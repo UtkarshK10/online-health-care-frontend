@@ -106,7 +106,7 @@ class Particle extends Component {
   render() {
     return (
       <div id='particles-js'>
-        <Particles width='98.5vw' height='100vh' params={params} />
+        <Particles width='98.5vw' height='97vh' params={params} />
       </div>
     );
   }

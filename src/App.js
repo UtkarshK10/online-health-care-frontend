@@ -8,6 +8,7 @@ import { AuthContext } from './contexts/auth-context';
 import HomePage from './components/HomePage';
 import { loadLocalStorage } from './utils/helper';
 import UserLogin from './components/UserLogin';
+import AddTechModal from './Modal/OTPModal';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -37,9 +38,9 @@ function App() {
                   path='/signup'
                   render={() => (
                     <div className='page'>
-                      {' '}
                       <Particle />
                       <UserRegistration />
+                      <AddTechModal />
                     </div>
                   )}
                 />

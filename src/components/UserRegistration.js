@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
@@ -19,6 +19,7 @@ function UserRegistration(props) {
   const [age, handleAgeChange] = useInputState('');
   const [gender, handleGender] = useInputState('');
   const [error, setError] = useState(false);
+  const [openModal, setModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   const { setAuth } = useContext(AuthContext);
@@ -73,14 +74,24 @@ function UserRegistration(props) {
           isLoggedIn: true,
         };
         setAuth(resData);
+        setModal(true);
         saveLocalStorage('userData', resData);
-        history.push('/');
       } else {
         setError(true);
         setErrorMsg(res.data.msg);
       }
     }
   };
+  const getOTP = () => {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.init(elem, {});
+    instance.open();
+  };
+  useEffect(() => {
+    if (openModal === true) getOTP();
+    // eslint-disable-next-line
+  }, [openModal]);
+
   const [state, toggle] = useState(true);
   const { x } = useSpring({
     from: { x: 0 },
@@ -91,7 +102,7 @@ function UserRegistration(props) {
     <div className='container'>
       <div className='row'>
         <div className='col hide-on-small-and-down m7 l7'>
-          <div onClick={() => toggle(!state)}>
+          <div>
             <animated.div
               style={{
                 opacity: x.interpolate({ range: [0, 1], output: [0.3, 1] }),
@@ -112,119 +123,121 @@ function UserRegistration(props) {
           </div>
         </div>
         <div className='col s12 m5 l5'>
-          <form onSubmit={register} className='padding-form'>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={name}
-                  onChange={handleNameChange}
-                  type='text'
-                  id='name'
-                  className='validate'
-                />
-                <label htmlFor='name'>Name</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={username}
-                  onChange={handleUserNameChange}
-                  type='text'
-                  id='username'
-                  className='validate'
-                />
-                <label htmlFor='username'>Username</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={password}
-                  onChange={handlePasswordChange}
-                  id='password'
-                  type='password'
-                  className='validate'
-                />
-                <label htmlFor='password'>Password</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={email}
-                  onChange={handleEmailChange}
-                  id='email'
-                  type='email'
-                  className='validate'
-                />
-                <label htmlFor='email'>Email</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  id='phno'
-                  type='text'
-                  className='validate'
-                />
-                <label htmlFor='phno'>Mobile No.</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  value={age}
-                  onChange={handleAgeChange}
-                  id='age'
-                  type='number'
-                  className='validate'
-                  min='1'
-                  max='100'
-                />
-                <label htmlFor='age'>Age</label>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='input-field' onChange={handleGender}>
-                <div className='gender-male'>
-                  <label>
-                    <input
-                      className='with-gap'
-                      name='gender'
-                      type='radio'
-                      value='male'
-                    />
-                    <span>Male</span>
-                  </label>
-                </div>
-                <div className='gender-female'>
-                  <label>
-                    <input
-                      className='with-gap'
-                      name='gender'
-                      type='radio'
-                      value='female'
-                    />
-                    <span>Female</span>
-                  </label>
+          <div id='slide'>
+            <form onSubmit={register} className='padding-form'>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={name}
+                    onChange={handleNameChange}
+                    type='text'
+                    id='name'
+                    className='validate'
+                  />
+                  <label htmlFor='name'>Name</label>
                 </div>
               </div>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <button className='btn btn-large purple btn-register waves-effect waves-light'>
-                  Register
-                  <i className='material-icons right'>check_circle</i>
-                </button>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={username}
+                    onChange={handleUserNameChange}
+                    type='text'
+                    id='username'
+                    className='validate'
+                  />
+                  <label htmlFor='username'>Username</label>
+                </div>
               </div>
-            </div>
-          </form>
-          <span>
-            Already registered? <Link to='/login'>Login</Link>
-          </span>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={password}
+                    onChange={handlePasswordChange}
+                    id='password'
+                    type='password'
+                    className='validate'
+                  />
+                  <label htmlFor='password'>Password</label>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={email}
+                    onChange={handleEmailChange}
+                    id='email'
+                    type='email'
+                    className='validate'
+                  />
+                  <label htmlFor='email'>Email</label>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={phone}
+                    onChange={handlePhoneChange}
+                    id='phno'
+                    type='text'
+                    className='validate'
+                  />
+                  <label htmlFor='phno'>Mobile No.</label>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='input-field'>
+                  <input
+                    value={age}
+                    onChange={handleAgeChange}
+                    id='age'
+                    type='number'
+                    className='validate'
+                    min='1'
+                    max='100'
+                  />
+                  <label htmlFor='age'>Age</label>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='input-field' onChange={handleGender}>
+                  <div className='gender-male'>
+                    <label>
+                      <input
+                        className='with-gap'
+                        name='gender'
+                        type='radio'
+                        value='male'
+                      />
+                      <span>Male</span>
+                    </label>
+                  </div>
+                  <div className='gender-female'>
+                    <label>
+                      <input
+                        className='with-gap'
+                        name='gender'
+                        type='radio'
+                        value='female'
+                      />
+                      <span>Female</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='input-field'>
+                  <button className='btn btn-large purple btn-register waves-effect waves-light'>
+                    Register
+                    <i className='material-icons right'>check_circle</i>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <span>
+              Already registered? <Link to='/login'>Login</Link>
+            </span>
+          </div>
         </div>
       </div>
       <p>{error && errorMsg.toString()}</p>

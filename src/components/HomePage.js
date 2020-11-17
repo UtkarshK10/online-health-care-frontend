@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../contexts/auth-context';
-import '../jsforproject.js/navjs';
+import '../jsforproject.js/all';
 
 const HomePage = () => {
   const { auth } = useContext(AuthContext);

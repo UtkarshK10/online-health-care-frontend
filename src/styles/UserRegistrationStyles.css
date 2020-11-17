@@ -17,15 +17,29 @@
 }
 .padding-form {
   margin-top: 1em;
+  padding-top: 10px;
+  margin-bottom: 10px;
   padding: 1em;
   padding-left: 2em;
   padding-right: 2em;
   box-shadow: 3px 3px 5px 6px #ccc;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px 10px 20px 10px;
   background-color: rgb(255, 241, 239);
   background-image: url('../assets/marble.jpg');
 }
-
+.padding-form * {
+  margin-bottom: 11px;
+}
+@media screen and (min-width: 480px) {
+  .padding-form {
+    margin-left: 30px;
+  }
+}
+@media screen and (min-width: 720px) {
+  .padding-form {
+    margin-left: 10px;
+  }
+}
 /* label color */
 .input-field label {
   color: Purple;
@@ -93,4 +107,29 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
+  z-index: -1;
+}
+
+@media screen and (min-width: 1200px) {
+  #slide {
+    position: absolute;
+    right: -400px;
+    width: 400px;
+    -webkit-animation: slide 1s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 1s forwards;
+    animation-delay: 0.5s;
+  }
+
+  @-webkit-keyframes slide {
+    100% {
+      right: 220px;
+    }
+  }
+
+  @keyframes slide {
+    100% {
+      right: 220px;
+    }
+  }
 }
