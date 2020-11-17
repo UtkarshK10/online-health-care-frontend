@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
-import axios from 'axios';
+import axios from '../axios/axios';
+// import axios from 'axios';
+import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
+import { saveLocalStorage } from '../utils/helper';
+import { useSpring, animated } from 'react-spring';
 
 function UserRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -12,18 +17,24 @@ function UserRegistration(props) {
   const [email, handleEmailChange] = useInputState('');
   const [phone, handlePhoneChange] = useInputState('');
   const [age, handleAgeChange] = useInputState('');
-  const [reg, setReg] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [gender, handleGender] = useInputState('');
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const { setAuth } = useContext(AuthContext);
+  const history = useHistory();
 
   const register = async (e) => {
     e.preventDefault();
+
     const data = {
       name,
-      username,
-      password,
       email,
       phone,
+      username,
+      password,
       age,
+      gender,
     };
     var regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     var phoneno = /^\d{10}$/;
@@ -50,23 +61,55 @@ function UserRegistration(props) {
     } else {
       const headers = { 'Content-Type': 'application/json' };
       //signup
-      const res = await axios.post('http://127.0.0.1:5000/register', data, {
+      const res = await axios.post('/api/users/', data, {
         headers: headers,
       });
-      console.log('response', res);
 
-      //clear input
-      //redirect user or show response
-      setReg(true);
-      setMsg(res.data.message);
+      if (res.status === 201) {
+        const resData = {
+          token: res.data.jwt_token,
+          username: res.data.username,
+          user_id: res.data.user_id,
+          isLoggedIn: true,
+        };
+        setAuth(resData);
+        saveLocalStorage('userData', resData);
+        history.push('/');
+      } else {
+        setError(true);
+        setErrorMsg(res.data.msg);
+      }
     }
   };
-
+  const [state, toggle] = useState(true);
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: state ? 1 : 0,
+    config: { duration: 1500 },
+  });
   return (
     <div className='container'>
       <div className='row'>
         <div className='col hide-on-small-and-down m7 l7'>
-          <img className='responsive-img center' src={doctor} alt='doctor' />
+          <div onClick={() => toggle(!state)}>
+            <animated.div
+              style={{
+                opacity: x.interpolate({ range: [0, 1], output: [0.3, 1] }),
+                transform: x
+                  .interpolate({
+                    range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+                    output: [0.6, 0.7, 0.8, 0.9, 1, 1.05, 1],
+                  })
+                  .interpolate((x) => `scale(${x})`),
+              }}
+            >
+              <img
+                className='responsive-img center'
+                src={doctor}
+                alt='doctor'
+              />
+            </animated.div>
+          </div>
         </div>
         <div className='col s12 m5 l5'>
           <form onSubmit={register} className='padding-form'>
@@ -145,16 +188,26 @@ function UserRegistration(props) {
               </div>
             </div>
             <div className='row'>
-              <div className='input-field'>
+              <div className='input-field' onChange={handleGender}>
                 <div className='gender-male'>
                   <label>
-                    <input className='with-gap' name='gender' type='radio' />
+                    <input
+                      className='with-gap'
+                      name='gender'
+                      type='radio'
+                      value='male'
+                    />
                     <span>Male</span>
                   </label>
                 </div>
                 <div className='gender-female'>
                   <label>
-                    <input className='with-gap' name='gender' type='radio' />
+                    <input
+                      className='with-gap'
+                      name='gender'
+                      type='radio'
+                      value='female'
+                    />
                     <span>Female</span>
                   </label>
                 </div>
@@ -164,14 +217,17 @@ function UserRegistration(props) {
               <div className='input-field'>
                 <button className='btn btn-large purple btn-register waves-effect waves-light'>
                   Register
-                  <i className='material-icons right'>done</i>
+                  <i className='material-icons right'>check_circle</i>
                 </button>
               </div>
             </div>
           </form>
+          <span>
+            Already registered? <Link to='/login'>Login</Link>
+          </span>
         </div>
       </div>
-      <p>{reg && msg.toString()}</p>
+      <p>{error && errorMsg.toString()}</p>
     </div>
   );
 }
