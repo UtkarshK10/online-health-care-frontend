@@ -2,6 +2,10 @@
 ::-webkit-scrollbar {
   display: none;
 }
+:root {
+  --primary: #f4511e;
+  --secondary: #ff7043;
+}
 
 .gender-male,
 .gender-female {
@@ -42,56 +46,56 @@
 }
 /* label color */
 .input-field label {
-  color: Purple;
+  color: var(--primary);
   font-weight: 400;
   font-size: 1.2 em;
 }
 /* label focus color */
 .input-field input[type='text']:focus + label {
-  color: purple !important;
+  color: var(--primary) !important;
 }
 /* label underline focus color */
 .input-field input[type='text']:focus {
   text-decoration: none !important;
   border: none;
-  border-bottom: 1px solid purple !important;
-  box-shadow: 0 1px 0 0 rgb(189, 142, 189) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 .input-field input[type='email']:focus + label {
-  color: purple !important;
+  color: var(--primary) !important;
 }
 /* label underline focus color */
 .input-field input[type='email']:focus {
   text-decoration: none !important;
   border: none;
-  border-bottom: 1px solid purple !important;
-  box-shadow: 0 1px 0 0 rgb(189, 142, 189) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 .input-field input[type='password']:focus + label {
-  color: purple !important;
+  color: var(--primary) !important;
 }
 /* label underline focus color */
 .input-field input[type='password']:focus {
   text-decoration: none !important;
   border: none;
-  border-bottom: 1px solid purple !important;
-  box-shadow: 0 1px 0 0 rgb(189, 142, 189) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 .input-field input[type='number']:focus + label {
-  color: purple !important;
+  color: var(--primary) !important;
 }
 /* label underline focus color */
 .input-field input[type='number']:focus {
   text-decoration: none !important;
   border: none;
-  border-bottom: 1px solid purple !important;
-  box-shadow: 0 1px 0 0 rgb(189, 142, 189) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 /* valid color */
 .input-field input[type='text'].valid {
   text-decoration: none !important;
-  border-bottom: 1px solid purple !important;
-  box-shadow: 0 1px 0 0 rgb(189, 142, 189) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 /* invalid color */
 .input-field input[type='text'].invalid {
@@ -132,4 +136,7 @@
       right: 220px;
     }
   }
+}
+.btn:hover {
+  background-color: var(--secondary);
 }

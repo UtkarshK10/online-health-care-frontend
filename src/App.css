@@ -1,3 +1,8 @@
+:root {
+  --primary: #f4511e;
+  --secondary: #ff7043;
+}
+
 .App {
   text-align: center;
 }
@@ -62,4 +67,16 @@
 .cleft {
   position: relative;
   left: 20px;
+}
+.pcolour {
+  background-color: var(--primary);
+}
+.scolour {
+  background-color: var(--secondary);
+}
+.stcolour {
+  color: var(--secondary);
+}
+.ptcolour {
+  color: var(--primary);
 }

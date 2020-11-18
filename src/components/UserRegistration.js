@@ -76,7 +76,7 @@ function UserRegistration(props) {
           username: res.data.username,
           user_id: res.data.user_id,
           isLoggedIn: true,
-          tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24
+          tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
         };
         setAuth(resData);
         saveLocalStorage('userData', resData);
@@ -100,8 +100,7 @@ function UserRegistration(props) {
     // eslint-disable-next-line
   }, [openModal]);
 
-
-  //animation part 
+  //animation part
 
   const { x } = useSpring({
     from: { x: 0 },
@@ -239,15 +238,18 @@ function UserRegistration(props) {
                 </div>
                 <div className='row'>
                   <div className='input-field'>
-                    <button className='btn btn-large purple btn-register waves-effect waves-light'>
+                    <button className='btn btn-large pcolour btn-register waves-effect waves-light'>
                       Register
-                    <i className='material-icons right'>check_circle</i>
+                      <i className='material-icons right'>check_circle</i>
                     </button>
                   </div>
                 </div>
               </form>
               <span>
-                Already registered? <Link to='/login'>Login</Link>
+                Already registered?{' '}
+                <Link to='/login' className='stcolour'>
+                  Login
+                </Link>
               </span>
             </div>
           </div>

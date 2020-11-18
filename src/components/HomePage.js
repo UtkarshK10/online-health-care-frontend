@@ -11,18 +11,18 @@ const HomePage = () => {
     <>
       {/* <div className='navbar-fixed'> */}
       <nav>
-        <div className='nav-wrapper purple'>
+        <div className='nav-wrapper pcolour'>
           <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
             Logo
-            </NavLink>
+          </NavLink>
           <NavLink to='/' className='brand-logo hide-on-large-only'>
             Logo
-            </NavLink>
+          </NavLink>
           <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
             <i className='material-icons'>menu</i>
           </a>
           <ul className='right hide-on-med-and-down'>
-            {auth?.isLoggedIn &&
+            {auth?.isLoggedIn && (
               <>
                 <li>
                   <NavLink to='/appointment'>Appointment</NavLink>
@@ -37,8 +37,8 @@ const HomePage = () => {
                   <NavLink to={`/user/${auth.user_id}`}>My Account</NavLink>
                 </li>
               </>
-            }
-            {!auth?.isLoggedIn &&
+            )}
+            {!auth?.isLoggedIn && (
               <>
                 <li>
                   <NavLink to='/login'>Login</NavLink>
@@ -47,13 +47,13 @@ const HomePage = () => {
                   <NavLink to='/signup'>Signup</NavLink>
                 </li>
               </>
-            }
+            )}
           </ul>
         </div>
       </nav>
       {/* </div> */}
       <ul className='sidenav' id='mobile-demo'>
-        {auth?.isLoggedIn &&
+        {auth?.isLoggedIn && (
           <>
             <li>
               <NavLink to='/appointment'>Appointment</NavLink>
@@ -68,8 +68,8 @@ const HomePage = () => {
               <NavLink to={`/user/${auth.user_id}`}>My Account</NavLink>
             </li>
           </>
-        }
-        {!auth?.isLoggedIn &&
+        )}
+        {!auth?.isLoggedIn && (
           <>
             <li>
               <NavLink to='/login'>Login</NavLink>
@@ -78,7 +78,7 @@ const HomePage = () => {
               <NavLink to='/signup'>Signup</NavLink>
             </li>
           </>
-        }
+        )}
       </ul>
     </>
   );
