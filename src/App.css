@@ -69,14 +69,14 @@
   left: 20px;
 }
 .pcolour {
-  background-color: var(--primary);
+  background-color: var(--primary) !important;
 }
 .scolour {
-  background-color: var(--secondary);
+  background-color: var(--secondary) !important;
 }
 .stcolour {
-  color: var(--secondary);
+  color: var(--secondary) !important;
 }
 .ptcolour {
-  color: var(--primary);
+  color: var(--primary) !important;
 }
