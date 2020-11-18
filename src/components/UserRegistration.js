@@ -9,6 +9,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
 import { saveLocalStorage } from '../utils/helper';
 import { useSpring, animated } from 'react-spring';
+import AddTechModal from '../Modal/OTPModal';
 
 function UserRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -21,9 +22,12 @@ function UserRegistration(props) {
   const [error, setError] = useState(false);
   const [openModal, setModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [state, toggle] = useState(true);
 
   const { setAuth } = useContext(AuthContext);
   const history = useHistory();
+
+  //user signup and validation
 
   const register = async (e) => {
     e.preventDefault();
@@ -37,9 +41,9 @@ function UserRegistration(props) {
       age,
       gender,
     };
-    var regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    var phoneno = /^\d{10}$/;
-    var regularExpressionEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    const phoneno = /^\d{10}$/;
+    const regularExpressionEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (name === '') {
       M.toast({ html: 'Name cannot be empty' });
     } else if (username === '') {
@@ -72,176 +76,186 @@ function UserRegistration(props) {
           username: res.data.username,
           user_id: res.data.user_id,
           isLoggedIn: true,
+          tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24
         };
         setAuth(resData);
-        setModal(true);
         saveLocalStorage('userData', resData);
+        setModal(true);
       } else {
         setError(true);
         setErrorMsg(res.data.msg);
       }
     }
   };
+
+  //Modal part
   const getOTP = () => {
     var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, {});
+    var instance = M.Modal.init(elem, { dismissible: false });
     instance.open();
   };
+
   useEffect(() => {
-    if (openModal === true) getOTP();
+    if (openModal) getOTP();
     // eslint-disable-next-line
   }, [openModal]);
 
-  const [state, toggle] = useState(true);
+
+  //animation part 
+
   const { x } = useSpring({
     from: { x: 0 },
     x: state ? 1 : 0,
     config: { duration: 1500 },
   });
+
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col hide-on-small-and-down m7 l7'>
-          <div>
-            <animated.div
-              style={{
-                opacity: x.interpolate({ range: [0, 1], output: [0.3, 1] }),
-                transform: x
-                  .interpolate({
-                    range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
-                    output: [0.6, 0.7, 0.8, 0.9, 1, 1.05, 1],
-                  })
-                  .interpolate((x) => `scale(${x})`),
-              }}
-            >
-              <img
-                className='responsive-img center'
-                src={doctor}
-                alt='doctor'
-              />
-            </animated.div>
+    <>
+      <div className='container'>
+        <div className='row'>
+          <div className='col hide-on-small-and-down m7 l7'>
+            <div>
+              <animated.div
+                style={{
+                  opacity: x.interpolate({ range: [0, 1], output: [0.3, 1] }),
+                  transform: x
+                    .interpolate({
+                      range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+                      output: [0.6, 0.7, 0.8, 0.9, 1, 1.05, 1],
+                    })
+                    .interpolate((x) => `scale(${x})`),
+                }}
+              >
+                <img
+                  className='responsive-img center'
+                  src={doctor}
+                  alt='doctor'
+                />
+              </animated.div>
+            </div>
           </div>
-        </div>
-        <div className='col s12 m5 l5'>
-          <div id='slide'>
-            <form onSubmit={register} className='padding-form'>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={name}
-                    onChange={handleNameChange}
-                    type='text'
-                    id='name'
-                    className='validate'
-                  />
-                  <label htmlFor='name'>Name</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={username}
-                    onChange={handleUserNameChange}
-                    type='text'
-                    id='username'
-                    className='validate'
-                  />
-                  <label htmlFor='username'>Username</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={password}
-                    onChange={handlePasswordChange}
-                    id='password'
-                    type='password'
-                    className='validate'
-                  />
-                  <label htmlFor='password'>Password</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={email}
-                    onChange={handleEmailChange}
-                    id='email'
-                    type='email'
-                    className='validate'
-                  />
-                  <label htmlFor='email'>Email</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={phone}
-                    onChange={handlePhoneChange}
-                    id='phno'
-                    type='text'
-                    className='validate'
-                  />
-                  <label htmlFor='phno'>Mobile No.</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={age}
-                    onChange={handleAgeChange}
-                    id='age'
-                    type='number'
-                    className='validate'
-                    min='1'
-                    max='100'
-                  />
-                  <label htmlFor='age'>Age</label>
-                </div>
-              </div>
-              <div className='row'>
-                <div className='input-field' onChange={handleGender}>
-                  <div className='gender-male'>
-                    <label>
-                      <input
-                        className='with-gap'
-                        name='gender'
-                        type='radio'
-                        value='male'
-                      />
-                      <span>Male</span>
-                    </label>
-                  </div>
-                  <div className='gender-female'>
-                    <label>
-                      <input
-                        className='with-gap'
-                        name='gender'
-                        type='radio'
-                        value='female'
-                      />
-                      <span>Female</span>
-                    </label>
+          <div className='col s12 m5 l5'>
+            <div id='slide'>
+              <form onSubmit={register} className='padding-form'>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={name}
+                      onChange={handleNameChange}
+                      type='text'
+                      id='name'
+                      className='validate'
+                    />
+                    <label htmlFor='name'>Name</label>
                   </div>
                 </div>
-              </div>
-              <div className='row'>
-                <div className='input-field'>
-                  <button className='btn btn-large purple btn-register waves-effect waves-light'>
-                    Register
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={username}
+                      onChange={handleUserNameChange}
+                      type='text'
+                      id='username'
+                      className='validate'
+                    />
+                    <label htmlFor='username'>Username</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={password}
+                      onChange={handlePasswordChange}
+                      id='password'
+                      type='password'
+                      className='validate'
+                    />
+                    <label htmlFor='password'>Password</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={email}
+                      onChange={handleEmailChange}
+                      id='email'
+                      type='email'
+                      className='validate'
+                    />
+                    <label htmlFor='email'>Email</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={phone}
+                      onChange={handlePhoneChange}
+                      id='phno'
+                      type='text'
+                      className='validate'
+                    />
+                    <label htmlFor='phno'>Mobile No.</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={age}
+                      onChange={handleAgeChange}
+                      id='age'
+                      type='number'
+                      className='validate'
+                      min='1'
+                      max='100'
+                    />
+                    <label htmlFor='age'>Age</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field' onChange={handleGender}>
+                    <div className='gender-male'>
+                      <label>
+                        <input
+                          className='with-gap'
+                          name='gender'
+                          type='radio'
+                          value='male'
+                        />
+                        <span>Male</span>
+                      </label>
+                    </div>
+                    <div className='gender-female'>
+                      <label>
+                        <input
+                          className='with-gap'
+                          name='gender'
+                          type='radio'
+                          value='female'
+                        />
+                        <span>Female</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <button className='btn btn-large purple btn-register waves-effect waves-light'>
+                      Register
                     <i className='material-icons right'>check_circle</i>
-                  </button>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
-            <span>
-              Already registered? <Link to='/login'>Login</Link>
-            </span>
+              </form>
+              <span>
+                Already registered? <Link to='/login'>Login</Link>
+              </span>
+            </div>
           </div>
         </div>
+        <p>{error && errorMsg.toString()}</p>
       </div>
-      <p>{error && errorMsg.toString()}</p>
-    </div>
+      <AddTechModal />
+    </>
   );
 }
 

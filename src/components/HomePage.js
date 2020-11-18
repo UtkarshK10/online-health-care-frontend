@@ -1,55 +1,86 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 import '../jsforproject.js/all';
 
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
+
   return (
-    <div>
-      <div className='navbar-fixed'>
-        <nav>
-          <div className='nav-wrapper purple'>
-            <a href='#!' className='cleft brand-logo hide-on-med-and-down'>
-              Logo
-            </a>
-            <a href='#!' className='brand-logo hide-on-large-only'>
-              Logo
-            </a>
-            <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
-              <i className='material-icons'>menu</i>
-            </a>
-            <ul className='right hide-on-med-and-down'>
-              <li>
-                <a href='sass.html'>Sass</a>
-              </li>
-              <li>
-                <a href='badges.html'>Components</a>
-              </li>
-              <li>
-                <a href='collapsible.html'>Javascript</a>
-              </li>
-              <li>
-                <a href='mobile.html'>Mobile</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+    // <div>
+    <>
+      {/* <div className='navbar-fixed'> */}
+      <nav>
+        <div className='nav-wrapper purple'>
+          <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
+            Logo
+            </NavLink>
+          <NavLink to='/' className='brand-logo hide-on-large-only'>
+            Logo
+            </NavLink>
+          <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
+            <i className='material-icons'>menu</i>
+          </a>
+          <ul className='right hide-on-med-and-down'>
+            {auth?.isLoggedIn &&
+              <>
+                <li>
+                  <NavLink to='/appointment'>Appointment</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/check'>Monitor Oxygen</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/logout'>Logout</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/user/${auth.user_id}`}>My Account</NavLink>
+                </li>
+              </>
+            }
+            {!auth?.isLoggedIn &&
+              <>
+                <li>
+                  <NavLink to='/login'>Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/signup'>Signup</NavLink>
+                </li>
+              </>
+            }
+          </ul>
+        </div>
+      </nav>
+      {/* </div> */}
       <ul className='sidenav' id='mobile-demo'>
-        <li>
-          <a href='sass.html'>Sass</a>
-        </li>
-        <li>
-          <a href='badges.html'>Components</a>
-        </li>
-        <li>
-          <a href='collapsible.html'>Javascript</a>
-        </li>
-        <li>
-          <a href='mobile.html'>Mobile</a>
-        </li>
+        {auth?.isLoggedIn &&
+          <>
+            <li>
+              <NavLink to='/appointment'>Appointment</NavLink>
+            </li>
+            <li>
+              <NavLink to='/check'>Monitor Oxygen</NavLink>
+            </li>
+            <li>
+              <NavLink to='/logout'>Logout</NavLink>
+            </li>
+            <li>
+              <NavLink to={`/user/${auth.user_id}`}>My Account</NavLink>
+            </li>
+          </>
+        }
+        {!auth?.isLoggedIn &&
+          <>
+            <li>
+              <NavLink to='/login'>Login</NavLink>
+            </li>
+            <li>
+              <NavLink to='/signup'>Signup</NavLink>
+            </li>
+          </>
+        }
       </ul>
-    </div>
+    </>
   );
 };
 
