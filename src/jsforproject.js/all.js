@@ -1,6 +1,6 @@
 import M from 'materialize-css/dist/js/materialize.min.js';
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("inside");
+
   var elems = document.querySelectorAll('.sidenav');
   M.Sidenav.init(elems, {});
 });
