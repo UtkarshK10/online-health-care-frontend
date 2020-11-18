@@ -8,8 +8,8 @@ import { AuthContext } from './contexts/auth-context';
 import HomePage from './components/HomePage';
 import { loadLocalStorage } from './utils/helper';
 import UserLogin from './components/UserLogin';
+import Oxymeter from './components/Oxymeter';
 // import AddTechModal from './Modal/OTPModal';
-
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -19,10 +19,8 @@ function App() {
     setAuth(userData);
   }, [setAuth]);
 
-
   return (
     <div className='App'>
-
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -44,6 +42,16 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <UserRegistration />
+                      {/* <AddTechModal /> */}
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/oxymeter'
+                  render={() => (
+                    <div className='page'>
+                      <Oxymeter />
                       {/* <AddTechModal /> */}
                     </div>
                   )}
