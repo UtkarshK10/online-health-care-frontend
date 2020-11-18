@@ -70,20 +70,24 @@ function UserRegistration(props) {
         headers: headers,
       });
 
-      if (res.status === 201) {
-        const resData = {
-          token: res.data.jwt_token,
-          username: res.data.username,
-          user_id: res.data.user_id,
-          isLoggedIn: true,
-          tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-        };
-        setAuth(resData);
-        saveLocalStorage('userData', resData);
-        setModal(true);
-      } else {
+      try {
+        if (res.status === 201) {
+          const resData = {
+            token: res.data.jwt_token,
+            username: res.data.username,
+            user_id: res.data.user_id,
+            isLoggedIn: true,
+            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+          };
+          setAuth(resData);
+          saveLocalStorage('userData', resData);
+          setModal(true);
+        }
+      } catch (e) {
+        const { response } = e;
+        const { request, ...errorObject } = response;
         setError(true);
-        setErrorMsg(res.data.msg);
+        setErrorMsg(errorObject.data.msg);
       }
     }
   };

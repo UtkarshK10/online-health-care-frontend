@@ -47,20 +47,24 @@ function UserLogin(props) {
 
       console.log(res);
 
-      if (res.status === 200) {
-        const resData = {
-          token: res.data.jwt_token,
-          username: res.data.username,
-          user_id: res.data.user_id,
-          isLoggedIn: true,
-          tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-        };
-        setAuth(resData);
-        saveLocalStorage('userData', resData);
-        history.push('/');
-      } else {
+      try {
+        if (res.status === 200) {
+          const resData = {
+            token: res.data.jwt_token,
+            username: res.data.username,
+            user_id: res.data.user_id,
+            isLoggedIn: true,
+            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+          };
+          setAuth(resData);
+          saveLocalStorage('userData', resData);
+          history.push('/');
+        }
+      } catch(e) { 
+        const { response } = e;
+        const { request, ...errorObject } = response;
         setError(true);
-        setErrorMsg(res.data.msg);
+        setErrorMsg(errorObject.data.msg);
       }
     }
   };

@@ -13,20 +13,21 @@ const OTPModal = () => {
     if (otp.length <= 0) {
       M.toast({ html: 'Please enter an OTP' });
     } else {
-      // const data = { otp };
-      // const headers = { 'Content-Type': 'application/json' };
-      // const res = await axios.post('/api/users/validate', data, {
-      //   headers: headers
-      // });
-      // if (res.status === 200) {
-      //   history.push('/');
-      // } else {
-      //   setMsg(res.data.msg);
-      // }
-      if (otp === '123') {
-        history.push('/');
-      } else {
-        M.toast({ html: 'Invalid OTP' });
+      let res;
+      try {
+        const data = { otp };
+        const headers = { 'Content-Type': 'application/json' };
+        res = await axios.post('/api/users/validate', data, {
+          headers: headers
+        });
+        if (res.status === 200) {
+          history.push('/');
+        }
+      } catch (e) {
+        const { response } = e;
+        const { request, ...errorObject } = response;
+        // console.log(errorObject);
+        setMsg(errorObject.data.msg);
       }
     }
   };
@@ -39,7 +40,7 @@ const OTPModal = () => {
           <br />
           <div className='input-field'>
             <input
-              type='text'
+              type='password'
               name='OTP'
               value={otp}
               onChange={setOTP}
@@ -48,7 +49,7 @@ const OTPModal = () => {
               OTP
             </label>
           </div>
-          {msg && <span>{msg}</span>}
+          {msg && <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>}
         </div>
       </div>
       <div className='modal-footer'>

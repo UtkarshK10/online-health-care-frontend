@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './App.css';
 import UserRegistration from './components/UserRegistration';
@@ -9,6 +9,7 @@ import HomePage from './components/HomePage';
 import { loadLocalStorage } from './utils/helper';
 import UserLogin from './components/UserLogin';
 import Oxymeter from './components/Oxymeter';
+import Navbar from './components/Navbar';
 // import AddTechModal from './Modal/OTPModal';
 
 function App() {
@@ -19,8 +20,11 @@ function App() {
     setAuth(userData);
   }, [setAuth]);
 
+  const { pathname } = useLocation();
+
   return (
     <div className='App'>
+      {(pathname !== '/login' && pathname !== '/signup') && <Navbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -67,7 +71,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Redirect exact to='/login' />
+                <Redirect exact to='/' />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
