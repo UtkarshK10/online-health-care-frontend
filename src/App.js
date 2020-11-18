@@ -10,6 +10,7 @@ import { loadLocalStorage } from './utils/helper';
 import UserLogin from './components/UserLogin';
 import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
+import Payment from './Payment/Payment';
 // import AddTechModal from './Modal/OTPModal';
 
 function App() {
@@ -56,6 +57,15 @@ function App() {
                   render={() => (
                     <div className='page'>
                       <Oxymeter />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/payment'
+                  render={() => (
+                    <div className='page'>
+                      <Payment />
                     </div>
                   )}
                 />

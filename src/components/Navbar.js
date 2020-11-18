@@ -17,7 +17,7 @@ const HomePage = () => {
           </NavLink>
         </li>
         <li>
-          <a href='#!' className='stcolour'>
+          <a href='/payment' className='stcolour'>
             Credit : <span className='ptcolour'>25</span>
           </a>
         </li>
@@ -40,13 +40,23 @@ const HomePage = () => {
             <i className='material-icons'>menu</i>
           </a>
           <ul className='right hide-on-med-and-down'>
-            {!auth?.isLoggedIn && (
+            {auth?.isLoggedIn && (
               <>
                 <li>
-                  <NavLink to='/appointment'>Appointment</NavLink>
+                  <NavLink
+                    to='/appointment'
+                    activeStyle={{ backgroundColor: '#db4619' }}
+                  >
+                    Appointment
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to='/check'>Monitor Oxygen</NavLink>
+                  <NavLink
+                    to='/oxymeter'
+                    activeStyle={{ backgroundColor: '#db4619' }}
+                  >
+                    Monitor Oxygen
+                  </NavLink>
                 </li>
                 <li>
                   <a
@@ -78,16 +88,31 @@ const HomePage = () => {
         {auth?.isLoggedIn && (
           <>
             <li>
-              <NavLink to='/appointment'>Appointment</NavLink>
+              <NavLink
+                to='/appointment'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                Appointment
+              </NavLink>
             </li>
             <li>
-              <NavLink to='/check'>Monitor Oxygen</NavLink>
+              <NavLink
+                to='/oxymeter'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                Monitor Oxygen
+              </NavLink>
             </li>
             <li>
-              <NavLink to={`/user/${auth.user_id}`}>My Profile</NavLink>
+              <NavLink
+                to={`/user/${auth.user_id}`}
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                My Profile
+              </NavLink>
             </li>
             <li>
-              <a href='#!'>
+              <a href='/payment' activeStyle={{ backgroundColor: '#db4619' }}>
                 Credit : <span className='ptcolour'>25</span>
               </a>
             </li>
