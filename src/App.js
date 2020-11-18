@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className='App'>
-      {(pathname !== '/login' && pathname !== '/signup') && <Navbar />}
+      {pathname !== '/login' && pathname !== '/signup' && <Navbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -56,7 +56,6 @@ function App() {
                   render={() => (
                     <div className='page'>
                       <Oxymeter />
-                      {/* <AddTechModal /> */}
                     </div>
                   )}
                 />
