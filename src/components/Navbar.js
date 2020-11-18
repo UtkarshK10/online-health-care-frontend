@@ -21,7 +21,7 @@ const HomePage = () => {
             Credit : <span className='ptcolour'>25</span>
           </a>
         </li>
-        <li class='divider'></li>
+        <li className='divider'></li>
         <li>
           <NavLink to='/logout' className='stcolour'>
             Logout
@@ -54,7 +54,7 @@ const HomePage = () => {
                     href='#!'
                     data-target='dropdown1'
                   >
-                    Dropdown
+                    My Account
                     <i className='material-icons right'>arrow_drop_down</i>
                   </a>
                 </li>
@@ -84,13 +84,16 @@ const HomePage = () => {
               <NavLink to='/check'>Monitor Oxygen</NavLink>
             </li>
             <li>
-              <NavLink to='/logout'>Logout</NavLink>
+              <NavLink to={`/user/${auth.user_id}`}>My Profile</NavLink>
             </li>
             <li>
-              <a className='dropdown-trigger' href='#!' data-target='dropdown1'>
-                Dropdown
-                <i className='material-icons right'>arrow_drop_down</i>
+              <a href='#!'>
+                Credit : <span className='ptcolour'>25</span>
               </a>
+            </li>
+            <li className='divider'></li>
+            <li>
+              <NavLink to='/logout'>Logout</NavLink>
             </li>
           </>
         )}
