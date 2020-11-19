@@ -242,7 +242,7 @@ function UserRegistration(props) {
                 </div>
                 <div className='row'>
                   <div className='input-field'>
-                    <button className='btn btn-large pcolour btn-register waves-effect waves-light'>
+                    <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
                       Register
                       <i className='material-icons right'>check_circle</i>
                     </button>
