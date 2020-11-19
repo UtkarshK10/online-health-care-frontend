@@ -9,25 +9,26 @@ const HomePage = () => {
     return (
 
         <>
-
-            <ul id='dropdown1' className='dropdown-content'>
-                <li>
-                    <NavLink to={`/user/${auth.user_id}`} className='stcolour'>
-                        My Profile
+            {auth?.isLoggedIn && (
+                <ul id='dropdown1' className='dropdown-content'>
+                    <li>
+                        <NavLink to={`/user/${auth.user_id}`} className='stcolour'>
+                            My Profile
           </NavLink>
-                </li>
-                <li>
-                    <NavLink to='/payment' className='stcolour'>
-                        Credit : <span className='ptcolour'>25</span>
-                    </NavLink>
-                </li>
-                <li className='divider'></li>
-                <li>
-                    <NavLink to='/logout' className='stcolour'>
-                        Logout
+                    </li>
+                    <li>
+                        <NavLink to='/payment' className='stcolour'>
+                            Credits : <span className='ptcolour'>{auth.credits}</span>
+                        </NavLink>
+                    </li>
+                    <li className='divider'></li>
+                    <li>
+                        <NavLink to='/logout' className='stcolour'>
+                            Logout
           </NavLink>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            )}
             <nav>
                 <div className='nav-wrapper pcolour'>
                     <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>

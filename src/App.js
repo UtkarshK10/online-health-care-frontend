@@ -17,7 +17,7 @@ function App() {
   const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    const userData = loadLocalStorage('userData');
+    const userData = loadLocalStorage();
     setAuth(userData);
   }, [setAuth]);
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
 import axios from '../axios/axios';
@@ -25,7 +25,6 @@ function UserRegistration(props) {
   const [state, toggle] = useState(true);
 
   const { setAuth } = useContext(AuthContext);
-  const history = useHistory();
 
   //user signup and validation
 
@@ -73,14 +72,21 @@ function UserRegistration(props) {
       try {
         if (res.status === 201) {
           const resData = {
-            token: res.data.jwt_token,
+            name: res.data.name,
             username: res.data.username,
             user_id: res.data.user_id,
+            email: res.data.email,
+            gender: res.data.gender,
+            phone: res.data.phone,
+            age: res.data.age,
+            credits: res.data.total_credit,
+            profile_image: res.data.profile_url,
             isLoggedIn: true,
+            token: res.data.jwt_token,
             tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
           };
           setAuth(resData);
-          saveLocalStorage('userData', resData);
+          saveLocalStorage(resData);
           setModal(true);
         }
       } catch (e) {

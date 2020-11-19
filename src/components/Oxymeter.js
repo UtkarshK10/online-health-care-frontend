@@ -32,8 +32,7 @@ const Oxymeter = () => {
             'api-token': auth.token
           }
         })
-        setLevel(res.data.msg);
-        console.log(res);
+        setLevel(res.data.spo2);
       } catch (e) {
 
         console.log(e);

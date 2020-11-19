@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import useInputState from '../hooks/useInputState';
 import axios from '../axios/axios';
+import { AuthContext } from '../contexts/auth-context';
 
 const OTPModal = () => {
   const [otp, setOTP] = useInputState('');
   const [msg, setMsg] = useState('');
   const history = useHistory();
+  const { auth } = useContext(AuthContext);
   const handleSubmit = async e => {
     e.preventDefault();
     if (otp.length <= 0) {
@@ -16,7 +18,7 @@ const OTPModal = () => {
       let res;
       try {
         const data = { otp };
-        const headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json', 'api-token': auth.token };
         res = await axios.post('/api/users/validate', data, {
           headers: headers
         });

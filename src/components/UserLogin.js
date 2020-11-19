@@ -25,7 +25,7 @@ function UserLogin(props) {
       email,
       password,
     };
-    const regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    // const regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     const regularExpressionEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!regularExpressionEmail.test(email)) {
       M.toast({ html: 'Please enter a valid email id.' });
@@ -40,19 +40,25 @@ function UserLogin(props) {
         headers: headers,
       });
 
-      console.log(res);
 
       try {
         if (res.status === 200) {
           const resData = {
-            token: res.data.jwt_token,
+            name: res.data.name,
             username: res.data.username,
             user_id: res.data.user_id,
+            email: res.data.email,
+            gender: res.data.gender,
+            phone: res.data.phone,
+            age: res.data.age,
+            credits: res.data.total_credit,
+            profile_image: res.data.profile_url,
             isLoggedIn: true,
+            token: res.data.jwt_token,
             tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
           };
           setAuth(resData);
-          saveLocalStorage('userData', resData);
+          saveLocalStorage(resData);
           history.push('/');
         }
       } catch (e) {
