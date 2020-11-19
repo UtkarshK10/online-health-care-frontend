@@ -12,25 +12,26 @@ const Profile = () => {
   const updatetrigger = async () => {
     setEdit(!edit);
     if (edit) {
-      delete user.id
-      delete user.created_at
-      delete user.modified_at
+      delete user.id;
+      delete user.created_at;
+      delete user.modified_at;
       try {
         const res = await axios.put('/api/users/me', user, {
           headers: {
             'Content-type': 'application/json',
-            'api-token': auth.token
-          }
-        })
+            'api-token': auth.token,
+          },
+        });
         console.log(res);
         setUser(res.data.user);
-      } catch (e) {
-
-      }
+      } catch (e) {}
     }
   };
   const updateGender = (val) => {
     if (edit) setUser({ ...user, gender: val });
+  };
+  const setImage = (img) => {
+    console.log(img);
   };
 
   if (edit === true) {
@@ -42,14 +43,14 @@ const Profile = () => {
       try {
         const res = await axios.get(`/api/users/${auth.user_id}`, {
           headers: {
-            'api-token': auth.token
-          }
-        })
+            'api-token': auth.token,
+          },
+        });
         setUser({ ...res.data.user });
       } catch (e) {
         console.log(e);
       }
-    }
+    };
     fetchUser();
   }, [auth.user_id, auth.token]);
 
@@ -61,7 +62,11 @@ const Profile = () => {
       <div className='container'>
         <div className='row'>
           <div className='col s12 m4 l4 margin'>
-            <ImageAvatar imageURL={profile_url} name={name} />
+            <ImageAvatar
+              imageURL={profile_url}
+              name={name}
+              setImage={setImage}
+            />
             <h4>{username}</h4>
             <h5>{email}</h5>
             {!edit && (
@@ -89,6 +94,7 @@ const Profile = () => {
                 <div className='input-field'>
                   <input
                     value={name}
+                    autoFocus={true}
                     onChange={update}
                     type='text'
                     id='name'
@@ -104,6 +110,7 @@ const Profile = () => {
                   <input
                     value={phone}
                     onChange={update}
+                    autoFocus={true}
                     type='text'
                     id='phoneno'
                     name='phone'
@@ -117,6 +124,7 @@ const Profile = () => {
                 <div className='input-field'>
                   <input
                     value={age}
+                    autoFocus={true}
                     onChange={update}
                     name='age'
                     id='age'
