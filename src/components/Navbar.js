@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 import '../jsforproject.js/all';
 
@@ -29,6 +29,7 @@ const HomePage = () => {
                     </li>
                 </ul>
             )}
+
             <nav>
                 <div className='nav-wrapper pcolour'>
                     <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
@@ -113,9 +114,12 @@ const HomePage = () => {
               </NavLink>
                         </li>
                         <li>
-                            <Link to='/payment' activeStyle={{ backgroundColor: '#db4619' }}>
+                            <NavLink
+                                to='/payment'
+                                activeStyle={{ backgroundColor: '#db4619' }}
+                            >
                                 Credit : <span className='ptcolour'>25</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className='divider'></li>
                         <li>

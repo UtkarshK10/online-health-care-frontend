@@ -107,7 +107,7 @@ function UserLogin(props) {
 
               <div className='row'>
                 <div className='input-field'>
-                  <button className='btn btn-large pcolour btn-register waves-effect waves-light'>
+                  <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
                     Login
                     <i className='material-icons right'>check_circle</i>
                   </button>

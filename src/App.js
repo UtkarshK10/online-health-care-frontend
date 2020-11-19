@@ -11,6 +11,7 @@ import UserLogin from './components/UserLogin';
 import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
+import Profile from './components/Profile';
 // import AddTechModal from './Modal/OTPModal';
 
 function App() {
@@ -29,10 +30,14 @@ function App() {
       <Route
         render={({ location }) => (
           <TransitionGroup>
-            <CSSTransition key={location.key} classNames='fade' timeout={{
-              enter: 100,
-              exit: 500,
-            }}>
+            <CSSTransition
+              key={location.key}
+              classNames='fade'
+              timeout={{
+                enter: 100,
+                exit: 500,
+              }}
+            >
               <Switch location={location}>
                 <Route
                   exact
@@ -60,6 +65,15 @@ function App() {
                   render={() => (
                     <div className='page'>
                       <Oxymeter />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/user/:userId'
+                  render={() => (
+                    <div className='page'>
+                      <Profile />
                     </div>
                   )}
                 />
