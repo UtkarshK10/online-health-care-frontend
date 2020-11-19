@@ -33,11 +33,6 @@ function UserLogin(props) {
       M.toast({
         html: 'Password should be of minimum 6 characters.',
       });
-    } else if (!regularExpressionPassword.test(password)) {
-      M.toast({
-        html:
-          'Password should contain atleast one number and one special character',
-      });
     } else {
       const headers = { 'Content-Type': 'application/json' };
       //login
@@ -60,7 +55,7 @@ function UserLogin(props) {
           saveLocalStorage('userData', resData);
           history.push('/');
         }
-      } catch(e) { 
+      } catch (e) {
         const { response } = e;
         const { request, ...errorObject } = response;
         setError(true);
