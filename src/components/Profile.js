@@ -12,25 +12,28 @@ const Profile = () => {
   const updatetrigger = async () => {
     setEdit(!edit);
     if (edit) {
-      delete user.id
-      delete user.created_at
-      delete user.modified_at
+      delete user.id;
+      delete user.created_at;
+      delete user.modified_at;
       try {
         const res = await axios.put('/api/users/me', user, {
           headers: {
             'Content-type': 'application/json',
-            'api-token': auth.token
-          }
-        })
-
+            'api-token': auth.token,
+          },
+        });
+        console.log(res);
         setUser(res.data.user);
       } catch (e) {
-
+        console.log(e);
       }
     }
   };
   const updateGender = (val) => {
     if (edit) setUser({ ...user, gender: val });
+  };
+  const setImage = (img) => {
+    console.log(img);
   };
 
   if (edit === true) {
@@ -42,14 +45,14 @@ const Profile = () => {
       try {
         const res = await axios.get(`/api/users/${auth.user_id}`, {
           headers: {
-            'api-token': auth.token
-          }
-        })
+            'api-token': auth.token,
+          },
+        });
         setUser({ ...res.data.user });
       } catch (e) {
         console.log(e);
       }
-    }
+    };
     fetchUser();
   }, [auth.user_id, auth.token]);
 
@@ -61,7 +64,11 @@ const Profile = () => {
       <div className='container'>
         <div className='row'>
           <div className='col s12 m4 l4 margin'>
-            <ImageAvatar imageURL={profile_url} name={name} />
+            <ImageAvatar
+              imageURL={profile_url}
+              name={name}
+              setImage={setImage}
+            />
             <h4>{username}</h4>
             <h5>{email}</h5>
             {!edit && (
@@ -95,9 +102,8 @@ const Profile = () => {
                     name='name'
                     readOnly={!edit}
                     className='validate'
-                    autoFocus
                   />
-                  <label htmlFor='name'>Name</label>
+                  <label htmlFor='name' className="active">Name</label>
                 </div>
               </div>
               <div className='row'>
@@ -110,9 +116,8 @@ const Profile = () => {
                     name='phone'
                     readOnly={!edit}
                     className='validate'
-                    autoFocus
                   />
-                  <label htmlFor='pho'>Phone no</label>
+                  <label htmlFor='pho' className="active">Phone no</label>
                 </div>
               </div>
               <div className='row'>
@@ -127,9 +132,8 @@ const Profile = () => {
                     readOnly={!edit}
                     min='1'
                     max='100'
-                    autoFocus
                   />
-                  <label htmlFor='age'>Age</label>
+                  <label htmlFor='age' className="active">Age</label>
                 </div>
               </div>
               <div className='row'>
