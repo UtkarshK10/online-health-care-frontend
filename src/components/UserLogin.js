@@ -21,6 +21,9 @@ function UserLogin(props) {
 
   const { setAuth } = useContext(AuthContext);
   const history = useHistory();
+  const [propData, setPropData] = useState(null);
+
+
 
   const getOTP = () => {
     var elem = document.querySelector('.modal');
@@ -95,6 +98,17 @@ function UserLogin(props) {
     }
   };
 
+  const handleClick = e => {
+    e.preventDefault()
+    setModal(true);
+    const data = {
+      'title': 'Enter your user account\'s verified email address and we will send you a password reset link.',
+      'btnText': 'Send reset link',
+      'label': 'Email'
+    }
+    setPropData(data);
+  }
+
   return (
     <>
       <div className='container'>
@@ -117,7 +131,9 @@ function UserLogin(props) {
                     <label htmlFor='email'>Email</label>
                   </div>
                 </div>
-
+                <p className="right-align">
+                  <Link to="#" onClick={handleClick} className="stcolour">Forgot password?</Link>
+                </p>
                 <div className='row'>
                   <div className='input-field'>
                     <input
@@ -152,7 +168,7 @@ function UserLogin(props) {
         </div>
         <p>{error && errorMsg.toString()}</p>
       </div>
-      <AddTechModal />
+      <AddTechModal info={propData} />
     </>
   );
 }

@@ -6,51 +6,84 @@ import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import { updateLocalStorage } from '../utils/helper';
 
-const OTPModal = () => {
+const OTPModal = (props) => {
   const [otp, setOTP] = useInputState('');
+  const [email, setEmail] = useInputState('');
   const [msg, setMsg] = useState('');
   const history = useHistory();
   const { auth, setAuth } = useContext(AuthContext);
+
+  const closeInstance = () => {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.init(elem, { dismissible: false });
+    instance.close();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (otp.length <= 0) {
-      M.toast({ html: 'Please enter an OTP' });
-    } else {
-      const data = { otp };
-      const headers = { 'Content-Type': 'application/json' };
-      axios.post(`/api/users/validate/${auth.user_id}`, data, {
-        headers: headers,
+    if (!props?.info) {
+      if (otp.length <= 0) {
+        M.toast({ html: 'Please enter an OTP' });
+      } else {
+        const data = { otp };
+        const headers = { 'Content-Type': 'application/json' };
+        axios.post(`/api/users/validate/${auth.user_id}`, data, {
+          headers: headers,
+        })
+          .then(res => {
+            if (res.status === 200) {
+              console.log(res);
+              const resData = {
+                name: res.data.name,
+                username: res.data.username,
+                user_id: res.data.user_id,
+                email: res.data.email,
+                gender: res.data.gender,
+                phone: res.data.phone,
+                age: res.data.age,
+                credits: res.data.total_credit,
+                profile_image: res.data.profile_url,
+                isLoggedIn: true,
+                token: res.data.jwt_token,
+                tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+              };
+              setAuth({ ...resData });
+              updateLocalStorage(resData);
+              history.push('/#!');
+            }
+          })
+          .catch(err => {
+            if (err?.response) {
+              setMsg(err?.response.data.msg)
+            } else if (err?.request) {
+              setMsg(err?.request.data.toString())
+            } else {
+              console.log(err)
+              setMsg("Something went wrong, please try again");
+            }
+          })
+      }
+    }
+    if (props?.info) {
+      const data = { email }
+      axios.post('/api/users/reset', data, {
+        headers: {
+          'Content-type': 'application/json'
+        }
       })
         .then(res => {
-          if (res.status === 200) {
-            console.log(res);
-            const resData = {
-              name: res.data.name,
-              username: res.data.username,
-              user_id: res.data.user_id,
-              email: res.data.email,
-              gender: res.data.gender,
-              phone: res.data.phone,
-              age: res.data.age,
-              credits: res.data.total_credit,
-              profile_image: res.data.profile_url,
-              isLoggedIn: true,
-              token: res.data.jwt_token,
-              tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-            };
-            setAuth({ ...resData });
-            updateLocalStorage(resData);
-            history.push('/#!');
-          }
+          setMsg(res.data.msg);
+          setTimeout(() => {
+            closeInstance()
+          }, 10000);
         })
         .catch(err => {
           if (err?.response) {
-            setMsg(err?.response.data.msg)
+
           } else if (err?.request) {
-            setMsg(err?.request.data.toString())
+
           } else {
             console.log(err)
-            setMsg("Something went wrong, please try again");
           }
         })
     }
@@ -59,15 +92,25 @@ const OTPModal = () => {
   return (
     <div id='OtpModal' className='modal'>
       <div className='modal-content'>
-        <h4>Enter the OTP to verify your email</h4>
+        <h4>{props?.info ? props?.info?.title : 'Enter the OTP to verify your email'}</h4>
         <div className='row'>
           <br />
-          <div className='input-field'>
-            <input type='password' name='OTP' value={otp} onChange={setOTP} />
-            <label htmlFor='OTP' className='active'>
-              OTP
+          {!props?.info
+            ?
+            <div className='input-field'>
+              <input type='password' name='OTP' value={otp} onChange={setOTP} />
+              <label htmlFor='OTP' className='active'>
+                OTP
             </label>
-          </div>
+            </div>
+            :
+            <div className='input-field'>
+              <input type='email' name='Email' value={email} onChange={setEmail} />
+              <label htmlFor='Email' className='active'>
+                Email
+            </label>
+            </div>
+          }
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}
@@ -77,9 +120,9 @@ const OTPModal = () => {
         <a
           href='#!'
           onClick={handleSubmit}
-          className='purple waves-effect btn secondary-content'
+          className='scolour waves-effect btn secondary-content'
         >
-          Verify
+          {props?.info ? props?.info?.btnText : 'Verify'}
         </a>
       </div>
     </div>
