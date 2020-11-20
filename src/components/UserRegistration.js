@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
 import axios from '../axios/axios';
-// import axios from 'axios';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
-import { saveLocalStorage } from '../utils/helper';
 import { useSpring, animated } from 'react-spring';
 import AddTechModal from '../Modal/OTPModal';
 
@@ -72,21 +70,9 @@ function UserRegistration(props) {
       try {
         if (res.status === 201) {
           const resData = {
-            name: res.data.name,
-            username: res.data.username,
-            user_id: res.data.user_id,
-            email: res.data.email,
-            gender: res.data.gender,
-            phone: res.data.phone,
-            age: res.data.age,
-            credits: res.data.total_credit,
-            profile_image: res.data.profile_url,
-            isLoggedIn: true,
-            token: res.data.jwt_token,
-            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-          };
+            user_id: res.data.user_id
+          }
           setAuth(resData);
-          saveLocalStorage(resData);
           setModal(true);
         }
       } catch (e) {

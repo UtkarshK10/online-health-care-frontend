@@ -4,10 +4,11 @@ import '../styles/UserRegistrationStyles.css';
 import CustomG from './CustomG';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
+import { updateLocalStorage } from '../utils/helper';
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   let classD = 'remove';
   const updatetrigger = async () => {
     setEdit(!edit);
@@ -15,6 +16,7 @@ const Profile = () => {
       delete user.id;
       delete user.created_at;
       delete user.modified_at;
+      console.log(auth.token)
       try {
         const res = await axios.put('/api/users/me', user, {
           headers: {
@@ -24,20 +26,46 @@ const Profile = () => {
         });
         console.log(res);
         setUser(res.data.user);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   const updateGender = (val) => {
     if (edit) setUser({ ...user, gender: val });
   };
-  const setImage = (img) => {
-    console.log(img);
+  const setImage = async img => {
+    const formData = new FormData();
+    formData.append('file', img);
+    try {
+      console.log("inside");
+      const res = await axios.put('/api/users/me', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'api-token': auth.token
+        }
+      })
+      console.log(res);
+      setUser({ ...res.data.user, profile_url: res.data.user.profile_url });
+      await setAuth({ ...auth, profile_image: res.data.user.profile_url });
+      await updateLocalStorage({ ...auth, profile_image: res.data.user.profile_url });
+    } catch (e) {
+
+    }
   };
 
   if (edit === true) {
     classD = 'shadow ';
   }
-
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    profile_url: '',
+    email: '',
+    age: '',
+    phone: '',
+    gender: ''
+  });
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -51,10 +79,10 @@ const Profile = () => {
         console.log(e);
       }
     };
-    fetchUser();
+    if (auth.user_id)
+      fetchUser();
   }, [auth.user_id, auth.token]);
 
-  const [user, setUser] = useState({});
   const { profile_url, name, username, email, age, phone, gender } = user;
   const update = (e) => setUser({ ...user, [e.target.name]: e.target.value });
   return (
@@ -94,7 +122,6 @@ const Profile = () => {
                 <div className='input-field'>
                   <input
                     value={name}
-                    autoFocus={true}
                     onChange={update}
                     type='text'
                     id='name'
@@ -102,7 +129,7 @@ const Profile = () => {
                     readOnly={!edit}
                     className='validate'
                   />
-                  <label htmlFor='name'>Name</label>
+                  <label htmlFor='name' className="active">Name</label>
                 </div>
               </div>
               <div className='row'>
@@ -110,21 +137,19 @@ const Profile = () => {
                   <input
                     value={phone}
                     onChange={update}
-                    autoFocus={true}
                     type='text'
                     id='phoneno'
                     name='phone'
                     readOnly={!edit}
                     className='validate'
                   />
-                  <label htmlFor='pho'>Phone no</label>
+                  <label htmlFor='pho' className="active">Phone no</label>
                 </div>
               </div>
               <div className='row'>
                 <div className='input-field'>
                   <input
                     value={age}
-                    autoFocus={true}
                     onChange={update}
                     name='age'
                     id='age'
@@ -134,7 +159,7 @@ const Profile = () => {
                     min='1'
                     max='100'
                   />
-                  <label htmlFor='age'>Age</label>
+                  <label htmlFor='age' className="active">Age</label>
                 </div>
               </div>
               <div className='row'>

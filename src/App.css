@@ -114,15 +114,24 @@ button {
 }
 .pos {
   position: relative;
-  top: -25px;
+  top: -20px;
   left: 70px;
   visibility: hidden;
   font-size: 2rem;
+  z-index: 10000;
 }
 .editIcon:hover .pos {
   visibility: visible;
   transition: all 0.5s;
   transform: scale(1.5);
+  z-index: 10000;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 .avatar {
   vertical-align: middle;

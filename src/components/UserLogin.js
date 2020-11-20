@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
@@ -8,17 +8,30 @@ import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
 import { saveLocalStorage } from '../utils/helper';
+import AddTechModal from '../Modal/OTPModal';
 
 function UserLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
   const [email, handleEmailChange] = useInputState('');
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [openModal, setModal] = useState(false);
 
   const { setAuth } = useContext(AuthContext);
   const history = useHistory();
 
-  const register = async (e) => {
+  const getOTP = () => {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.init(elem, { dismissible: false });
+    instance.open();
+  };
+
+  useEffect(() => {
+    if (openModal) getOTP();
+    // eslint-disable-next-line
+  }, [openModal]);
+
+  const login = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -40,9 +53,15 @@ function UserLogin(props) {
         headers: headers,
       });
 
-
       try {
-        if (res.status === 200) {
+        if (res.status === 200 && res.data.msg === 'unverified') {
+          const resData = {
+            user_id: res.data.user_id
+          }
+          setAuth(resData);
+          setModal(true);
+        }
+        else if (res.status === 200) {
           const resData = {
             name: res.data.name,
             username: res.data.username,
@@ -64,65 +83,70 @@ function UserLogin(props) {
       } catch (e) {
         const { response } = e;
         const { request, ...errorObject } = response;
+        console.log(errorObject)
         setError(true);
         setErrorMsg(errorObject.data.msg);
+
       }
     }
   };
 
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col hide-on-small-and-down m7 l7'>
-          <img className='responsive-img center' src={doctor} alt='doctor' />
-        </div>
-        <div className='col s12 m5 l5'>
-          <div id='slide'>
-            <form onSubmit={register} className='padding-form'>
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={email}
-                    onChange={handleEmailChange}
-                    id='email'
-                    type='email'
-                    className='validate'
-                  />
-                  <label htmlFor='email'>Email</label>
+    <>
+      <div className='container'>
+        <div className='row'>
+          <div className='col hide-on-small-and-down m7 l7'>
+            <img className='responsive-img center' src={doctor} alt='doctor' />
+          </div>
+          <div className='col s12 m5 l5'>
+            <div id='slide'>
+              <form onSubmit={login} className='padding-form'>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={email}
+                      onChange={handleEmailChange}
+                      id='email'
+                      type='email'
+                      className='validate'
+                    />
+                    <label htmlFor='email'>Email</label>
+                  </div>
                 </div>
-              </div>
 
-              <div className='row'>
-                <div className='input-field'>
-                  <input
-                    value={password}
-                    onChange={handlePasswordChange}
-                    id='password'
-                    type='password'
-                    className='validate'
-                  />
-                  <label htmlFor='password'>Password</label>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={password}
+                      onChange={handlePasswordChange}
+                      id='password'
+                      type='password'
+                      className='validate'
+                    />
+                    <label htmlFor='password'>Password</label>
+                  </div>
                 </div>
-              </div>
 
-              <div className='row'>
-                <div className='input-field'>
-                  <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
-                    Login
+                <div className='row'>
+                  <div className='input-field'>
+                    <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                      Login
                     <i className='material-icons right'>check_circle</i>
-                  </button>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
-            <span>New to App?</span>{' '}
-            <Link to='/signup' className='stcolour'>
-              Register
+              </form>
+              <span>New to App?</span>{' '}
+              <Link to='/signup' className='stcolour'>
+                Register
             </Link>
+            </div>
           </div>
         </div>
+        <p>{error && errorMsg.toString()}</p>
       </div>
-      <p>{error && errorMsg.toString()}</p>
-    </div>
+      <AddTechModal />
+    </>
   );
 }
 

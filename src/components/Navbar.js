@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
+
 import M from 'materialize-css/dist/js/materialize.min.js';
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
@@ -35,9 +36,6 @@ const HomePage = () => {
       <nav>
         <div className='nav-wrapper pcolour'>
           <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
-            Logo
-          </NavLink>
-          <NavLink to='/' className='brand-logo hide-on-large-only'>
             Logo
           </NavLink>
           <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
@@ -121,6 +119,14 @@ const HomePage = () => {
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
                 Credit : <span className='ptcolour'>25</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/payment'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                Credits : <span className='ptcolour'>{auth.credits}</span>
               </NavLink>
             </li>
             <li className='divider'></li>
