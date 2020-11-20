@@ -5,7 +5,7 @@ import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 
 const Oxymeter = () => {
-  const [oxylevel, setLevel] = useState('');
+  const [oxylevel, setLevel] = useState(0);
   const [loading, setLoading] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
 
@@ -54,10 +54,10 @@ const Oxymeter = () => {
               maxFileSize={20971520}
               filesLimit={1}
             />
-            {oxylevel && (
+            {oxylevel > 0 && (
               <h4>
                 Your blood oxygen level is{' '}
-                <span className='ptcolour'>{oxylevel + ' %'}</span>
+                <span className='ptcolour'>{+oxylevel.toFixed(2) + ' %'}</span>
               </h4>
             )}
           </div>

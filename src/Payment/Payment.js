@@ -25,7 +25,7 @@ const Payment = () => {
       if (res.status === 200) {
         setMsg(res.data.msg);
         await setAuth({ ...auth, credits: res.data.new_credits })
-        updateLocalStorage(auth);
+        updateLocalStorage({ ...auth, credits: res.data.new_credits });
         setAmount(0);
       }
     } catch (e) {
@@ -78,7 +78,8 @@ const Payment = () => {
             </button>
           </StripeCheckout>
         )}
-        {msg && <h4 className="success">{msg}</h4>}
+
+        {(msg && credit === 0) && <h4 className="success">{msg}</h4>}
       </div>
     </div>
   );

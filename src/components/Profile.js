@@ -22,7 +22,7 @@ const Profile = () => {
             'api-token': auth.token
           }
         })
-        console.log(res);
+
         setUser(res.data.user);
       } catch (e) {
 
@@ -95,6 +95,7 @@ const Profile = () => {
                     name='name'
                     readOnly={!edit}
                     className='validate'
+                    autoFocus
                   />
                   <label htmlFor='name'>Name</label>
                 </div>
@@ -109,6 +110,7 @@ const Profile = () => {
                     name='phone'
                     readOnly={!edit}
                     className='validate'
+                    autoFocus
                   />
                   <label htmlFor='pho'>Phone no</label>
                 </div>
@@ -125,6 +127,7 @@ const Profile = () => {
                     readOnly={!edit}
                     min='1'
                     max='100'
+                    autoFocus
                   />
                   <label htmlFor='age'>Age</label>
                 </div>
