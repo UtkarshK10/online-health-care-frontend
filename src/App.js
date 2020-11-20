@@ -12,7 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
-import Forget from './components/Forget';
+import { TempParticle } from './components/TempParticle';
 // import AddTechModal from './Modal/OTPModal';
 
 function App() {
@@ -80,13 +80,12 @@ function App() {
                 />{' '}
                 <Route
                   exact
-                  path='/forget'
-                  render={() => (
-                    <div className='page'>
-                      <Particle />
-                      <Forget />
-                    </div>
-                  )}
+                  path={`/reset/:token`}
+                  component={TempParticle}
+                // <div className='page'>
+                // <Particle />
+
+                // </div>
                 />
                 <Route
                   exact

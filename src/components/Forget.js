@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
 import RESET from '../assets/reset.png';
+import axios from '../axios/axios';
+// import { } from 'react-router-dom';
 
-const Forget = () => {
+const Forget = ({ token }) => {
   const [fields, setFields] = useState({
     password1: '',
     password2: '',
   });
+  const [msg, setMsg] = useState(null);
   const onChange = (e) =>
     setFields({ ...fields, [e.target.name]: e.target.value });
-  const onSubmit = () => {
-    console.log('submitted');
+  const onSubmit = e => {
+    e.preventDefault();
+    const data = { password: password1 }
+    axios.put(`/api/users/reset/${token}`, data, {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+      .then(res => {
+        console.log(res);
+        setMsg(res.data.msg);
+      })
+      .catch(err => {
+        if (err?.response) {
+
+        } else if (err?.request) {
+
+        } else {
+          console.log(err)
+        }
+      })
   };
   const { password1, password2 } = fields;
   return (
@@ -65,6 +87,7 @@ const Forget = () => {
           </div>
         </div>
       </div>
+      {msg && <p>{msg}</p>}
     </div>
   );
 };
