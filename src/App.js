@@ -12,6 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
+import Forget from './components/Forget';
 // import AddTechModal from './Modal/OTPModal';
 
 function App() {
@@ -74,6 +75,16 @@ function App() {
                   render={() => (
                     <div className='page'>
                       <Profile />
+                    </div>
+                  )}
+                />{' '}
+                <Route
+                  exact
+                  path='/forget'
+                  render={() => (
+                    <div className='page'>
+                      <Particle />
+                      <Forget />
                     </div>
                   )}
                 />
