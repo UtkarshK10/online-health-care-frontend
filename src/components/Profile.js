@@ -4,10 +4,11 @@ import '../styles/UserRegistrationStyles.css';
 import CustomG from './CustomG';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
+import { updateLocalStorage } from '../utils/helper';
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   let classD = 'remove';
   const updatetrigger = async () => {
     setEdit(!edit);
@@ -15,6 +16,7 @@ const Profile = () => {
       delete user.id;
       delete user.created_at;
       delete user.modified_at;
+      console.log(auth.token)
       try {
         const res = await axios.put('/api/users/me', user, {
           headers: {
@@ -32,14 +34,38 @@ const Profile = () => {
   const updateGender = (val) => {
     if (edit) setUser({ ...user, gender: val });
   };
-  const setImage = (img) => {
-    console.log(img);
+  const setImage = async img => {
+    const formData = new FormData();
+    formData.append('file', img);
+    try {
+      console.log("inside");
+      const res = await axios.put('/api/users/me', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'api-token': auth.token
+        }
+      })
+      console.log(res);
+      setUser({ ...res.data.user, profile_url: res.data.user.profile_url });
+      await setAuth({ ...auth, profile_image: res.data.user.profile_url });
+      await updateLocalStorage({ ...auth, profile_image: res.data.user.profile_url });
+    } catch (e) {
+
+    }
   };
 
   if (edit === true) {
     classD = 'shadow ';
   }
-
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    profile_url: '',
+    email: '',
+    age: '',
+    phone: '',
+    gender: ''
+  });
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -53,10 +79,10 @@ const Profile = () => {
         console.log(e);
       }
     };
-    fetchUser();
+    if (auth.user_id)
+      fetchUser();
   }, [auth.user_id, auth.token]);
 
-  const [user, setUser] = useState({});
   const { profile_url, name, username, email, age, phone, gender } = user;
   const update = (e) => setUser({ ...user, [e.target.name]: e.target.value });
   return (

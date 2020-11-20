@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
 import axios from '../axios/axios';
-// import axios from 'axios';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';

@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
-import '../jsforproject.js/all';
 
+import M from 'materialize-css/dist/js/materialize.min.js';
 const HomePage = () => {
     const { auth } = useContext(AuthContext);
-
+    useEffect(() => {
+        M.AutoInit();
+        var elems = document.querySelectorAll('.sidenav');
+        M.Sidenav.init(elems, {});
+    });
     return (
-
         <>
             {auth?.isLoggedIn && (
                 <ul id='dropdown1' className='dropdown-content'>
                     <li>
                         <NavLink to={`/user/${auth.user_id}`} className='stcolour'>
                             My Profile
-          </NavLink>
+            </NavLink>
                     </li>
                     <li>
                         <NavLink to='/payment' className='stcolour'>
@@ -25,7 +28,7 @@ const HomePage = () => {
                     <li>
                         <NavLink to='/logout' className='stcolour'>
                             Logout
-          </NavLink>
+            </NavLink>
                     </li>
                 </ul>
             )}
@@ -118,7 +121,7 @@ const HomePage = () => {
                                 to='/payment'
                                 activeStyle={{ backgroundColor: '#db4619' }}
                             >
-                                Credit : <span className='ptcolour'>25</span>
+                                Credits : <span className='ptcolour'>{auth.credits}</span>
                             </NavLink>
                         </li>
                         <li className='divider'></li>
