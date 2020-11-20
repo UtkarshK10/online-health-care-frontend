@@ -9,6 +9,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
 import { saveLocalStorage } from '../utils/helper';
 import AddTechModal from '../Modal/OTPModal';
+import ReactSpinner from './ReactSpinner';
 
 function UserLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
@@ -16,6 +17,7 @@ function UserLogin(props) {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [openModal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { setAuth } = useContext(AuthContext);
   const history = useHistory();
@@ -56,12 +58,11 @@ function UserLogin(props) {
       try {
         if (res.status === 200 && res.data.msg === 'unverified') {
           const resData = {
-            user_id: res.data.user_id
-          }
+            user_id: res.data.user_id,
+          };
           setAuth(resData);
           setModal(true);
-        }
-        else if (res.status === 200) {
+        } else if (res.status === 200) {
           const resData = {
             name: res.data.name,
             username: res.data.username,
@@ -83,10 +84,9 @@ function UserLogin(props) {
       } catch (e) {
         const { response } = e;
         const { request, ...errorObject } = response;
-        console.log(errorObject)
+        console.log(errorObject);
         setError(true);
         setErrorMsg(errorObject.data.msg);
-
       }
     }
   };
@@ -128,18 +128,21 @@ function UserLogin(props) {
                 </div>
 
                 <div className='row'>
-                  <div className='input-field'>
-                    <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
-                      Login
-                    <i className='material-icons right'>check_circle</i>
-                    </button>
-                  </div>
+                  {!loading && (
+                    <div className='input-field'>
+                      <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                        Login
+                        <i className='material-icons right'>check_circle</i>
+                      </button>
+                    </div>
+                  )}
+                  {loading && <ReactSpinner size={25} />}
                 </div>
               </form>
               <span>New to App?</span>{' '}
               <Link to='/signup' className='stcolour'>
                 Register
-            </Link>
+              </Link>
             </div>
           </div>
         </div>

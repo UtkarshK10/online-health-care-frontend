@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import ClipLoader from 'react-spinners/ClipLoader';
 const override = css`
   display: block;
@@ -7,10 +7,10 @@ const override = css`
   border-color: red;
 `;
 
-const ReactSpinner = () => {
+const ReactSpinner = ({ size }) => {
   return (
     <div className='sweet-loading'>
-      <ClipLoader css={override} size={150} color={'#123abc'} loading={true} />
+      <ClipLoader css={override} size={size} color={'#f4511e'} loading={true} />
     </div>
   );
 };

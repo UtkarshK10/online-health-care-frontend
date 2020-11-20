@@ -8,6 +8,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
 import { useSpring, animated } from 'react-spring';
 import AddTechModal from '../Modal/OTPModal';
+import ReactSpinner from './ReactSpinner';
 
 function UserRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -21,14 +22,13 @@ function UserRegistration(props) {
   const [openModal, setModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [state, toggle] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   const { setAuth } = useContext(AuthContext);
 
   //user signup and validation
 
   const register = async (e) => {
     e.preventDefault();
-
     const data = {
       name,
       email,
@@ -61,6 +61,7 @@ function UserRegistration(props) {
     } else if (age.value < 0 && age.value > 100) {
       M.toast({ html: 'Please enter a valid age.' });
     } else {
+      setLoading(true);
       const headers = { 'Content-Type': 'application/json' };
       //signup
       const res = await axios.post('/api/users/', data, {
@@ -70,8 +71,8 @@ function UserRegistration(props) {
       try {
         if (res.status === 201) {
           const resData = {
-            user_id: res.data.user_id
-          }
+            user_id: res.data.user_id,
+          };
           setAuth(resData);
           setModal(true);
         }
@@ -81,6 +82,7 @@ function UserRegistration(props) {
         setError(true);
         setErrorMsg(errorObject.data.msg);
       }
+      setLoading(false);
     }
   };
 
@@ -232,12 +234,15 @@ function UserRegistration(props) {
                   </div>
                 </div>
                 <div className='row'>
-                  <div className='input-field'>
-                    <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
-                      Register
-                      <i className='material-icons right'>check_circle</i>
-                    </button>
-                  </div>
+                  {!loading && (
+                    <div className='input-field'>
+                      <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                        Register
+                        <i className='material-icons right'>check_circle</i>
+                      </button>
+                    </div>
+                  )}
+                  {loading && <ReactSpinner size={25} />}
                 </div>
               </form>
               <span>
