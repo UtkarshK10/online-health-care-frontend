@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import ReactSpinner from './ReactSpinner';
 import axios from '../axios/axios';
@@ -12,21 +12,27 @@ const Oxymeter = () => {
     if (file.length > 0) {
       const formData = new FormData();
       formData.append('file', file[0]);
-
-      let res;
       setLoading(true);
-      try {
-        res = await axios.post('/api/users/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'api-token': auth.token,
-          },
-        });
-        setLevel(res.data.spo2);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
+      axios.post('/api/users/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'api-token': auth.token,
+        },
+      })
+        .then(res => {
+          setLoading(false);
+          setLevel(res.data.spo2);
+        })
+        .catch(err => {
+          setLoading(false);
+          if (err?.response) {
+
+          } else if (err?.request) {
+
+          } else {
+            console.log(err)
+          }
+        })
     }
   };
   return (

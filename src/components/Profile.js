@@ -10,48 +10,73 @@ const Profile = () => {
   const [edit, setEdit] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
   let classD = 'remove';
-  const updatetrigger = async () => {
+  const updatetrigger = () => {
     setEdit(!edit);
     if (edit) {
       delete user.id;
       delete user.created_at;
       delete user.modified_at;
-      console.log(auth.token)
-      try {
-        const res = await axios.put('/api/users/me', user, {
-          headers: {
-            'Content-type': 'application/json',
-            'api-token': auth.token,
-          },
-        });
-        console.log(res);
-        setUser(res.data.user);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
+      axios.put('/api/users/me', user, {
+        headers: {
+          'Content-type': 'application/json',
+          'api-token': auth.token,
+        },
+      })
+        .then(res => {
+          const resData = {
+            name: res.data.name,
+            username: res.data.username,
+            user_id: res.data.user_id,
+            email: res.data.email,
+            gender: res.data.gender,
+            phone: res.data.phone,
+            age: res.data.age,
+            credits: res.data.total_credit,
+            profile_image: res.data.profile_url,
+          }
+          console.log(resData);
+          setUser(res.data.user);
+          // setAuth({ ...auth, ...resData });
+          // updateLocalStorage({ ...auth, ...resData });
+        })
+        .catch(err => {
+          if (err?.response) {
+
+          } else if (err?.request) {
+
+          } else {
+            console.log(err)
+          }
+        })
+
+    };
+  }
   const updateGender = (val) => {
     if (edit) setUser({ ...user, gender: val });
   };
   const setImage = async img => {
     const formData = new FormData();
     formData.append('file', img);
-    try {
-      console.log("inside");
-      const res = await axios.put('/api/users/me', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'api-token': auth.token
+    axios.put('/api/users/me', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'api-token': auth.token
+      }
+    })
+      .then(res => {
+        setUser({ ...res.data.user, profile_url: res.data.user.profile_url });
+        setAuth({ ...auth, profile_image: res.data.user.profile_url });
+        updateLocalStorage({ ...auth, profile_image: res.data.user.profile_url });
+      })
+      .catch(err => {
+        if (err?.response) {
+
+        } else if (err?.request) {
+
+        } else {
+          console.log(err)
         }
       })
-      console.log(res);
-      setUser({ ...res.data.user, profile_url: res.data.user.profile_url });
-      await setAuth({ ...auth, profile_image: res.data.user.profile_url });
-      await updateLocalStorage({ ...auth, profile_image: res.data.user.profile_url });
-    } catch (e) {
-
-    }
   };
 
   if (edit === true) {
@@ -68,17 +93,18 @@ const Profile = () => {
   });
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        const res = await axios.get(`/api/users/me`, {
-          headers: {
-            'api-token': auth.token,
-          },
-        });
-        setUser({ ...res.data.user });
-      } catch (e) {
-        console.log(e);
-      }
-    };
+      axios.get(`/api/users/${auth.user_id}`, {
+        headers: {
+          'api-token': auth.token,
+        },
+      })
+        .then(res => {
+          setUser({ ...res.data.user });
+        })
+        .catch(err => {
+
+        })
+    }
     if (auth.user_id)
       fetchUser();
   }, [auth.user_id, auth.token]);

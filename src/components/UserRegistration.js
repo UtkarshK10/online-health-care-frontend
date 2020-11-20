@@ -63,26 +63,28 @@ function UserRegistration(props) {
     } else {
       setLoading(true);
       const headers = { 'Content-Type': 'application/json' };
-      //signup
-      const res = await axios.post('/api/users/', data, {
+      axios.post('/api/users/', data, {
         headers: headers,
-      });
-
-      try {
-        if (res.status === 201) {
+      })
+        .then(res => {
           const resData = {
             user_id: res.data.user_id,
           };
           setAuth(resData);
           setModal(true);
-        }
-      } catch (e) {
-        const { response } = e;
-        const { request, ...errorObject } = response;
-        setError(true);
-        setErrorMsg(errorObject.data.msg);
-      }
-      setLoading(false);
+        })
+        .catch(err => {
+          setLoading(false);
+          setError(true);
+          if (err?.response) {
+            setErrorMsg(err?.response.data.msg)
+          } else if (err?.request) {
+            setErrorMsg(err?.request.data.toString())
+          } else {
+            console.log(err)
+            setErrorMsg("Something went wrong, please try again");
+          }
+        })
     }
   };
 

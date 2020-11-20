@@ -16,43 +16,43 @@ const OTPModal = () => {
     if (otp.length <= 0) {
       M.toast({ html: 'Please enter an OTP' });
     } else {
-      let res;
-      try {
-        const data = { otp };
-        const headers = { 'Content-Type': 'application/json' };
-        res = await axios.post(`/api/users/validate/${auth.user_id}`, data, {
-          headers: headers,
-        });
-        if (res.status === 200) {
-          console.log(res);
-          const resData = {
-            name: res.data.name,
-            username: res.data.username,
-            user_id: res.data.user_id,
-            email: res.data.email,
-            gender: res.data.gender,
-            phone: res.data.phone,
-            age: res.data.age,
-            credits: res.data.total_credit,
-            profile_image: res.data.profile_url,
-            isLoggedIn: true,
-            token: res.data.jwt_token,
-            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-          };
-          await setAuth({ ...resData });
-          await updateLocalStorage(resData);
-          history.push('/#!');
-        }
-      } catch (e) {
-        // console.log(e?.response);
-        // console.log(e?.response?.data);
-        // console.log(e);
-        const errorObject = (e?.response && e?.response.data) || e;
-        // const { response } = e;
-        // const { request, ...errorObject } = response;
-        // console.log(data);
-        setMsg(errorObject?.msg || 'Invalid OTP');
-      }
+      const data = { otp };
+      const headers = { 'Content-Type': 'application/json' };
+      axios.post(`/api/users/validate/${auth.user_id}`, data, {
+        headers: headers,
+      })
+        .then(res => {
+          if (res.status === 200) {
+            console.log(res);
+            const resData = {
+              name: res.data.name,
+              username: res.data.username,
+              user_id: res.data.user_id,
+              email: res.data.email,
+              gender: res.data.gender,
+              phone: res.data.phone,
+              age: res.data.age,
+              credits: res.data.total_credit,
+              profile_image: res.data.profile_url,
+              isLoggedIn: true,
+              token: res.data.jwt_token,
+              tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+            };
+            setAuth({ ...resData });
+            updateLocalStorage(resData);
+            history.push('/#!');
+          }
+        })
+        .catch(err => {
+          if (err?.response) {
+            setMsg(err?.response.data.msg)
+          } else if (err?.request) {
+            setMsg(err?.request.data.toString())
+          } else {
+            console.log(err)
+            setMsg("Something went wrong, please try again");
+          }
+        })
     }
   };
 

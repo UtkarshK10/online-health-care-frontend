@@ -21,7 +21,7 @@ const Payment = () => {
           'Content-type': 'application/json'
         }
       })
-      console.log(res);
+
       if (res.status === 200) {
         setMsg(res.data.msg);
         await setAuth({ ...auth, credits: res.data.new_credits })

@@ -50,44 +50,48 @@ function UserLogin(props) {
       });
     } else {
       const headers = { 'Content-Type': 'application/json' };
-      //login
-      const res = await axios.post('/api/users/login', data, {
+      axios.post('/api/users/login', data, {
         headers: headers,
-      });
-
-      try {
-        if (res.status === 200 && res.data.msg === 'unverified') {
-          const resData = {
-            user_id: res.data.user_id,
-          };
-          setAuth(resData);
-          setModal(true);
-        } else if (res.status === 200) {
-          const resData = {
-            name: res.data.name,
-            username: res.data.username,
-            user_id: res.data.user_id,
-            email: res.data.email,
-            gender: res.data.gender,
-            phone: res.data.phone,
-            age: res.data.age,
-            credits: res.data.total_credit,
-            profile_image: res.data.profile_url,
-            isLoggedIn: true,
-            token: res.data.jwt_token,
-            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-          };
-          setAuth(resData);
-          saveLocalStorage(resData);
-          history.push('/');
-        }
-      } catch (e) {
-        const { response } = e;
-        const { request, ...errorObject } = response;
-        console.log(errorObject);
-        setError(true);
-        setErrorMsg(errorObject.data.msg);
-      }
+      })
+        .then(res => {
+          if (res.status === 200 && res.data.msg === 'unverified') {
+            const resData = {
+              user_id: res.data.user_id,
+            };
+            setAuth(resData);
+            setModal(true);
+          } else if (res.status === 200) {
+            const resData = {
+              name: res.data.name,
+              username: res.data.username,
+              user_id: res.data.user_id,
+              email: res.data.email,
+              gender: res.data.gender,
+              phone: res.data.phone,
+              age: res.data.age,
+              credits: res.data.total_credit,
+              profile_image: res.data.profile_url,
+              isLoggedIn: true,
+              token: res.data.jwt_token,
+              tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+            };
+            setAuth(resData);
+            saveLocalStorage(resData);
+            history.push('/');
+          }
+        })
+        .catch(err => {
+          setLoading(false);
+          setError(true);
+          if (err?.response) {
+            setErrorMsg(err?.response.data.msg)
+          } else if (err?.request) {
+            setErrorMsg(err?.request.data.toString())
+          } else {
+            console.log(err)
+            setErrorMsg("Something went wrong, please try again");
+          }
+        })
     }
   };
 
