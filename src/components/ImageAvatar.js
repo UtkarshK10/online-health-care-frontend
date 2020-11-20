@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+/*import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,3 +59,41 @@ export default function ImageAvatars({ imageURL, name, setImage }) {
     </div>
   );
 }
+*/
+
+const ImageAvatar = ({ imageURL, name, setImage }) => {
+  const inputFile = useRef(null);
+  const [newFile, setFile] = useState(null);
+  if (newFile !== null) {
+    setImage(newFile);
+  }
+  const onchange = (e) => {
+    setFile(e.target.value);
+  };
+  const onButtonClick = () => {
+    inputFile.current.click();
+  };
+  return (
+    <div>
+      {' '}
+      <input
+        type='file'
+        id='file'
+        ref={inputFile}
+        onChange={onchange}
+        style={{ display: 'none' }}
+        accept='image/png, image/jpeg'
+      />
+      <img src={imageURL} alt='Avatar' className='avatar editIcon'></img>
+      <i
+        className='material-icons pos ptcolour'
+        onClick={onButtonClick}
+        alt='edit'
+      >
+        edit
+      </i>
+    </div>
+  );
+};
+
+export default ImageAvatar;

@@ -10,7 +10,7 @@ const OTPModal = () => {
   const [msg, setMsg] = useState('');
   const history = useHistory();
   const { auth } = useContext(AuthContext);
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (otp.length <= 0) {
       M.toast({ html: 'Please enter an OTP' });
@@ -18,18 +18,21 @@ const OTPModal = () => {
       let res;
       try {
         const data = { otp };
-        const headers = { 'Content-Type': 'application/json', 'api-token': auth.token };
+        const headers = {
+          'Content-Type': 'application/json',
+          'api-token': auth.token,
+        };
         res = await axios.post('/api/users/validate', data, {
-          headers: headers
+          headers: headers,
         });
         if (res.status === 200) {
           history.push('/');
         }
       } catch (e) {
-        const { response } = e;
-        const { request, ...errorObject } = response;
+        //const { response } = e;
+        //const { request, ...errorObject } = response;
         // console.log(errorObject);
-        setMsg(errorObject.data.msg);
+        // setMsg(errorObject.data.msg);
       }
     }
   };
@@ -41,17 +44,14 @@ const OTPModal = () => {
         <div className='row'>
           <br />
           <div className='input-field'>
-            <input
-              type='password'
-              name='OTP'
-              value={otp}
-              onChange={setOTP}
-            />
+            <input type='password' name='OTP' value={otp} onChange={setOTP} />
             <label htmlFor='OTP' className='active'>
               OTP
             </label>
           </div>
-          {msg && <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>}
+          {msg && (
+            <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
+          )}
         </div>
       </div>
       <div className='modal-footer'>

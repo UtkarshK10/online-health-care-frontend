@@ -104,7 +104,6 @@ function UserRegistration(props) {
     var instance = M.Modal.init(elem, { dismissible: false });
     instance.open();
   };
-
   useEffect(() => {
     if (openModal) getOTP();
     // eslint-disable-next-line

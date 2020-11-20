@@ -41,7 +41,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`/api/users/${auth.user_id}`, {
+        const res = await axios.get(`/api/users/me`, {
           headers: {
             'api-token': auth.token,
           },

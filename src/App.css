@@ -114,7 +114,7 @@ button {
 }
 .pos {
   position: relative;
-  top: 150px;
+  top: -25px;
   left: 70px;
   visibility: hidden;
   font-size: 2rem;
@@ -123,4 +123,10 @@ button {
   visibility: visible;
   transition: all 0.5s;
   transform: scale(1.5);
+}
+.avatar {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }

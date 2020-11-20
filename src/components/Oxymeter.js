@@ -12,12 +12,11 @@ const Oxymeter = () => {
   const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    if (loading)
-      setShowSpinner(true);
+    if (loading) setShowSpinner(true);
     else if (loading === false) setShowSpinner(false);
   }, [loading]);
 
-  const handleChange = async file => {
+  const handleChange = async (file) => {
     if (file.length > 0) {
       const formData = new FormData();
       formData.append('file', file[0]);
@@ -25,23 +24,21 @@ const Oxymeter = () => {
       let res;
       setLoading(true);
       try {
-
         res = await axios.post('/api/users/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            'api-token': auth.token
-          }
-        })
+            'api-token': auth.token,
+          },
+        });
         setLevel(res.data.spo2);
       } catch (e) {
-
         console.log(e);
       }
       setLoading(false);
     }
-  }
+  };
   if (showSpinner) {
-    return <Spinner />
+    return <Spinner />;
   } else {
     return (
       <div className='container'>
@@ -50,7 +47,12 @@ const Oxymeter = () => {
             <h3>Upload the video below</h3>
             <DropzoneArea
               onChange={handleChange}
-              acceptedFiles={['video/mp4', 'video/mkv', 'video/m4v', 'video/wav']}
+              acceptedFiles={[
+                'video/mp4',
+                'video/mkv',
+                'video/m4v',
+                'video/wav',
+              ]}
               maxFileSize={20971520}
               filesLimit={1}
             />
