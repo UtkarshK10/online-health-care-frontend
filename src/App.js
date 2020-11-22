@@ -13,7 +13,8 @@ import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
 import { TempParticle } from './components/TempParticle';
-// import AddTechModal from './Modal/OTPModal';
+import DoctorRegistration from './components/Doctor/DoctorRegistration';
+import DoctorLogin from './components/Doctor/DoctorLogin';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <div className='App'>
-      {pathname !== '/login' && pathname !== '/signup' && <Navbar />}
+      {!pathname.includes('login') && !pathname.includes('signup') && <Navbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -65,7 +66,16 @@ function App() {
                   path='/oxymeter'
                   render={() => (
                     <div className='page'>
-                      <Oxymeter />
+                      <Oxymeter title="Please drop your 20 secs video to monitor oxygen amount" />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/appointment/oxymeter'
+                  render={(props) => (
+                    <div className='page'>
+                      <Oxymeter title="First check your oxygen amount" appointment {...props} />
                     </div>
                   )}
                 />
@@ -104,6 +114,28 @@ function App() {
                       {' '}
                       <Particle />
                       <UserLogin />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/doctors/signup'
+                  render={() => (
+                    <div className='page'>
+                      <Particle />
+                      <DoctorRegistration />
+
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/doctors/login'
+                  render={() => (
+                    <div className='page'>
+                      <Particle />
+                      <DoctorLogin />
+
                     </div>
                   )}
                 />

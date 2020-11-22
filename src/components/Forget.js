@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RESET from '../assets/reset.png';
 import axios from '../axios/axios';
+import M from 'materialize-css/dist/js/materialize.min.js';
 // import { } from 'react-router-dom';
 
 const Forget = ({ token }) => {
@@ -13,6 +14,11 @@ const Forget = ({ token }) => {
     setFields({ ...fields, [e.target.name]: e.target.value });
   const onSubmit = e => {
     e.preventDefault();
+    if (password1 !== password2) {
+      M.toast({ html: 'Passwords does not match' })
+      return;
+    }
+    console.log('he')
     const data = { password: password1 }
     axios.put(`/api/users/reset/${token}`, data, {
       headers: {
@@ -52,7 +58,7 @@ const Forget = ({ token }) => {
                     <input
                       value={password1}
                       onChange={onChange}
-                      type='text'
+                      type='password'
                       id='password1'
                       name='password1'
                       className='validate'
@@ -65,7 +71,7 @@ const Forget = ({ token }) => {
                     <input
                       value={password2}
                       onChange={onChange}
-                      type='text'
+                      type='password'
                       id='password2'
                       name='password2'
                       className='validate'

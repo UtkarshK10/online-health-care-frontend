@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Card = (props) => {
+
   const { amount, photo, setAmount, credit } = props;
   const selectCard = () => {
     setAmount(amount);

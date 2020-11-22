@@ -16,6 +16,8 @@ const Profile = () => {
       delete user.id;
       delete user.created_at;
       delete user.modified_at;
+      delete user.reset_token
+      delete user.reset_token_exp
       axios.put('/api/users/me', user, {
         headers: {
           'Content-type': 'application/json',
@@ -23,21 +25,24 @@ const Profile = () => {
         },
       })
         .then(res => {
+
+          const { name, username, email, phone, age, gender } = res.data.user;
           const resData = {
-            name: res.data.name,
-            username: res.data.username,
-            user_id: res.data.user_id,
-            email: res.data.email,
-            gender: res.data.gender,
-            phone: res.data.phone,
-            age: res.data.age,
-            credits: res.data.total_credit,
-            profile_image: res.data.profile_url,
+            name,
+            username,
+            user_id: res.data.user.id,
+            email,
+            gender,
+            phone,
+            age,
+            credits: res.data.user.total_credit,
+            profile_image: res.data.user.profile_url,
           }
-          console.log(resData);
-          setUser(res.data.user);
-          // setAuth({ ...auth, ...resData });
-          // updateLocalStorage({ ...auth, ...resData });
+          delete resData.profile_image
+          setUser({ ...resData, profile_url: res.data.user.profile_url });
+          resData.profile_image = res.data.user.profile_url
+          setAuth({ ...auth, ...resData });
+          updateLocalStorage({ ...auth, ...resData });
         })
         .catch(err => {
           if (err?.response) {

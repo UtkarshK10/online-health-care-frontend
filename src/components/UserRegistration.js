@@ -9,6 +9,7 @@ import doctor from '../assets/doctor.png';
 import { useSpring, animated } from 'react-spring';
 import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
+import { saveLocalStorage } from '../utils/helper.js'
 
 function UserRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -18,7 +19,6 @@ function UserRegistration(props) {
   const [phone, handlePhoneChange] = useInputState('');
   const [age, handleAgeChange] = useInputState('');
   const [gender, handleGender] = useInputState('');
-  const [error, setError] = useState(false);
   const [openModal, setModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [state, toggle] = useState(true);
@@ -71,11 +71,11 @@ function UserRegistration(props) {
             user_id: res.data.user_id,
           };
           setAuth(resData);
+          saveLocalStorage(resData);
           setModal(true);
         })
         .catch(err => {
           setLoading(false);
-          setError(true);
           if (err?.response) {
             setErrorMsg(err?.response.data.msg)
           } else if (err?.request) {
@@ -211,7 +211,7 @@ function UserRegistration(props) {
                 </div>
                 <div className='row'>
                   <div className='input-field' onChange={handleGender}>
-                    <div className='gender-male'>
+                    <div className='first'>
                       <label>
                         <input
                           className='with-gap'
@@ -222,7 +222,7 @@ function UserRegistration(props) {
                         <span>Male</span>
                       </label>
                     </div>
-                    <div className='gender-female'>
+                    <div className='second'>
                       <label>
                         <input
                           className='with-gap'
@@ -256,7 +256,7 @@ function UserRegistration(props) {
             </div>
           </div>
         </div>
-        <p>{error && errorMsg.toString()}</p>
+        {errorMsg && M.toast({ html: errorMsg?.toString() })}
       </div>
       <AddTechModal />
     </>

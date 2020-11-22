@@ -32,7 +32,7 @@ const OTPModal = (props) => {
         })
           .then(res => {
             if (res.status === 200) {
-              console.log(res);
+
               const resData = {
                 name: res.data.name,
                 username: res.data.username,
@@ -98,14 +98,14 @@ const OTPModal = (props) => {
           {!props?.info
             ?
             <div className='input-field'>
-              <input type='password' name='OTP' value={otp} onChange={setOTP} />
+              <input autoFocus type='password' name='OTP' value={otp} onChange={setOTP} />
               <label htmlFor='OTP' className='active'>
                 OTP
             </label>
             </div>
             :
             <div className='input-field'>
-              <input type='email' name='Email' value={email} onChange={setEmail} />
+              <input autoFocus type='email' name='Email' value={email} onChange={setEmail} />
               <label htmlFor='Email' className='active'>
                 Email
             </label>
