@@ -11,8 +11,6 @@ import { saveLocalStorage } from '../utils/helper';
 import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
 
-
-
 function UserLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
   const [email, handleEmailChange] = useInputState('');
@@ -24,8 +22,6 @@ function UserLogin(props) {
   const { setAuth } = useContext(AuthContext);
   const history = useHistory();
   const [propData, setPropData] = useState(null);
-
-
 
   const getOTP = () => {
     var elem = document.querySelector('.modal');
@@ -55,10 +51,11 @@ function UserLogin(props) {
       });
     } else {
       const headers = { 'Content-Type': 'application/json' };
-      axios.post('/api/users/login', data, {
-        headers: headers,
-      })
-        .then(res => {
+      axios
+        .post('/api/users/login', data, {
+          headers: headers,
+        })
+        .then((res) => {
           if (res.status === 200 && res.data.msg === 'unverified') {
             const resData = {
               user_id: res.data.user_id,
@@ -85,31 +82,32 @@ function UserLogin(props) {
             history.push('/');
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setLoading(false);
           setError(true);
           if (err?.response) {
-            setErrorMsg(err?.response.data.msg)
+            setErrorMsg(err?.response.data.msg);
           } else if (err?.request) {
-            setErrorMsg(err?.request.data.toString())
+            setErrorMsg(err?.request.data.toString());
           } else {
-            console.log(err)
-            setErrorMsg("Something went wrong, please try again");
+            console.log(err);
+            setErrorMsg('Something went wrong, please try again');
           }
-        })
+        });
     }
   };
 
-  const handleClick = e => {
-    e.preventDefault()
+  const handleClick = (e) => {
+    e.preventDefault();
     setModal(true);
     const data = {
-      'title': 'Enter your user account\'s verified email address and we will send you a password reset link.',
-      'btnText': 'Send reset link',
-      'label': 'Email'
-    }
+      title:
+        "Enter your user account's verified email address and we will send you a password reset link.",
+      btnText: 'Send reset link',
+      label: 'Email',
+    };
     setPropData(data);
-  }
+  };
 
   return (
     <>
@@ -120,7 +118,7 @@ function UserLogin(props) {
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>
-              <form onSubmit={login} className='padding-form'>
+              <form onSubmit={login} className='padding-form form-shadow'>
                 <div className='row'>
                   <div className='input-field'>
                     <input
@@ -133,8 +131,10 @@ function UserLogin(props) {
                     <label htmlFor='email'>Email</label>
                   </div>
                 </div>
-                <p className="right-align">
-                  <Link to="#" onClick={handleClick} className="stcolour">Forgot password?</Link>
+                <p className='right-align'>
+                  <Link to='#' onClick={handleClick} className='stcolour'>
+                    Forgot password?
+                  </Link>
                 </p>
                 <div className='row'>
                   <div className='input-field'>

@@ -28,7 +28,9 @@ function App() {
 
   return (
     <div className='App'>
-      {!pathname.includes('login') && !pathname.includes('signup') && <Navbar />}
+      {!pathname.includes('login') && !pathname.includes('signup') && (
+        <Navbar />
+      )}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -66,7 +68,7 @@ function App() {
                   path='/oxymeter'
                   render={() => (
                     <div className='page'>
-                      <Oxymeter title="Please drop your 20 secs video to monitor oxygen amount" />
+                      <Oxymeter title='Please drop your 20 secs video to monitor oxygen amount' />
                     </div>
                   )}
                 />
@@ -75,7 +77,11 @@ function App() {
                   path='/appointment/oxymeter'
                   render={(props) => (
                     <div className='page'>
-                      <Oxymeter title="First check your oxygen amount" appointment {...props} />
+                      <Oxymeter
+                        title='First check your oxygen amount'
+                        appointment
+                        {...props}
+                      />
                     </div>
                   )}
                 />
@@ -92,10 +98,10 @@ function App() {
                   exact
                   path={`/reset/:token`}
                   component={TempParticle}
-                // <div className='page'>
-                // <Particle />
+                  // <div className='page'>
+                  // <Particle />
 
-                // </div>
+                  // </div>
                 />
                 <Route
                   exact
@@ -124,7 +130,6 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <DoctorRegistration />
-
                     </div>
                   )}
                 />
@@ -135,7 +140,6 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <DoctorLogin />
-
                     </div>
                   )}
                 />

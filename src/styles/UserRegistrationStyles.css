@@ -26,10 +26,12 @@
   padding: 1em;
   padding-left: 2em;
   padding-right: 2em;
-  box-shadow: 3px 3px 5px 6px #ccc;
   border-radius: 10px 10px 20px 10px;
   background-color: rgb(255, 241, 239);
-  background-image: url("../assets/marble.jpg");
+  background-image: url('../assets/marble.jpg');
+}
+.form-shadow {
+  box-shadow: 3px 3px 5px 6px #ccc;
 }
 .padding-form * {
   margin-bottom: 11px;
@@ -51,54 +53,54 @@
   font-size: 1.2 em;
 }
 /* label focus color */
-.input-field input[type="text"]:focus + label {
+.input-field input[type='text']:focus + label {
   color: var(--primary) !important;
 }
 /* label underline focus color */
-.input-field input[type="text"]:focus {
+.input-field input[type='text']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
-.input-field input[type="email"]:focus + label {
+.input-field input[type='email']:focus + label {
   color: var(--primary) !important;
 }
 /* label underline focus color */
-.input-field input[type="email"]:focus {
+.input-field input[type='email']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
-.input-field input[type="password"]:focus + label {
+.input-field input[type='password']:focus + label {
   color: var(--primary) !important;
 }
 /* label underline focus color */
-.input-field input[type="password"]:focus {
+.input-field input[type='password']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
-.input-field input[type="number"]:focus + label {
+.input-field input[type='number']:focus + label {
   color: var(--primary) !important;
 }
 /* label underline focus color */
-.input-field input[type="number"]:focus {
+.input-field input[type='number']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 /* valid color */
-.input-field input[type="text"].valid {
+.input-field input[type='text'].valid {
   text-decoration: none !important;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
 }
 /* invalid color */
-.input-field input[type="text"].invalid {
+.input-field input[type='text'].invalid {
   border-bottom: 1px solid red !important;
   box-shadow: 0 1px 0 0 #000;
 }
