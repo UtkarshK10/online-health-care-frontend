@@ -15,6 +15,7 @@ import Profile from './components/Profile';
 import { TempParticle } from './components/TempParticle';
 import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
+import DoctorHomePage from './components/Doctor/DoctorHomePage';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -28,7 +29,7 @@ function App() {
 
   return (
     <div className='App'>
-      {!pathname.includes('login') && !pathname.includes('signup') && <Navbar />}
+      {!pathname.includes('login') && !pathname.includes('signup') && !pathname.includes('doctors') && <Navbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -136,6 +137,15 @@ function App() {
                       <Particle />
                       <DoctorLogin />
 
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/doctors'
+                  render={(props) => (
+                    <div className='page'>
+                      <DoctorHomePage />
                     </div>
                   )}
                 />
