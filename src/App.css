@@ -11,9 +11,11 @@
   height: 100vh;
   width: 100%;
   /* position: fixed; */
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
-
+.appoint {
+  overflow: initial;
+}
 .fade-enter {
   opacity: 0;
 }
@@ -157,4 +159,52 @@ button {
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
+}
+.hoverable:hover {
+  transition: all 1s;
+  transition-delay: 0.3s;
+  transform: scale(1.01) !important;
+}
+.round {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.top-margin {
+  margin-top: 20px !important;
+}
+.font-app {
+  font-size: 1.4em;
+}
+.glow {
+  -webkit-animation: glow 5000ms infinite;
+  animation: glow 5000ms infinite;
+}
+@-webkit-keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--secondary);
+  }
+  40% {
+    box-shadow: 0 0 20px var(--secondary);
+  }
+  60% {
+    box-shadow: 0 0 20px var(--secondary);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--secondary);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--secondary);
+  }
+  40% {
+    box-shadow: 0 0 20px var(--secondary);
+  }
+  60% {
+    box-shadow: 0 0 20px var(--secondary);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--secondary);
+  }
 }

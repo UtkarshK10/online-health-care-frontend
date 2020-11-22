@@ -67,7 +67,7 @@ function App() {
                   path='/oxymeter'
                   render={() => (
                     <div className='page'>
-                      <Oxymeter title="Please drop your 20 secs video to monitor oxygen amount" />
+                      <Oxymeter title='Please drop your 20 secs video to monitor oxygen amount' />
                     </div>
                   )}
                 />
@@ -76,7 +76,11 @@ function App() {
                   path='/appointment/oxymeter'
                   render={(props) => (
                     <div className='page'>
-                      <Oxymeter title="First check your oxygen amount" appointment {...props} />
+                      <Oxymeter
+                        title='First check your oxygen amount'
+                        appointment
+                        {...props}
+                      />
                     </div>
                   )}
                 />
@@ -125,7 +129,6 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <DoctorRegistration />
-
                     </div>
                   )}
                 />
@@ -136,7 +139,6 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <DoctorLogin />
-
                     </div>
                   )}
                 />

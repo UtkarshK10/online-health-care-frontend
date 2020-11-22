@@ -9,7 +9,7 @@ import doctor from '../assets/doctor.png';
 import { useSpring, animated } from 'react-spring';
 import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
-import { saveLocalStorage } from '../utils/helper.js'
+import { saveLocalStorage } from '../utils/helper.js';
 
 function UserRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -63,10 +63,11 @@ function UserRegistration(props) {
     } else {
       setLoading(true);
       const headers = { 'Content-Type': 'application/json' };
-      axios.post('/api/users/', data, {
-        headers: headers,
-      })
-        .then(res => {
+      axios
+        .post('/api/users/', data, {
+          headers: headers,
+        })
+        .then((res) => {
           const resData = {
             user_id: res.data.user_id,
           };
@@ -74,17 +75,17 @@ function UserRegistration(props) {
           saveLocalStorage(resData);
           setModal(true);
         })
-        .catch(err => {
+        .catch((err) => {
           setLoading(false);
           if (err?.response) {
-            setErrorMsg(err?.response.data.msg)
+            setErrorMsg(err?.response.data.msg);
           } else if (err?.request) {
-            setErrorMsg(err?.request.data.toString())
+            setErrorMsg(err?.request.data.toString());
           } else {
-            console.log(err)
-            setErrorMsg("Something went wrong, please try again");
+            console.log(err);
+            setErrorMsg('Something went wrong, please try again');
           }
-        })
+        });
     }
   };
 
@@ -134,7 +135,7 @@ function UserRegistration(props) {
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>
-              <form onSubmit={register} className='padding-form'>
+              <form onSubmit={register} className='padding-form form-shadow'>
                 <div className='row'>
                   <div className='input-field'>
                     <input
