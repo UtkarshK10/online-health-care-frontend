@@ -208,3 +208,7 @@ button {
     box-shadow: 0 0 5px var(--secondary);
   }
 }
+.newsImage {
+  height: auto;
+  padding: 0px !important;
+}
