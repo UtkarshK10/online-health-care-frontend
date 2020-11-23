@@ -264,3 +264,7 @@ button {
     margin-left: 4.2% !important;
   }
 }
+.icon-size {
+  width: 48px;
+  vertical-align: center;
+}
