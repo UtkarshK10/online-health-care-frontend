@@ -22,16 +22,25 @@ export default function DoctorHomePage() {
           params: {
             q: searchItem,
             language: 'en',
-            pageSize: 5,
+            pageSize: 10,
             page: 1,
             apiKey: NEWS_API_KEY,
-            pageSize: 5,
-            page: 1
           },
           cancelToken: new axios.CancelToken((c) => (cancel = c)),
         })
         .then((res) => {
-          console.log(res.data.articles);
+          // const uniques = [];
+          // const articleData = [];
+          // for (let article in res.data.articles) {
+          //   if (!uniques.includes(article.url)) {
+          //     uniques.push(article.url);
+          //     articleData.push(article)
+          //   }
+          // }
+          // while (articleData.length !== 5) {
+          //   articleData.pop();
+          // }
+
           setNewsPosts(res.data.articles);
         })
         .catch((err) => {

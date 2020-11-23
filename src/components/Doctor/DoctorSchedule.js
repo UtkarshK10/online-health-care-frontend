@@ -7,6 +7,7 @@ const DoctorSchedule = () => {
     const [patientDetails, setPatientDetails] = useState([]);
     const [currPatient, setCurrPatient] = useState({});
     const [isDetails, setIsDetails] = useState(false);
+
     useEffect(() => {
         const fetchPatientDetails = () => {
             axios.get('/api/doctors/pat_details', {
@@ -27,9 +28,12 @@ const DoctorSchedule = () => {
 
 
     if (isDetails) {
+
+
         console.log(currPatient);
         return (
             <div className="row">
+
                 <div className="col s12 m6 l4 offset-m3 offset-l4">
                     <div className="card">
                         <div class="card-content">
