@@ -255,3 +255,9 @@ button {
 .react-chatbot-kit-user-avatar-container {
   background-color: var(--secondary) !important;
 }
+.center {
+  justify-content: center;
+}
+.left-marg {
+  margin-left: 4.2% !important;
+}
