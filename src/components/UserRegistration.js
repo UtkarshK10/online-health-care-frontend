@@ -21,7 +21,7 @@ function UserRegistration(props) {
   const [gender, handleGender] = useInputState('');
   const [openModal, setModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [state, toggle] = useState(true);
+  const [state] = useState(true);
   const [loading, setLoading] = useState(false);
   const { setAuth } = useContext(AuthContext);
 
@@ -78,9 +78,9 @@ function UserRegistration(props) {
         .catch((err) => {
           setLoading(false);
           if (err?.response) {
-            setErrorMsg(err?.response.data.msg);
+            setErrorMsg(err?.response?.data.msg);
           } else if (err?.request) {
-            setErrorMsg(err?.request.data.toString());
+            setErrorMsg(err?.request?.data?.toString());
           } else {
             console.log(err);
             setErrorMsg('Something went wrong, please try again');
@@ -92,7 +92,7 @@ function UserRegistration(props) {
   //Modal part
   const getOTP = () => {
     var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, { dismissible: false });
+    var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
     instance.open();
   };
   useEffect(() => {
