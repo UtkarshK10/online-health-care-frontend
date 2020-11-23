@@ -74,9 +74,8 @@ export default function DoctorHomePage() {
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m2 l3  ${
-                idx === 0 ? 'left-marg' : 'offset-l1'
-              }`}
+              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+                }`}
               key={idx}
             >
               <PatientCountCard

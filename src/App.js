@@ -17,6 +17,7 @@ import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
 import DoctorNavbar from './components/Doctor/DoctorNavbar';
+import DoctorSchedule from './components/Doctor/DoctorSchedule';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -150,6 +151,15 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <DoctorHomePage />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/doctors/schedules'
+                  render={(props) => (
+                    <div className='page'>
+                      <DoctorSchedule />
                     </div>
                   )}
                 />

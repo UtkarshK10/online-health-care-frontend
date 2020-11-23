@@ -258,6 +258,9 @@ button {
 .center {
   justify-content: center;
 }
-.left-marg {
-  margin-left: 4.2% !important;
+
+@media screen and (min-width: 480px) {
+  .left-marg {
+    margin-left: 4.2% !important;
+  }
 }
