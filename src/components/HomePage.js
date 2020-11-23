@@ -6,6 +6,10 @@ import DoctorCard from './DoctorCard';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Pagination from './Pagination';
+import Chatbot from 'react-chatbot-kit'
+import ActionProvider from '../chatbot/ActionProvider'
+import config from '../chatbot/config'
+import MessageParser from '../chatbot/MessageParser'
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -14,6 +18,7 @@ const HomePage = () => {
   const [doctorsPerPage] = useState(3);
   const { auth } = useContext(AuthContext);
   const history = useHistory();
+
   const fetchDoctors = useCallback(() =>
     axios
       .get('/api/doctors/', {
@@ -87,6 +92,14 @@ const HomePage = () => {
         totalDoctors={doctors.length}
         paginate={paginate}
       />
+      <div className="container">
+        <Chatbot
+          config={config}
+          actionProvider={ActionProvider}
+          messageParser={MessageParser}
+        />
+      </div>
+
     </>
   );
 };

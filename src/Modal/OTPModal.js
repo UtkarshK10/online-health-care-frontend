@@ -15,7 +15,7 @@ const OTPModal = (props) => {
 
   const closeInstance = () => {
     var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, { dismissible: false });
+    var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
     instance.close();
   };
 

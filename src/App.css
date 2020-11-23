@@ -208,3 +208,113 @@ button {
     box-shadow: 0 0 5px var(--secondary);
   }
 }
+
+#chatbox {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  margin-top: 60px;
+}
+
+#userInput {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  margin-top: 60px;
+}
+
+#textInput {
+  width: 87%;
+  border: none;
+  border-bottom: 3px solid #009688;
+  font-family: monospace;
+  font-size: 17px;
+}
+
+#buttonInput {
+  padding: 3px;
+  font-family: monospace;
+  font-size: 17px;
+}
+
+.userText {
+  color: white;
+  font-family: monospace;
+  font-size: 17px;
+  text-align: right;
+  line-height: 30px;
+}
+
+.userText span {
+  background-color: #009688;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.botText {
+  color: white;
+  font-family: monospace;
+  font-size: 17px;
+  text-align: left;
+  line-height: 30px;
+}
+
+.botText span {
+  background-color: #ef5350;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+#tidbit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+}
+
+.react-chatbot-kit-chat-container {
+  width: 350px !important;
+}
+.react-chatbot-kit-chat-inner-container {
+  border: 2px solid #efefef;
+}
+.react-chatbot-kit-chat-bot-message {
+  background-color: var(--primary) !important;
+  margin-left: 0 !important;
+}
+.react-chatbot-kit-chat-header {
+  background-color: #666 !important;
+  color: #fff !important;
+}
+.react-chatbot-kit-chat-btn-send {
+  background-color: var(--secondary) !important;
+}
+.react-chatbot-kit-chat-bot-message-arrow {
+  border-right: 8px solid var(--primary) !important;
+  left: -8.5px !important;
+}
+.react-chatbot-kit-chat-bot-avatar-container {
+  background-color: var(--secondary) !important;
+}
+.react-chatbot-kit-chat-bot-avatar-letter {
+  color: #fff !important;
+}
+.react-chatbot-kit-chat-input {
+  margin: 10px !important;
+  border: none !important;
+}
+.react-chatbot-kit-chat-input:focus {
+  border-bottom: 1px solid var(--primary) !important;
+  outline: none !important;
+}
+.react-chatbot-kit-user-chat-message {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+.react-chatbot-kit-user-chat-message-arrow {
+  border-left: 8px solid var(--primary) !important;
+  right: -8px !important;
+}
+.react-chatbot-kit-user-avatar-container {
+  background-color: var(--secondary) !important;
+}
