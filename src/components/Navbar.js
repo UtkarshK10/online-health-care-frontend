@@ -45,16 +45,24 @@ const HomePage = () => {
           <ul className='right hide-on-med-and-down'>
             {auth?.isLoggedIn && (
               <>
-                {pathname.includes('appointment') &&
+                {pathname.includes('appointment') && (
                   <li>
                     <NavLink
                       to='/appointment'
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
                       Appointment
-                  </NavLink>
+                    </NavLink>
                   </li>
-                }
+                )}
+                <li>
+                  <NavLink
+                    to='/shopping/home'
+                    activeStyle={{ backgroundColor: '#db4619' }}
+                  >
+                    Store
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to='/oxymeter'
@@ -92,16 +100,24 @@ const HomePage = () => {
       <ul className='sidenav' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
-            {pathname.includes('appointment') &&
+            {pathname.includes('appointment') && (
               <li>
                 <NavLink
                   to='/appointment'
                   activeStyle={{ backgroundColor: '#db4619' }}
                 >
                   Appointment
-              </NavLink>
+                </NavLink>
               </li>
-            }
+            )}
+            <li>
+              <NavLink
+                to='/shopping/home'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                Store
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to='/oxymeter'

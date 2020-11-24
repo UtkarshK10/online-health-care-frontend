@@ -66,8 +66,7 @@ export default function DoctorHomePage() {
           console.log(e);
         });
     };
-    if (auth.token)
-      fetchPatientCount();
+    if (auth.token) fetchPatientCount();
   }, [auth.token]);
 
   const shortDescription = (description) => {
@@ -76,15 +75,17 @@ export default function DoctorHomePage() {
       description = description.substring(0, maxChar) + ' . . .';
       return description;
     }
+    return description;
   };
   return (
     <div className='container'>
-      <div className='row' style={{ marginTop: "10px" }}>
+      <div className='row' style={{ marginTop: '10px' }}>
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
-                }`}
+              className={`col s12 m3 l3  ${
+                idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+              }`}
               key={idx}
             >
               <PatientCountCard

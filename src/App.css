@@ -295,3 +295,8 @@ button {
     width: 94% !important;
   }
 }
+.spaceA * {
+  margin: 5px;
+  margin-left: 15px;
+  font-weight: 400;
+}

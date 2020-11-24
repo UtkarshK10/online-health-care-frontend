@@ -19,6 +19,7 @@ import DoctorHomePage from './components/Doctor/DoctorHomePage';
 import DoctorNavbar from './components/Doctor/DoctorNavbar';
 import DoctorSchedule from './components/Doctor/DoctorSchedule';
 import DoctorMail from './components/Doctor/DoctorMail';
+import ShoppingHome from './components/Shopping/ShoppingHome';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -124,7 +125,6 @@ function App() {
                   path='/login'
                   render={() => (
                     <div className='page'>
-                      {' '}
                       <Particle />
                       <UserLogin />
                     </div>
@@ -174,6 +174,15 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <DoctorMail {...props} />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/shopping/home'
+                  render={(props) => (
+                    <div className='page'>
+                      <ShoppingHome />
                     </div>
                   )}
                 />
