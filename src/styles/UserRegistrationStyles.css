@@ -108,6 +108,18 @@
 .input-field .prefix.active {
   color: #000;
 }
+
+.input-field textarea:focus + label {
+  color: var(--primary) !important;
+}
+/* label underline focus color */
+.input-field textarea:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--primary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
+}
+
 #particles-js {
   position: absolute;
   background-repeat: no-repeat;

@@ -280,3 +280,18 @@ button {
     text-align: left;
   }
 }
+@media screen and (max-width: 1920px) {
+  .modal {
+    width: 23% !important;
+  }
+}
+@media screen and (max-width: 1366px) {
+  .modal {
+    width: 34% !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .modal {
+    width: 94% !important;
+  }
+}

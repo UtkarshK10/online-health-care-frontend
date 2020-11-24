@@ -32,8 +32,12 @@ function App() {
 
   return (
     <div className='App'>
-      {!pathname.includes('login') && !pathname.includes('signup') && !pathname.includes('doctors') && <Navbar />}
-      {!pathname.includes('login') && !pathname.includes('signup') && pathname.includes('doctors') && <DoctorNavbar />}
+      {!pathname.includes('login') &&
+        !pathname.includes('signup') &&
+        !pathname.includes('doctors') && <Navbar />}
+      {!pathname.includes('login') &&
+        !pathname.includes('signup') &&
+        pathname.includes('doctors') && <DoctorNavbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -75,8 +79,6 @@ function App() {
                     </div>
                   )}
                 />
-
-
                 <Route
                   exact
                   path='/appointment/oxymeter'
@@ -90,7 +92,6 @@ function App() {
                     </div>
                   )}
                 />
-
                 <Route
                   exact
                   path='/user/:userId'
@@ -104,10 +105,10 @@ function App() {
                   exact
                   path={`/reset/:token`}
                   component={TempParticle}
-                // <div className='page'>
-                // <Particle />
+                  // <div className='page'>
+                  // <Particle />
 
-                // </div>
+                  // </div>
                 />
                 <Route
                   exact

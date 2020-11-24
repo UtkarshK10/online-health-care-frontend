@@ -6,10 +6,11 @@ import DoctorCard from './DoctorCard';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Pagination from './Pagination';
-import Chatbot from 'react-chatbot-kit'
-import ActionProvider from '../chatbot/ActionProvider'
-import config from '../chatbot/config'
-import MessageParser from '../chatbot/MessageParser'
+import Chatbot from 'react-chatbot-kit';
+import ActionProvider from '../chatbot/ActionProvider';
+import config from '../chatbot/config';
+import MessageParser from '../chatbot/MessageParser';
+import BotButton from './BotButton';
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -42,7 +43,13 @@ const HomePage = () => {
   useEffect(() => {
     // if (auth?.token)
     fetchDoctors();
+    initModal();
   }, [auth?.token]);
+
+  const initModal = () => {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, { opacity: 0.1 });
+  };
 
   const makeAppointment = (id) => {
     if (auth.credits < 10) {
@@ -92,14 +99,14 @@ const HomePage = () => {
         totalDoctors={doctors.length}
         paginate={paginate}
       />
-      <div className="container">
+      <div id='chat-modal' className='modal'>
         <Chatbot
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
         />
       </div>
-
+      <BotButton />
     </>
   );
 };
