@@ -264,3 +264,19 @@ button {
     margin-left: 4.2% !important;
   }
 }
+.icon-size {
+  width: 48px;
+  vertical-align: center;
+  cursor: pointer;
+}
+.shadow-patient-card {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+@media screen and (min-width: 600px) {
+  .justify-text {
+    text-align: left;
+  }
+}

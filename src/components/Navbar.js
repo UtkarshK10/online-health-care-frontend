@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 
 import M from 'materialize-css/dist/js/materialize.min.js';
@@ -10,6 +10,7 @@ const HomePage = () => {
     var elems = document.querySelectorAll('.sidenav');
     M.Sidenav.init(elems, {});
   });
+  const { pathname } = useLocation();
   return (
     <>
       {auth?.isLoggedIn && (
@@ -44,14 +45,16 @@ const HomePage = () => {
           <ul className='right hide-on-med-and-down'>
             {auth?.isLoggedIn && (
               <>
-                <li>
-                  <NavLink
-                    to='/appointment'
-                    activeStyle={{ backgroundColor: '#db4619' }}
-                  >
-                    Appointment
+                {pathname.includes('appointment') &&
+                  <li>
+                    <NavLink
+                      to='/appointment'
+                      activeStyle={{ backgroundColor: '#db4619' }}
+                    >
+                      Appointment
                   </NavLink>
-                </li>
+                  </li>
+                }
                 <li>
                   <NavLink
                     to='/oxymeter'
@@ -89,14 +92,16 @@ const HomePage = () => {
       <ul className='sidenav' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
-            <li>
-              <NavLink
-                to='/appointment'
-                activeStyle={{ backgroundColor: '#db4619' }}
-              >
-                Appointment
+            {pathname.includes('appointment') &&
+              <li>
+                <NavLink
+                  to='/appointment'
+                  activeStyle={{ backgroundColor: '#db4619' }}
+                >
+                  Appointment
               </NavLink>
-            </li>
+              </li>
+            }
             <li>
               <NavLink
                 to='/oxymeter'

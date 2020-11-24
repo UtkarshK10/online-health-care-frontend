@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import axiosC from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
-import PatientCountCard from '../PatientCountCard';
+import PatientCountCard from './PatientCountCard';
 import RedHeart from '../../assets/heart-red.png';
 import BlueHeart from '../../assets/heart-blue.png';
 import GreenHeart from '../../assets/heart-green.png';
@@ -60,14 +60,14 @@ export default function DoctorHomePage() {
           },
         })
         .then((res) => {
-          console.log(res);
           setCount({ ...res?.data });
         })
         .catch((e) => {
           console.log(e);
         });
     };
-    fetchPatientCount();
+    if (auth.token)
+      fetchPatientCount();
   }, [auth.token]);
 
   const shortDescription = (description) => {
@@ -79,7 +79,7 @@ export default function DoctorHomePage() {
   };
   return (
     <div className='container'>
-      <div className='row '>
+      <div className='row' style={{ marginTop: "10px" }}>
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div

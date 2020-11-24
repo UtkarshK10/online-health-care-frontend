@@ -1,0 +1,66 @@
+import React from 'react';
+import CardField from './CardField';
+const PatientDetailsCard = ({ currPatient, updateState }) => {
+  const keyNames = [
+    "Age",
+    "Gender",
+    "Oxygen Level",
+    "Heart Rate",
+    "Body Temperature",
+    "Are you having difficulties in breathing?",
+    "Are you facing any common symptoms like cold?",
+    "Were you in contact with person who had Cold / Fever / Covid since the past 14 days?",
+    "Have you travelled anywhere internationally across states since the last 14 days?",
+    "Major Diseases in the past?",
+    "Possibility of contact?"
+  ]
+  console.log(currPatient);
+  const changeRadioState = val => {
+    if (val === "on") {
+      return "No"
+    }
+    return val;
+  }
+  return (
+    <div className='container'>
+      <div className='row'>
+        <div className='col s12 m10 l10 offset-m1 offset-l1'>
+          <div className='card shadow-patient-card'>
+            <div className='card-content'>
+              <span
+                className='card-title ptcolour'
+                style={{ fontSize: '2.5em', fontWeight: '500' }}
+              >
+                {currPatient.patient_name}
+              </span>
+              <br />
+              <br />
+              <div className="justify-text">
+                <CardField keyName={keyNames[0]} value={currPatient.age} />
+                <CardField keyName={keyNames[1]} value={currPatient.gender} />
+                <CardField keyName={keyNames[2]} value={currPatient.oxygen_level} />
+                <CardField keyName={keyNames[3]} value="78" />
+                <CardField keyName={keyNames[4]} value={currPatient.temperature} />
+                <CardField keyName={keyNames[5]} value={changeRadioState(currPatient.breathing_difficulty)} />
+                <CardField keyName={keyNames[6]} value={currPatient.symptoms} />
+                <CardField keyName={keyNames[7]} value={changeRadioState(currPatient.contact_with_others)} />
+                <CardField keyName={keyNames[8]} value={changeRadioState(currPatient.past_travel)} />
+                <CardField keyName={keyNames[9]} value={currPatient.prior_or_current_disease} />
+                <CardField keyName={keyNames[10]} value={currPatient.might_be_causing_condition} />
+              </div>
+            </div>
+          </div>
+          <button onClick={e => {
+            e.preventDefault();
+            updateState(false);
+          }} className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+            <i className='material-icons left'>arrow_back</i>
+            Go Back
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PatientDetailsCard;

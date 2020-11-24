@@ -18,6 +18,7 @@ import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
 import DoctorNavbar from './components/Doctor/DoctorNavbar';
 import DoctorSchedule from './components/Doctor/DoctorSchedule';
+import DoctorMail from './components/Doctor/DoctorMail';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -74,6 +75,8 @@ function App() {
                     </div>
                   )}
                 />
+
+
                 <Route
                   exact
                   path='/appointment/oxymeter'
@@ -87,6 +90,7 @@ function App() {
                     </div>
                   )}
                 />
+
                 <Route
                   exact
                   path='/user/:userId'
@@ -160,6 +164,15 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <DoctorSchedule />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/doctors/mail'
+                  render={(props) => (
+                    <div className='page'>
+                      <DoctorMail {...props} />
                     </div>
                   )}
                 />

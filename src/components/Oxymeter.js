@@ -11,6 +11,7 @@ import { updateLocalStorage } from '../utils/helper';
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState(0);
+
   const [data, setData] = useState({
     temperature: '',
     contact: '',
@@ -306,8 +307,10 @@ const Oxymeter = (props) => {
                     e.preventDefault();
                     setShowForm(false);
                   }}
-                  className='scolour waves-effect btn secondary-content'
+                  style={{ marginBottom: "10px" }}
+                  className='pcolour waves-effect btn secondary-content'
                 >
+                  <i className="material-icons left">arrow_back</i>
                   Go Back
                 </a>
               </div>
