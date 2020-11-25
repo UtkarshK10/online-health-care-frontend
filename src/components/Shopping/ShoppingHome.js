@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Pagination from '../Pagination';
 // import ReactSpinner from '../ReactSpinner';
 import ProductCard from './ProductCard';
+import axios from '../../axios/axios';
+import { AuthContext } from '../../contexts/auth-context';
 
 const ShoppingHome = () => {
+  const { auth } = useContext(AuthContext);
+
   const ProductArray = [
     {
       id: '1',
@@ -51,33 +55,43 @@ const ShoppingHome = () => {
       rating: 3.9,
     },
   ];
-  const [products] = useState(ProductArray);
+  const [products, setProducts] = useState(ProductArray);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [productsPerPage] = useState(3);
-  const [filteredProducts, setFilteredProducts] = useState(ProductArray.slice(0, 3));
-  const [searchString, setSearchString] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(
+    ProductArray.slice(0, 3)
+  );
+  const [searchString, setSearchString] = useState('');
   const [len, setLen] = useState(products.length);
-  const handleChange = e => {
-    setSearchString(e.target.value)
+  const handleChange = (e) => {
+    setSearchString(e.target.value);
     setCurrentPage(1);
-  }
+  };
   useEffect(() => {
     const idxOfLastProduct = currentPage * productsPerPage;
     const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
-    if (searchString) {
-      const tempProducts = products.filter(product => {
-        return product.name.toLowerCase().includes(searchString.toLowerCase())
+    if (searchString && searchString.length > 0) {
+      const tempProducts = products.filter((product) => {
+        console.log(
+          product.name.toLowerCase().includes(searchString.toLowerCase())
+        );
+        return product.name.toLowerCase().includes(searchString.toLowerCase());
       });
-      setLen(tempProducts.length)
-      setFilteredProducts(tempProducts.slice(idxOfFirstProduct, idxOfLastProduct));
-
+      setLen(tempProducts.length);
+      setFilteredProducts(
+        tempProducts.slice(idxOfFirstProduct, idxOfLastProduct)
+      );
     }
-  }, [searchString, products, productsPerPage, currentPage])
+    if (searchString.length === 0) {
+      setFilteredProducts(products);
+    }
+  }, [searchString, products, productsPerPage, currentPage]);
   // if(loading) {
   //   return <ReactSpinner size={50}/>
   // }
 
-  const paginate = pageNumber => {
+  const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
     const idxOfLastProduct = pageNumber * productsPerPage;
     const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
@@ -89,14 +103,28 @@ const ShoppingHome = () => {
     if (!searchString) {
       setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
     }
-  }
+  };
+  useEffect(() => {
+    axios
+      .get('/api/medicines/', {
+        headers: {
+          'api-token': auth?.token,
+        },
+      })
+      .then((res) => {
+        setFilteredProducts(res.data.msg.slice(0, 3));
+        setProducts(res.data.msg);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [auth?.token]);
 
   return (
     <div className='container'>
-      <div className="row">
-
-        <div className="col s6 m6">
-          <div className="input-field">
+      <div className='row'>
+        <div className='col s6 m6'>
+          <div className='input-field'>
             <input
               value={searchString}
               onSubmit={handleChange}
@@ -106,7 +134,6 @@ const ShoppingHome = () => {
               className='validate'
             />
             <label htmlFor='search_medicines'>Search Medicines</label>
-
           </div>
         </div>
       </div>
@@ -126,7 +153,6 @@ const ShoppingHome = () => {
         currentPage={currentPage}
         paginate={paginate}
       />
-
     </div>
   );
 };

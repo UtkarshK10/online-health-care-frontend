@@ -61,7 +61,7 @@ const HomePage = () => {
                     to='/shopping/home'
                     activeStyle={{ backgroundColor: '#db4619' }}
                   >
-                    Store
+                    <i className='material-icons'>store</i>
                   </NavLink>
                 </li>
                 <li>
@@ -69,7 +69,11 @@ const HomePage = () => {
                     to='/shopping/cart'
                     activeStyle={{ backgroundColor: '#db4619' }}
                   >
-                    <img style={{ height: "3rem", width: "3rem", marginTop: "10px" }} src={cart_icon} alt="Cart" />
+                    {/* <img style={{
+                  height: "3rem",
+                  width: "3rem"
+                }} src={cart_icon} alt="Cart" /> */}
+                    <i className='material-icons'>shopping_cart</i>
                   </NavLink>
                 </li>
                 <li>
@@ -132,7 +136,9 @@ const HomePage = () => {
                 to='/shopping/home'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
-                Store
+                <span>
+                  Store <i className='material-icons'>store</i>
+                </span>
               </NavLink>
             </li>
             <li>
@@ -140,10 +146,9 @@ const HomePage = () => {
                 to='/shopping/cart'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
-                <img style={{
-                  height: "3rem",
-                  width: "3rem"
-                }} src={cart_icon} alt="Cart" />
+                <span>
+                  Cart <i className='material-icons'>shopping_cart</i>
+                </span>
               </NavLink>
             </li>
             <li>
@@ -152,7 +157,7 @@ const HomePage = () => {
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
                 Orders
-                  </NavLink>
+              </NavLink>
             </li>
             <li>
               <NavLink

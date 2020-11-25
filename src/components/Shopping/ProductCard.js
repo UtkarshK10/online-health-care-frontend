@@ -3,7 +3,7 @@ import RatingStar from './RatingStar';
 import Basket from '../../assets/basket.png';
 
 const ProductCard = ({ Product }) => {
-  const { id, name, price, description, imageUrl, rating } = Product;
+  const { id, name, price, description, image_url, rating } = Product;
   const shortText = (description) => {
     const maxChar = 200;
     if (description.length > maxChar) {
@@ -16,7 +16,7 @@ const ProductCard = ({ Product }) => {
     <div className='col s12 m6 l4'>
       <div className='card '>
         <div className='card-image'>
-          <img src={imageUrl} alt={id} style={{ height: '200px' }} />
+          <img src={image_url} alt={id} style={{ height: '200px' }} />
         </div>
         <br />
         <div className='left-align spaceA'>
@@ -43,7 +43,7 @@ const ProductCard = ({ Product }) => {
 
         <div className='row' style={{ marginTop: '20px' }}>
           <div
-            className='col s6 m4 l  4'
+            className='col s4 m4 l4'
             style={{
               marginLeft: '15px',
 
@@ -53,11 +53,11 @@ const ProductCard = ({ Product }) => {
           >
             &#8377; {price}
           </div>
-          <div className='col offset-l1 offset-m1 s6 m6 l6 '>
+          <div className='col offset-l5 offset-m5 s4 m2 l2 offset-s3'>
             <img
               src={Basket}
               alt=''
-              style={{ width: '30px', marginLeft: '100px', cursor: 'pointer' }}
+              style={{ width: '30px', cursor: 'pointer' }}
             />
           </div>
           <br />
