@@ -32,86 +32,98 @@ const HomePage = () => {
           </li>
         </ul>
       )}
-
-      <nav>
-        <div className='nav-wrapper pcolour'>
-          <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
-            Logo
-          </NavLink>
-          <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
-            <i className='material-icons'>menu</i>
-          </a>
-          <ul className='right hide-on-med-and-down'>
-            {auth?.isLoggedIn && (
-              <>
-                {pathname.includes('appointment') && (
+      <div className='navbar-fixed'>
+        <nav>
+          <div className='nav-wrapper pcolour'>
+            <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
+              Logo
+            </NavLink>
+            <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
+              <i className='material-icons'>menu</i>
+            </a>
+            <ul className='right hide-on-med-and-down'>
+              {auth?.isLoggedIn && (
+                <>
+                  {pathname.includes('appointment') && (
+                    <li>
+                      <NavLink
+                        to='/appointment'
+                        activeStyle={{
+                          backgroundColor: '#db4619',
+                          color: 'white',
+                        }}
+                      >
+                        Appointment
+                      </NavLink>
+                    </li>
+                  )}
                   <li>
                     <NavLink
-                      to='/appointment'
+                      to='/shopping/home'
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
-                      Appointment
+                      <i className='material-icons'>store</i>
                     </NavLink>
                   </li>
-                )}
-                <li>
-                  <NavLink
-                    to='/shopping/home'
-                    activeStyle={{ backgroundColor: '#db4619' }}
-                  >
-                    <i className='material-icons'>store</i>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/shopping/cart'
-                    activeStyle={{ backgroundColor: '#db4619' }}
-                  >
-                    <i className='material-icons'>shopping_cart</i>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/shopping/orders'
-                    activeStyle={{ backgroundColor: '#db4619' }}
-                  >
-                    Orders
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/oxymeter'
-                    activeStyle={{ backgroundColor: '#db4619' }}
-                  >
-                    Monitor Oxygen
-                  </NavLink>
-                </li>
-                <li>
-                  <a
-                    className='dropdown-trigger'
-                    href='#!'
-                    data-target='dropdown1'
-                  >
-                    My Account
-                    <i className='material-icons right'>arrow_drop_down</i>
-                  </a>
-                </li>
-              </>
-            )}
-            {!auth?.isLoggedIn && (
-              <>
-                <li>
-                  <NavLink to='/login'>Login</NavLink>
-                </li>
-                <li>
-                  <NavLink to='/signup'>Signup</NavLink>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-      </nav>
-      {/* </div> */}
+                  <li>
+                    <NavLink
+                      to='/shopping/cart'
+                      activeStyle={{
+                        backgroundColor: '#db4619',
+                        color: 'white',
+                      }}
+                    >
+                      <i className='material-icons'>shopping_cart</i>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to='/shopping/orders'
+                      activeStyle={{
+                        backgroundColor: '#db4619',
+                        color: 'white',
+                      }}
+                    >
+                      Orders
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to='/oxymeter'
+                      activeStyle={{
+                        backgroundColor: '#db4619',
+                        color: 'white',
+                      }}
+                    >
+                      Monitor Oxygen
+                    </NavLink>
+                  </li>
+                  <li>
+                    <a
+                      className='dropdown-trigger'
+                      href='#!'
+                      data-target='dropdown1'
+                    >
+                      My Account
+                      <i className='material-icons right'>arrow_drop_down</i>
+                    </a>
+                  </li>
+                </>
+              )}
+              {!auth?.isLoggedIn && (
+                <>
+                  <li>
+                    <NavLink to='/login'>Login</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/signup'>Signup</NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </nav>
+      </div>
       <ul className='sidenav' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
@@ -119,7 +131,7 @@ const HomePage = () => {
               <li>
                 <NavLink
                   to='/appointment'
-                  activeStyle={{ backgroundColor: '#db4619' }}
+                  activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
                 >
                   Appointment
                 </NavLink>
@@ -130,7 +142,13 @@ const HomePage = () => {
                 to='/shopping/home'
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
                   Store <i className='material-icons'>store</i>
                 </span>
               </NavLink>
@@ -138,9 +156,15 @@ const HomePage = () => {
             <li>
               <NavLink
                 to='/shopping/cart'
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
                   Cart <i className='material-icons'>shopping_cart</i>
                 </span>
               </NavLink>
@@ -148,7 +172,7 @@ const HomePage = () => {
             <li>
               <NavLink
                 to='/shopping/orders'
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
                 Orders
               </NavLink>
@@ -156,7 +180,7 @@ const HomePage = () => {
             <li>
               <NavLink
                 to='/oxymeter'
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
                 Monitor Oxygen
               </NavLink>
@@ -164,7 +188,7 @@ const HomePage = () => {
             <li>
               <NavLink
                 to={`/user/${auth.user_id}`}
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
                 My Profile
               </NavLink>
@@ -172,14 +196,12 @@ const HomePage = () => {
             <li>
               <NavLink
                 to='/payment'
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
                 Credits : <span className='ptcolour'>{auth.credits}</span>
               </NavLink>
             </li>
-            <li>
-
-            </li>
+            <li></li>
             <li className='divider'></li>
             <li>
               <NavLink to='/logout'>Logout</NavLink>
