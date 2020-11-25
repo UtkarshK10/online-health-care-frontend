@@ -22,6 +22,8 @@ import DoctorMail from './components/Doctor/DoctorMail';
 import ShoppingHome from './components/Shopping/ShoppingHome';
 import Cart from './components/Shopping/Cart';
 import Orders from './components/Shopping/Orders';
+import OrderDetails from './components/Shopping/OrderDetails';
+import ConfirmationPage from './components/Shopping/ConfirmationPage';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -206,6 +208,25 @@ function App() {
                     </div>
                   )}
                 />
+                <Route
+                  exact
+                  path='/shopping/orders/details'
+                  render={(props) => (
+                    <div className='page'>
+                      <OrderDetails {...props} />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/shopping/confirm'
+                  render={(props) => (
+                    <div className='page'>
+                      <ConfirmationPage />
+                    </div>
+                  )}
+                />
+
                 <Redirect exact to='/' />
               </Switch>
             </CSSTransition>

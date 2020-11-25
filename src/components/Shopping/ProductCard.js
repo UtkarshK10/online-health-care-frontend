@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import RatingStar from './RatingStar';
 import Basket from '../../assets/basket.png';
+import { AuthContext } from '../../contexts/auth-context';
+import axios from '../../axios/axios';
+import ReactSpinner from '../ReactSpinner';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const ProductCard = ({ Product }) => {
+  const [loading, setLoading] = useState(false);
+  const { auth } = useContext(AuthContext);
   const { id, name, price, description, image_url, rating } = Product;
   const shortText = (description) => {
     const maxChar = 200;
@@ -12,6 +18,25 @@ const ProductCard = ({ Product }) => {
     }
     return description;
   };
+  const handleAddToCart = e => {
+    e.preventDefault();
+    setLoading(true);
+    const data = { medicine_id: id, quantity: 1 }
+    axios.put('/api/cart/add_to', data, {
+      headers: {
+        'api-token': auth?.token,
+        'Content-type': 'application/json'
+      }
+    })
+      .then(res => {
+        M.toast({ html: res.data.msg })
+        setLoading(false);
+      })
+      .catch(e => {
+        setLoading(false);
+        console.log(e)
+      })
+  }
   return (
     <div className='col s12 m6 l4'>
       <div className='card '>
@@ -54,11 +79,12 @@ const ProductCard = ({ Product }) => {
             &#8377; {price}
           </div>
           <div className='col offset-l5 offset-m5 s4 m2 l2 offset-s3'>
-            <img
+            {loading ? <ReactSpinner size="25" /> : <img
+              onClick={handleAddToCart}
               src={Basket}
               alt=''
               style={{ width: '30px', cursor: 'pointer' }}
-            />
+            />}
           </div>
           <br />
         </div>

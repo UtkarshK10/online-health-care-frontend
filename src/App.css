@@ -300,3 +300,28 @@ button {
   margin-left: 15px;
   font-weight: 400;
 }
+
+table th {
+  font-size: 22px;
+}
+table td {
+  font-size: 18px;
+}
+.input-field .prefix {
+  position: absolute;
+  width: 3rem;
+  font-size: 2rem;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+  top: 0.8rem !important;
+  color: var(--primary) !important;
+}
+.pagination li a {
+  background-color: white !important;
+  color: var(--primary) !important;
+  font-size: 28px !important;
+  border: 0px !important;
+  outline: 0px !important;
+  box-shadow: 0px !important;
+  text-decoration: none !important;
+}

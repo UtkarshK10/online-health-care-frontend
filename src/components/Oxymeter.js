@@ -104,7 +104,6 @@ const Oxymeter = (props) => {
     } else {
       filtered = [...toFilter, value];
     }
-    // console.log(filtered)
     setCheckboxData({ ...checkboxData, [name]: [...filtered] });
 
     // console.log(checkboxData);

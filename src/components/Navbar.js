@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
-import cart_icon from '../assets/cart_icon.png';
-
 import M from 'materialize-css/dist/js/materialize.min.js';
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
@@ -69,10 +67,6 @@ const HomePage = () => {
                     to='/shopping/cart'
                     activeStyle={{ backgroundColor: '#db4619' }}
                   >
-                    {/* <img style={{
-                  height: "3rem",
-                  width: "3rem"
-                }} src={cart_icon} alt="Cart" /> */}
                     <i className='material-icons'>shopping_cart</i>
                   </NavLink>
                 </li>
@@ -134,9 +128,9 @@ const HomePage = () => {
             <li>
               <NavLink
                 to='/shopping/home'
-                activeStyle={{ backgroundColor: '#db4619' }}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                <span>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   Store <i className='material-icons'>store</i>
                 </span>
               </NavLink>
@@ -146,7 +140,7 @@ const HomePage = () => {
                 to='/shopping/cart'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
-                <span>
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   Cart <i className='material-icons'>shopping_cart</i>
                 </span>
               </NavLink>
@@ -180,16 +174,11 @@ const HomePage = () => {
                 to='/payment'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
-                Credit : <span className='ptcolour'>{auth.credits}</span>
+                Credits : <span className='ptcolour'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to='/payment'
-                activeStyle={{ backgroundColor: '#db4619' }}
-              >
-                Credits : <span className='ptcolour'>{auth.credits}</span>
-              </NavLink>
+
             </li>
             <li className='divider'></li>
             <li>
