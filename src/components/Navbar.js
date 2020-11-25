@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
+import cart_icon from '../assets/cart_icon.png';
 
 import M from 'materialize-css/dist/js/materialize.min.js';
 const HomePage = () => {
@@ -65,6 +66,22 @@ const HomePage = () => {
                 </li>
                 <li>
                   <NavLink
+                    to='/shopping/cart'
+                    activeStyle={{ backgroundColor: '#db4619' }}
+                  >
+                    <img style={{ height: "3rem", width: "3rem", marginTop: "10px" }} src={cart_icon} alt="Cart" />
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/shopping/orders'
+                    activeStyle={{ backgroundColor: '#db4619' }}
+                  >
+                    Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to='/oxymeter'
                     activeStyle={{ backgroundColor: '#db4619' }}
                   >
@@ -120,6 +137,25 @@ const HomePage = () => {
             </li>
             <li>
               <NavLink
+                to='/shopping/cart'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                <img style={{
+                  height: "3rem",
+                  width: "3rem"
+                }} src={cart_icon} alt="Cart" />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/shopping/orders'
+                activeStyle={{ backgroundColor: '#db4619' }}
+              >
+                Orders
+                  </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to='/oxymeter'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
@@ -139,7 +175,7 @@ const HomePage = () => {
                 to='/payment'
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
-                Credit : <span className='ptcolour'>25</span>
+                Credit : <span className='ptcolour'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>

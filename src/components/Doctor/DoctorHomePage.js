@@ -66,8 +66,8 @@ export default function DoctorHomePage() {
           console.log(e);
         });
     };
-    if (auth.token) fetchPatientCount();
-  }, [auth.token]);
+    if (auth?.token) fetchPatientCount();
+  }, [auth?.token]);
 
   const shortDescription = (description) => {
     const maxChar = 200;
@@ -83,9 +83,8 @@ export default function DoctorHomePage() {
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m3 l3  ${
-                idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
-              }`}
+              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+                }`}
               key={idx}
             >
               <PatientCountCard

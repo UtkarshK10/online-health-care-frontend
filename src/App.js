@@ -20,6 +20,8 @@ import DoctorNavbar from './components/Doctor/DoctorNavbar';
 import DoctorSchedule from './components/Doctor/DoctorSchedule';
 import DoctorMail from './components/Doctor/DoctorMail';
 import ShoppingHome from './components/Shopping/ShoppingHome';
+import Cart from './components/Shopping/Cart';
+import Orders from './components/Shopping/Orders';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -106,10 +108,10 @@ function App() {
                   exact
                   path={`/reset/:token`}
                   component={TempParticle}
-                  // <div className='page'>
-                  // <Particle />
+                // <div className='page'>
+                // <Particle />
 
-                  // </div>
+                // </div>
                 />
                 <Route
                   exact
@@ -183,6 +185,24 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <ShoppingHome />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/shopping/cart'
+                  render={(props) => (
+                    <div className='page'>
+                      <Cart />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path='/shopping/orders'
+                  render={(props) => (
+                    <div className='page'>
+                      <Orders />
                     </div>
                   )}
                 />

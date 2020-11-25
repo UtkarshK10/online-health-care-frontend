@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Pagination({ doctorsPerPage, totalDoctors, paginate }) {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalDoctors / doctorsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+export default function Pagination({ itemsPerPage, totalItems, paginate, currentPage }) {
+  const [pageNumbers, setPageNumbers] = useState([]);
+  useEffect(() => {
+    const pages = [];
+    for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+      pages.push(i);
+    }
+    setPageNumbers([...pages])
+  }, [totalItems, itemsPerPage])
+
+
   return (
-    <ul className='list-inline'>
-      {pageNumbers.map((pageNumber) => {
+    <ul className='pagination'>
+      {pageNumbers.map((pageNumber, idx) => {
         return (
-          <li key={pageNumber}>
+          <li key={pageNumber} className={`${currentPage === (idx + 1) ? "active" : "waves-effect"}`}>
             <a
               style={{ fontSize: '2rem' }}
               onClick={(e) => {
@@ -18,7 +24,8 @@ export default function Pagination({ doctorsPerPage, totalDoctors, paginate }) {
               }}
               href='!#'
             >
-              {totalDoctors > 3 ? pageNumber : ''}
+              {/* {totalDoctors > 3 ? pageNumber : ''} */}
+              {pageNumber}
             </a>
           </li>
         );

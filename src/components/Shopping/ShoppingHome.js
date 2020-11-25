@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Pagination from '../Pagination';
+// import ReactSpinner from '../ReactSpinner';
 import ProductCard from './ProductCard';
 
 const ShoppingHome = () => {
   const ProductArray = [
     {
       id: '1',
-      name: 'Strepsils Lozenges Orange',
+      name: 'Strepsils Lozenges orange',
       price: '285',
       description: 'jar of 100 lozenges',
       imageUrl:
@@ -14,7 +16,7 @@ const ShoppingHome = () => {
     },
     {
       id: '2',
-      name: 'Strepsils Lozenges Orange',
+      name: 'Strepsils Lozenges orange',
       price: '500',
       description: 'jar of 200 lozenges',
       imageUrl:
@@ -23,7 +25,7 @@ const ShoppingHome = () => {
     },
     {
       id: '3',
-      name: 'Strepsils Lozenges Orange',
+      name: 'Strepsils Lozenges red',
       price: '700',
       description: 'jar of 300 lozenges',
       imageUrl:
@@ -41,7 +43,7 @@ const ShoppingHome = () => {
     },
     {
       id: '5',
-      name: 'Strepsils Lozenges Orange',
+      name: 'Strepsils Lozenges orange',
       price: '1100',
       description: 'jar of 500 lozenges',
       imageUrl:
@@ -49,10 +51,67 @@ const ShoppingHome = () => {
       rating: 3.9,
     },
   ];
+  const [products] = useState(ProductArray);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(3);
+  const [filteredProducts, setFilteredProducts] = useState(ProductArray.slice(0, 3));
+  const [searchString, setSearchString] = useState("");
+  const [len, setLen] = useState(products.length);
+  const handleChange = e => {
+    setSearchString(e.target.value)
+    setCurrentPage(1);
+  }
+  useEffect(() => {
+    const idxOfLastProduct = currentPage * productsPerPage;
+    const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
+    if (searchString) {
+      const tempProducts = products.filter(product => {
+        return product.name.toLowerCase().includes(searchString.toLowerCase())
+      });
+      setLen(tempProducts.length)
+      setFilteredProducts(tempProducts.slice(idxOfFirstProduct, idxOfLastProduct));
+
+    }
+  }, [searchString, products, productsPerPage, currentPage])
+  // if(loading) {
+  //   return <ReactSpinner size={50}/>
+  // }
+
+  const paginate = pageNumber => {
+    setCurrentPage(pageNumber);
+    const idxOfLastProduct = pageNumber * productsPerPage;
+    const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
+    // if (searchString) {
+    //   setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct).filter(product => {
+    //     return product.name.toLowerCase().includes(searchString.toLowerCase())
+    //   }));
+    // }
+    if (!searchString) {
+      setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
+    }
+  }
+
   return (
     <div className='container'>
+      <div className="row">
+
+        <div className="col s6 m6">
+          <div className="input-field">
+            <input
+              value={searchString}
+              onSubmit={handleChange}
+              onChange={handleChange}
+              id='search_medicines'
+              type='text'
+              className='validate'
+            />
+            <label htmlFor='search_medicines'>Search Medicines</label>
+
+          </div>
+        </div>
+      </div>
       <div className='row'>
-        {ProductArray.map((Product, idx) => {
+        {filteredProducts.map((Product, idx) => {
           return (
             <div key={idx}>
               <ProductCard Product={Product} />
@@ -60,6 +119,14 @@ const ShoppingHome = () => {
           );
         })}
       </div>
+      {console.log(filteredProducts.length)}
+      <Pagination
+        itemsPerPage={productsPerPage}
+        totalItems={!searchString ? products.length : len}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
+
     </div>
   );
 };

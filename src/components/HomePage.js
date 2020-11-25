@@ -95,8 +95,8 @@ const HomePage = () => {
         </div>
       </div>
       <Pagination
-        doctorsPerPage={doctorsPerPage}
-        totalDoctors={doctors.length}
+        itemsPerPage={doctorsPerPage}
+        totalItems={doctors.length}
         paginate={paginate}
       />
       <div id='chat-modal' className='modal'>
