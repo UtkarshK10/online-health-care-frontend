@@ -10,26 +10,29 @@ export default function Pagination({ itemsPerPage, totalItems, paginate, current
     setPageNumbers([...pages])
   }, [totalItems, itemsPerPage])
 
-
-  return (
-    <ul className='pagination'>
-      {pageNumbers.map((pageNumber, idx) => {
-        return (
-          <li key={pageNumber} className={`${currentPage === (idx + 1) ? "active" : "waves-effect"}`}>
-            <a
-              style={{ fontSize: '2rem' }}
-              onClick={(e) => {
-                e.preventDefault();
-                paginate(pageNumber);
-              }}
-              href='!#'
-            >
-              {/* {totalDoctors > 3 ? pageNumber : ''} */}
-              {pageNumber}
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  if (totalItems / itemsPerPage > 1) {
+    return (
+      <ul className='pagination'>
+        {pageNumbers.map((pageNumber, idx) => {
+          return (
+            <li key={pageNumber} className={`${currentPage === (idx + 1) ? "active" : "waves-effect"}`}>
+              <a
+                style={{ fontSize: '2rem' }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  paginate(pageNumber);
+                }}
+                href='!#'
+              >
+                {/* {totalDoctors > 3 ? pageNumber : ''} */}
+                {pageNumber}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  } else {
+    return null
+  }
 }

@@ -107,11 +107,27 @@ const Cart = () => {
     setCart(editedCart);
   };
   const checkCredit = () => {
-    if (total / 4 < 200) {
-      history.push('/shopping/confirm');
-    } else {
-      M.toast({ html: 'Not Enough credits' });
-    }
+    // if (total / 4 < 200) {
+    //   history.push('/shopping/address');
+    // } else {
+    //   M.toast({ html: 'Not Enough credits' });
+    // }
+    axios.get('/api/cart/check', {
+      headers: {
+        'api-token': auth?.token
+      }
+    })
+      .then(res => {
+        const { msg, info } = res.data;
+        if (msg) {
+          history.push('/shopping/address');
+        } else {
+          M.toast({ html: info });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      })
   };
 
   if (loading) {
@@ -205,87 +221,87 @@ const Cart = () => {
                     <ReactSpinner size='30px' />
                   </div>
                 ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
                       }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
                     >
-                      remove
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        remove
                     </i>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className='btn btn-small scolour waves-effect'
-                    >
-                      <span style={{ fontSize: '18px' }}>
-                        {cartDetail.quantity}
-                      </span>{' '}
-                    </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                        className='btn btn-small scolour waves-effect'
+                      >
+                        <span style={{ fontSize: '18px' }}>
+                          {cartDetail.quantity}
+                        </span>{' '}
+                      </button>
 
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
-                      }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
-                    >
-                      add
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        add
                     </i>
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
               <div className='row hide-on-med-and-up'>
                 {loading_inc_dec ? (
                   <ReactSpinner size='25px' />
                 ) : (
-                  <div
-                    className=' col s6'
-                    style={{ display: 'flex', alignItems: 'center' }}
-                  >
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
-                      }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
+                    <div
+                      className=' col s6'
+                      style={{ display: 'flex', alignItems: 'center' }}
                     >
-                      remove
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        remove
                     </i>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className='btn btn-small scolour waves-effect'
-                    >
-                      <span style={{ fontSize: '18px' }}>
-                        {cartDetail.quantity}
-                      </span>{' '}
-                    </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                        className='btn btn-small scolour waves-effect'
+                      >
+                        <span style={{ fontSize: '18px' }}>
+                          {cartDetail.quantity}
+                        </span>{' '}
+                      </button>
 
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
-                      }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
-                    >
-                      add
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        add
                     </i>
-                  </div>
-                )}{' '}
+                    </div>
+                  )}{' '}
                 <div className='col s6'>
                   <p
                     className='ptcolour  right-align'

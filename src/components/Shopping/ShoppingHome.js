@@ -71,7 +71,7 @@ const ShoppingHome = () => {
   }, [auth?.token]);
 
   //  if(loading) {
-  //   return <ReactSpinner size={50}/>
+  //   return <ReactSpinner size="50px"/>
   // }
 
   return (

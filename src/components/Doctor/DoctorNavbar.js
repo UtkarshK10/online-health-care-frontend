@@ -50,7 +50,7 @@ const DoctorNavbar = () => {
 
                 <li>
                   <NavLink
-                    to={`/doctors/logout`}
+                    to={`/logout`}
                     activeStyle={{ backgroundColor: '#db4619' }}
                   >
                     Logout
@@ -102,7 +102,7 @@ const DoctorNavbar = () => {
 
             <li>
               <NavLink
-                to={`/doctors/logout`}
+                to={`/logout`}
                 activeStyle={{ backgroundColor: '#db4619' }}
               >
                 Logout

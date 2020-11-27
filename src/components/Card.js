@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Card = (props) => {
-
+  const BASE_PRICE = 500;
   const { amount, photo, setAmount, credit } = props;
   const selectCard = () => {
     setAmount(amount);
@@ -9,6 +9,9 @@ const Card = (props) => {
   let classD = '';
   if (credit === amount) {
     classD = 'activeD';
+  }
+  const getCredits = amount => {
+    return amount * 0.4 + (amount - BASE_PRICE) * 0.1;
   }
   return (
     <div className={`card click ${classD}`} onClick={selectCard}>
@@ -20,7 +23,7 @@ const Card = (props) => {
       </div>
       <div className='card-content'>
         <p>
-          You will get <b className='stcolour'>{amount / 4}</b> credits !!
+          You will get <b className='stcolour'>{getCredits(amount)}</b> credits !!
         </p>
       </div>
     </div>

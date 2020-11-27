@@ -79,12 +79,13 @@ const ProductCard = ({ Product }) => {
             &#8377; {price}
           </div>
           <div className='col offset-l5 offset-m5 s4 m2 l2 offset-s3'>
-            {loading ? <ReactSpinner size="25" /> : <img
+            {auth?.token && (loading ? <ReactSpinner size="25px" /> : <img
               onClick={handleAddToCart}
               src={Basket}
               alt=''
               style={{ width: '30px', cursor: 'pointer' }}
-            />}
+            />)
+            }
           </div>
           <br />
         </div>

@@ -1,42 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
-const Orders = [
-  {
-    id: '1',
-    name: 'Strepsils Lozenges Orange',
-    price: '285',
-    image_url:
-      'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1915&q=80',
-    quantity: 2,
-  },
-  {
-    id: '2',
-    name: 'Strepsils Lozenges Orange',
-    price: '500',
-    image_url:
-      'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80',
-    quantity: 1,
-  },
-  {
-    id: '3',
-    name: 'Strepsils Lozenges Orange',
-    price: '700',
-    image_url:
-      'https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1035&q=80',
-    quantity: 3,
-  },
-];
+import ReactSpinner from '../ReactSpinner';
+import axios from '../../axios/axios';
+import { AuthContext } from '../../contexts/auth-context';
+// const Orders = [
+//   {
+//     id: '1',
+//     name: 'Strepsils Lozenges Orange',
+//     price: '285',
+//     image_url:
+//       'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1915&q=80',
+//     quantity: 2,
+//   },
+//   {
+//     id: '2',
+//     name: 'Strepsils Lozenges Orange',
+//     price: '500',
+//     image_url:
+//       'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80',
+//     quantity: 1,
+//   },
+//   {
+//     id: '3',
+//     name: 'Strepsils Lozenges Orange',
+//     price: '700',
+//     image_url:
+//       'https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1035&q=80',
+//     quantity: 3,
+//   },
+// ];
 const OrderDetails = (props) => {
   const searchString = queryString.parse(props.location.search);
+  const { id } = searchString;
   const history = useHistory();
+  const [orderDetails, setOrderDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { auth } = useContext(AuthContext);
   const downloadInvoice = () => {
-    //invoice download
+    history.push(`/shopping/invoice?id=${id}`);
   };
   const handleClick = (e) => {
     e.preventDefault();
     history.push('/shopping/orders');
   };
+  useEffect(() => {
+    if (auth?.token) {
+      setLoading(true);
+      axios.get(`/api/orders/order_items/${+id}`, {
+        headers: {
+          'api-token': auth?.token
+        }
+      })
+        .then(res => {
+          setLoading(false);
+          setOrderDetails(res.data.details)
+        })
+        .catch(e => {
+          setLoading(false);
+          console.log(e);
+        })
+    }
+  }, [auth?.token, id]);
+
+  if (loading) {
+    return (
+      <div className="container">
+        <ReactSpinner size="50px" />
+      </div>
+    )
+  }
+
   return (
     <div className='container'>
       <ul className='collection with-header'>
@@ -51,13 +85,13 @@ const OrderDetails = (props) => {
                 onClick={downloadInvoice}
               >
                 Invoice
-                <i className='material-icons left'>get_app</i>
+                <i className='material-icons right'>receipt</i>
               </button>
             </div>
           </div>
         </li>
-        {Orders.map((orderDetail, idx) => (
-          <React.Fragment key={orderDetail.id}>
+        {orderDetails.map((orderDetail, idx) => (
+          <React.Fragment key={idx}>
             <li className='row'>
               <div className='col s12 m3 l3'>
                 <img
@@ -107,7 +141,7 @@ const OrderDetails = (props) => {
                 >
                   <span style={{ fontSize: '20px' }}>
                     {orderDetail.quantity}{' '}
-                    {orderDetail.quantity === 1 ? ' item' : ' items'}
+                    {orderDetail.quantity === 1 ? ' unit' : ' units'}
                   </span>{' '}
                 </button>
               </div>

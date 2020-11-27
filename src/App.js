@@ -24,6 +24,10 @@ import Cart from './components/Shopping/Cart';
 import Orders from './components/Shopping/Orders';
 import OrderDetails from './components/Shopping/OrderDetails';
 import ConfirmationPage from './components/Shopping/ConfirmationPage';
+import CaptchaPage from './components/Shopping/CaptchaPage';
+import PrivateRoute from './routers/PrivateRoutes';
+import Logout from './components/Logout';
+import Invoice from './components/Shopping/Invoice';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -75,7 +79,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/oxymeter'
                   render={() => (
@@ -84,7 +88,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/appointment/oxymeter'
                   render={(props) => (
@@ -97,7 +101,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/user/:userId'
                   render={() => (
@@ -115,7 +119,7 @@ function App() {
 
                 // </div>
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/payment'
                   render={() => (
@@ -131,6 +135,16 @@ function App() {
                     <div className='page'>
                       <Particle />
                       <UserLogin />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/logout'
+                  render={() => (
+                    <div className='page'>
+                      <Particle />
+                      <Logout />
                     </div>
                   )}
                 />
@@ -163,7 +177,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/doctors/schedules'
                   render={(props) => (
@@ -172,7 +186,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/doctors/mail'
                   render={(props) => (
@@ -190,7 +204,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/shopping/cart'
                   render={(props) => (
@@ -199,7 +213,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/shopping/orders'
                   render={(props) => (
@@ -208,7 +222,7 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path='/shopping/orders/details'
                   render={(props) => (
@@ -217,12 +231,30 @@ function App() {
                     </div>
                   )}
                 />
-                <Route
+                <PrivateRoute
                   exact
-                  path='/shopping/confirm'
+                  path='/shopping/address'
                   render={(props) => (
                     <div className='page'>
                       <ConfirmationPage />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/shopping/confirm/:addressId'
+                  render={(props) => (
+                    <div className='page'>
+                      <CaptchaPage {...props} />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/shopping/invoice'
+                  render={(props) => (
+                    <div className='page'>
+                      <Invoice {...props} />
                     </div>
                   )}
                 />

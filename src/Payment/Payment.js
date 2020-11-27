@@ -35,10 +35,10 @@ const Payment = () => {
     }
   };
   const data = [
-    { amount: 1000, photo: 'https://www.finance-watch.org/wp-content/uploads/2018/08/money-supply-1600x1067.jpg' },
-    { amount: 2500, photo: 'https://p1.pxfuel.com/preview/377/271/771/money-dollar-bill-bills-paper-money.jpg' },
-    { amount: 5000, photo: 'https://capestylemag.com/wp-content/uploads/2020/02/bank-number-usa-bills-dollar_1232-3931.jpg' },
-    { amount: 10000, photo: 'https://bgfons.com/uploads/money/money_texture1386.jpg' }
+    { amount: 500, photo: 'https://www.finance-watch.org/wp-content/uploads/2018/08/money-supply-1600x1067.jpg' },
+    { amount: 1000, photo: 'https://p1.pxfuel.com/preview/377/271/771/money-dollar-bill-bills-paper-money.jpg' },
+    { amount: 2000, photo: 'https://capestylemag.com/wp-content/uploads/2020/02/bank-number-usa-bills-dollar_1232-3931.jpg' },
+    { amount: 5000, photo: 'https://bgfons.com/uploads/money/money_texture1386.jpg' }
   ]
 
 

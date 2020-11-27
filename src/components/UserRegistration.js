@@ -47,7 +47,7 @@ function UserRegistration(props) {
       M.toast({ html: 'Username cannot be empty' });
     } else if (password.length < 6) {
       M.toast({
-        html: 'Password should be of minimum 6 characters.',
+        html: 'Password should be of minimum 6 characters',
       });
     } else if (!regularExpressionPassword.test(password)) {
       M.toast({
@@ -55,11 +55,11 @@ function UserRegistration(props) {
           'Password should contain atleast one number and one special character',
       });
     } else if (!regularExpressionEmail.test(email)) {
-      M.toast({ html: 'Please enter a valid email id.' });
+      M.toast({ html: 'Please enter a valid email id' });
     } else if (!phoneno.test(phone)) {
-      M.toast({ html: 'Please enter a valid phone number.' });
+      M.toast({ html: 'Please enter a valid phone number' });
     } else if (age.value < 0 && age.value > 100) {
-      M.toast({ html: 'Please enter a valid age.' });
+      M.toast({ html: 'Please enter a valid age' });
     } else {
       setLoading(true);
       const headers = { 'Content-Type': 'application/json' };

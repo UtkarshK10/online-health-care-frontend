@@ -1,0 +1,21 @@
+.card {
+  border: none;
+}
+
+.totals tr td {
+  font-size: 16px;
+}
+
+.footer span {
+  font-size: 16px;
+}
+
+.product-qty span {
+  font-size: 16px;
+}
+.price {
+  margin-right: 10px;
+}
+.no-border {
+  border-bottom: none !important;
+}

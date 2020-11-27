@@ -44,10 +44,10 @@ function UserLogin(props) {
     // const regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     const regularExpressionEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!regularExpressionEmail.test(email)) {
-      M.toast({ html: 'Please enter a valid email id.' });
+      M.toast({ html: 'Please enter a valid email id' });
     } else if (password.length < 6) {
       M.toast({
-        html: 'Password should be of minimum 6 characters.',
+        html: 'Password should be of minimum 6 characters',
       });
     } else {
       const headers = { 'Content-Type': 'application/json' };

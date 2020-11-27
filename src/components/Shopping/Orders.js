@@ -1,18 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom';
 import noOrders from '../../assets/no-orders.png';
 import ReactSpinner from '../ReactSpinner';
-const OrderArray = [
-    { "id": "1", "order_time": "27/11/2020 18:23:31", "total_items": 3 },
-    { "id": "2", "order_time": "28/11/2020 18:43:20", "total_items": 4 },
-]
+import axios from '../../axios/axios';
+import { AuthContext } from '../../contexts/auth-context';
+// const OrderArray = [
+//     { "id": "1", "order_time": "27/11/2020 18:23:31", "total_items": 3 },
+//     { "id": "2", "order_time": "28/11/2020 18:43:20", "total_items": 4 },
+// ]
 const Orders = () => {
     const history = useHistory();
-    const [orders, setOrders] = useState(OrderArray);
+    const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { auth } = useContext(AuthContext);
     const handleClick = id => {
         history.push(`/shopping/orders/details?id=${id}`);
     }
+
+    useEffect(() => {
+        if (auth?.token) {
+            setLoading(true);
+            axios.get('/api/orders/orders', {
+                headers: {
+                    'api-token': auth?.token
+                }
+            })
+                .then(res => {
+                    setLoading(false);
+                    console.log(res);
+                    setOrders(res.data.orders);
+                })
+                .catch(e => {
+                    setLoading(false);
+                    console.log(e);
+                })
+        }
+    }, [auth?.token])
 
     if (loading) {
         return <ReactSpinner size="50px" />
@@ -38,7 +61,7 @@ const Orders = () => {
                 <thead>
                     <tr>
                         <th>Order Id</th>
-                        <th>Order Time</th>
+                        <th>Order Date</th>
                         <th>Total Items</th>
                         <th>View Details</th>
                     </tr></thead>
@@ -46,8 +69,8 @@ const Orders = () => {
                     {orders.map(order => (
                         <tr key={order.id}>
                             <td>{order.id}</td>
-                            <td>{order.order_time}</td>
-                            <td>{order.total_items}</td>
+                            <td>{order.order_date.toString().replace("GMT", "IST")}</td>
+                            <td>{order.items_count}</td>
                             <td>
 
                                 <button onClick={e => {
