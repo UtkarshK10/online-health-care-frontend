@@ -51,7 +51,26 @@ const ConfirmationPage = () => {
             })
     }
 
-    const handleClick = () => {
+    const handleClick = (new_address, id = null) => {
+
+        if (!new_address) {
+            setLoading(true);
+            const data = { id, new_address }
+            axios.post('/api/address/', data, {
+                headers: {
+                    'api-token': auth?.token
+                }
+            })
+                .then(res => {
+                    const { address } = res.data
+                    setLoading(false);
+                    history.push(`/shopping/confirm/${address}`);
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            return;
+        }
         const { name, phone_number, house_number, street, landmark, zip_code, city, state } = address;
 
         const regularExpressionZip = /^[1-9][0-9]{5}$/;
@@ -82,7 +101,7 @@ const ConfirmationPage = () => {
                 zip_code,
                 city,
                 state,
-                new_address: true
+                new_address
             }
             setLoading(true);
             axios.post('/api/address/', data, {
@@ -115,6 +134,31 @@ const ConfirmationPage = () => {
                     console.log(e);
                 })
         }
+    }
+
+    const deleteAddress = id => {
+        if (loading) return;
+
+        axios.delete('/api/address/delete_address', {
+            headers: {
+                'api-token': auth?.token,
+            },
+            data: { address_id: id }
+        })
+            .then(res => {
+                if (res.status === 200) {
+                    deleteLocally(id);
+                }
+            })
+            .catch(e => {
+                console.log(e);
+            })
+
+    }
+
+    const deleteLocally = id => {
+        const temp_address = oldAddresses.filter(address => address.id !== id);
+        setOldAddresses(temp_address);
     }
 
     useEffect(() => {
@@ -158,9 +202,9 @@ const ConfirmationPage = () => {
                                 {oldAddresses.map(address => {
                                     return (
                                         <div className="row" id={`${address.id}`} >
-                                            <div className="col s12 m6 l6">
+                                            <div className="col s12 m6 l6" style={{ fontSize: "1.2em" }}>
                                                 <span className="card-title">
-                                                    <i>{address.name}</i>
+                                                    <em>{address.name}</em>
                                                     <h6>{address.phone_number}</h6>
 
                                                 </span>
@@ -169,18 +213,21 @@ const ConfirmationPage = () => {
                                                 <p>{address.city}, {address.state}</p>
                                             </div>
                                             <div className="col s12 m3 l3 offset-m3 offset-l3">
-                                                {!loading && (
-                                                    <div className='input-field'>
-                                                        <button onClick={e => {
-                                                            e.preventDefault();
-                                                            handleClick();
-                                                        }} className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
-                                                            Continue
+
+                                                <div className='input-field'>
+                                                    <button onClick={e => {
+                                                        e.preventDefault();
+                                                        handleClick(false, address.id);
+                                                    }} className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                                                        Continue
                         <i className='material-icons right'>arrow_forward</i>
-                                                        </button>
-                                                    </div>
-                                                )}
-                                                {loading && <ReactSpinner size={25} />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="col s12 m3 l3 offset-m9 offset-l9">
+                                                <div className='input-field'>
+                                                    <i onClick={() => deleteAddress(address.id)} className="material-icons black-text" style={{ cursor: "pointer" }}>delete</i>
+                                                </div>
                                             </div>
                                         </div>
                                     )
@@ -335,7 +382,7 @@ const ConfirmationPage = () => {
                                         <div className='input-field'>
                                             <button onClick={e => {
                                                 e.preventDefault();
-                                                handleClick();
+                                                handleClick(true);
                                             }} className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
                                                 Continue
                         <i className='material-icons right'>arrow_forward</i>

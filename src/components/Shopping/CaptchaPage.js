@@ -5,12 +5,13 @@ import { AuthContext } from '../../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { Redirect } from 'react-router-dom'
 import { updateLocalStorage } from '../../utils/helper';
+// import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 
 const CaptchaPage = ({ match }) => {
     const [token, setToken] = useState(null);
     const [msg, setMsg] = useState(null);
-    const recaptchaRef = useRef();
+    const captchaRef = useRef();
     const { addressId } = match.params;
     const { auth, setAuth } = useContext(AuthContext);
     const handleConfirmation = async () => {
@@ -26,6 +27,29 @@ const CaptchaPage = ({ match }) => {
         //     })
         //     .catch(e => {
         //         console.log(e);
+        //     })
+
+        // axios.post('https://hcaptcha.com/siteverify', null, {
+        //     params: {
+        //         'secret': process.env.REACT_APP_reCAPTCHA_SECRET_KEY_V2,
+        //         'response': token,
+        //         'remoteip': remoteIp,
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log(res);
+        //         const { success } = res.data;
+        //         if (success) {
+        //             console.log("confirm order");
+        //         } else {
+        //             M.toast({ html: 'Please complete the captcha' })
+        //         }
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     })
+        //     .finally(() => {
+        //         captchaRef.current.reset();
         //     })
         // axios.post('https://www.google.com/recaptcha/api/siteverify', null, {
         //     params: {
@@ -44,11 +68,11 @@ const CaptchaPage = ({ match }) => {
         //         }
         //     })
         //     .catch(e => {
-        //         recaptchaRef.current.reset();
+        //         captchaRef.current.reset();
         //         console.log(e);
         //     })
         //     .finally(() => {
-        //         recaptchaRef.current.reset();
+        //         captchaRef.current.reset();
         //     })
 
     }
@@ -91,11 +115,17 @@ const CaptchaPage = ({ match }) => {
                                 <ReCAPTCHA
                                     sitekey={process.env.REACT_APP_reCAPTCHA_KEY_V2}
                                     onChange={token => setToken(token)}
-                                    ref={recaptchaRef}
+                                    ref={captchaRef}
                                     type="image"
                                     theme="light"
                                     badge="inline"
                                 />
+                                {/* <HCaptcha
+                                    sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
+                                    onVerify={token => setToken(token)}
+                                    ref={hcaptchaRef}
+
+                                /> */}
                             </div>
                         </div>
                         <div className="row">

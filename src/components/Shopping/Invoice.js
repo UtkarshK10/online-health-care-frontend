@@ -1,88 +1,54 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import Pdf from 'react-to-pdf';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import ReactToPrint from 'react-to-print'
+import queryString from 'query-string';
 import axios from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
 import healthcare from '../../assets/healthcare.svg';
 import '../../styles/Invoice.css'
+import ReactSpinner from '../ReactSpinner';
 
 
-const InvoiceData = {
-    name: "Test",
-    order_no: "1",
-    order_date: "26 Nov, 2020",
-    shipping_address: "blah blah",
-    invoice_number: "123",
-    products: [
-        {
-            prod_name: "prod1",
-            image_url: "",
-            price: "20",
-            quantity: "2",
-        },
-        {
-            prod_name: "prod2",
-            image_url: "",
-            price: "21",
-            quantity: "3",
-        }
-    ],
-    sub_total: 190,
-    discount: 0,
-    tax: 10,
-    total: 200,
-}
 
-const Invoice = () => {
+const Invoice = (props) => {
+    const searchString = queryString.parse(props.location.search);
+    const { id } = searchString;
     const { auth } = useContext(AuthContext);
-    const [invoiceData, setInvoiceData] = useState(InvoiceData);
+    const [invoiceData, setInvoiceData] = useState({});
+    const [loading, setLoading] = useState(true);
     const pdfRef = useRef();
-    const filename = `Invoice_${invoiceData.invoice_number}`;
 
-    // const pxToMm = (px) => {
-    //     return Math.floor(px / document.getElementById('myMm').offsetHeight);
-    // };
+    useEffect(() => {
+        if (auth?.token) {
+            setLoading(true);
+            axios.get(`/api/orders/invoice/${id}`, {
+                headers: {
+                    'api-token': auth?.token
+                }
+            })
+                .then(res => {
+                    setInvoiceData(res.data.invoice);
 
-    // const mmToPx = (mm) => {
-    //     return document.getElementById('myMm').offsetHeight * mm;
-    // };
+                    setLoading(false);
 
-    // const range = (start, end) => {
-    //     return Array(end - start).join(0).split(0).map(function (val, id) { return id + start });
-    // };
+                })
+                .catch(e => {
+                    setLoading(false);
+                    console.log(e);
+                })
+        }
+    }, [auth?.token, id])
 
-    // const downloadInvoice = () => {
-    //     const input = document.getElementById('pageToPrint');
-    //     const inputHeightMm = pxToMm(input.offsetHeight);
-    //     const a4WidthMm = 210;
-    //     const a4HeightMm = 297;
-    //     const a4HeightPx = mmToPx(a4HeightMm);
-    //     const numPages = inputHeightMm <= a4HeightMm ? 1 : Math.floor(inputHeightMm / a4HeightMm) + 1;
-    //     console.log({
-    //         input, inputHeightMm, a4HeightMm, a4HeightPx, numPages, range: range(0, numPages),
-    //         comp: inputHeightMm <= a4HeightMm, inputHeightPx: input.offsetHeight
-    //     });
+    const formatDate = date => {
+        return date.split("T")[0].toString().split("-").reverse().join("/");
+    }
 
-
-    //     html2canvas(input)
-    //         .then((canvas) => {
-    //             const imgData = canvas.toDataURL('image/png');
-    //             let pdf;
-    //             // Document of a4WidthMm wide and inputHeightMm high
-    //             if (inputHeightMm > a4HeightMm) {
-    //                 // elongated a4 (system print dialog will handle page breaks)
-    //                 pdf = new jsPDF('p', 'mm', [inputHeightMm + 16, a4WidthMm]);
-    //             } else {
-    //                 // standard a4
-    //                 pdf = new jsPDF();
-    //             }
-
-    //             pdf.addImage(imgData, 'PNG', 0, 0);
-    //             pdf.save(`${filename}.pdf`);
-    //         });
-    // }
+    if (loading) {
+        return (
+            <div className="container">
+                <ReactSpinner size="50px" />
+            </div>
+        )
+    }
 
     return (
         <div className="container" style={{
@@ -95,13 +61,13 @@ const Invoice = () => {
                         <div className="left" style={{ padding: '2% 5%' }}> <img src={healthcare} width="75" alt="logo" />
                         </div>
                         <div className="right" style={{ marginRight: "20px", fontSize: "1.8em" }}>
-                            <p className="grey-text" style={{ display: "inline-block", padding: "10px" }}>Invoice Number: </p><span style={{ display: "inline-block" }}>#{invoiceData.invoice_number}</span>
+                            <p className="grey-text" style={{ display: "inline-block", padding: "10px" }}>Invoice Number: </p><span style={{ display: "inline-block" }}>#{invoiceData.Invoice_No}</span>
                         </div>
                         <div className="invoice">
                             <div className="col s12">
                                 <h5 className="">Your order Confirmed!</h5>
                                 <div className="col s12 left">
-                                    <p className="left" style={{ fontWeight: 600 }}>Hello, {invoiceData.name}</p>
+                                    <p className="left" style={{ fontWeight: 600 }}>Hello, {invoiceData.Name}</p>
 
                                 </div>
                                 <p className="left">Your order has been confirmed and will be shipped in next few days!</p>
@@ -111,16 +77,16 @@ const Invoice = () => {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Order Date</p> <p>12 Jan,2018</p> </div>
+                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Order Date</p> <p>{formatDate(invoiceData.Order_Date)}</p> </div>
                                             </td>
                                             <td>
-                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Order No</p> <p>MT12332345</p> </div>
+                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Order No</p> <p>{invoiceData.Order_No}</p> </div>
                                             </td>
                                             <td>
                                                 <div style={{ padding: "2% 0" }}> <p className="grey-text">Payment</p> <p><img src="https://img.icons8.com/color/48/000000/visa.png" width="40" alt="prod1" /></p> </div>
                                             </td>
                                             <td>
-                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Shiping Address</p> <p>414 Advert Avenue, NY,USA</p> </div>
+                                                <div style={{ padding: "2% 0" }}> <p className="grey-text">Shiping Address</p> <p>{invoiceData.Shipping_Address.house_number}, {invoiceData.Shipping_Address.street} - {invoiceData.Shipping_Address.zip_code}, {invoiceData.Shipping_Address.city}, {invoiceData.Shipping_Address.state}</p> </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -129,15 +95,17 @@ const Invoice = () => {
                             <div className="product border-bottom table-responsive ">
                                 <table className="table table-borderless centered">
                                     <tbody>
-                                        <tr>
-                                            <td width="20%"> <img src="https://i.imgur.com/SmBOua9.jpg" width="70" alt="xyz" /> </td>
-                                            <td width="60%"> <span className="font-weight-bold">Men's Collar T-shirt</span>
-                                                <div className="product-qty"> <span className="grey-text font-weight-bold">1 Unit</span></div>
-                                            </td>
-                                            <td width="20%">
-                                                <div className="right price"> <span className="font-weight-bold">77.50 cr.</span> </div>
-                                            </td>
-                                        </tr>
+                                        {invoiceData.Products.map((product, idx) => (
+                                            <tr key={idx}>
+                                                <td width="20%"> <img src={product.image_url} width="70" alt={product.name} /> </td>
+                                                <td width="60%"> <span className="font-weight-bold">{product.name}</span>
+                                                    <div className="product-qty"> <span className="grey-text font-weight-bold">{product.quantity} {product.quantity > 1 ? "Units" : "Unit"}</span></div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div className="right price"> <span className="font-weight-bold">{product.price} cr.</span> </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
@@ -153,31 +121,31 @@ const Invoice = () => {
                                                     <div className="left"> <span className="grey-text">Subtotal</span> </div>
                                                 </td>
                                                 <td>
-                                                    <div className="right price"> <span>168.50 cr.</span> </div>
+                                                    <div className="right price"> <span>{invoiceData.Sub_Total} cr.</span> </div>
                                                 </td>
                                             </tr>
                                             <tr className="no-border">
                                                 <td>
-                                                    <div className="left"> <span className="grey-text">Shipping Fee</span> </div>
+                                                    <div className="left"> <span className="grey-text">SGST</span> </div>
                                                 </td>
                                                 <td>
-                                                    <div className="right price"> <span>22 cr.</span> </div>
+                                                    <div className="right price"> <span>{invoiceData.SGST} cr.</span> </div>
                                                 </td>
                                             </tr>
                                             <tr className="no-border">
                                                 <td>
-                                                    <div className="left"> <span className="grey-text">Tax Fee</span> </div>
+                                                    <div className="left"> <span className="grey-text">CGST</span> </div>
                                                 </td>
                                                 <td>
-                                                    <div className="right price"> <span>7.65 cr.</span> </div>
+                                                    <div className="right price"> <span>{invoiceData.CGST} cr.</span> </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div className="left"> <span className="grey-text">Discount</span> </div>
+                                                    <div className="left"> <span className="grey-text">GST</span> </div>
                                                 </td>
                                                 <td>
-                                                    <div className="right price"> <span className="deep-orange-text darken-1">168.50 cr.</span> </div>
+                                                    <div className="right price"> <span className="deep-orange-text darken-1">{invoiceData.GST} cr.</span> </div>
                                                 </td>
                                             </tr>
                                             <tr className="border-top border-bottom">
@@ -185,7 +153,7 @@ const Invoice = () => {
                                                     <div className="left"> <span style={{ fontWeight: 600 }}>Total</span> </div>
                                                 </td>
                                                 <td>
-                                                    <div className="right"> <span style={{ fontWeight: 600 }}>238.50 cr.</span> </div>
+                                                    <div className="right"> <span style={{ fontWeight: 600 }}>{invoiceData.Total} cr.</span> </div>
                                                 </td>
                                             </tr>
                                         </tbody>

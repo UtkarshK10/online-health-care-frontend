@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HalfRating({ val }) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Rating name='half-rating-read' precision={0.25} readOnly value={val} />

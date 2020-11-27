@@ -1469,6 +1469,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@hcaptcha/react-hcaptcha@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@hcaptcha/react-hcaptcha/-/react-hcaptcha-0.2.1.tgz#af0ec7646f33f4141f3381878a772b6790ad8155"
+  integrity sha512-2YiUrUvwFys1UVjplTx2sNiOqN7RJE0krhGmQo7yrhV5ULuLy4XRdOLEXESSDlMCDQPKcMx4cGkXjtoTljjXcQ==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -10577,6 +10582,11 @@ react-google-recaptcha@^2.1.0:
   dependencies:
     prop-types "^15.5.0"
     react-async-script "^1.1.1"
+
+react-hcaptcha@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-hcaptcha/-/react-hcaptcha-0.1.1.tgz#da21311166f0153054624caf5784cfd977ef31f5"
+  integrity sha512-p0s7uDOZAh28dbcmP2bXsox2NmIwQ6OtDTgjCYwfe49kHeCU67Omma1DhzYiGWQJRC6eTUZEikjsm+WT7bmy2g==
 
 react-infinite-scroll-component@^5.1.0:
   version "5.1.0"
