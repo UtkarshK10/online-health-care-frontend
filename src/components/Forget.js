@@ -4,7 +4,8 @@ import axios from '../axios/axios';
 import M from 'materialize-css/dist/js/materialize.min.js';
 // import { } from 'react-router-dom';
 
-const Forget = ({ token }) => {
+const Forget = ({ match, midRoute }) => {
+  const { token } = match.params;
   const [fields, setFields] = useState({
     password1: '',
     password2: '',
@@ -18,9 +19,8 @@ const Forget = ({ token }) => {
       M.toast({ html: 'Passwords does not match' })
       return;
     }
-    console.log('he')
     const data = { password: password1 }
-    axios.put(`/api/users/reset/${token}`, data, {
+    axios.put(`/api/${midRoute}/reset/${token}`, data, {
       headers: {
         'Content-type': 'application/json'
       }

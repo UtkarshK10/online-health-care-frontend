@@ -12,7 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
-import { TempParticle } from './components/TempParticle';
+import Forget from './Forget'
 import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
@@ -116,11 +116,22 @@ function App() {
                 <Route
                   exact
                   path={`/reset/:token`}
-                  component={TempParticle}
-                  // <div className='page'>
-                  // <Particle />
-
-                  // </div>
+                  render={(props) => (
+                    <div className='page'>
+                      <Particle />
+                      <Forget {...props} midRoute="users" />
+                    </div>
+                  )}
+                />
+                <Route
+                  exact
+                  path={`/doctors/reset/:token`}
+                  render={(props) => (
+                    <div className='page'>
+                      <Particle />
+                      <Forget {...props} midRoute="doctors" />
+                    </div>
+                  )}
                 />
                 <PrivateRoute
                   exact

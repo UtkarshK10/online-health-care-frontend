@@ -7,8 +7,8 @@ import { AuthContext } from '../../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../../assets/doctor_thanks.jpg';
 import ReactSpinner from '../ReactSpinner';
-import {saveLocalStorage} from '../../utils/helper.js'
-import AddTechModal from '../../Modal/OTPModal';
+import { saveLocalStorage } from '../../utils/helper.js'
+import DoctorOTPModal from '../../Modal/DoctorOTPModal';
 
 
 function DoctorLogin(props) {
@@ -20,17 +20,17 @@ function DoctorLogin(props) {
     const [propData, setPropData] = useState(null);
     const { setAuth } = useContext(AuthContext);
     const history = useHistory();
-    
-    const getOTP = () => {
-    var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, { dismissible: false });
-    instance.open();
-  };
 
-  useEffect(() => {
-    if (openModal) getOTP();
-    // eslint-disable-next-line
-  }, [openModal]);
+    //Modal part
+    const getOTP = () => {
+        var elem = document.querySelector('.modal');
+        var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
+        instance.open();
+    };
+    useEffect(() => {
+        if (openModal) getOTP();
+        // eslint-disable-next-line
+    }, [openModal]);
 
     const login = async (e) => {
         e.preventDefault();
@@ -53,23 +53,31 @@ function DoctorLogin(props) {
                 headers: headers,
             })
                 .then(res => {
-                   if (res.status === 200) {
+                    if (res.status === 200 && res.data.msg === 'unverified') {
                         const resData = {
-                        name: res.data.name,
-                        username: res.data.username,
-                        user_id: res.data.user_id,
-                        email: res.data.email,
-                        phone: res.data.phone,
-                        speciality: res.data.speciality,
-                        experience: res.data.experience,
-                        profile_image: res.data.profile_url,
-                        isLoggedIn: true,
-                        token: res.data.jwt_token,
-                        tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
-                    };
-                    setAuth(resData);
-                    saveLocalStorage(resData)
-                    history.push('/doctors')
+                            user_id: res.data.user_id,
+                        };
+                        setAuth(resData);
+                        saveLocalStorage(resData);
+                        setModal(true);
+                    }
+                    else if (res.status === 200) {
+                        const resData = {
+                            name: res.data.name,
+                            username: res.data.username,
+                            user_id: res.data.user_id,
+                            email: res.data.email,
+                            phone: res.data.phone,
+                            speciality: res.data.speciality,
+                            experience: res.data.experience,
+                            profile_image: res.data.profile_url,
+                            isLoggedIn: true,
+                            token: res.data.jwt_token,
+                            tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,
+                        };
+                        setAuth(resData);
+                        saveLocalStorage(resData)
+                        history.push('/doctors')
                     }
                 })
                 .catch(err => {
@@ -88,13 +96,13 @@ function DoctorLogin(props) {
 
     const handleClick = e => {
         e.preventDefault()
-        setModal(true);
         const data = {
             'title': 'Enter your user account\'s verified email address and we will send you a password reset link.',
             'btnText': 'Send reset link',
             'label': 'Email'
         }
         setPropData(data);
+        setModal(true);
     }
 
     return (
@@ -156,7 +164,7 @@ function DoctorLogin(props) {
                 </div>
                 {errorMsg && M.toast({ html: errorMsg?.toString() })}
             </div>
-             <AddTechModal info={propData} />
+            <DoctorOTPModal info={propData} />
         </>
     );
 }

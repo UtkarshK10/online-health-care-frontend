@@ -66,7 +66,7 @@ const DoctorOTPModal = (props) => {
     if (props?.info) {
       const data = { email };
       axios
-        .post('/api/users/reset', data, {
+        .post('/api/doctors/reset', data, {
           headers: {
             'Content-type': 'application/json',
           },
@@ -111,19 +111,19 @@ const DoctorOTPModal = (props) => {
               </label>
             </div>
           ) : (
-            <div className='input-field'>
-              <input
-                autoFocus
-                type='email'
-                name='Email'
-                value={email}
-                onChange={setEmail}
-              />
-              <label htmlFor='Email' className='active'>
-                Email
+              <div className='input-field'>
+                <input
+                  autoFocus
+                  type='email'
+                  name='Email'
+                  value={email}
+                  onChange={setEmail}
+                />
+                <label htmlFor='Email' className='active'>
+                  Email
               </label>
-            </div>
-          )}
+              </div>
+            )}
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}
