@@ -20,8 +20,18 @@ const HomePage = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to={`/records`} className='stcolour'>
+              Records
+            </NavLink>
+          </li>
+          <li>
             <NavLink to='/payment' className='stcolour'>
               Credits : <span className='ptcolour'>{auth.credits}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/transactions' className='stcolour'>
+              Transactions
             </NavLink>
           </li>
           <li className='divider'></li>
@@ -194,11 +204,18 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to='/payment'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to={`/records`} className='stcolour'>
+                Records
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/payment' className='stcolour'>
                 Credits : <span className='ptcolour'>{auth.credits}</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/transactions' className='stcolour'>
+                Transactions
               </NavLink>
             </li>
             <li></li>

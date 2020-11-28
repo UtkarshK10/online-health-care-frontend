@@ -12,7 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
-import Forget from './Forget'
+import Forget from './components/Forget';
 import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
@@ -31,6 +31,8 @@ import Invoice from './components/Shopping/Invoice';
 import DoctorPrescription from './components/Shopping/DoctorPrescription';
 import PatientPrescriptionDetails from './components/PatientPrescriptionDetails';
 import PatientPrescription from './components/PatientPrescription';
+import Records from './components/Records';
+import Transactions from './components/Transactions';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -119,7 +121,16 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <Particle />
-                      <Forget {...props} midRoute="users" />
+                      <Forget {...props} midRoute='users' />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path={`/doctors/user/:id`}
+                  render={() => (
+                    <div className='page'>
+                      <Profile isDoctor />
                     </div>
                   )}
                 />
@@ -129,7 +140,7 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <Particle />
-                      <Forget {...props} midRoute="doctors" />
+                      <Forget {...props} midRoute='doctors' />
                     </div>
                   )}
                 />
@@ -139,6 +150,24 @@ function App() {
                   render={() => (
                     <div className='page'>
                       <Payment />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/records'
+                  render={() => (
+                    <div className='page'>
+                      <Records />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/transactions'
+                  render={() => (
+                    <div className='page'>
+                      <Transactions />
                     </div>
                   )}
                 />
