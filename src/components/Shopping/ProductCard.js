@@ -95,16 +95,16 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
                 style={{ width: '30px', cursor: 'pointer' }}
               />
             ) : (
-              <img
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleAddToPrescription();
-                }}
-                src={PrescriptionIcon}
-                alt=''
-                style={{ width: '30px', cursor: 'pointer' }}
-              />
-            ))}
+                  <img
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToPrescription();
+                    }}
+                    src={PrescriptionIcon}
+                    alt=''
+                    style={{ width: '30px', cursor: 'pointer' }}
+                  />
+                ))}
         </div>
         <br />
       </div>

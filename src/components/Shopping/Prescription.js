@@ -3,6 +3,7 @@ import ReactSpinner from '../ReactSpinner';
 import EmptyPre from '../../assets/empty-pre.png';
 import { AuthContext } from '../../contexts/auth-context';
 import axios from '../../axios/axios';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Prescription = ({
   prescription,
@@ -26,16 +27,19 @@ const Prescription = ({
   const handleSubmit = () => {
     const data = prescription.map((p) => {
       const { id, quantity, instruction } = p;
-      return { id, quantity, instruction };
+      return { id, quantity, description: instruction };
     });
-    console.log(data);
     axios
       .post(`/api/prescription/${recordID}`, data, {
         headers: {
           'api-token': auth?.token,
         },
       })
-      .then()
+      .then(res => {
+        if (res.status === 200) {
+          M.toast({ html: res.data.msg })
+        }
+      })
       .catch((e) => {
         console.log(e);
       });
@@ -85,91 +89,91 @@ const Prescription = ({
                     <ReactSpinner size='30px' />
                   </div>
                 ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(prescriptionDetail.id, -1);
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
                       }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
                     >
-                      remove
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(prescriptionDetail.id, -1);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        remove
                     </i>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className='btn btn-small scolour waves-effect'
-                    >
-                      <span style={{ fontSize: '18px' }}>
-                        {prescriptionDetail.quantity}
-                      </span>{' '}
-                    </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                        className='btn btn-small scolour waves-effect'
+                      >
+                        <span style={{ fontSize: '18px' }}>
+                          {prescriptionDetail.quantity}
+                        </span>{' '}
+                      </button>
 
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(prescriptionDetail.id, 1);
-                      }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
-                    >
-                      add
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(prescriptionDetail.id, 1);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        add
                     </i>
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
               <div className='row hide-on-med-and-up'>
                 {loading_inc_dec ? (
                   <ReactSpinner size='25px' />
                 ) : (
-                  <div
-                    className=' col s12'
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginLeft: '30%',
-                    }}
-                  >
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(prescriptionDetail.medicine_id, -1);
+                    <div
+                      className=' col s12'
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: '30%',
                       }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
                     >
-                      remove
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(prescriptionDetail.medicine_id, -1);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        remove
                     </i>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      className='btn btn-small scolour waves-effect'
-                    >
-                      <span style={{ fontSize: '18px' }}>
-                        {prescriptionDetail.quantity}
-                      </span>{' '}
-                    </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                        className='btn btn-small scolour waves-effect'
+                      >
+                        <span style={{ fontSize: '18px' }}>
+                          {prescriptionDetail.quantity}
+                        </span>{' '}
+                      </button>
 
-                    <i
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleEdit(prescriptionDetail.id, 1);
-                      }}
-                      className='material-icons ptcolour'
-                      style={{ cursor: 'pointer' }}
-                    >
-                      add
+                      <i
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleEdit(prescriptionDetail.id, 1);
+                        }}
+                        className='material-icons ptcolour'
+                        style={{ cursor: 'pointer' }}
+                      >
+                        add
                     </i>
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
               <div className='col s12 m3 l3'>
                 <div className='row'>
