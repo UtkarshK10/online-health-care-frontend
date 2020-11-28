@@ -172,6 +172,7 @@ const Oxymeter = (props) => {
       oxy_level: oxylevel,
       user_id: auth.user_id,
       doctor_id,
+      transaction_id: 1,
     };
     console.log(jsonData);
     axios
@@ -306,10 +307,10 @@ const Oxymeter = (props) => {
                     e.preventDefault();
                     setShowForm(false);
                   }}
-                  style={{ marginBottom: "10px" }}
+                  style={{ marginBottom: '10px' }}
                   className='pcolour waves-effect btn secondary-content'
                 >
-                  <i className="material-icons left">arrow_back</i>
+                  <i className='material-icons left'>arrow_back</i>
                   Go Back
                 </a>
               </div>

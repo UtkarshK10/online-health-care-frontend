@@ -325,3 +325,9 @@ table td {
   box-shadow: 0px !important;
   text-decoration: none !important;
 }
+
+@media screen and (min-width: 992px) {
+  .pre-container {
+    height: 88vh !important;
+  }
+}

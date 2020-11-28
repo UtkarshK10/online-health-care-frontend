@@ -28,6 +28,7 @@ import CaptchaPage from './components/Shopping/CaptchaPage';
 import PrivateRoute from './routers/PrivateRoutes';
 import Logout from './components/Logout';
 import Invoice from './components/Shopping/Invoice';
+import DoctorPrescription from './components/Shopping/DoctorPrescription';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -114,10 +115,10 @@ function App() {
                   exact
                   path={`/reset/:token`}
                   component={TempParticle}
-                // <div className='page'>
-                // <Particle />
+                  // <div className='page'>
+                  // <Particle />
 
-                // </div>
+                  // </div>
                 />
                 <PrivateRoute
                   exact
@@ -194,6 +195,15 @@ function App() {
                       <DoctorMail {...props} />
                     </div>
                   )}
+                />{' '}
+                <PrivateRoute
+                  exact
+                  path='/doctors/prescription'
+                  render={(props) => (
+                    <div className='page'>
+                      <DoctorPrescription {...props} />
+                    </div>
+                  )}
                 />
                 <Route
                   exact
@@ -258,7 +268,6 @@ function App() {
                     </div>
                   )}
                 />
-
                 <Redirect exact to='/' />
               </Switch>
             </CSSTransition>

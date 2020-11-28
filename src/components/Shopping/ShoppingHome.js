@@ -8,14 +8,11 @@ import { AuthContext } from '../../contexts/auth-context';
 const ShoppingHome = () => {
   const { auth } = useContext(AuthContext);
 
-
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [productsPerPage] = useState(3);
-  const [filteredProducts, setFilteredProducts] = useState(
-    []
-  );
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchString, setSearchString] = useState('');
   const [len, setLen] = useState(products.length);
   const handleChange = (e) => {
@@ -61,7 +58,6 @@ const ShoppingHome = () => {
         },
       })
       .then((res) => {
-
         setFilteredProducts(res.data.msg.slice(0, 3));
         setProducts(res.data.msg);
       })
@@ -75,10 +71,12 @@ const ShoppingHome = () => {
   // }
 
   return (
-    <div className='container'><br></br>
+    <div className='container'>
+      <br></br>
       <div className='row'>
         <div className='col s11 m6'>
-          <div className='input-field'><i className="material-icons prefix">search</i>
+          <div className='input-field'>
+            <i className='material-icons prefix'>search</i>
             <input
               value={searchString}
               onSubmit={handleChange}
@@ -95,7 +93,9 @@ const ShoppingHome = () => {
         {filteredProducts.map((Product, idx) => {
           return (
             <div key={idx}>
-              <ProductCard Product={Product} />
+              <div className='col s12 m6 l4'>
+                <ProductCard Product={Product} />
+              </div>
             </div>
           );
         })}
