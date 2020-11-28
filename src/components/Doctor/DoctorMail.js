@@ -87,6 +87,7 @@ const DoctorMail = (props) => {
               <div className='row'>
                 <div className='input-field'>
                   <DateTimePicker
+                    className='date-picker'
                     onChange={handleChange}
                     value={time}
                     minDate={new Date()}
@@ -131,7 +132,10 @@ const DoctorMail = (props) => {
               <div className='row'>
                 {!loading && (
                   <div className='input-field'>
-                    <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                    <button
+                      className='btn btn-large pcolour btn-register waves-effect waves-light hover'
+                      style={{ zIndex: 0 }}
+                    >
                       Submit
                       <i className='material-icons right'>check_circle</i>
                     </button>

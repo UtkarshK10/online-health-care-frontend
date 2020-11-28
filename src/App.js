@@ -29,6 +29,8 @@ import PrivateRoute from './routers/PrivateRoutes';
 import Logout from './components/Logout';
 import Invoice from './components/Shopping/Invoice';
 import DoctorPrescription from './components/Shopping/DoctorPrescription';
+import PatientPrescriptionDetails from './components/PatientPrescriptionDetails';
+import PatientPrescription from './components/PatientPrescription';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -202,6 +204,24 @@ function App() {
                   render={(props) => (
                     <div className='page'>
                       <DoctorPrescription {...props} />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/patientprescriptiondetails'
+                  render={(props) => (
+                    <div className='page'>
+                      <PatientPrescriptionDetails {...props} />
+                    </div>
+                  )}
+                />
+                <PrivateRoute
+                  exact
+                  path='/patientprescription'
+                  render={() => (
+                    <div className='page'>
+                      <PatientPrescription />
                     </div>
                   )}
                 />

@@ -232,7 +232,7 @@ const Prescription = ({
               className='btn btn-large pcolour btn-register waves-effect waves-light hover'
             >
               Submit
-              <i className='material-icons right'>check_circle</i>
+              <i className='material-icons right'>add_task</i>
             </button>
           </div>
         </div>
