@@ -3,33 +3,61 @@ import { AuthContext } from '../contexts/auth-context';
 import axios from '../axios/axios';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import noRecords from '../assets/no-record.svg';
+import ReactSpinner from './ReactSpinner';
 
 const PatientPrescription = () => {
   const history = useHistory();
   const [prescriptions, setPrescriptions] = useState([]);
   const { auth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    axios.get('/api/prescriptions/show_all', {
-      headers: {
-        'api-token': auth?.token
-      }
-    })
-      .then(res => {
-        setPrescriptions(res.data.prescriptions);
-      })
-      .catch(err => {
-        if (err?.response) {
-          M.toast({ html: err?.response?.data?.msg });
-        } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
-        } else {
-          M.toast({ html: 'Something went wrong, please try again' });
+    if (auth?.token) {
+      setLoading(true);
+      axios.get('/api/prescriptions/show_all', {
+        headers: {
+          'api-token': auth?.token
         }
       })
+        .then(res => {
+          setPrescriptions(res.data.prescriptions);
+          setLoading(true);
+        })
+        .catch(err => {
+          setLoading(true);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
+        })
+    }
   }, [auth?.token]);
   const handleClick = id => {
     history.push(`/records/prescription?id=${id}`)
 
+  }
+  if (loading) {
+    return <div className="container">
+      <div className="row">
+        <div className="col s12">
+          <ReactSpinner size="50px" />
+        </div>
+      </div>
+    </div>
+  }
+
+  if (!loading && prescriptions?.length === 0) {
+    return <div className="container">
+      <div className="row">
+        <div className="col s12">
+          <h2>No records found!</h2>
+          <img src={noRecords} alt="no records" />
+        </div>
+      </div>
+    </div>
   }
   return (
     <div className='container'>
