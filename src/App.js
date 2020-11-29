@@ -12,7 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
-import Forget from './Forget'
+import Forget from './components/Forget'
 import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
