@@ -30,7 +30,7 @@ const Prescription = ({
       const { id, quantity, instruction } = p;
       return { medicine_id: id, quantity, description: instruction };
     });
-    console.log(data)
+
     axios
       .post(`/api/prescriptions/create/${recordID}`, { data }, {
         headers: {
@@ -43,8 +43,14 @@ const Prescription = ({
           M.toast({ html: res.data.msg })
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   };
 

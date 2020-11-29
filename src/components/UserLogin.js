@@ -3,7 +3,6 @@ import { useHistory, Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
 import axios from '../axios/axios';
-// import axios from 'axios';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import doctor from '../assets/doctor.png';
@@ -14,8 +13,6 @@ import ReactSpinner from './ReactSpinner';
 function UserLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
   const [email, handleEmailChange] = useInputState('');
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
   const [openModal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -76,14 +73,12 @@ function UserLogin(props) {
         })
         .catch((err) => {
           setLoading(false);
-          setError(true);
           if (err?.response) {
-            setErrorMsg(err?.response.data.msg);
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            setErrorMsg(err?.request.data.toString());
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
-            setErrorMsg('Something went wrong, please try again');
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }
@@ -160,7 +155,7 @@ function UserLogin(props) {
             </div>
           </div>
         </div>
-        <p>{error && errorMsg.toString()}</p>
+
       </div>
       <AddTechModal info={propData} />
     </>

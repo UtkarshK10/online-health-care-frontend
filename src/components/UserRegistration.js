@@ -11,7 +11,7 @@ import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
 import { saveLocalStorage } from '../utils/helper.js';
 
-function UserRegistration(props) {
+function UserRegistration() {
   const [name, handleNameChange] = useInputState('');
   const [username, handleUserNameChange] = useInputState('');
   const [password, handlePasswordChange] = useInputState('');
@@ -20,7 +20,6 @@ function UserRegistration(props) {
   const [age, handleAgeChange] = useInputState('');
   const [gender, handleGender] = useInputState('');
   const [openModal, setModal] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
   const [state] = useState(true);
   const [loading, setLoading] = useState(false);
   const { setAuth } = useContext(AuthContext);
@@ -78,12 +77,11 @@ function UserRegistration(props) {
         .catch((err) => {
           setLoading(false);
           if (err?.response) {
-            setErrorMsg(err?.response?.data.msg);
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            setErrorMsg(err?.request?.data?.toString());
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
-            setErrorMsg('Something went wrong, please try again');
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }
@@ -257,7 +255,6 @@ function UserRegistration(props) {
             </div>
           </div>
         </div>
-        {errorMsg && M.toast({ html: errorMsg?.toString() })}
       </div>
       <AddTechModal />
     </>

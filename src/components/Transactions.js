@@ -2,21 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import noTransaction from '../assets/no-transaction.svg'
-
-// const fakeData = [
-//   {
-//     id: '1',
-//     done_to: 'Bought Credits',
-//     amount: 200,
-//     transaction_date: '28/11/2020',
-//   },
-//   {
-//     id: '2',
-//     done_to: 'Purchase Medicines',
-//     amount: 100,
-//     transaction_date: '28/11/2020',
-//   },
-// ];
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Transcations = () => {
   const [transactions, setTransactions] = useState([]);
@@ -35,8 +21,14 @@ const Transcations = () => {
         setLoading(false);
         setTransactions(res.data.details)
       })
-      .catch((e) => {
-        setLoading(false);
+      .catch((err) => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   }, [auth?.token]);
 

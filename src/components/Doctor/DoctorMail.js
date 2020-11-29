@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
 import DateTimePicker from 'react-datetime-picker';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth-context';
 import ReactSpinner from '../ReactSpinner';
 import queryString from 'query-string';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import axios from '../../axios/axios';
 
 const DoctorMail = (props) => {
-  const history = useHistory();
   const { auth } = useContext(AuthContext);
   const [time, onChange] = useState(new Date());
   const [emailData, setEmailData] = useState({
@@ -51,8 +50,15 @@ const DoctorMail = (props) => {
         const d = new Date(res.data.msg).toLocaleString();
         setMsg(`Appointment confirmed at: ${d}`);
       })
-      .catch((e) => {
+      .catch((err) => {
         setLoading(false);
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   };
   // if (!receiver) {
@@ -147,7 +153,7 @@ const DoctorMail = (props) => {
           </div>
         </div>
       </div>
-      {msg && <span>{msg}</span>}
+      <h4>{msg && <span>{msg}</span>}</h4>
     </div>
   );
 };

@@ -14,7 +14,7 @@ import DoctorOTPModal from '../../Modal/DoctorOTPModal';
 function DoctorLogin(props) {
     const [password, handlePasswordChange] = useInputState('');
     const [email, handleEmailChange] = useInputState('');
-    const [errorMsg, setErrorMsg] = useState('');
+
     const [loading, setLoading] = useState(false);
     const [openModal, setModal] = useState(false);
     const [propData, setPropData] = useState(null);
@@ -75,12 +75,11 @@ function DoctorLogin(props) {
                 .catch(err => {
                     setLoading(false);
                     if (err?.response) {
-                        setErrorMsg(err?.response.data.msg)
+                        M.toast({ html: err?.response?.data?.msg });
                     } else if (err?.request) {
-                        setErrorMsg(err?.request.data.toString())
+                        M.toast({ html: err?.request?.data?.toString() });
                     } else {
-                        console.log(err)
-                        setErrorMsg("Something went wrong, please try again");
+                        M.toast({ html: 'Something went wrong, please try again' });
                     }
                 })
         }
@@ -154,7 +153,7 @@ function DoctorLogin(props) {
                         </div>
                     </div>
                 </div>
-                {errorMsg && M.toast({ html: errorMsg?.toString() })}
+
             </div>
             <DoctorOTPModal info={propData} />
         </>

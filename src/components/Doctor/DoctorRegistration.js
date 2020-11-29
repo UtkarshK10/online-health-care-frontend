@@ -20,7 +20,7 @@ function DoctorRegistration(props) {
   const [speciality, handleSpeciality] = useInputState('');
   const [experience, handleExperience] = useInputState('');
   const [fee, handleFee] = useInputState('');
-  const [errorMsg, setErrorMsg] = useState(null);
+
   const [state] = useState(true);
   const [loading, setLoading] = useState(false);
   const { setAuth } = useContext(AuthContext);
@@ -152,12 +152,11 @@ function DoctorRegistration(props) {
         .catch((err) => {
           setLoading(false);
           if (err?.response) {
-            setErrorMsg(err?.response.data.msg);
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            setErrorMsg(err?.request?.data?.toString());
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
-            setErrorMsg('Something went wrong, please try again');
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }
@@ -348,7 +347,7 @@ function DoctorRegistration(props) {
             </div>
           </div>
         </div>
-        {errorMsg && M.toast({ html: errorMsg.toString() })}
+
       </div>
       <DoctorOTPModal />
     </>

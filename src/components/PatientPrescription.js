@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/auth-context';
 import axios from '../axios/axios';
 import { useHistory } from 'react-router-dom';
+import M from 'materialize-css/dist/js/materialize.min.js';
+
 const PatientPrescription = () => {
   const history = useHistory();
   const [prescriptions, setPrescriptions] = useState([]);
@@ -15,8 +17,14 @@ const PatientPrescription = () => {
       .then(res => {
         setPrescriptions(res.data.prescriptions);
       })
-      .catch(e => {
-        console.log(e);
+      .catch(err => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       })
   }, [auth?.token]);
   const handleClick = id => {

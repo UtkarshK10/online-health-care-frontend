@@ -4,6 +4,7 @@ import '../styles/UserRegistrationStyles.css';
 import CustomG from './CustomG';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 
 const Profile = ({ isDoctor }) => {
@@ -24,9 +25,11 @@ const Profile = ({ isDoctor }) => {
         })
         .catch((err) => {
           if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }
@@ -47,9 +50,11 @@ const Profile = ({ isDoctor }) => {
       })
       .catch((err) => {
         if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
         } else {
-          console.log(err);
+          M.toast({ html: 'Something went wrong, please try again' });
         }
       });
   };
@@ -75,7 +80,7 @@ const Profile = ({ isDoctor }) => {
           headers,
         })
         .then((res) => {
-          console.log(res);
+
           setUser({ ...res.data.user });
         })
         .catch((err) => { });

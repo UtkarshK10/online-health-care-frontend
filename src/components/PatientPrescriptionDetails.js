@@ -14,6 +14,7 @@ const PatientPrescriptionDetails = (props) => {
   const [loading, setLoading] = useState(false);
   const { auth } = useContext(AuthContext);
   const history = useHistory();
+
   const addToCart = e => {
     e.preventDefault();
     axios.get(`/api/prescriptions/add/${id}`, {
@@ -24,8 +25,14 @@ const PatientPrescriptionDetails = (props) => {
       .then(res => {
         M.toast({ html: res.data.msg })
       })
-      .catch(e => {
-        console.log(e);
+      .catch(err => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       })
   };
   const handleClick = (e) => {
@@ -46,9 +53,15 @@ const PatientPrescriptionDetails = (props) => {
           setLoading(false);
           setPrescriptionDetails(res.data.details);
         })
-        .catch((e) => {
+        .catch((err) => {
           setLoading(false);
-          console.log(e);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         });
     }
   }, [auth?.token, id]);

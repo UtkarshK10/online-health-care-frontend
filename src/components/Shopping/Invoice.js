@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/auth-context';
 import healthcare from '../../assets/healthcare.svg';
 import '../../styles/Invoice.css';
 import ReactSpinner from '../ReactSpinner';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Invoice = (props) => {
   const searchString = queryString.parse(props.location.search);
@@ -29,9 +30,15 @@ const Invoice = (props) => {
 
           setLoading(false);
         })
-        .catch((e) => {
+        .catch((err) => {
           setLoading(false);
-          console.log(e);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         });
     }
   }, [auth?.token, id]);
@@ -276,10 +283,10 @@ const Invoice = (props) => {
               <div className='input-field'>
                 <button
                   className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                  // onClick={e => {
-                  //     e.preventDefault();
-                  //     downloadInvoice();
-                  // }}
+                // onClick={e => {
+                //     e.preventDefault();
+                //     downloadInvoice();
+                // }}
                 >
                   Print
                   <i className='material-icons left'>get_app</i>

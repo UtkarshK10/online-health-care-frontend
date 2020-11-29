@@ -34,9 +34,15 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
         M.toast({ html: res.data.msg });
         setLoading(false);
       })
-      .catch((e) => {
+      .catch((err) => {
         setLoading(false);
-        console.log(e);
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   };
   const handleAddToPrescription = () => {

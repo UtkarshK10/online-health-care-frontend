@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import ReactSpinner from '../ReactSpinner';
 import axios from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
+import M from 'materialize-css/dist/js/materialize.min.js';
 // const Orders = [
 //   {
 //     id: '1',
@@ -56,9 +57,15 @@ const OrderDetails = (props) => {
           setLoading(false);
           setOrderDetails(res.data.details)
         })
-        .catch(e => {
+        .catch(err => {
           setLoading(false);
-          console.log(e);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         })
     }
   }, [auth?.token, id]);

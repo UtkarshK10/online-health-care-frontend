@@ -44,13 +44,19 @@ const DoctorSchedule = () => {
       }
     })
       .then(res => {
-        console.log(res);
+
         if (res.status === 200) {
           updatePatientDetails(id);
         }
       })
-      .catch(e => {
-        console.log(e);
+      .catch(err => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       })
   }
 
@@ -74,18 +80,22 @@ const DoctorSchedule = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setPatientDetails([...res.data.details]);
         })
         .catch((err) => {
-          console.log(err);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         });
     };
     if (auth.token) fetchPatientDetails();
   }, [auth.token]);
 
   if (isDetails) {
-    console.log(currPatient);
     return (
       <PatientDetailsCard
         updateState={setIsDetails}

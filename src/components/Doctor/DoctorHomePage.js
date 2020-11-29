@@ -3,6 +3,7 @@ import axios from 'axios';
 import axiosC from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
 import PatientCountCard from './PatientCountCard';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import RedHeart from '../../assets/heart-red.png';
 import BlueHeart from '../../assets/heart-blue.png';
 import GreenHeart from '../../assets/heart-green.png';
@@ -45,8 +46,8 @@ export default function DoctorHomePage() {
         .then(res => {
           setNewsPosts(res.data.response.docs)
         })
-        .catch(e => {
-          console.log(e);
+        .catch(err => {
+          console.log(err);
         })
     };
     fetchNews();
@@ -64,8 +65,14 @@ export default function DoctorHomePage() {
         .then((res) => {
           setCount({ ...res?.data });
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((err) => {
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         });
     };
     if (auth?.token) fetchPatientCount();

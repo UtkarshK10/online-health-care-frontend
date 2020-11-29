@@ -77,7 +77,7 @@ const CaptchaPage = ({ match }) => {
 
     }
     const confirmOrder = () => {
-        console.log("confirmOrder");
+
         const data = { address_id: addressId }
         axios.post('/api/orders/confirm', data, {
             headers: {
@@ -89,8 +89,14 @@ const CaptchaPage = ({ match }) => {
                 setAuth({ ...auth, credits: res.data.new_credits })
                 updateLocalStorage({ ...auth, credits: res.data.new_credits });
             })
-            .catch(e => {
-                console.log(e);
+            .catch(err => {
+                if (err?.response) {
+                    M.toast({ html: err?.response?.data?.msg });
+                } else if (err?.request) {
+                    M.toast({ html: err?.request?.data?.toString() });
+                } else {
+                    M.toast({ html: 'Something went wrong, please try again' });
+                }
             })
             .finally(() => {
                 redirectUser();

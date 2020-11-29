@@ -39,9 +39,15 @@ const Cart = () => {
           setLoading(false);
           setCart(res.data.details);
         })
-        .catch((e) => {
+        .catch((err) => {
           setLoading(false);
-          console.log(e);
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
         });
     }
   }, [auth?.token]);
@@ -62,8 +68,14 @@ const Cart = () => {
           setCart(filteredProducts);
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   };
   const handleEdit = (medicine_id, qty, id) => {
@@ -86,9 +98,15 @@ const Cart = () => {
           updateCart(id, newQuantity);
         }
       })
-      .catch((e) => {
+      .catch((err) => {
         setLoadingIncDec(false);
-        console.log(e);
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   };
 
@@ -125,8 +143,14 @@ const Cart = () => {
           M.toast({ html: info });
         }
       })
-      .catch(e => {
-        console.log(e);
+      .catch(err => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       })
   };
 

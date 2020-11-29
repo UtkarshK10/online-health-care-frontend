@@ -29,7 +29,7 @@ const PatientDetailsCard = ({ currPatient, updateState }) => {
     },
     { name: 'apply', label: 'None of the above', value: 'none' },
   ];
-  console.log(currPatient);
+
   const changeRadioState = val => {
     if (val === "on") {
       return "No"

@@ -66,8 +66,14 @@ const ConfirmationPage = () => {
                     setLoading(false);
                     history.push(`/shopping/confirm/${address}`);
                 })
-                .catch(e => {
-                    console.log(e);
+                .catch(err => {
+                    if (err?.response) {
+                        M.toast({ html: err?.response?.data?.msg });
+                    } else if (err?.request) {
+                        M.toast({ html: err?.request?.data?.toString() });
+                    } else {
+                        M.toast({ html: 'Something went wrong, please try again' });
+                    }
                 })
             return;
         }
@@ -115,9 +121,15 @@ const ConfirmationPage = () => {
                     setLoading(false);
                     history.push(`/shopping/confirm/${address}`);
                 })
-                .catch(e => {
+                .catch(err => {
                     setLoading(false);
-                    console.log(e);
+                    if (err?.response) {
+                        M.toast({ html: err?.response?.data?.msg });
+                    } else if (err?.request) {
+                        M.toast({ html: err?.request?.data?.toString() });
+                    } else {
+                        M.toast({ html: 'Something went wrong, please try again' });
+                    }
                 })
         }
     }
@@ -150,8 +162,14 @@ const ConfirmationPage = () => {
                     deleteLocally(id);
                 }
             })
-            .catch(e => {
-                console.log(e);
+            .catch(err => {
+                if (err?.response) {
+                    M.toast({ html: err?.response?.data?.msg });
+                } else if (err?.request) {
+                    M.toast({ html: err?.request?.data?.toString() });
+                } else {
+                    M.toast({ html: 'Something went wrong, please try again' });
+                }
             })
 
     }
@@ -172,8 +190,14 @@ const ConfirmationPage = () => {
                 .then(res => {
                     setOldAddresses(res.data.addresses);
                 })
-                .catch(e => {
-                    console.log(e);
+                .catch(err => {
+                    if (err?.response) {
+                        M.toast({ html: err?.response?.data?.msg });
+                    } else if (err?.request) {
+                        M.toast({ html: err?.request?.data?.toString() });
+                    } else {
+                        M.toast({ html: 'Something went wrong, please try again' });
+                    }
                 })
         }
     }, [auth?.token])

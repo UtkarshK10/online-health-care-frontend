@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Pagination from '../Pagination';
-// import ReactSpinner from '../ReactSpinner';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import ProductCard from './ProductCard';
 import axios from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
@@ -61,8 +61,14 @@ const ShoppingHome = () => {
         setFilteredProducts(res.data.msg.slice(0, 3));
         setProducts(res.data.msg);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   }, [auth?.token]);
 

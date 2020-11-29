@@ -45,12 +45,11 @@ const DoctorOTPModal = (props) => {
           })
           .catch((err) => {
             if (err?.response) {
-              setMsg(err?.response.data.msg);
+              M.toast({ html: err?.response?.data?.msg });
             } else if (err?.request) {
-              setMsg(err?.request.data.toString());
+              M.toast({ html: err?.request?.data?.toString() });
             } else {
-              console.log(err);
-              setMsg('Something went wrong, please try again');
+              M.toast({ html: 'Something went wrong, please try again' });
             }
           });
       }
@@ -71,9 +70,11 @@ const DoctorOTPModal = (props) => {
         })
         .catch((err) => {
           if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }

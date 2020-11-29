@@ -190,9 +190,15 @@ const DoctorNavbar = () => {
                   justifyContent: 'center',
                 }}
               >
-                <i className="material-icons">
-                  event_note
+                <span style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <i className="material-icons">
+                    event_note
 </i>
+                </span>
 
               </NavLink>
             </li>
@@ -201,8 +207,16 @@ const DoctorNavbar = () => {
                 to={`/doctors/user`}
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                My Profile
-                </NavLink>
+                <span style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  Profile &nbsp;<i className="material-icons">
+                    account_circle
+</i>
+                </span>
+              </NavLink>
             </li>
 
             <li>
@@ -210,8 +224,17 @@ const DoctorNavbar = () => {
                 to={`/logout`}
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                Logout
-                </NavLink>
+                <span style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  Logout&nbsp;<i className="material-icons">
+                    directions_run
+</i>
+
+                </span>
+              </NavLink>
             </li>
           </>
         )}

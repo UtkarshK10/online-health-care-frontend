@@ -32,6 +32,7 @@ import DoctorPrescription from './components/Shopping/DoctorPrescription';
 import PatientPrescriptionDetails from './components/PatientPrescriptionDetails';
 import PatientPrescription from './components/PatientPrescription';
 import Transactions from './components/Transactions';
+import NotFound from './components/404';
 
 function App() {
   const { setAuth } = useContext(AuthContext);
@@ -47,10 +48,10 @@ function App() {
     <div className='App'>
       {!pathname.includes('login') &&
         !pathname.includes('signup') &&
-        !pathname.includes('doctors') && <Navbar />}
+        !pathname.includes('doctors') && !pathname.includes('notFound') && <Navbar />}
       {!pathname.includes('login') &&
         !pathname.includes('signup') &&
-        pathname.includes('doctors') && <DoctorNavbar />}
+        pathname.includes('doctors') && !pathname.includes('notFound') && <DoctorNavbar />}
       <Route
         render={({ location }) => (
           <TransitionGroup>
@@ -327,7 +328,12 @@ function App() {
                     </div>
                   )}
                 />
-                <Redirect exact to='/' />
+                <Route exact path="/notFound" render={() => (
+                  <div className='page'>
+                    <NotFound />
+                  </div>
+                )} />
+                <Redirect exact to='/notFound' />
               </Switch>
             </CSSTransition>
           </TransitionGroup>

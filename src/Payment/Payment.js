@@ -4,6 +4,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import Card from '../components/Card';
 import axios from '../axios/axios';
 import { updateLocalStorage } from '../utils/helper';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Payment = () => {
   const [credit, setAmount] = useState(0);
@@ -12,27 +13,33 @@ const Payment = () => {
   const { auth, setAuth } = useContext(AuthContext);
 
   const key = process.env.REACT_APP_STRIPE_KEY;
-  const handleToken = async (token, addresses) => {
-    try {
-      const data = { credit };
-      const res = await axios.put('/api/users/payment', data, {
-        headers: {
-          'api-token': auth.token,
-          'Content-type': 'application/json'
+  const handleToken = (token, addresses) => {
+
+    const data = { credit };
+    axios.put('/api/users/payment', data, {
+      headers: {
+        'api-token': auth.token,
+        'Content-type': 'application/json'
+      }
+    })
+      .then(res => {
+
+        if (res.status === 200) {
+          setMsg(res.data.msg);
+          setAuth({ ...auth, credits: res.data.new_credits })
+          updateLocalStorage({ ...auth, credits: res.data.new_credits });
+          setAmount(0);
         }
       })
-
-      if (res.status === 200) {
-        setMsg(res.data.msg);
-        await setAuth({ ...auth, credits: res.data.new_credits })
-        updateLocalStorage({ ...auth, credits: res.data.new_credits });
-        setAmount(0);
-      }
-    } catch (e) {
-      const { response } = e;
-      const { request, ...errorObject } = response;
-      setMsg(errorObject.data.msg)
-    }
+      .catch(err => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
+      })
   };
   const data = [
     { amount: 500, photo: 'https://www.finance-watch.org/wp-content/uploads/2018/08/money-supply-1600x1067.jpg' },

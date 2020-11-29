@@ -7,6 +7,7 @@ import RadioButton from './RadioButton';
 import Checkbox from './Checkbox';
 import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
@@ -46,9 +47,11 @@ const Oxymeter = (props) => {
         .catch((err) => {
           setLoading(false);
           if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
+            M.toast({ html: err?.request?.data?.toString() });
           } else {
-            console.log(err);
+            M.toast({ html: 'Something went wrong, please try again' });
           }
         });
     }
@@ -174,7 +177,6 @@ const Oxymeter = (props) => {
       doctor_id,
       transaction_id: 1,
     };
-    console.log(jsonData);
     axios
       .post('/api/records/', jsonData, {
         headers: {
@@ -184,7 +186,7 @@ const Oxymeter = (props) => {
       })
       .then((res) => {
         setLoading(false);
-        console.log(res);
+
         if (res.status === 201) {
           const { new_credits } = res.data;
           setAuth({ ...auth, credits: new_credits });
@@ -195,12 +197,11 @@ const Oxymeter = (props) => {
       .catch((err) => {
         setLoading(false);
         if (err?.response) {
-          setMsg(err?.response?.data?.msg);
+          M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          setMsg(err?.request?.data?.toString());
+          M.toast({ html: err?.request?.data?.toString() });
         } else {
-          console.log(err);
-          setMsg('Something went wrong, please try again!');
+          M.toast({ html: 'Something went wrong, please try again' });
         }
       });
   };

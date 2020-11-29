@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/auth-context';
 import SearchMed from '../../assets/search_med.png';
 import Sad from '../../assets/sad.png';
 import Prescription from './Prescription';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import queryString from 'query-string';
 
 const DoctorPrescription = (props) => {
@@ -41,8 +42,14 @@ const DoctorPrescription = (props) => {
       .then((res) => {
         setProducts(res.data.msg);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        if (err?.response) {
+          M.toast({ html: err?.response?.data?.msg });
+        } else if (err?.request) {
+          M.toast({ html: err?.request?.data?.toString() });
+        } else {
+          M.toast({ html: 'Something went wrong, please try again' });
+        }
       });
   }, [auth?.token]);
 
