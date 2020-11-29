@@ -8,30 +8,6 @@ import Sad from '../../assets/sad.png';
 import Prescription from './Prescription';
 import queryString from 'query-string';
 
-// const fakeData = [
-//   {
-//     id: '1',
-//     name: 'Glucon D',
-//     description: 'Champ ke liye gift',
-//     quantity: '3',
-//     instruction: '',
-//   },
-//   {
-//     id: '2',
-//     name: 'Glucon D Nimbu',
-//     description: 'Champ ke liye gift',
-//     quantity: '1',
-//     instruction: '',
-//   },
-//   {
-//     id: '3',
-//     name: 'Glucon D Orange',
-//     description: 'Champ ke liye gift',
-//     quantity: '2',
-//     instruction: '',
-//   },
-// ];
-
 const DoctorPrescription = (props) => {
   const searchID = queryString.parse(props.location.search);
   const { id } = searchID;

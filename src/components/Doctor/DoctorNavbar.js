@@ -29,14 +29,6 @@ const DoctorNavbar = () => {
                 <>
                   <li>
                     <NavLink
-                      to='/doctors/mail'
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
-                      Mail
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
                       to='/doctors/schedules'
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
@@ -79,14 +71,6 @@ const DoctorNavbar = () => {
         <ul className='sidenav' id='mobile-demo'>
           {auth?.isLoggedIn && (
             <>
-              <li>
-                <NavLink
-                  to='/doctors/mail'
-                  activeStyle={{ backgroundColor: '#db4619' }}
-                >
-                  Mail
-                </NavLink>
-              </li>
               <li>
                 <NavLink
                   to='/doctors/schedules'
