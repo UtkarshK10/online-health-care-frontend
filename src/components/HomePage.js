@@ -75,7 +75,7 @@ const HomePage = () => {
     <>
       <div className='container top-margin  '>
         <div className="row">
-          <h5 className="stcolour">Our Health Experts</h5>
+          <h4 className="stcolour">Our Health Experts</h4>
         </div>
         <div className='row'>
           {currPageDoctors.map((doctor) => {

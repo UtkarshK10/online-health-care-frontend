@@ -5,21 +5,34 @@ import ReactSpinner from './ReactSpinner';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import noPrescription from '../assets/no-prescription.png'
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const PatientPrescriptionDetails = (props) => {
   const searchString = queryString.parse(props.location.search);
   const { id } = searchString;
-  const history = useHistory();
   const [prescriptionDetails, setPrescriptionDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const { auth } = useContext(AuthContext);
-  const addToCart = () => {
-
+  const history = useHistory();
+  const addToCart = e => {
+    e.preventDefault();
+    axios.get(`/api/prescriptions/add/${id}`, {
+      headers: {
+        'api-token': auth?.token
+      }
+    })
+      .then(res => {
+        M.toast({ html: res.data.msg })
+      })
+      .catch(e => {
+        console.log(e);
+      })
   };
   const handleClick = (e) => {
     e.preventDefault();
     history.push('/records');
   };
+
   useEffect(() => {
     if (auth?.token) {
       setLoading(true);
@@ -73,8 +86,8 @@ const PatientPrescriptionDetails = (props) => {
                 className='btn btn-large pcolour btn-register waves-effect waves-light hover'
                 onClick={addToCart}
               >
-                Add To Your Cart
-                <i className='material-icons right'>receipt</i>
+
+                <i className="material-icons" style={{ fontSize: '2.5em' }}>add_shopping_cart</i>
               </button>
             </div>
           </div>

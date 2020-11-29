@@ -33,7 +33,7 @@ const PatientPrescription = () => {
           <tr>
             <th>Prescription Id</th>
             <th>Issued On</th>
-            <th>Issues By</th>
+            <th>Issued By</th>
             <th>View Prescription</th>
           </tr>
         </thead>

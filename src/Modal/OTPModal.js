@@ -14,7 +14,7 @@ const OTPModal = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
 
   const closeInstance = () => {
-    var elem = document.querySelector('.modal');
+    var elem = document.querySelector('.umodal');
     var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
     instance.close();
   };
@@ -27,7 +27,7 @@ const OTPModal = (props) => {
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
-        axios.post(`/api/users/validate/${auth.user_id}`, data, {
+        axios.post(`/api/users/validate/${auth.username}`, data, {
           headers: headers,
         })
           .then(res => {
@@ -82,7 +82,7 @@ const OTPModal = (props) => {
   };
 
   return (
-    <div id='OtpModal' className='modal'>
+    <div id='OtpModal' className='modal umodal'>
       <div className='modal-content'>
         <h4>{props?.info ? props?.info?.title : 'Enter the OTP to verify your email'}</h4>
         <div className='row'>

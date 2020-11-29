@@ -205,7 +205,7 @@ const Oxymeter = (props) => {
       });
   };
 
-  if (showForm) {
+  if (showForm && !msg) {
     return (
       <>
         <div className='container'>
@@ -318,10 +318,18 @@ const Oxymeter = (props) => {
           </div>
         </div>
 
-        {msg && <h3>{msg}</h3>}
       </>
     );
   }
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col s12">
+          {msg && <h6>{msg}</h6>}
+        </div>
+      </div>
+    </div>
+  )
 };
 
 export default Oxymeter;

@@ -5,6 +5,8 @@ import DetailsIcon from '../../assets/details.png';
 import { AuthContext } from '../../contexts/auth-context';
 import PatientDetailsCard from './PatientDetailsCard';
 import Prescription from '../../assets/prescription.png';
+import ConfirmationModal from '../../Modal/ConfirmationModal';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const DoctorSchedule = () => {
   const { auth } = useContext(AuthContext);
@@ -12,10 +14,56 @@ const DoctorSchedule = () => {
   const [currPatient, setCurrPatient] = useState({});
   const [isDetails, setIsDetails] = useState(false);
   const history = useHistory();
+  const [propData, setPropData] = useState(null);
+  const [openModal, setModal] = useState(false);
+
+  const getOTP = () => {
+    var elem = document.querySelector('.cmodal');
+    var instance = M.Modal.init(elem, { dismissible: false });
+    instance.open();
+  };
+
+  useEffect(() => {
+    if (openModal) getOTP();
+    // eslint-disable-next-line
+  }, [openModal]);
 
   const handleClick = (email) => {
     history.push(`/doctors/mail?email=${email}`);
   };
+
+  const handleAttendedConfirmation = id => {
+    setPropData({ label: "Are you sure you want to mark it as attended ?", callback: handleAttended, id: id, closeModal: () => setModal(false) });
+    setModal(true);
+  }
+
+  const handleAttended = id => {
+    axios.patch('/api/records/attended', { "id": id }, {
+      headers: {
+        "dapi-token": auth?.token
+      }
+    })
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          updatePatientDetails(id);
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }
+
+  const updatePatientDetails = id => {
+    setPatientDetails(patientDetails.map(patient => {
+      if (patient.patient_record_id === id) {
+        patient.attended = 1;
+        return patient
+      }
+      return patient;
+    })
+    )
+  }
 
   useEffect(() => {
     const fetchPatientDetails = () => {
@@ -91,6 +139,7 @@ const DoctorSchedule = () => {
               <div className='row'>
                 <div className='col s9 m9 l9'>
                   <button
+                    disabled={patientDetail.attended}
                     onClick={(e) => {
                       e.preventDefault();
                       handleClick(patientDetail?.patient_email);
@@ -120,6 +169,11 @@ const DoctorSchedule = () => {
               <button
                 className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                 style={{ marginTop: '0px' }}
+                disabled={patientDetail.attended}
+                onClick={e => {
+                  e.preventDefault();
+                  handleAttendedConfirmation(patientDetail.patient_record_id)
+                }}
               >
                 Mark as complete
                 <i className='material-icons right'>check_circle</i>
@@ -128,7 +182,7 @@ const DoctorSchedule = () => {
           </li>
         ))}
       </ul>
-      {}
+      <ConfirmationModal propData={propData} />
     </div>
   );
 };

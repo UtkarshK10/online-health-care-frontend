@@ -331,3 +331,6 @@ table td {
     height: 88vh !important;
   }
 }
+#overlay-remove {
+  z-index: -10000 !important;
+}

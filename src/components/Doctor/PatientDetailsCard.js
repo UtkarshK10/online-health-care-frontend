@@ -14,6 +14,21 @@ const PatientDetailsCard = ({ currPatient, updateState }) => {
     "Major Diseases in the past?",
     "Possibility of contact?"
   ]
+  const apply = [
+    {
+      name: 'apply',
+      label:
+        'I have recently interacted or lived with someone who has tested positive for COVID - 19',
+      value: '1',
+    },
+    {
+      name: 'apply',
+      label:
+        'I am a healthcare worker and I examined a COVID-19 confirmed case without protective gear',
+      value: '2',
+    },
+    { name: 'apply', label: 'None of the above', value: 'none' },
+  ];
   console.log(currPatient);
   const changeRadioState = val => {
     if (val === "on") {
@@ -46,7 +61,7 @@ const PatientDetailsCard = ({ currPatient, updateState }) => {
                 <CardField keyName={keyNames[7]} value={changeRadioState(currPatient.contact_with_others)} />
                 <CardField keyName={keyNames[8]} value={changeRadioState(currPatient.past_travel)} />
                 <CardField keyName={keyNames[9]} value={currPatient.prior_or_current_disease} />
-                <CardField keyName={keyNames[10]} value={currPatient.might_be_causing_condition} />
+                <CardField keyName={keyNames[10]} value={apply[currPatient.might_be_causing_condition - 1]['label']} />
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ const DoctorOTPModal = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
 
   const closeInstance = () => {
-    var elem = document.querySelector('.modal');
+    var elem = document.querySelector('.dmodal');
     var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
     instance.close();
   };
@@ -28,7 +28,7 @@ const DoctorOTPModal = (props) => {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
         axios
-          .post(`/api/doctors/validate/${auth.user_id}`, data, {
+          .post(`/api/doctors/validate/${auth.username}`, data, {
             headers: headers,
           })
           .then((res) => {
@@ -80,7 +80,7 @@ const DoctorOTPModal = (props) => {
   };
 
   return (
-    <div id='OtpModal' className='modal'>
+    <div id='OtpModal' className='modal dmodal'>
       <div className='modal-content'>
         <h4>
           {props?.info

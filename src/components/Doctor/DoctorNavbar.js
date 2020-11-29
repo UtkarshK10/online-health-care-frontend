@@ -12,7 +12,7 @@ const DoctorNavbar = () => {
   });
   return (
     <>
-      <div className='navbar-fixed'>
+      {/* <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper pcolour'>
             <NavLink
@@ -32,7 +32,9 @@ const DoctorNavbar = () => {
                       to='/doctors/schedules'
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
-                      Meeting Schedules
+                      <i className="material-icons">
+                        event_note
+</i>
                     </NavLink>
                   </li>
                   <li>
@@ -68,7 +70,7 @@ const DoctorNavbar = () => {
           </div>
         </nav>
 
-        <ul className='sidenav' id='mobile-demo'>
+        <ul className='sidenav' id='mobile-demo overlay-remove'>
           {auth?.isLoggedIn && (
             <>
               <li>
@@ -76,7 +78,17 @@ const DoctorNavbar = () => {
                   to='/doctors/schedules'
                   activeStyle={{ backgroundColor: '#db4619' }}
                 >
-                  Meeting Schedules
+                  <span
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <i className="material-icons">
+                      event_note
+</i>
+                  </span>
                 </NavLink>
               </li>
               <li>
@@ -109,7 +121,111 @@ const DoctorNavbar = () => {
             </>
           )}
         </ul>
+      </div> */}
+      <div className='navbar-fixed'>
+        <nav>
+          <div className='nav-wrapper pcolour'>
+            <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
+              Logo
+            </NavLink>
+            <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
+              <i className='material-icons'>menu</i>
+            </a>
+            <ul className='right hide-on-med-and-down'>
+              {auth?.isLoggedIn && (
+                <>
+                  <li>
+                    <NavLink
+                      to='/doctors/schedules'
+                      activeStyle={{ backgroundColor: '#db4619' }}
+                    >
+                      <i className="material-icons">
+                        event_note
+</i>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={`/doctors/user`}
+                      activeStyle={{ backgroundColor: '#db4619' }}
+                    >
+                      My Profile
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink
+                      to={`/logout`}
+                      activeStyle={{ backgroundColor: '#db4619' }}
+                    >
+                      Logout
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {!auth?.isLoggedIn && (
+                <>
+                  <li>
+                    <NavLink to='/doctors/login'>Login</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/doctors/signup'>Signup</NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </nav>
       </div>
+      <ul className='sidenav' id='mobile-demo'>
+        {auth?.isLoggedIn && (
+          <>
+            <li >
+              <NavLink
+                to='/doctors/schedules'
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <i className="material-icons">
+                  event_note
+</i>
+
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={`/doctors/user`}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
+              >
+                My Profile
+                </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={`/logout`}
+                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
+              >
+                Logout
+                </NavLink>
+            </li>
+          </>
+        )}
+        {!auth?.isLoggedIn && (
+          <>
+            <li>
+              <NavLink to='/doctors/login'>Login</NavLink>
+            </li>
+            <li>
+              <NavLink to='/doctors/signup'>Signup</NavLink>
+            </li>
+          </>
+        )}
+      </ul>
     </>
   );
 };

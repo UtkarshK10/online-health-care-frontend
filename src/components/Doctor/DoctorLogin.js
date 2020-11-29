@@ -23,7 +23,7 @@ function DoctorLogin(props) {
 
     //Modal part
     const getOTP = () => {
-        var elem = document.querySelector('.modal');
+        var elem = document.querySelector('.dmodal');
         var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
         instance.open();
     };

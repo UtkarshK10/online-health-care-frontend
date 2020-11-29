@@ -8,44 +8,46 @@ import BlueHeart from '../../assets/heart-blue.png';
 import GreenHeart from '../../assets/heart-green.png';
 
 export default function DoctorHomePage() {
+  const STATIC_URL = 'https://static01.nyt.com/'
   const [newsPosts, setNewsPosts] = useState([]);
   const { auth } = useContext(AuthContext);
-  const [searchItem, setSearchItem] = useState('Covid');
+  const [searchItem] = useState('Covid');
   const [patientCount, setCount] = useState({});
   const NEWS_API_KEY = process.env.REACT_APP_NEWS_API;
   const iconNames = [GreenHeart, RedHeart, BlueHeart];
   useEffect(() => {
     let cancel;
     const fetchNews = () => {
-      axios
-        .get('https://newsapi.org/v2/top-headlines', {
-          params: {
-            q: searchItem,
-            language: 'en',
-            pageSize: 10,
-            page: 1,
-            apiKey: NEWS_API_KEY,
-          },
-          cancelToken: new axios.CancelToken((c) => (cancel = c)),
+      // axios
+      //   .get('https://newsapi.org/v2/top-headlines', {
+      //     params: {
+      //       q: searchItem,
+      //       language: 'en',
+      //       pageSize: 10,
+      //       page: 1,
+      //       apiKey: NEWS_API_KEY,
+      //     },
+      //     cancelToken: new axios.CancelToken((c) => (cancel = c)),
+      //   })
+      //   .then((res) => {
+      //     setNewsPosts(res.data.articles);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
+        params: {
+          q: searchItem,
+          'api-key': process.env.REACT_APP_NYT_KEY
+        },
+        cancelToken: new axios.CancelToken((c) => (cancel = c)),
+      })
+        .then(res => {
+          setNewsPosts(res.data.response.docs)
         })
-        .then((res) => {
-          // const uniques = [];
-          // const articleData = [];
-          // for (let article in res.data.articles) {
-          //   if (!uniques.includes(article.url)) {
-          //     uniques.push(article.url);
-          //     articleData.push(article)
-          //   }
-          // }
-          // while (articleData.length !== 5) {
-          //   articleData.pop();
-          // }
-
-          setNewsPosts(res.data.articles);
+        .catch(e => {
+          console.log(e);
         })
-        .catch((err) => {
-          console.log(err);
-        });
     };
     fetchNews();
     return () => cancel();
@@ -71,8 +73,8 @@ export default function DoctorHomePage() {
 
   const shortDescription = (description) => {
     const maxChar = 200;
-    if (description.length > maxChar) {
-      description = description.substring(0, maxChar) + ' . . .';
+    if (description?.length > maxChar) {
+      description = description?.substring(0, maxChar) + ' . . .';
       return description;
     }
     return description;
@@ -97,11 +99,11 @@ export default function DoctorHomePage() {
         })}
       </div>
       <div className='row'>
-        <input
+        {/* <input
           type='text'
           value={searchItem}
           onChange={(e) => setSearchItem(e.target.value)}
-        />
+        /> */}
       </div>
 
       <ul className='collection with-header'>
@@ -112,19 +114,19 @@ export default function DoctorHomePage() {
           <li key={idx} className='collection-item'>
             <div className='row'>
               <img
-                src={article?.urlToImage}
-                alt={article.title}
+                src={STATIC_URL + article?.multimedia[0]?.url}
+                alt={article?.headline?.main}
                 className='newsImage col s12 m4 l4'
               />
               <div className='col s12 m8 l8 '>
-                <span className='title stcolour font-app'>{article.title}</span>
+                <span className='title stcolour font-app'>{article?.headline?.main}</span>
                 <p className='grey-text'>
-                  {shortDescription(article.description)}
+                  {shortDescription(article?.abstract)}
                 </p>
                 <a
                   target='_blank'
                   rel='noreferrer'
-                  href={`${article.url}#!`}
+                  href={`${article?.web_url}#!`}
                   className='secondary-content'
                 >
                   <i className='material-icons blue-text ptcolour'>send</i>

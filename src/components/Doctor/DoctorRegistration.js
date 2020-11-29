@@ -59,7 +59,7 @@ function DoctorRegistration(props) {
 
   //Modal part
   const getOTP = () => {
-    var elem = document.querySelector('.modal');
+    var elem = document.querySelector('.dmodal');
     var instance = M.Modal.init(elem, { dismissible: false, opacity: 0.7 });
     instance.open();
   };
@@ -143,7 +143,7 @@ function DoctorRegistration(props) {
           //   saveLocalStorage(resData);
           //   history.push('/doctors');
           const resData = {
-            user_id: res.data.user_id,
+            user_id: res.data.username,
           };
           setAuth(resData);
           saveLocalStorage(resData);
