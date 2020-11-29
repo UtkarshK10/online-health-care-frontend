@@ -93,8 +93,8 @@ function DoctorLogin(props) {
             'btnText': 'Send reset link',
             'label': 'Email'
         }
-        setPropData(data);
         setModal(true);
+        setPropData(data);
     }
 
     return (

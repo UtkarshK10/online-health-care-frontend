@@ -1,60 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import ImageAvatar from './ImageAvatar';
 import '../styles/UserRegistrationStyles.css';
 import CustomG from './CustomG';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
-import { updateLocalStorage } from '../utils/helper';
+
 
 const Profile = ({ isDoctor }) => {
   const [edit, setEdit] = useState(false);
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const route = isDoctor ? '/api/doctors/me' : '/api/users/me';
-  const headers = isDoctor
-    ? { 'dapi-token': auth?.token }
-    : { 'api-token': auth?.token };
+  const headers = useMemo(() => isDoctor ? { 'dapi-token': auth?.token } : { 'api-token': auth?.token }, [auth?.token, isDoctor]);
   let classD = 'remove';
   const updatetrigger = () => {
     setEdit(!edit);
     if (edit) {
-      // delete user.id;
-      // delete user.created_at;
-      // delete user.modified_at;
-      // delete user.reset_token
-      // delete user.reset_token_exp
       axios
         .put(`${route}`, user, {
           headers: { ...headers, 'Content-type': 'application/json' },
         })
         .then((res) => {
-          const {
-            name,
-            username,
-            email,
-            phone,
-            age,
-            gender,
-            experience,
-            consultation_fee,
-          } = res.data.user;
-          const resData = {
-            name,
-            username,
-            user_id: res.data.user.id,
-            email,
-            gender,
-            phone,
-            age,
-            experience,
-            consultation_fee,
-            credits: res.data.user.total_credit,
-            profile_image: res.data.user.profile_url,
-          };
-          // delete resData.profile_image;
-          setUser({ ...resData, profile_url: res.data.user.profile_url });
-          resData.profile_image = res.data.user.profile_url;
-          setAuth({ ...auth, ...resData });
-          updateLocalStorage({ ...auth, ...resData });
+          setUser({ ...res.data.user });
         })
         .catch((err) => {
           if (err?.response) {
@@ -78,11 +44,6 @@ const Profile = ({ isDoctor }) => {
       })
       .then((res) => {
         setUser({ ...res.data.user, profile_url: res.data.user.profile_url });
-        setAuth({ ...auth, profile_image: res.data.user.profile_url });
-        updateLocalStorage({
-          ...auth,
-          profile_image: res.data.user.profile_url,
-        });
       })
       .catch((err) => {
         if (err?.response) {
@@ -109,7 +70,6 @@ const Profile = ({ isDoctor }) => {
   });
   useEffect(() => {
     const fetchUser = async () => {
-      console.log('inside');
       axios
         .get(`${route}`, {
           headers,
@@ -118,10 +78,10 @@ const Profile = ({ isDoctor }) => {
           console.log(res);
           setUser({ ...res.data.user });
         })
-        .catch((err) => {});
+        .catch((err) => { });
     };
-    if (auth.user_id) fetchUser();
-  }, [auth?.token, isDoctor]);
+    if (auth?.token) fetchUser();
+  }, [auth?.token, route, headers]);
 
   const {
     profile_url,
@@ -246,43 +206,43 @@ const Profile = ({ isDoctor }) => {
                   </div>
                 </>
               ) : (
-                <>
-                  <div className='row'>
-                    <div className='input-field'>
-                      <input
-                        value={age}
-                        onChange={update}
-                        name='age'
-                        id='age'
-                        type='number'
-                        className='validate'
-                        readOnly={!edit}
-                        min='1'
-                        max='100'
-                      />
-                      <label htmlFor='age' className={`${age && 'active'}`}>
-                        Age
+                  <>
+                    <div className='row'>
+                      <div className='input-field'>
+                        <input
+                          value={age}
+                          onChange={update}
+                          name='age'
+                          id='age'
+                          type='number'
+                          className='validate'
+                          readOnly={!edit}
+                          min='1'
+                          max='100'
+                        />
+                        <label htmlFor='age' className={`${age && 'active'}`}>
+                          Age
                       </label>
+                      </div>
                     </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col l3 m3 s6 offset-l3 offset-m3'>
-                      <CustomG
-                        sex='male'
-                        gender={gender}
-                        updateGender={updateGender}
-                      />
+                    <div className='row'>
+                      <div className='col l3 m3 s6 offset-l3 offset-m3'>
+                        <CustomG
+                          sex='male'
+                          gender={gender}
+                          updateGender={updateGender}
+                        />
+                      </div>
+                      <div className='col l3 m3 s6'>
+                        <CustomG
+                          sex='female'
+                          gender={gender}
+                          updateGender={updateGender}
+                        />
+                      </div>
                     </div>
-                    <div className='col l3 m3 s6'>
-                      <CustomG
-                        sex='female'
-                        gender={gender}
-                        updateGender={updateGender}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
             </form>
           </div>
         </div>
