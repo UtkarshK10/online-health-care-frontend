@@ -8,6 +8,7 @@ import Checkbox from './Checkbox';
 import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import GetWell from '../assets/get-well.jpg';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
@@ -318,19 +319,23 @@ const Oxymeter = (props) => {
             </div>
           </div>
         </div>
-
       </>
     );
   }
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col s12">
-          {msg && <h6>{msg}</h6>}
+    <div className='container'>
+      <div className='row'>
+        <div className='col s12'>{msg && <h4>{msg}</h4>}</div>{' '}
+        <div className='col s8 l8 m8 offset-l2 offset-m2 offset-s2'>
+          <img
+            src={GetWell}
+            alt='Get Well Soon'
+            style={{ height: '500px', margin: '20px' }}
+          />
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Oxymeter;

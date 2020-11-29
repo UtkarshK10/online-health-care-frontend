@@ -12,116 +12,6 @@ const DoctorNavbar = () => {
   });
   return (
     <>
-      {/* <div className='navbar-fixed'>
-        <nav>
-          <div className='nav-wrapper pcolour'>
-            <NavLink
-              to='/doctors'
-              className='cleft brand-logo hide-on-med-and-down'
-            >
-              Logo
-            </NavLink>
-            <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
-              <i className='material-icons'>menu</i>
-            </a>
-            <ul className='right hide-on-med-and-down'>
-              {auth?.isLoggedIn && (
-                <>
-                  <li>
-                    <NavLink
-                      to='/doctors/schedules'
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
-                      <i className="material-icons">
-                        event_note
-</i>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={`/doctors/user`}
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
-                      My Profile
-                    </NavLink>
-                  </li>
-
-                  <li>
-                    <NavLink
-                      to={`/logout`}
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
-                      Logout
-                    </NavLink>
-                  </li>
-                </>
-              )}
-              {!auth?.isLoggedIn && (
-                <>
-                  <li>
-                    <NavLink to='/doctors/login'>Login</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to='/doctors/signup'>Signup</NavLink>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </nav>
-
-        <ul className='sidenav' id='mobile-demo overlay-remove'>
-          {auth?.isLoggedIn && (
-            <>
-              <li>
-                <NavLink
-                  to='/doctors/schedules'
-                  activeStyle={{ backgroundColor: '#db4619' }}
-                >
-                  <span
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <i className="material-icons">
-                      event_note
-</i>
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={`/doctors/user`}
-                  activeStyle={{ backgroundColor: '#db4619' }}
-                >
-                  My Profile
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to={`/logout`}
-                  activeStyle={{ backgroundColor: '#db4619' }}
-                >
-                  Logout
-                </NavLink>
-              </li>
-            </>
-          )}
-          {!auth?.isLoggedIn && (
-            <>
-              <li>
-                <NavLink to='/doctors/login'>Login</NavLink>
-              </li>
-              <li>
-                <NavLink to='/doctors/signup'>Signup</NavLink>
-              </li>
-            </>
-          )}
-        </ul>
-      </div> */}
       <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper pcolour'>
@@ -139,9 +29,7 @@ const DoctorNavbar = () => {
                       to='/doctors/schedules'
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
-                      <i className="material-icons">
-                        event_note
-</i>
+                      <i className='material-icons'>event_note</i>
                     </NavLink>
                   </li>
                   <li>
@@ -149,7 +37,16 @@ const DoctorNavbar = () => {
                       to={`/doctors/user`}
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
-                      My Profile
+                      <span
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Profile &nbsp;
+                        <i className='material-icons'>account_circle</i>
+                      </span>
                     </NavLink>
                   </li>
 
@@ -158,7 +55,16 @@ const DoctorNavbar = () => {
                       to={`/logout`}
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
-                      Logout
+                      <span
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Logout&nbsp;
+                        <i className='material-icons'>directions_run</i>
+                      </span>
                     </NavLink>
                   </li>
                 </>
@@ -180,7 +86,7 @@ const DoctorNavbar = () => {
       <ul className='sidenav' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
-            <li >
+            <li>
               <NavLink
                 to='/doctors/schedules'
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
@@ -190,16 +96,15 @@ const DoctorNavbar = () => {
                   justifyContent: 'center',
                 }}
               >
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <i className="material-icons">
-                    event_note
-</i>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <i className='material-icons'>event_note</i>
                 </span>
-
               </NavLink>
             </li>
             <li>
@@ -207,14 +112,14 @@ const DoctorNavbar = () => {
                 to={`/doctors/user`}
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  Profile &nbsp;<i className="material-icons">
-                    account_circle
-</i>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  Profile &nbsp;<i className='material-icons'>account_circle</i>
                 </span>
               </NavLink>
             </li>
@@ -224,15 +129,14 @@ const DoctorNavbar = () => {
                 to={`/logout`}
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  Logout&nbsp;<i className="material-icons">
-                    directions_run
-</i>
-
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  Logout&nbsp;<i className='material-icons'>directions_run</i>
                 </span>
               </NavLink>
             </li>

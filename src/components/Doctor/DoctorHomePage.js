@@ -9,7 +9,7 @@ import BlueHeart from '../../assets/heart-blue.png';
 import GreenHeart from '../../assets/heart-green.png';
 
 export default function DoctorHomePage() {
-  const STATIC_URL = 'https://static01.nyt.com/'
+  const STATIC_URL = 'https://static01.nyt.com/';
   const [newsPosts, setNewsPosts] = useState([]);
   const { auth } = useContext(AuthContext);
   const [searchItem] = useState('Covid');
@@ -36,19 +36,20 @@ export default function DoctorHomePage() {
       //   .catch((err) => {
       //     console.log(err);
       //   });
-      axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
-        params: {
-          q: searchItem,
-          'api-key': process.env.REACT_APP_NYT_KEY
-        },
-        cancelToken: new axios.CancelToken((c) => (cancel = c)),
-      })
-        .then(res => {
-          setNewsPosts(res.data.response.docs)
+      axios
+        .get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
+          params: {
+            q: searchItem,
+            'api-key': process.env.REACT_APP_NYT_KEY,
+          },
+          cancelToken: new axios.CancelToken((c) => (cancel = c)),
         })
-        .catch(err => {
+        .then((res) => {
+          setNewsPosts(res.data.response.docs);
+        })
+        .catch((err) => {
           console.log(err);
-        })
+        });
     };
     fetchNews();
     return () => cancel();
@@ -92,8 +93,9 @@ export default function DoctorHomePage() {
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
-                }`}
+              className={`col s12 m3 l3  ${
+                idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+              }`}
               key={idx}
             >
               <PatientCountCard
@@ -120,13 +122,17 @@ export default function DoctorHomePage() {
         {newsPosts.map((article, idx) => (
           <li key={idx} className='collection-item'>
             <div className='row'>
-              <img
-                src={STATIC_URL + article?.multimedia[0]?.url}
-                alt={article?.headline?.main}
-                className='newsImage col s12 m4 l4'
-              />
+              <div className='col s12 m4 l4'>
+                <img
+                  src={STATIC_URL + article?.multimedia[0]?.url}
+                  alt={article?.headline?.main}
+                  style={{ width: '250px', height: '200px' }}
+                />
+              </div>
               <div className='col s12 m8 l8 '>
-                <span className='title stcolour font-app'>{article?.headline?.main}</span>
+                <span className='title stcolour font-app'>
+                  {article?.headline?.main}
+                </span>
                 <p className='grey-text'>
                   {shortDescription(article?.abstract)}
                 </p>
