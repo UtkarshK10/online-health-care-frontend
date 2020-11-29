@@ -37,7 +37,7 @@ const DoctorNavbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to={`/doctors/user/${auth.user_id}`}
+                      to={`/doctors/user`}
                       activeStyle={{ backgroundColor: '#db4619' }}
                     >
                       My Profile
@@ -81,7 +81,7 @@ const DoctorNavbar = () => {
               </li>
               <li>
                 <NavLink
-                  to={`/doctors/user/${auth.user_id}`}
+                  to={`/doctors/user`}
                   activeStyle={{ backgroundColor: '#db4619' }}
                 >
                   My Profile

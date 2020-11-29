@@ -11,6 +11,7 @@ const Prescription = ({
   deletePrescription,
   editInstruction,
   recordID,
+  resetPage
 }) => {
   const { auth } = useContext(AuthContext);
   const [loading_inc_dec, setLoadingIncDec] = useState(false);
@@ -27,16 +28,18 @@ const Prescription = ({
   const handleSubmit = () => {
     const data = prescription.map((p) => {
       const { id, quantity, instruction } = p;
-      return { id, quantity, description: instruction };
+      return { medicine_id: id, quantity, description: instruction };
     });
+    console.log(data)
     axios
-      .post(`/api/prescription/${recordID}`, data, {
+      .post(`/api/prescriptions/create/${recordID}`, { data }, {
         headers: {
-          'api-token': auth?.token,
+          'dapi-token': auth?.token,
         },
       })
       .then(res => {
         if (res.status === 200) {
+          resetPage();
           M.toast({ html: res.data.msg })
         }
       })

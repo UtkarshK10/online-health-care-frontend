@@ -64,15 +64,7 @@ function UserLogin(props) {
             setModal(true);
           } else if (res.status === 200) {
             const resData = {
-              name: res.data.name,
-              username: res.data.username,
-              user_id: res.data.user_id,
-              email: res.data.email,
-              gender: res.data.gender,
-              phone: res.data.phone,
-              age: res.data.age,
               credits: res.data.total_credit,
-              profile_image: res.data.profile_url,
               isLoggedIn: true,
               token: res.data.jwt_token,
               tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,

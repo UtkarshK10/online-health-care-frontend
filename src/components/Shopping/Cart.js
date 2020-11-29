@@ -155,13 +155,13 @@ const Cart = () => {
               <h4 className='left-align'>Your Cart</h4>
             </div>
             <div className='col s12 m6 l6'>
-              <h4 className='right-align'>Total: &#8377; {total}</h4>
+              <h4 className='right-align'>Total: {total} cr.</h4>
             </div>
           </div>
           <div className='row hide-on-med-and-up'>
             <div className='col s12 m6 l6'>
               <h4>Your Cart</h4>
-              <h4>Total: &#8377; {total}</h4>
+              <h4>Total: {total} cr.</h4>
             </div>
           </div>
         </li>
@@ -214,7 +214,7 @@ const Cart = () => {
                     marginLeft: '20px',
                   }}
                 >
-                  &#8377; {cartDetail.price}
+                  {cartDetail.price} cr.
                 </p>
                 {loading_inc_dec ? (
                   <div style={{ marginRight: '118px', marginTop: '20px' }}>
@@ -312,7 +312,7 @@ const Cart = () => {
                       marginLeft: '22px',
                     }}
                   >
-                    &#8377; {cartDetail.price}
+                    {cartDetail.price} cr.
                   </p>
                 </div>
               </div>

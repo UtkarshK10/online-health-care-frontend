@@ -27,7 +27,6 @@ const Orders = () => {
             })
                 .then(res => {
                     setLoading(false);
-                    console.log(res);
                     setOrders(res.data.orders);
                 })
                 .catch(e => {

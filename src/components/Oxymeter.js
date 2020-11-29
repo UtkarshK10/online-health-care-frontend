@@ -186,9 +186,9 @@ const Oxymeter = (props) => {
         setLoading(false);
         console.log(res);
         if (res.status === 201) {
-          const { total_credit } = res.data.user;
-          setAuth({ ...auth, credits: total_credit });
-          updateLocalStorage({ ...auth, credits: total_credit });
+          const { new_credits } = res.data;
+          setAuth({ ...auth, credits: new_credits });
+          updateLocalStorage({ ...auth, credits: new_credits });
           setMsg(res.data.msg);
         }
       })

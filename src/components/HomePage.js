@@ -74,6 +74,9 @@ const HomePage = () => {
   return (
     <>
       <div className='container top-margin  '>
+        <div className="row">
+          <h5 className="stcolour">Our Health Experts</h5>
+        </div>
         <div className='row'>
           {currPageDoctors.map((doctor) => {
             const { id, name, profile_url, experience, speciality } = doctor;

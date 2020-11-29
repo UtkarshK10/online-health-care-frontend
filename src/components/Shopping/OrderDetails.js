@@ -130,7 +130,7 @@ const OrderDetails = (props) => {
                     marginLeft: '22px',
                   }}
                 >
-                  &#8377; {orderDetail.price}
+                  {orderDetail.price} cr.
                 </p>
 
                 <button

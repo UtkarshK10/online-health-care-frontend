@@ -81,7 +81,7 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
             fontSize: '22px',
           }}
         >
-          &#8377; {price}
+          {price} cr.
         </div>
         <div className='col offset-l5 offset-m5 s4 m2 l2 offset-s3'>
           {auth?.token &&

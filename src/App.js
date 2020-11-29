@@ -12,11 +12,7 @@ import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
 import Payment from './Payment/Payment';
 import Profile from './components/Profile';
-<<<<<<< HEAD
-import Forget from './components/Forget'
-=======
 import Forget from './components/Forget';
->>>>>>> fe34e459db3f1ddcedbb2194b421b99eb56caaee
 import DoctorRegistration from './components/Doctor/DoctorRegistration';
 import DoctorLogin from './components/Doctor/DoctorLogin';
 import DoctorHomePage from './components/Doctor/DoctorHomePage';
@@ -35,7 +31,6 @@ import Invoice from './components/Shopping/Invoice';
 import DoctorPrescription from './components/Shopping/DoctorPrescription';
 import PatientPrescriptionDetails from './components/PatientPrescriptionDetails';
 import PatientPrescription from './components/PatientPrescription';
-import Records from './components/Records';
 import Transactions from './components/Transactions';
 
 function App() {
@@ -112,7 +107,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path='/user/:userId'
+                  path='/user'
                   render={() => (
                     <div className='page'>
                       <Profile />
@@ -131,7 +126,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path={`/doctors/user/:id`}
+                  path={`/doctors/user`}
                   render={() => (
                     <div className='page'>
                       <Profile isDoctor />
@@ -157,7 +152,7 @@ function App() {
                     </div>
                   )}
                 />
-                <PrivateRoute
+                {/* <PrivateRoute
                   exact
                   path='/records'
                   render={() => (
@@ -165,7 +160,7 @@ function App() {
                       <Records />
                     </div>
                   )}
-                />
+                /> */}
                 <PrivateRoute
                   exact
                   path='/transactions'
@@ -253,7 +248,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path='/patientprescriptiondetails'
+                  path='/records/prescription'
                   render={(props) => (
                     <div className='page'>
                       <PatientPrescriptionDetails {...props} />
@@ -262,7 +257,7 @@ function App() {
                 />
                 <PrivateRoute
                   exact
-                  path='/patientprescription'
+                  path='/records'
                   render={() => (
                     <div className='page'>
                       <PatientPrescription />

@@ -63,14 +63,6 @@ function DoctorLogin(props) {
                     }
                     else if (res.status === 200) {
                         const resData = {
-                            name: res.data.name,
-                            username: res.data.username,
-                            user_id: res.data.user_id,
-                            email: res.data.email,
-                            phone: res.data.phone,
-                            speciality: res.data.speciality,
-                            experience: res.data.experience,
-                            profile_image: res.data.profile_url,
                             isLoggedIn: true,
                             token: res.data.jwt_token,
                             tokenExpirationDate: new Date().getTime() + 1000 * 60 * 60 * 24,

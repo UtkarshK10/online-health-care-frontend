@@ -15,7 +15,7 @@ const HomePage = () => {
       {auth?.isLoggedIn && (
         <ul id='dropdown1' className='dropdown-content'>
           <li>
-            <NavLink to={`/user/${auth.user_id}`} className='stcolour'>
+            <NavLink to={`/user`} className='stcolour'>
               My Profile
             </NavLink>
           </li>
@@ -197,7 +197,7 @@ const HomePage = () => {
             </li>
             <li>
               <NavLink
-                to={`/user/${auth.user_id}`}
+                to={`/user`}
                 activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
               >
                 My Profile
