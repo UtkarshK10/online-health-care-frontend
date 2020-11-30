@@ -46,7 +46,7 @@ const getPrimary = style('mode', {
 
 const getSecondary = style('mode', {
   light: '#ff7043',
-  dark: '#101010',
+  dark: '#282828',
 });
 const getbgcolor = style('mode', {
   light: 'white',
@@ -61,7 +61,7 @@ const getbgsecondary = style('mode', {
   dark: 'grey',
 });
 const getTextsecondary = style('mode', {
-  light: 'grey',
+  light: '#303030',
   dark: '#E0E0E0',
 });
 const getMarble = style('mode', {

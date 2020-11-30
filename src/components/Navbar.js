@@ -15,35 +15,35 @@ const HomePage = () => {
   return (
     <>
       {auth?.isLoggedIn && (
-        <ul id='dropdown1' className='dropdown-content'>
+        <ul id='dropdown1' className='dropdown-content bgsecondary'>
           <li>
-            <NavLink to={`/user`} className='stcolour'>
+            <NavLink to={`/user`} className='text-secondary'>
               My Profile
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/records`} className='stcolour'>
+            <NavLink to={`/records`} className='text-secondary'>
               Records
             </NavLink>
           </li>
           <li>
-            <NavLink to='/shopping/orders' className='stcolour'>
+            <NavLink to='/shopping/orders' className='text-secondary'>
               Orders
             </NavLink>
           </li>
           <li>
-            <NavLink to='/payment' className='stcolour'>
+            <NavLink to='/payment' className='highlight'>
               Credits : <span className='ptcolour'>{auth.credits}</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to='/transactions' className='stcolour'>
+            <NavLink to='/transactions' className='text-secondary'>
               Transactions
             </NavLink>
           </li>
           <li className='divider'></li>
           <li>
-            <NavLink to='/logout' className='stcolour'>
+            <NavLink to='/logout' className='text-secondary'>
               Logout
             </NavLink>
           </li>
@@ -70,45 +70,24 @@ const HomePage = () => {
                 <>
                   {pathname.includes('appointment') && (
                     <li>
-                      <NavLink
-                        to='/appointment'
-                        activeStyle={{
-                          backgroundColor: '#db4619',
-                          color: 'white',
-                        }}
-                      >
+                      <NavLink to='/appointment' activeClassName='scolour'>
                         Appointment
                       </NavLink>
                     </li>
                   )}
                   <li>
-                    <NavLink
-                      to='/shopping/home'
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
+                    <NavLink to='/shopping/home' activeClassName='scolour'>
                       <i className='material-icons'>store</i>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to='/shopping/cart'
-                      activeStyle={{
-                        backgroundColor: '#db4619',
-                        color: 'white',
-                      }}
-                    >
+                    <NavLink to='/shopping/cart' activeClassName='scolour'>
                       <i className='material-icons'>shopping_cart</i>
                     </NavLink>
                   </li>
 
                   <li>
-                    <NavLink
-                      to='/oxymeter'
-                      activeStyle={{
-                        backgroundColor: '#db4619',
-                        color: 'white',
-                      }}
-                    >
+                    <NavLink to='/oxymeter' activeClassName='scolour'>
                       Monitor Oxygen
                     </NavLink>
                   </li>
@@ -138,24 +117,22 @@ const HomePage = () => {
           </div>
         </nav>
       </div>
-      <ul className='sidenav' id='mobile-demo'>
+      <ul className='sidenav bgcolor sideinside' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
             {pathname.includes('appointment') && (
               <li>
                 <NavLink
+                  className='text-secondary'
                   to='/appointment'
-                  activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
+                  activeClassName='scolour'
                 >
                   Appointment
                 </NavLink>
               </li>
             )}
             <li>
-              <NavLink
-                to='/shopping/home'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to='/shopping/home' activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',
@@ -168,10 +145,7 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to='/shopping/cart'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to='/shopping/cart' activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',
@@ -184,26 +158,17 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to='/shopping/orders'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to='/shopping/orders' activeClassName='scolour'>
                 Orders
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to='/oxymeter'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to='/oxymeter' activeClassName='scolour'>
                 Monitor Oxygen
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to={`/user`}
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to={`/user`} activeClassName='scolour'>
                 My Profile
               </NavLink>
             </li>
@@ -211,7 +176,7 @@ const HomePage = () => {
               <NavLink to={`/records`}>Records</NavLink>
             </li>
             <li>
-              <NavLink to='/payment' className='stcolour'>
+              <NavLink to='/payment' className='highlight'>
                 Credits : <span className='ptcolour'>{auth.credits}</span>
               </NavLink>
             </li>

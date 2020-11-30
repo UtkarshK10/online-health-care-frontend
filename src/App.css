@@ -9,7 +9,7 @@ html {
   --bgcolor: white;
   --bgsecondary: white;
   --text-primary: black;
-  --text-secondary: grey;
+  --text-secondary: #303030;
   --highlight: #f4511e;
   --marble: url('./assets/marble.jpg');
 }
@@ -368,7 +368,11 @@ table td {
 }
 
 .highlight {
-  color: var(--highlight);
+  color: var(--highlight) !important;
+}
+
+.sideinside * {
+  color: var(--text-secondary) !important;
 }
 /* UserRegistration.css*/
 
