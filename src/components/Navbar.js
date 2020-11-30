@@ -2,8 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import Switch from '@material-ui/core/Switch';
+import { ThemeContext } from '../contexts/theme-provider';
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
+  // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   useEffect(() => {
     M.AutoInit();
     var elems = document.querySelectorAll('.sidenav');
@@ -25,12 +28,9 @@ const HomePage = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to='/shopping/orders'
-              className="stcolour"
-            >
+            <NavLink to='/shopping/orders' className='stcolour'>
               Orders
-                    </NavLink>
+            </NavLink>
           </li>
           <li>
             <NavLink to='/payment' className='stcolour'>
@@ -54,6 +54,12 @@ const HomePage = () => {
         <nav>
           <div className='nav-wrapper pcolour'>
             <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
+              Logo
+            </NavLink>
+            <NavLink
+              to='/'
+              className='brand-logo show-on-medium-and-down hide-on-large-only'
+            >
               Logo
             </NavLink>
             <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
@@ -202,9 +208,7 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/records`} className='stcolour'>
-                Records
-              </NavLink>
+              <NavLink to={`/records`}>Records</NavLink>
             </li>
             <li>
               <NavLink to='/payment' className='stcolour'>
@@ -212,9 +216,7 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to='/transactions' className='stcolour'>
-                Transactions
-              </NavLink>
+              <NavLink to='/transactions'>Transactions</NavLink>
             </li>
             <li></li>
             <li className='divider'></li>

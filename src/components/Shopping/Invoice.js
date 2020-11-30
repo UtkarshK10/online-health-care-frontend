@@ -86,15 +86,19 @@ const Invoice = (props) => {
             <div className='invoice'>
               <div className='col s12'>
                 <h5 className=''>Your order Confirmed!</h5>
-                <div className='col s12 left'>
-                  <p className='left' style={{ fontWeight: 600 }}>
+                <div className='col s12' style={{ textAlign: 'left' }}>
+                  <p
+                    style={{
+                      fontWeight: 600,
+                    }}
+                  >
                     Hello, {invoiceData.Name}
                   </p>
+                  <p>
+                    Your order has been confirmed and will be shipped in next
+                    few days!
+                  </p>
                 </div>
-                <p className='left'>
-                  Your order has been confirmed and will be shipped in next few
-                  days!
-                </p>
               </div>
               <div className='payment border-top mt-3 mb-3 border-bottom table-responsive'>
                 <table className='centered'>
@@ -116,15 +120,13 @@ const Invoice = (props) => {
                       </td>
                       <td>
                         <div style={{ padding: '2% 0' }}>
-                          {' '}
-                          <p className='grey-text'>Payment</p>{' '}
-                          <p>
-                            <img
-                              src='https://img.icons8.com/color/48/000000/visa.png'
-                              width='40'
-                              alt='prod1'
-                            />
-                          </p>{' '}
+                          <p className='grey-text'>Payment</p>
+
+                          <img
+                            src='https://img.icons8.com/color/48/000000/visa.png'
+                            width='40'
+                            alt='prod1'
+                          />
                         </div>
                       </td>
                       <td>
@@ -283,10 +285,10 @@ const Invoice = (props) => {
               <div className='input-field'>
                 <button
                   className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                // onClick={e => {
-                //     e.preventDefault();
-                //     downloadInvoice();
-                // }}
+                  // onClick={e => {
+                  //     e.preventDefault();
+                  //     downloadInvoice();
+                  // }}
                 >
                   Print
                   <i className='material-icons left'>get_app</i>
