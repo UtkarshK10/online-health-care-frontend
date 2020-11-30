@@ -129,6 +129,7 @@ const Oxymeter = (props) => {
                 ]}
                 maxFileSize={20971520}
                 filesLimit={1}
+                getFileLimitExceedMessage="Only 1 file allowed"
               />
             )}
             {loading && <ReactSpinner size={150} />}
