@@ -2,8 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import Switch from '@material-ui/core/Switch';
+import { ThemeContext } from '../contexts/theme-provider';
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
+  // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   useEffect(() => {
     M.AutoInit();
     var elems = document.querySelectorAll('.sidenav');
