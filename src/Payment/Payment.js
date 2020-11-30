@@ -14,24 +14,23 @@ const Payment = () => {
 
   const key = process.env.REACT_APP_STRIPE_KEY;
   const handleToken = (token, addresses) => {
-
     const data = { credit };
-    axios.put('/api/users/payment', data, {
-      headers: {
-        'api-token': auth.token,
-        'Content-type': 'application/json'
-      }
-    })
-      .then(res => {
-
+    axios
+      .put('/api/users/payment', data, {
+        headers: {
+          'api-token': auth.token,
+          'Content-type': 'application/json',
+        },
+      })
+      .then((res) => {
         if (res.status === 200) {
           setMsg(res.data.msg);
-          setAuth({ ...auth, credits: res.data.new_credits })
+          setAuth({ ...auth, credits: res.data.new_credits });
           updateLocalStorage({ ...auth, credits: res.data.new_credits });
           setAmount(0);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -39,32 +38,45 @@ const Payment = () => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
+      });
   };
   const data = [
-    { amount: 500, photo: 'https://www.finance-watch.org/wp-content/uploads/2018/08/money-supply-1600x1067.jpg' },
-    { amount: 1000, photo: 'https://p1.pxfuel.com/preview/377/271/771/money-dollar-bill-bills-paper-money.jpg' },
-    { amount: 2000, photo: 'https://capestylemag.com/wp-content/uploads/2020/02/bank-number-usa-bills-dollar_1232-3931.jpg' },
-    { amount: 5000, photo: 'https://bgfons.com/uploads/money/money_texture1386.jpg' }
-  ]
-
+    {
+      amount: 500,
+      photo:
+        'https://www.finance-watch.org/wp-content/uploads/2018/08/money-supply-1600x1067.jpg',
+    },
+    {
+      amount: 1000,
+      photo:
+        'https://p1.pxfuel.com/preview/377/271/771/money-dollar-bill-bills-paper-money.jpg',
+    },
+    {
+      amount: 2000,
+      photo:
+        'https://capestylemag.com/wp-content/uploads/2020/02/bank-number-usa-bills-dollar_1232-3931.jpg',
+    },
+    {
+      amount: 5000,
+      photo: 'https://bgfons.com/uploads/money/money_texture1386.jpg',
+    },
+  ];
 
   return (
     <div className='container'>
-      {' '}
-      <div className='row' style={{ margin: '10px 0px 10px 0px' }}>
+      <div className='row'>
         {credit !== 0 && (
-          <h4>
-            Pay <span className='ptcolour'>&#8377; {credit}</span> to complete the
-            transaction
+          <h4 className='h4-style'>
+            Pay <span className='highlight'>&#8377; {credit}</span> to complete
+            the transaction
           </h4>
         )}
       </div>
-      <div className='row' style={{ margin: '10px 0px 10px 0px' }}>
-        {credit === 0 && <h4>Please select an amount</h4>}
+      <div className='row'>
+        {credit === 0 && <h4 className='h4-style'>Please select an amount</h4>}
       </div>
       <div className='row'>
-        {data.map(d => (
+        {data.map((d) => (
           <div key={d.amount} className='col s12 m6 l3'>
             <Card
               credit={credit}
@@ -77,8 +89,17 @@ const Payment = () => {
       </div>
       <div className='row'>
         {credit !== 0 && (
-          <StripeCheckout allowRememberMe currency="INR" amount={credit * 100}
-            name={auth?.name} email={auth?.email} description="Payment to add Credits" image={auth?.profile_image} stripeKey={key} token={handleToken}>
+          <StripeCheckout
+            allowRememberMe
+            currency='INR'
+            amount={credit * 100}
+            name={auth?.name}
+            email={auth?.email}
+            description='Payment to add Credits'
+            image={auth?.profile_image}
+            stripeKey={key}
+            token={handleToken}
+          >
             <button className='btn btn-large pcolour btn-register waves-effect waves-light'>
               Pay
               <i className='material-icons right'>check_circle</i>
@@ -86,7 +107,7 @@ const Payment = () => {
           </StripeCheckout>
         )}
 
-        {(msg && credit === 0) && <h4 className="success">{msg}</h4>}
+        {msg && credit === 0 && <h4 className='success'>{msg}</h4>}
       </div>
     </div>
   );

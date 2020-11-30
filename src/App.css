@@ -1,3 +1,8 @@
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: var(--bgcolor);
+}
 :root {
   --primary: #f4511e;
   --secondary: #ff7043;
@@ -5,6 +10,7 @@
   --bgsecondary: white;
   --text-primary: black;
   --text-secondary: grey;
+  --highlight: #f4511e;
   --marble: url('./assets/marble.jpg');
 }
 
@@ -26,6 +32,9 @@
 .bgsecondary {
   background-color: var(--bgsecondary) !important;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 .App {
   text-align: center;
@@ -36,7 +45,8 @@ h4 {
 }
 
 .page {
-  height: 100vh;
+  min-height: 100vh !important;
+  min-height: -webkit-fill-available;
   width: 100%;
   background-color: var(--bgcolor);
   /* position: fixed; */
@@ -357,6 +367,9 @@ table td {
   z-index: -10000 !important;
 }
 
+.highlight {
+  color: var(--highlight);
+}
 /* UserRegistration.css*/
 
 .first,
