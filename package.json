@@ -31,6 +31,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hcaptcha": "^0.1.1",
     "react-infinite-scroll-component": "^5.1.0",
+    "react-is": "^17.0.1",
     "react-particles-js": "^3.4.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",

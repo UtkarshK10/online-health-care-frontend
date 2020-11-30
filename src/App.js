@@ -77,6 +77,7 @@ function App() {
           !pathname.includes('signup') &&
           pathname.includes('doctors') &&
           !pathname.includes('notFound') && <DoctorNavbar />}
+        <Switch onChange={() => theme.setTheme(theme.mode === 'dark' ? { ...theme, mode: 'light' } : { ...theme, mode: 'dark' })} />
         <Route
           render={({ location }) => (
             <TransitionGroup>
@@ -114,7 +115,7 @@ function App() {
                     path='/oxymeter'
                     render={() => (
                       <div className='page'>
-                        <Oxymeter title='Please drop your 20 secs video to monitor oxygen amount' />
+                        <Oxymeter title='Please drop your 20-30 secs video to monitor oxygen amount' />
                       </div>
                     )}
                   />
@@ -178,15 +179,7 @@ function App() {
                       </div>
                     )}
                   />
-                  {/* <PrivateRoute
-                  exact
-                  path='/records'
-                  render={() => (
-                    <div className='page'>
-                      <Records />
-                    </div>
-                  )}
-                /> */}
+
                   <PrivateRoute
                     exact
                     path='/transactions'

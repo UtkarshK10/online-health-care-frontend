@@ -11,7 +11,6 @@ import ActionProvider from '../chatbot/ActionProvider';
 import config from '../chatbot/config';
 import MessageParser from '../chatbot/MessageParser';
 import BotButton from './BotButton';
-import Switch from '@material-ui/core/Switch';
 import { ThemeContext } from '../contexts/theme-provider';
 
 const HomePage = () => {
@@ -79,7 +78,7 @@ const HomePage = () => {
   }
   return (
     <>
-      <div className='container top-margin  '>
+      <div className='container top-margin'>
         <div className='row'>
           {' '}
           {/* <Switch onChange={() => toggleTheme((prev) => !prev)} /> */}
