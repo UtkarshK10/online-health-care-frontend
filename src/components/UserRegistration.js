@@ -248,7 +248,7 @@ function UserRegistration() {
               </form>
               <span>
                 Already registered?{' '}
-                <Link to='/login' className='stcolour'>
+                <Link to='/login' className='text-secondary'>
                   Login
                 </Link>
               </span>

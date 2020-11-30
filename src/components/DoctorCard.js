@@ -22,7 +22,7 @@ const DoctorCard = (props) => {
   //     classD = 'activeD';
   // }
   return (
-    <div className='card  hoverable round'>
+    <div className='card  hoverable round bgsecondary'>
       <div className='card-image'>
         <img height='300' src={photo} alt='#' />
         {showLink && (

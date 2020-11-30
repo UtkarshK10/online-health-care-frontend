@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import ReactSpinner from './ReactSpinner';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
-import noPrescription from '../assets/no-prescription.png'
+import noPrescription from '../assets/no-prescription.png';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const PatientPrescriptionDetails = (props) => {
@@ -15,17 +15,18 @@ const PatientPrescriptionDetails = (props) => {
   const { auth } = useContext(AuthContext);
   const history = useHistory();
 
-  const addToCart = e => {
+  const addToCart = (e) => {
     e.preventDefault();
-    axios.get(`/api/prescriptions/add/${id}`, {
-      headers: {
-        'api-token': auth?.token
-      }
-    })
-      .then(res => {
-        M.toast({ html: res.data.msg })
+    axios
+      .get(`/api/prescriptions/add/${id}`, {
+        headers: {
+          'api-token': auth?.token,
+        },
       })
-      .catch(err => {
+      .then((res) => {
+        M.toast({ html: res.data.msg });
+      })
+      .catch((err) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -33,7 +34,7 @@ const PatientPrescriptionDetails = (props) => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
+      });
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -76,10 +77,14 @@ const PatientPrescriptionDetails = (props) => {
   if (!loading && prescriptionDetails?.length === 0) {
     return (
       <div className='container'>
-        <div className="row">
-          <div className="col s12">
+        <div className='row'>
+          <div className='col s12'>
             <h2>No prescription has been issued yet!</h2>
-            <img src={noPrescription} alt="no-prescription" style={{ width: "300px" }} />
+            <img
+              src={noPrescription}
+              alt='no-prescription'
+              style={{ width: '300px' }}
+            />
           </div>
         </div>
       </div>
@@ -87,9 +92,9 @@ const PatientPrescriptionDetails = (props) => {
   }
 
   return (
-    <div className='container'>
-      <ul className='collection with-header'>
-        <li className='collection-header'>
+    <div className='container' style={{ paddingTop: '30px' }}>
+      <ul className='collection with-header' style={{ marginTop: '0px' }}>
+        <li className='collection-header bgcolor'>
           <div className='row'>
             <div className='col s12 m6 l6'>
               <h4 className='left-align'>Prescription #{searchString.id}</h4>
@@ -99,8 +104,9 @@ const PatientPrescriptionDetails = (props) => {
                 className='btn btn-large pcolour btn-register waves-effect waves-light hover'
                 onClick={addToCart}
               >
-
-                <i className="material-icons" style={{ fontSize: '2.5em' }}>add_shopping_cart</i>
+                <i className='material-icons' style={{ fontSize: '2.5em' }}>
+                  add_shopping_cart
+                </i>
               </button>
             </div>
           </div>

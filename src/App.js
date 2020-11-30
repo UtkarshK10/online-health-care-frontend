@@ -36,6 +36,8 @@ import NotFound from './components/404';
 import style from 'styled-theming';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import useTheme from './components/useTheme';
+import bmarble from './assets/bmarble.jpg';
+import marble from './assets/marble.jpg';
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -46,11 +48,36 @@ const getSecondary = style('mode', {
   light: '#ff7043',
   dark: '#101010',
 });
+const getbgcolor = style('mode', {
+  light: 'white',
+  dark: '#404040',
+});
+const getTextPrimary = style('mode', {
+  light: 'black',
+  dark: 'white',
+});
+const getbgsecondary = style('mode', {
+  light: 'white',
+  dark: 'grey',
+});
+const getTextsecondary = style('mode', {
+  light: 'grey',
+  dark: '#E0E0E0',
+});
+const getMarble = style('mode', {
+  light: `url(${marble})`,
+  dark: `url(${bmarble})`,
+});
 
 const GlobalStyle = createGlobalStyle`
 :root {
   --primary: ${getPrimary};
   --secondary: ${getSecondary};
+  --bgcolor: ${getbgcolor};
+  --text-primary: ${getTextPrimary};
+  --bgsecondary: ${getbgsecondary};
+  --text-secondary: ${getTextsecondary};
+  --marble: ${getMarble};
 }
 `;
 function App() {

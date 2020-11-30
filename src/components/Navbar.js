@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import Switch from '@material-ui/core/Switch';
-import { ThemeContext } from '../contexts/theme-provider';
+import ToggleMode from './ToggleMode';
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
   // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -56,6 +55,7 @@ const HomePage = () => {
             <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
               Logo
             </NavLink>
+            <ToggleMode />
             <NavLink
               to='/'
               className='brand-logo show-on-medium-and-down hide-on-large-only'

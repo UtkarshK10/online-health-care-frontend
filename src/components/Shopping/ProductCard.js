@@ -50,7 +50,7 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
     addToPrescription({ id, name, description, instruction: '', quantity: 1 });
   };
   return (
-    <div className='card '>
+    <div className='card bgsecondary'>
       <div className='card-image'>
         <img src={image_url} alt={id} style={{ height: '200px' }} />
       </div>
@@ -65,7 +65,7 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
           {shortText(name)}
         </div>
         <div
-          className='card-title  grey-text'
+          className='card-title text-secondary'
           style={{
             fontSize: '1em',
           }}
@@ -101,16 +101,16 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
                 style={{ width: '30px', cursor: 'pointer' }}
               />
             ) : (
-                  <img
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddToPrescription();
-                    }}
-                    src={PrescriptionIcon}
-                    alt=''
-                    style={{ width: '30px', cursor: 'pointer' }}
-                  />
-                ))}
+              <img
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddToPrescription();
+                }}
+                src={PrescriptionIcon}
+                alt=''
+                style={{ width: '30px', cursor: 'pointer' }}
+              />
+            ))}
         </div>
         <br />
       </div>

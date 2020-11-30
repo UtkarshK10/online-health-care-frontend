@@ -9,10 +9,15 @@ import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import GetWell from '../assets/get-well.jpg';
+import useTheme from './useTheme';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState(0);
+
+  const theme = useTheme();
+
+  console.log('theme', theme);
 
   const [data, setData] = useState({
     temperature: '',
@@ -209,12 +214,16 @@ const Oxymeter = (props) => {
 
   if (showForm && !msg) {
     return (
-      <>
+      <div className='bgcolor' style={{ height: '168vh' }}>
         <div className='container'>
           <div className='row'>
             <div className='col s12 m8 l8 offset-l2 offset-m2'>
               <div id=''>
-                <form onSubmit={bookAppointment} className='padding-form glow'>
+                <form
+                  onSubmit={bookAppointment}
+                  className='padding-form glow'
+                  autoComplete='off'
+                >
                   <div className='row'>
                     <div className='input-field'>
                       <input
@@ -293,7 +302,7 @@ const Oxymeter = (props) => {
                     <div className='row'>
                       {!loading && (
                         <div className='input-field'>
-                          <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                          <button className='btn btn-large pcolour waves-effect waves-dark hover glow'>
                             Submit
                             <i className='material-icons right'>check_circle</i>
                           </button>
@@ -319,7 +328,7 @@ const Oxymeter = (props) => {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
   return (

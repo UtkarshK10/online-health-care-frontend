@@ -130,12 +130,13 @@ const Cart = () => {
     // } else {
     //   M.toast({ html: 'Not Enough credits' });
     // }
-    axios.get('/api/cart/check', {
-      headers: {
-        'api-token': auth?.token
-      }
-    })
-      .then(res => {
+    axios
+      .get('/api/cart/check', {
+        headers: {
+          'api-token': auth?.token,
+        },
+      })
+      .then((res) => {
         const { msg, info } = res.data;
         if (msg) {
           history.push('/shopping/address');
@@ -143,7 +144,7 @@ const Cart = () => {
           M.toast({ html: info });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -151,7 +152,7 @@ const Cart = () => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
+      });
   };
 
   if (loading) {
@@ -171,10 +172,10 @@ const Cart = () => {
     );
   }
   return (
-    <div className='container'>
-      <ul className='collection with-header'>
-        <li className='collection-header'>
-          <div className='row hide-on-small-only'>
+    <div className='container' style={{ paddingTop: '30px' }}>
+      <ul className='collection with-header' style={{ marginTop: '0px' }}>
+        <li className='collection-header bgcolor'>
+          <div className='row hide-on-small-only '>
             <div className='col s12 m6 l6'>
               <h4 className='left-align'>Your Cart</h4>
             </div>
@@ -245,87 +246,87 @@ const Cart = () => {
                     <ReactSpinner size='30px' />
                   </div>
                 ) : (
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
                       }}
+                      className='material-icons ptcolour'
+                      style={{ cursor: 'pointer' }}
                     >
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        remove
+                      remove
                     </i>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                        className='btn btn-small scolour waves-effect'
-                      >
-                        <span style={{ fontSize: '18px' }}>
-                          {cartDetail.quantity}
-                        </span>{' '}
-                      </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                      className='btn btn-small scolour waves-effect'
+                    >
+                      <span style={{ fontSize: '18px' }}>
+                        {cartDetail.quantity}
+                      </span>{' '}
+                    </button>
 
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        add
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
+                      }}
+                      className='material-icons ptcolour'
+                      style={{ cursor: 'pointer' }}
+                    >
+                      add
                     </i>
-                    </div>
-                  )}
+                  </div>
+                )}
               </div>
               <div className='row hide-on-med-and-up'>
                 {loading_inc_dec ? (
                   <ReactSpinner size='25px' />
                 ) : (
-                    <div
-                      className=' col s6'
-                      style={{ display: 'flex', alignItems: 'center' }}
+                  <div
+                    className=' col s6'
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
+                      }}
+                      className='material-icons ptcolour'
+                      style={{ cursor: 'pointer' }}
                     >
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        remove
+                      remove
                     </i>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                        className='btn btn-small scolour waves-effect'
-                      >
-                        <span style={{ fontSize: '18px' }}>
-                          {cartDetail.quantity}
-                        </span>{' '}
-                      </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                      className='btn btn-small scolour waves-effect'
+                    >
+                      <span style={{ fontSize: '18px' }}>
+                        {cartDetail.quantity}
+                      </span>{' '}
+                    </button>
 
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        add
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
+                      }}
+                      className='material-icons ptcolour'
+                      style={{ cursor: 'pointer' }}
+                    >
+                      add
                     </i>
-                    </div>
-                  )}{' '}
+                  </div>
+                )}{' '}
                 <div className='col s6'>
                   <p
                     className='ptcolour  right-align'

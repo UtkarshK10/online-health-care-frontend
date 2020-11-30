@@ -114,14 +114,14 @@ const CaptchaPage = ({ match }) => {
     <div className='container'>
       {!msg ? (
         <>
-          <div className='row' style={{ margin: '30px' }}>
+          <div className='row' style={{ padding: '30px' }}>
             <div className='col s10 l6 m8 offset-l4 offset-s1 offset-m2'>
               <ReCAPTCHA
                 sitekey={process.env.REACT_APP_reCAPTCHA_KEY_V2}
                 onChange={(token) => setToken(token)}
                 ref={captchaRef}
                 type='image'
-                theme='light'
+                theme='dark'
                 badge='inline'
                 size='normal'
               />

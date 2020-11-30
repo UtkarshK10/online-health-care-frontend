@@ -18,7 +18,7 @@ export default function Checkbox({ title, data, handleChange, curr }) {
               type='checkbox'
               className='filled-in'
             />
-            <span className='stcolour'>{d.label}</span>
+            <span className='text-secondary'>{d.label}</span>
           </label>
         </p>
       ))}

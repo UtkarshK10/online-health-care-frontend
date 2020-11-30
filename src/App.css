@@ -1,15 +1,44 @@
 :root {
   --primary: #f4511e;
   --secondary: #ff7043;
+  --bgcolor: white;
+  --bgsecondary: white;
+  --text-primary: black;
+  --text-secondary: grey;
+  --marble: url('./assets/marble.jpg');
+}
+
+.pcolour {
+  background-color: var(--primary) !important;
+}
+.scolour {
+  background-color: var(--secondary) !important;
+}
+.text-primary {
+  color: var(--text-primary) !important;
+}
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.bgcolor {
+  background-color: var(--bgcolor) !important;
+}
+.bgsecondary {
+  background-color: var(--bgsecondary) !important;
 }
 
 .App {
   text-align: center;
+  color: var(--text-primary) !important;
+}
+h4 {
+  color: var(--text-primary);
 }
 
 .page {
   height: 100vh;
   width: 100%;
+  background-color: var(--bgcolor);
   /* position: fixed; */
   /*overflow: scroll;*/
 }
@@ -36,20 +65,9 @@
   position: relative;
   left: 20px;
 }
-.pcolour {
-  background-color: var(--primary) !important;
-}
-.scolour {
-  background-color: var(--secondary) !important;
-}
-.stcolour {
-  color: var(--secondary) !important;
-}
-.ptcolour {
-  color: var(--primary) !important;
-}
+
 .hover:hover {
-  background-color: var(--secondary) !important;
+  background-color: var(--text-secondary) !important;
 }
 .pad li {
   margin-left: 5px;
@@ -59,7 +77,7 @@
   height: 180px;
 }
 .amount {
-  color: var(--primary) !important;
+  color: var(--text-primary) !important;
   font-size: 30px !important  ;
   font-weight: 600 !important;
 }
@@ -82,6 +100,10 @@
 h5,
 button {
   margin: 15px;
+}
+.h4-style {
+  margin-top: 0;
+  padding-top: 20px;
 }
 .update-form {
   margin-top: 2.5em;
@@ -181,31 +203,31 @@ button {
 }
 @-webkit-keyframes glow {
   0% {
-    box-shadow: 0 0 5px var(--secondary);
+    box-shadow: 0 0 5px var(--text-secondary);
   }
   40% {
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--text-secondary);
   }
   60% {
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--text-secondary);
   }
   100% {
-    box-shadow: 0 0 5px var(--secondary);
+    box-shadow: 0 0 5px var(--text-secondary);
   }
 }
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 5px var(--secondary);
+    box-shadow: 0 0 5px var(--text-secondary);
   }
   40% {
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--text-secondary);
   }
   60% {
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--text-secondary);
   }
   100% {
-    box-shadow: 0 0 5px var(--secondary);
+    box-shadow: 0 0 5px var(--text-secondary);
   }
 }
 
@@ -216,7 +238,7 @@ button {
   border: 2px solid #efefef;
 }
 .react-chatbot-kit-chat-bot-message {
-  background-color: var(--primary) !important;
+  background-color: var(--text-primary) !important;
   margin-left: 0 !important;
 }
 .react-chatbot-kit-chat-header {
@@ -224,14 +246,14 @@ button {
   color: #fff !important;
 }
 .react-chatbot-kit-chat-btn-send {
-  background-color: var(--secondary) !important;
+  background-color: var(--text-secondary) !important;
 }
 .react-chatbot-kit-chat-bot-message-arrow {
-  border-right: 8px solid var(--primary) !important;
+  border-right: 8px solid var(--text-primary) !important;
   left: -8.5px !important;
 }
 .react-chatbot-kit-chat-bot-avatar-container {
-  background-color: var(--secondary) !important;
+  background-color: var(--text-secondary) !important;
 }
 .react-chatbot-kit-chat-bot-avatar-letter {
   color: #fff !important;
@@ -241,19 +263,19 @@ button {
   border: none !important;
 }
 .react-chatbot-kit-chat-input:focus {
-  border-bottom: 1px solid var(--primary) !important;
+  border-bottom: 1px solid var(--text-primary) !important;
   outline: none !important;
 }
 .react-chatbot-kit-user-chat-message {
-  background-color: var(--primary) !important;
+  background-color: var(--text-primary) !important;
   color: #fff !important;
 }
 .react-chatbot-kit-user-chat-message-arrow {
-  border-left: 8px solid var(--primary) !important;
+  border-left: 8px solid var(--text-primary) !important;
   right: -8px !important;
 }
 .react-chatbot-kit-user-avatar-container {
-  background-color: var(--secondary) !important;
+  background-color: var(--text-secondary) !important;
 }
 .center {
   justify-content: center;
@@ -314,7 +336,7 @@ table td {
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
   top: 0.8rem !important;
-  color: var(--primary) !important;
+  color: var(--text-primary) !important;
 }
 .pagination li a {
   background-color: white !important;
@@ -333,4 +355,163 @@ table td {
 }
 #overlay-remove {
   z-index: -10000 !important;
+}
+
+/* UserRegistration.css*/
+
+.first,
+.second {
+  display: inline-block;
+}
+.first {
+  margin-left: 35px;
+}
+.center {
+  position: relative;
+  top: 18vh;
+  margin-right: 2em;
+}
+.padding-form {
+  margin-top: 1em;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-radius: 10px 10px 20px 10px;
+  background-color: rgb(255, 241, 239);
+  background-image: var(--marble);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.form-shadow {
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+.padding-form * {
+  margin-bottom: 11px;
+}
+@media screen and (min-width: 480px) {
+  .padding-form {
+    margin-left: 30px;
+  }
+}
+@media screen and (min-width: 720px) {
+  .padding-form {
+    margin-left: 10px;
+  }
+}
+/* label color */
+.input-field label {
+  color: var(--text-primary);
+  font-weight: 400;
+  font-size: 1.2 em;
+}
+
+.input-field input[type='text'] {
+  color: var(--text-primary) !important;
+}
+.input-field input[type='number'] {
+  color: var(--text-primary) !important;
+}
+/* label focus color */
+.input-field input[type='text']:focus + label {
+  color: var(--text-primary) !important;
+}
+/* label underline focus color */
+.input-field input[type='text']:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+.input-field input[type='email']:focus + label {
+  color: var(--text-primary) !important;
+}
+/* label underline focus color */
+.input-field input[type='email']:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+.input-field input[type='password']:focus + label {
+  color: var(--text-primary) !important;
+}
+/* label underline focus color */
+.input-field input[type='password']:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+.input-field input[type='number']:focus + label {
+  color: var(--text-primary) !important;
+}
+/* label underline focus color */
+.input-field input[type='number']:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+/* valid color */
+.input-field input[type='text'].valid {
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+/* invalid color */
+.input-field input[type='text'].invalid {
+  border-bottom: 1px solid red !important;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000;
+}
+
+.input-field textarea:focus + label {
+  color: var(--text-primary) !important;
+}
+/* label underline focus color */
+.input-field textarea:focus {
+  text-decoration: none !important;
+  border: none;
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+}
+
+#particles-js {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: -1;
+}
+
+@media screen and (min-width: 1200px) {
+  #slide {
+    position: absolute;
+    right: -400px;
+    width: 400px;
+    -webkit-animation: slide 1s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 1s forwards;
+    animation-delay: 0.5s;
+  }
+
+  @-webkit-keyframes slide {
+    100% {
+      right: 220px;
+    }
+  }
+
+  @keyframes slide {
+    100% {
+      right: 220px;
+    }
+  }
+}
+.btn:hover {
+  background-color: var(--secondary);
 }
