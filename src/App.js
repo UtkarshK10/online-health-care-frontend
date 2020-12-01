@@ -36,6 +36,8 @@ import NotFound from './components/404';
 import style from 'styled-theming';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import useTheme from './components/useTheme';
+import bmarble from './assets/bmarble.jpg';
+import marble from './assets/marble.jpg';
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -44,13 +46,38 @@ const getPrimary = style('mode', {
 
 const getSecondary = style('mode', {
   light: '#ff7043',
-  dark: '#101010',
+  dark: '#282828',
+});
+const getbgcolor = style('mode', {
+  light: 'white',
+  dark: '#404040',
+});
+const getTextPrimary = style('mode', {
+  light: 'black',
+  dark: 'white',
+});
+const getbgsecondary = style('mode', {
+  light: 'white',
+  dark: 'grey',
+});
+const getTextsecondary = style('mode', {
+  light: '#303030',
+  dark: '#E0E0E0',
+});
+const getMarble = style('mode', {
+  light: `url(${marble})`,
+  dark: `url(${bmarble})`,
 });
 
 const GlobalStyle = createGlobalStyle`
 :root {
   --primary: ${getPrimary};
   --secondary: ${getSecondary};
+  --bgcolor: ${getbgcolor};
+  --text-primary: ${getTextPrimary};
+  --bgsecondary: ${getbgsecondary};
+  --text-secondary: ${getTextsecondary};
+  --marble: ${getMarble};
 }
 `;
 function App() {
@@ -77,7 +104,6 @@ function App() {
           !pathname.includes('signup') &&
           pathname.includes('doctors') &&
           !pathname.includes('notFound') && <DoctorNavbar />}
-        <Switch onChange={() => theme.setTheme(theme.mode === 'dark' ? { ...theme, mode: 'light' } : { ...theme, mode: 'dark' })} />
         <Route
           render={({ location }) => (
             <TransitionGroup>
@@ -115,7 +141,7 @@ function App() {
                     path='/oxymeter'
                     render={() => (
                       <div className='page'>
-                        <Oxymeter title='Please drop your 20-30 secs video to monitor oxygen amount' />
+                        <Oxymeter title='Please drop your 20 secs video to monitor oxygen amount' />
                       </div>
                     )}
                   />
@@ -179,7 +205,15 @@ function App() {
                       </div>
                     )}
                   />
-
+                  {/* <PrivateRoute
+                  exact
+                  path='/records'
+                  render={() => (
+                    <div className='page'>
+                      <Records />
+                    </div>
+                  )}
+                /> */}
                   <PrivateRoute
                     exact
                     path='/transactions'

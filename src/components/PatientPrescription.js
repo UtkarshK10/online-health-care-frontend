@@ -66,7 +66,7 @@ const PatientPrescription = () => {
   return (
     <div className='container'>
       <div className='row'>
-        <h3>Your Records</h3>
+        <h3 className='h4-style'>Your Records</h3>
       </div>
       <table className='striped responsive-table'>
         <thead>

@@ -11,7 +11,6 @@ import ActionProvider from '../chatbot/ActionProvider';
 import config from '../chatbot/config';
 import MessageParser from '../chatbot/MessageParser';
 import BotButton from './BotButton';
-import { ThemeContext } from '../contexts/theme-provider';
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -42,8 +41,6 @@ const HomePage = () => {
         }
       })
   );
-
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     // if (auth?.token)
@@ -78,11 +75,9 @@ const HomePage = () => {
   }
   return (
     <>
-      <div className='container top-margin'>
+      <div className='container'>
         <div className='row'>
-          {' '}
-          {/* <Switch onChange={() => toggleTheme((prev) => !prev)} /> */}
-          <h4 className='stcolour'>Our Health Experts</h4>
+          <h4 className='h4-style'>Our Health Experts</h4>
         </div>
         <div className='row'>
           {currPageDoctors.map((doctor) => {

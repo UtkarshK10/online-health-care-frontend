@@ -48,16 +48,17 @@ const OrderDetails = (props) => {
   useEffect(() => {
     if (auth?.token) {
       setLoading(true);
-      axios.get(`/api/orders/order_items/${+id}`, {
-        headers: {
-          'api-token': auth?.token
-        }
-      })
-        .then(res => {
-          setLoading(false);
-          setOrderDetails(res.data.details)
+      axios
+        .get(`/api/orders/order_items/${+id}`, {
+          headers: {
+            'api-token': auth?.token,
+          },
         })
-        .catch(err => {
+        .then((res) => {
+          setLoading(false);
+          setOrderDetails(res.data.details);
+        })
+        .catch((err) => {
           setLoading(false);
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
@@ -66,22 +67,22 @@ const OrderDetails = (props) => {
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
-        })
+        });
     }
   }, [auth?.token, id]);
 
   if (loading) {
     return (
-      <div className="container">
-        <ReactSpinner size="50px" />
+      <div className='container'>
+        <ReactSpinner size='50px' />
       </div>
-    )
+    );
   }
 
   return (
-    <div className='container'>
-      <ul className='collection with-header'>
-        <li className='collection-header'>
+    <div className='container' style={{ paddingTop: '30px' }}>
+      <ul className='collection with-header' style={{ marginTop: '0px' }}>
+        <li className='collection-header bgcolor'>
           <div className='row'>
             <div className='col s12 m6 l6'>
               <h4 className='left-align'>Order #{searchString.id} Details</h4>

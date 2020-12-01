@@ -1,10 +1,6 @@
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar for Chrome, Safari and Opera
 ::-webkit-scrollbar {
   display: none;
-}
-:root {
-  --primary: #f4511e;
-  --secondary: #ff7043;
 }
 
 .first,
@@ -47,27 +43,27 @@
   }
 }
 /* label color */
-.input-field label {
+/* .input-field label {
   color: var(--primary);
   font-weight: 400;
   font-size: 1.2 em;
 }
 /* label focus color */
-.input-field input[type='text']:focus + label {
+/* .input-field input[type='text']:focus + label {
   color: var(--primary) !important;
-}
+} */
 /* label underline focus color */
-.input-field input[type='text']:focus {
+/* .input-field input[type='text']:focus {
   text-decoration: none !important;
   border: none;
-  border-bottom: 1px solid var(--primary) !important;
-  box-shadow: 0 1px 0 0 var(--secondary) !important;
-}
-.input-field input[type='email']:focus + label {
+  border-bottom: 1px solid var(--text-primary) !important;
+  box-shadow: 0 1px 0 0 var(--text-secondary) !important;
+} */
+/* .input-field input[type='email']:focus + label {
   color: var(--primary) !important;
-}
+} */
 /* label underline focus color */
-.input-field input[type='email']:focus {
+/* .input-field input[type='email']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
@@ -75,9 +71,9 @@
 }
 .input-field input[type='password']:focus + label {
   color: var(--primary) !important;
-}
+} */
 /* label underline focus color */
-.input-field input[type='password']:focus {
+/* .input-field input[type='password']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
@@ -85,27 +81,27 @@
 }
 .input-field input[type='number']:focus + label {
   color: var(--primary) !important;
-}
+} */
 /* label underline focus color */
-.input-field input[type='number']:focus {
+/* .input-field input[type='number']:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
-}
+} */
 /* valid color */
-.input-field input[type='text'].valid {
+/* .input-field input[type='text'].valid {
   text-decoration: none !important;
   border-bottom: 1px solid var(--primary) !important;
   box-shadow: 0 1px 0 0 var(--secondary) !important;
-}
+} */
 /* invalid color */
-.input-field input[type='text'].invalid {
+/* .input-field input[type='text'].invalid {
   border-bottom: 1px solid red !important;
   box-shadow: 0 1px 0 0 #000;
-}
+} */
 /* icon prefix focus color */
-.input-field .prefix.active {
+/* .input-field .prefix.active {
   color: #000;
 }
 
@@ -113,7 +109,7 @@
   color: var(--primary) !important;
 }
 /* label underline focus color */
-.input-field textarea:focus {
+/* .input-field textarea:focus {
   text-decoration: none !important;
   border: none;
   border-bottom: 1px solid var(--primary) !important;
@@ -153,4 +149,4 @@
 }
 .btn:hover {
   background-color: var(--secondary);
-}
+}    */

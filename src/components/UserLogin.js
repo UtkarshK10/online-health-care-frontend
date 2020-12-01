@@ -119,7 +119,7 @@ function UserLogin(props) {
                   </div>
                 </div>
                 <p className='right-align'>
-                  <Link to='#' onClick={handleClick} className='stcolour'>
+                  <Link to='#' onClick={handleClick} className='text-secondary'>
                     Forgot password?
                   </Link>
                 </p>
@@ -149,13 +149,12 @@ function UserLogin(props) {
                 </div>
               </form>
               <span>New to App?</span>{' '}
-              <Link to='/signup' className='stcolour'>
+              <Link to='/signup' className='text-secondary'>
                 Register
               </Link>
             </div>
           </div>
         </div>
-
       </div>
       <AddTechModal info={propData} />
     </>

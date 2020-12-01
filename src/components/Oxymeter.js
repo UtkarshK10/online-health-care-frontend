@@ -9,10 +9,15 @@ import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import GetWell from '../assets/get-well.jpg';
+import useTheme from './useTheme';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState(0);
+
+  const theme = useTheme();
+
+  console.log('theme', theme);
 
   const [data, setData] = useState({
     temperature: '',
@@ -130,7 +135,6 @@ const Oxymeter = (props) => {
                 ]}
                 maxFileSize={20971520}
                 filesLimit={1}
-                getFileLimitExceedMessage="Only 1 file allowed"
               />
             )}
             {loading && <ReactSpinner size={150} />}
@@ -210,117 +214,118 @@ const Oxymeter = (props) => {
 
   if (showForm && !msg) {
     return (
-      <>
-        <div className='container'>
-          <div className='row'>
-            <div className='col s12 m8 l8 offset-l2 offset-m2'>
-              <div id=''>
-                <form onSubmit={bookAppointment} className='padding-form glow'>
-                  <div className='row'>
-                    <div className='input-field'>
-                      <input
-                        value={data.temperature}
-                        onChange={handleChange}
-                        id='temperature'
-                        type='text'
-                        name='temperature'
-                        className='validate'
-                      />
-                      <label htmlFor='temperature' className='active font-app'>
-                        Body Temperature
-                      </label>
-                    </div>
-                    <div className='row'>
-                      <p className='font-app'>
-                        Were you in contact with person who had
-                        Cold/Fever/Covid?
-                      </p>
-                      <RadioButton
-                        name='contact'
-                        val1='Yes'
-                        val2='No'
-                        handleChange={handleChange}
-                        curr={data['contact']}
-                      />
-                    </div>
-                    <div className='row'>
-                      <p className='font-app'>
-                        Are you having difficulties in breathing?
-                      </p>
-                      <RadioButton
-                        name='difficulty'
-                        val1='Yes'
-                        val2='No'
-                        handleChange={handleChange}
-                        curr={data['difficulty']}
-                      />
-                    </div>
-                    <div className='row'>
-                      <p className='font-app'>
-                        Have you travelled anywhere internationally?
-                      </p>
-                      <RadioButton
-                        name='travel'
-                        val1='Yes'
-                        val2='No'
-                        handleChange={handleChange}
-                        curr={data['travel']}
-                      />
-                    </div>
-                    <div className='row'>
-                      <Checkbox
-                        title='Are you having any of the following symptoms?'
-                        data={symptoms}
-                        handleChange={handleCheckboxChange}
-                        curr={checkboxData['symptoms']}
-                      />
-                    </div>
-                    <div className='row'>
-                      <Checkbox
-                        title='Have you ever had or have any one of the following diseases?'
-                        data={disease}
-                        handleChange={handleCheckboxChange}
-                        curr={checkboxData['disease']}
-                      />
-                    </div>
-                    <div className='row'>
-                      <Checkbox
-                        title='Which of the following applies to you??'
-                        data={apply}
-                        handleChange={handleCheckboxChange}
-                        curr={checkboxData['apply']}
-                      />
-                    </div>
-                    <div className='row'>
-                      {!loading && (
-                        <div className='input-field'>
-                          <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
-                            Submit
-                            <i className='material-icons right'>check_circle</i>
-                          </button>
-                        </div>
-                      )}
-                      {loading && <ReactSpinner size={25} />}
-                    </div>
+      <div className='container'>
+        <div className='row'>
+          <div className='col s12 m8 l8 offset-l2 offset-m2'>
+            <div id=''>
+              <form
+                onSubmit={bookAppointment}
+                className='padding-form glow'
+                autoComplete='off'
+              >
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={data.temperature}
+                      onChange={handleChange}
+                      id='temperature'
+                      type='text'
+                      name='temperature'
+                      className='validate'
+                    />
+                    <label htmlFor='temperature' className='active font-app'>
+                      Body Temperature
+                    </label>
                   </div>
-                </form>{' '}
-                <a
-                  href='#!'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowForm(false);
-                  }}
-                  style={{ marginBottom: '10px' }}
-                  className='pcolour waves-effect btn secondary-content'
-                >
-                  <i className='material-icons left'>arrow_back</i>
-                  Go Back
-                </a>
-              </div>
+                  <div className='row'>
+                    <p className='font-app'>
+                      Were you in contact with person who had Cold/Fever/Covid?
+                    </p>
+                    <RadioButton
+                      name='contact'
+                      val1='Yes'
+                      val2='No'
+                      handleChange={handleChange}
+                      curr={data['contact']}
+                    />
+                  </div>
+                  <div className='row'>
+                    <p className='font-app'>
+                      Are you having difficulties in breathing?
+                    </p>
+                    <RadioButton
+                      name='difficulty'
+                      val1='Yes'
+                      val2='No'
+                      handleChange={handleChange}
+                      curr={data['difficulty']}
+                    />
+                  </div>
+                  <div className='row'>
+                    <p className='font-app'>
+                      Have you travelled anywhere internationally?
+                    </p>
+                    <RadioButton
+                      name='travel'
+                      val1='Yes'
+                      val2='No'
+                      handleChange={handleChange}
+                      curr={data['travel']}
+                    />
+                  </div>
+                  <div className='row'>
+                    <Checkbox
+                      title='Are you having any of the following symptoms?'
+                      data={symptoms}
+                      handleChange={handleCheckboxChange}
+                      curr={checkboxData['symptoms']}
+                    />
+                  </div>
+                  <div className='row'>
+                    <Checkbox
+                      title='Have you ever had or have any one of the following diseases?'
+                      data={disease}
+                      handleChange={handleCheckboxChange}
+                      curr={checkboxData['disease']}
+                    />
+                  </div>
+                  <div className='row'>
+                    <Checkbox
+                      title='Which of the following applies to you??'
+                      data={apply}
+                      handleChange={handleCheckboxChange}
+                      curr={checkboxData['apply']}
+                    />
+                  </div>
+                  <div className='row'>
+                    {!loading && (
+                      <div className='input-field'>
+                        <button className='btn btn-large pcolour waves-effect waves-dark hover glow'>
+                          Submit
+                          <i className='material-icons right'>check_circle</i>
+                        </button>
+                      </div>
+                    )}
+                    {loading && <ReactSpinner size={25} />}
+                  </div>
+                </div>
+              </form>{' '}
+              <a
+                href='#!'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowForm(false);
+                }}
+                style={{ marginBottom: '10px' }}
+                className='pcolour waves-effect btn secondary-content'
+              >
+                <i className='material-icons left'>arrow_back</i>
+                Go Back
+              </a>
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
   return (

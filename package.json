@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.0.0",
     "@emotion/react": "^11.1.1",
     "@hcaptcha/react-hcaptcha": "^0.2.1",
     "@material-ui/core": "^4.11.1",
@@ -43,7 +44,8 @@
     "react-to-print": "^2.11.0",
     "react-transition-group": "^4.4.1",
     "secure-web-storage": "^1.0.2",
-    "styled-components": "^5.2.1",
+    "shallowequal": "^1.1.0",
+    "styled-components": "^4.0.0",
     "styled-theming": "^2.2.0",
     "web-vitals": "^0.2.4"
   },

@@ -10,11 +10,11 @@ const Card = (props) => {
   if (credit === amount) {
     classD = 'activeD';
   }
-  const getCredits = amount => {
+  const getCredits = (amount) => {
     return amount * 0.4 + (amount - BASE_PRICE) * 0.1;
-  }
+  };
   return (
-    <div className={`card click ${classD}`} onClick={selectCard}>
+    <div className={`card bgsecondary click ${classD}`} onClick={selectCard}>
       <div className='card-image'>
         <img src={photo} alt='money' className='ratio' />
       </div>
@@ -23,7 +23,8 @@ const Card = (props) => {
       </div>
       <div className='card-content'>
         <p>
-          You will get <b className='stcolour'>{getCredits(amount)}</b> credits !!
+          You will get <b className='stcolour'>{getCredits(amount)}</b> credits
+          !!
         </p>
       </div>
     </div>

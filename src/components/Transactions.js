@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
-import noTransaction from '../assets/no-transaction.svg'
+import noTransaction from '../assets/no-transaction.svg';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Transcations = () => {
@@ -17,9 +17,8 @@ const Transcations = () => {
         },
       })
       .then((res) => {
-
         setLoading(false);
-        setTransactions(res.data.details)
+        setTransactions(res.data.details);
       })
       .catch((err) => {
         if (err?.response) {
@@ -34,21 +33,25 @@ const Transcations = () => {
 
   if (!loading && transactions?.length === 0) {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12">
+      <div className='container'>
+        <div className='row'>
+          <div className='col s12'>
             <h2>No transaction records found!</h2>
-            <img src={noTransaction} alt="No Transaction Records" style={{ width: "300px" }} />
+            <img
+              src={noTransaction}
+              alt='No Transaction Records'
+              style={{ width: '300px' }}
+            />
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className='container'>
       <div className='row'>
-        <h3>Your Transcations</h3>
+        <h3 className='h4-style'>Your Transcations</h3>
       </div>
       <table className='responsive-table'>
         <thead>
@@ -63,14 +66,17 @@ const Transcations = () => {
             <tr
               key={transaction.transaction_id}
               className={
-                transaction.done_to.includes('Bought') ? 'green-text' : 'red-text'}>
+                transaction.done_to.includes('Bought')
+                  ? 'green-text'
+                  : 'red-text'
+              }
+            >
               <td>{transaction.transaction_id}</td>
               <td>{transaction.done_to}</td>
               <td>{transaction.amount} cr.</td>
               <td>
                 {transaction.transaction_date.toString().replace('GMT', 'IST')}
               </td>
-
             </tr>
           ))}
         </tbody>
