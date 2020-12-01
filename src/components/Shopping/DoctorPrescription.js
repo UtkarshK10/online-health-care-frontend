@@ -11,6 +11,7 @@ import queryString from 'query-string';
 
 const DoctorPrescription = (props) => {
   const searchID = queryString.parse(props.location.search);
+
   const { id } = searchID;
   const [searchString, setSearchString] = useState('');
   const [products, setProducts] = useState([]);
@@ -82,7 +83,6 @@ const DoctorPrescription = (props) => {
     );
   };
   const handleDelete = (id) => {
-    console.log('boom');
     setPrescription(prescription.filter((p) => p.id !== id));
   };
 
@@ -105,11 +105,19 @@ const DoctorPrescription = (props) => {
     );
   };
 
+  // const getThemeFromLocalStorage = () => {
+  //   setTheme(JSON.parse(storage.getItem('theme')['mode']));
+  // };
+
+  // useEffect(() => {
+  //   getThemeFromLocalStorage();
+  // }, []);
+
   return (
-    <div className='container '>
+    <div className='container'>
       <div className='card'>
         <div className='row'>
-          <div className='col s12 m12 l4 pre-container'>
+          <div className='col s12 m12 l4 pre-container searchp'>
             <div className='row'>
               <div className='col s12 m12 l12'>
                 <div className='input-field'>
@@ -128,11 +136,14 @@ const DoctorPrescription = (props) => {
             </div>
             {filteredProducts.length === 0 && !searchString ? (
               <div className='row'>
-                <img
+                {/* <img
                   src={SearchMed}
                   style={{ width: '100px' }}
                   alt='Search Medicines'
-                />
+                /> */}
+                <i className='material-icons' style={{ fontSize: '180px' }}>
+                  local_pharmacy
+                </i>
               </div>
             ) : filteredProducts.length === 0 && searchString ? (
               <div className='row'>
@@ -160,7 +171,7 @@ const DoctorPrescription = (props) => {
             )}
           </div>
           <div
-            className='col s12 m12 l8 pre-container'
+            className='col s12 m12 l8 pre-container bgsecondary'
             style={{ overflow: 'scroll' }}
           >
             <Prescription

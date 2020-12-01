@@ -100,7 +100,7 @@ const Payment = () => {
             stripeKey={key}
             token={handleToken}
           >
-            <button className='btn btn-large pcolour btn-register waves-effect waves-light'>
+            <button className='btn btn-large pcolour btn-register waves-effect waves-light glow'>
               Pay
               <i className='material-icons right'>check_circle</i>
             </button>

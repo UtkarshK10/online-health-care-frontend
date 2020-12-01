@@ -68,7 +68,14 @@ const getMarble = style('mode', {
   light: `url(${marble})`,
   dark: `url(${bmarble})`,
 });
-
+const getHighlight = style('mode', {
+  light: '#f4511e',
+  dark: 'hotpink',
+});
+const getSearchP = style('mode', {
+  light: 'white',
+  dark: 'black',
+});
 const GlobalStyle = createGlobalStyle`
 :root {
   --primary: ${getPrimary};
@@ -78,6 +85,8 @@ const GlobalStyle = createGlobalStyle`
   --bgsecondary: ${getbgsecondary};
   --text-secondary: ${getTextsecondary};
   --marble: ${getMarble};
+  --highlight: ${getHighlight};
+  --searchp : ${getSearchP};
 }
 `;
 function App() {

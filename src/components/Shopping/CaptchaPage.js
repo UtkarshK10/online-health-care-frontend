@@ -142,7 +142,7 @@ const CaptchaPage = ({ match }) => {
                     e.preventDefault();
                     handleConfirmation();
                   }}
-                  className='btn btn-large pcolour btn-register waves-effect waves-light hover'
+                  className='btn btn-large pcolour btn-register waves-effect waves-light glow'
                 >
                   Confirm
                   <i className='material-icons right'>check_circle</i>

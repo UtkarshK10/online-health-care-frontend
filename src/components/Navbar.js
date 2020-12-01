@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth-context';
+import healthcare from '../assets/healthcare.svg';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import ToggleMode from './ToggleMode';
+
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
   // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -53,9 +54,9 @@ const HomePage = () => {
         <nav>
           <div className='nav-wrapper pcolour'>
             <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
-              Logo
+              <img src={healthcare} width='35' alt='logo' />
             </NavLink>
-            <ToggleMode />
+
             <NavLink
               to='/'
               className='brand-logo show-on-medium-and-down hide-on-large-only'

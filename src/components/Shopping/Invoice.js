@@ -242,7 +242,7 @@ const Invoice = (props) => {
                           <td>
                             <div className='right price'>
                               {' '}
-                              <span className='deep-orange-text darken-1'>
+                              <span className='highlight'>
                                 {invoiceData.GST} cr.
                               </span>{' '}
                             </div>

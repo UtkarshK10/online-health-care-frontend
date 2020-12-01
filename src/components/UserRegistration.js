@@ -237,7 +237,7 @@ function UserRegistration() {
                 <div className='row'>
                   {!loading && (
                     <div className='input-field'>
-                      <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                      <button className='btn btn-large pcolour btn-register waves-effect waves-light glow'>
                         Register
                         <i className='material-icons right'>check_circle</i>
                       </button>

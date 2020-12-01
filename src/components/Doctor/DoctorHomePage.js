@@ -116,11 +116,13 @@ export default function DoctorHomePage() {
       </div>
 
       <ul className='collection with-header'>
-        <li className='collection-header'>
-          <h4 className='ptcolour'>News Articles related to {searchItem}</h4>
+        <li className='collection-header bgsecondary '>
+          <h4 className='text-primary'>
+            News Articles related to {searchItem}
+          </h4>
         </li>
         {newsPosts.map((article, idx) => (
-          <li key={idx} className='collection-item'>
+          <li key={idx} className='collection-item bgsecondary'>
             <div className='row'>
               <div className='col s12 m4 l4'>
                 <img
@@ -130,10 +132,10 @@ export default function DoctorHomePage() {
                 />
               </div>
               <div className='col s12 m8 l8 '>
-                <span className='title stcolour font-app'>
+                <span className='title text-primary font-app'>
                   {article?.headline?.main}
                 </span>
-                <p className='grey-text'>
+                <p className='text-secondary'>
                   {shortDescription(article?.abstract)}
                 </p>
                 <a
@@ -142,7 +144,7 @@ export default function DoctorHomePage() {
                   href={`${article?.web_url}#!`}
                   className='secondary-content'
                 >
-                  <i className='material-icons blue-text ptcolour'>send</i>
+                  <i className='material-icons blue-text highlight'>send</i>
                 </a>
               </div>
             </div>

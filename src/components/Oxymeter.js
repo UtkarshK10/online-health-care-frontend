@@ -141,7 +141,7 @@ const Oxymeter = (props) => {
             {oxylevel > 0 && (
               <h4>
                 Your blood oxygen level is{' '}
-                <span className='ptcolour'>{+oxylevel.toFixed(2) + ' %'}</span>
+                <span className='highlight'>{+oxylevel.toFixed(2)}</span>
               </h4>
             )}
             {oxylevel > 0 && appointment && (
@@ -233,7 +233,7 @@ const Oxymeter = (props) => {
                       name='temperature'
                       className='validate'
                     />
-                    <label htmlFor='temperature' className='active font-app'>
+                    <label htmlFor='temperature' className='font-app'>
                       Body Temperature
                     </label>
                   </div>
