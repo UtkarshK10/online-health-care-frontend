@@ -32,24 +32,33 @@ const DoctorSchedule = () => {
     history.push(`/doctors/mail?email=${email}`);
   };
 
-  const handleAttendedConfirmation = id => {
-    setPropData({ label: "Are you sure you want to mark it as attended ?", callback: handleAttended, id: id, closeModal: () => setModal(false) });
+  const handleAttendedConfirmation = (id) => {
+    setPropData({
+      label: 'Are you sure you want to mark it as attended ?',
+      callback: handleAttended,
+      id: id,
+      closeModal: () => setModal(false),
+    });
     setModal(true);
-  }
+  };
 
-  const handleAttended = id => {
-    axios.patch('/api/records/attended', { "id": id }, {
-      headers: {
-        "dapi-token": auth?.token
-      }
-    })
-      .then(res => {
-
+  const handleAttended = (id) => {
+    axios
+      .patch(
+        '/api/records/attended',
+        { id: id },
+        {
+          headers: {
+            'dapi-token': auth?.token,
+          },
+        }
+      )
+      .then((res) => {
         if (res.status === 200) {
           updatePatientDetails(id);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -57,19 +66,20 @@ const DoctorSchedule = () => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
-  }
+      });
+  };
 
-  const updatePatientDetails = id => {
-    setPatientDetails(patientDetails.map(patient => {
-      if (patient.patient_record_id === id) {
-        patient.attended = 1;
-        return patient
-      }
-      return patient;
-    })
-    )
-  }
+  const updatePatientDetails = (id) => {
+    setPatientDetails(
+      patientDetails.map((patient) => {
+        if (patient.patient_record_id === id) {
+          patient.attended = 1;
+          return patient;
+        }
+        return patient;
+      })
+    );
+  };
 
   useEffect(() => {
     const fetchPatientDetails = () => {
@@ -107,89 +117,96 @@ const DoctorSchedule = () => {
     history.push(`/doctors/prescription?id=${id}`);
   };
   return (
-    <div className='container'>
-      <ul className='collection with-header'>
-        <li className='collection-header'>
+    <div className='container' style={{ paddingTop: '30px' }}>
+      <ul className='collection with-header' style={{ marginTop: '0px' }}>
+        <li className='collection-header bgcolor'>
           <h4>Patient Details List</h4>
         </li>
         {patientDetails.map((patientDetail, idx) => (
-          <li className='row' key={idx}>
-            <div className='col s12 m3 l3'>
-              <p style={{ fontSize: '1.5em', marginLeft: '0px' }}>
-                {patientDetail.patient_name} <br />
-                {patientDetail.age}
-              </p>
-            </div>
-            <div className='col s6 m1 l1'>
-              <p
-                className='ptcolour'
-                style={{ fontSize: '4.2em', margin: '2px', fontWeight: '400' }}
-              >
-                {patientDetail.gender[0].toUpperCase()}
-              </p>
-            </div>
-            <div className='col s6 l1 m1 offset-m1 offset-l1'>
-              <p
-                className='ptcolour'
-                style={{ fontSize: '4.3em', margin: '2px' }}
-              >
-                <img
-                  src={DetailsIcon}
-                  alt='details Icon'
-                  className='icon-size'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrPatient({ ...patientDetails[idx] });
-                    setIsDetails(true);
+          <>
+            <li className='row' key={idx}>
+              <div className='col s12 m3 l3'>
+                <p style={{ fontSize: '1.5em', marginLeft: '0px' }}>
+                  {patientDetail.patient_name} <br />
+                  {patientDetail.age}
+                </p>
+              </div>
+              <div className='col s6 m1 l1'>
+                <p
+                  className='ptcolour'
+                  style={{
+                    fontSize: '4.2em',
+                    margin: '2px',
+                    fontWeight: '400',
                   }}
-                />
-              </p>
-            </div>
-            <div className='col s12 m3 l3 offset-m3 offset-l3'>
-              <div className='row'>
-                <div className='col s9 m9 l9'>
-                  <button
-                    disabled={patientDetail.attended}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleClick(patientDetail?.patient_email);
-                    }}
-                    className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
-                  >
-                    Send Mail
-                    <i className='material-icons right'>call_made</i>
-                  </button>
-                </div>
-                <div className='col' style={{ paddingLeft: 0 }}>
+                >
+                  {patientDetail.gender[0].toUpperCase()}
+                </p>
+              </div>
+              <div className='col s6 l1 m1 offset-m1 offset-l1'>
+                <p
+                  className='ptcolour'
+                  style={{ fontSize: '4.3em', margin: '2px' }}
+                >
                   <img
-                    src={Prescription}
-                    alt='Prescription'
+                    src={DetailsIcon}
+                    alt='details Icon'
+                    className='icon-size'
                     onClick={(e) => {
                       e.preventDefault();
-                      handlePrescription(patientDetail.patient_record_id);
-                    }}
-                    style={{
-                      width: '40px',
-                      marginTop: '11px',
-                      cursor: 'pointer',
+                      setCurrPatient({ ...patientDetails[idx] });
+                      setIsDetails(true);
                     }}
                   />
-                </div>
-              </div>{' '}
-              <button
-                className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
-                style={{ marginTop: '0px' }}
-                disabled={patientDetail.attended}
-                onClick={e => {
-                  e.preventDefault();
-                  handleAttendedConfirmation(patientDetail.patient_record_id)
-                }}
-              >
-                Mark as complete
-                <i className='material-icons right'>check_circle</i>
-              </button>
-            </div>
-          </li>
+                </p>
+              </div>
+              <div className='col s12 m3 l3 offset-m3 offset-l3'>
+                <div className='row'>
+                  <div className='col s9 m9 l9'>
+                    <button
+                      disabled={patientDetail.attended}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleClick(patientDetail?.patient_email);
+                      }}
+                      className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
+                    >
+                      Send Mail
+                      <i className='material-icons right'>call_made</i>
+                    </button>
+                  </div>
+                  <div className='col' style={{ paddingLeft: 0 }}>
+                    <img
+                      src={Prescription}
+                      alt='Prescription'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePrescription(patientDetail.patient_record_id);
+                      }}
+                      style={{
+                        width: '40px',
+                        marginTop: '11px',
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </div>
+                </div>{' '}
+                <button
+                  className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
+                  style={{ marginTop: '0px' }}
+                  disabled={patientDetail.attended}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleAttendedConfirmation(patientDetail.patient_record_id);
+                  }}
+                >
+                  Mark as complete
+                  <i className='material-icons right'>check_circle</i>
+                </button>
+              </div>
+            </li>{' '}
+            <div className='divider'></div>
+          </>
         ))}
       </ul>
       <ConfirmationModal propData={propData} />

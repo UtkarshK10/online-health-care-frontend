@@ -12,8 +12,11 @@ html {
   --text-secondary: #303030;
   --highlight: #f4511e;
   --marble: url('./assets/marble.jpg');
+  --searchp: white;
 }
-
+.searchp {
+  background-color: var(--searchp);
+}
 .pcolour {
   background-color: var(--primary) !important;
 }
@@ -72,7 +75,7 @@ h4 {
   transition: opacity 500ms;
 }
 .cleft {
-  position: relative;
+  position: absolute;
   left: 20px;
 }
 
@@ -248,7 +251,7 @@ button {
   border: 2px solid #efefef;
 }
 .react-chatbot-kit-chat-bot-message {
-  background-color: var(--text-primary) !important;
+  background-color: var(--primary) !important;
   margin-left: 0 !important;
 }
 .react-chatbot-kit-chat-header {
@@ -256,14 +259,14 @@ button {
   color: #fff !important;
 }
 .react-chatbot-kit-chat-btn-send {
-  background-color: var(--text-secondary) !important;
+  background-color: var(--secondary) !important;
 }
 .react-chatbot-kit-chat-bot-message-arrow {
-  border-right: 8px solid var(--text-primary) !important;
+  border-right: 8px solid var(--primary) !important;
   left: -8.5px !important;
 }
 .react-chatbot-kit-chat-bot-avatar-container {
-  background-color: var(--text-secondary) !important;
+  background-color: var(--secondary) !important;
 }
 .react-chatbot-kit-chat-bot-avatar-letter {
   color: #fff !important;
@@ -273,19 +276,19 @@ button {
   border: none !important;
 }
 .react-chatbot-kit-chat-input:focus {
-  border-bottom: 1px solid var(--text-primary) !important;
+  border-bottom: 1px solid var(--primary) !important;
   outline: none !important;
 }
 .react-chatbot-kit-user-chat-message {
-  background-color: var(--text-primary) !important;
+  background-color: var(--primary) !important;
   color: #fff !important;
 }
 .react-chatbot-kit-user-chat-message-arrow {
-  border-left: 8px solid var(--text-primary) !important;
+  border-left: 8px solid var(--primary) !important;
   right: -8px !important;
 }
 .react-chatbot-kit-user-avatar-container {
-  background-color: var(--text-secondary) !important;
+  background-color: var(--secondary) !important;
 }
 .center {
   justify-content: center;
@@ -374,6 +377,15 @@ table td {
 .sideinside * {
   color: var(--text-secondary) !important;
 }
+<<<<<<< HEAD
+=======
+
+.lightswitch {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+>>>>>>> e7d0883928075f717ac623ddd7c37ea0f5e969ad
 /* UserRegistration.css*/
 
 .first,
@@ -503,7 +515,7 @@ table td {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-  z-index: -1;
+  z-index: 0;
 }
 
 @media screen and (min-width: 1200px) {

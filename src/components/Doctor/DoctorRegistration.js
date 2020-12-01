@@ -316,7 +316,7 @@ function DoctorRegistration(props) {
                       <button
                         type='button'
                         onClick={pickImageHandler}
-                        className='btn btn-large pcolour btn-register waves-effect waves-light hover'
+                        className='btn btn-large pcolour btn-register waves-effect waves-light glow'
                       >
                         Upload Profile Picture
                         <i className='material-icons right'>image</i>
@@ -329,7 +329,7 @@ function DoctorRegistration(props) {
                 <div className='row'>
                   {!loading && (
                     <div className='input-field'>
-                      <button className='btn btn-large pcolour btn-register waves-effect waves-light hover'>
+                      <button className='btn btn-large pcolour btn-register waves-effect waves-light glow'>
                         Register
                         <i className='material-icons right'>check_circle</i>
                       </button>
@@ -347,7 +347,6 @@ function DoctorRegistration(props) {
             </div>
           </div>
         </div>
-
       </div>
       <DoctorOTPModal />
     </>

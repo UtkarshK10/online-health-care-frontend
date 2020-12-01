@@ -2,7 +2,7 @@ import React from 'react';
 
 const PatientCountCard = ({ title, count, icon }) => {
   return (
-    <div className='card hoverable'>
+    <div className='card hoverable bgsecondary'>
       <div className='card-title'>
         {title[0].toUpperCase() + title.slice(1)}
       </div>

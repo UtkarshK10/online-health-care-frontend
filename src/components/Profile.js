@@ -5,6 +5,7 @@ import CustomG from './CustomG';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import ToggleMode from './ToggleMode';
 
 const Profile = ({ isDoctor }) => {
   const [edit, setEdit] = useState(false);
@@ -132,6 +133,10 @@ const Profile = ({ isDoctor }) => {
                 <i className='material-icons right'>save</i>
               </button>
             )}
+            <label>
+              <p style={{ fontSize: '20px' }}>Switch Theme</p>
+              <ToggleMode />
+            </label>
           </div>
           <div className='col s12 m7 l7 offset-l1 offset-m1'>
             <form onSubmit={update} className={`update-form  ${classD}`}>

@@ -15,7 +15,10 @@ const DoctorNavbar = () => {
       <div className='navbar-fixed'>
         <nav>
           <div className='nav-wrapper pcolour'>
-            <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
+            <NavLink
+              to='/doctors'
+              className='cleft brand-logo hide-on-med-and-down'
+            >
               Logo
             </NavLink>
             <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
@@ -25,18 +28,12 @@ const DoctorNavbar = () => {
               {auth?.isLoggedIn && (
                 <>
                   <li>
-                    <NavLink
-                      to='/doctors/schedules'
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
+                    <NavLink to='/doctors/schedules' activeClassName='scolour'>
                       <i className='material-icons'>event_note</i>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to={`/doctors/user`}
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
+                    <NavLink to={`/doctors/user`} activeClassName='scolour'>
                       <span
                         style={{
                           display: 'flex',
@@ -51,10 +48,7 @@ const DoctorNavbar = () => {
                   </li>
 
                   <li>
-                    <NavLink
-                      to={`/logout`}
-                      activeStyle={{ backgroundColor: '#db4619' }}
-                    >
+                    <NavLink to={`/logout`} activeClassName='scolour'>
                       <span
                         style={{
                           display: 'flex',
@@ -89,7 +83,7 @@ const DoctorNavbar = () => {
             <li>
               <NavLink
                 to='/doctors/schedules'
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
+                activeClassName='scolour'
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -108,10 +102,7 @@ const DoctorNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to={`/doctors/user`}
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to={`/doctors/user`} activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',
@@ -125,10 +116,7 @@ const DoctorNavbar = () => {
             </li>
 
             <li>
-              <NavLink
-                to={`/logout`}
-                activeStyle={{ backgroundColor: '#db4619', color: 'white' }}
-              >
+              <NavLink to={`/logout`} activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',

@@ -48,7 +48,7 @@ const Oxymeter = (props) => {
         })
         .then((res) => {
           setLoading(false);
-          setLevel(+res.data.spo2.toFixed(2));
+          setLevel(+res.data);
         })
         .catch((err) => {
           setLoading(false);
@@ -139,10 +139,16 @@ const Oxymeter = (props) => {
             )}
             {loading && <ReactSpinner size={150} />}
             {oxylevel > 0 && (
-              <h4>
-                Your blood oxygen level is{' '}
-                <span className='ptcolour'>{+oxylevel.toFixed(2) + ' %'}</span>
-              </h4>
+              <>
+                <h4>
+                  Your blood oxygen level is{' '}
+                  <span className='highlight'>{+oxylevel.spo2.toFixed(2)}</span>
+                </h4>
+                <h4>
+                  Your heart rate is{' '}
+                  <span className='highlight'>{+oxylevel.heart_rate.toFixed(2)}</span>
+                </h4>
+              </>
             )}
             {oxylevel > 0 && appointment && (
               <a
@@ -233,7 +239,7 @@ const Oxymeter = (props) => {
                       name='temperature'
                       className='validate'
                     />
-                    <label htmlFor='temperature' className='active font-app'>
+                    <label htmlFor='temperature' className='font-app'>
                       Body Temperature
                     </label>
                   </div>

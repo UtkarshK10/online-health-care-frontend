@@ -242,7 +242,7 @@ const Invoice = (props) => {
                           <td>
                             <div className='right price'>
                               {' '}
-                              <span className='deep-orange-text darken-1'>
+                              <span className='highlight'>
                                 {invoiceData.GST} cr.
                               </span>{' '}
                             </div>
@@ -287,10 +287,10 @@ const Invoice = (props) => {
                 <div className='input-field'>
                   <button
                     className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                    // onClick={e => {
-                    //     e.preventDefault();
-                    //     downloadInvoice();
-                    // }}
+                  // onClick={e => {
+                  //     e.preventDefault();
+                  //     downloadInvoice();
+                  // }}
                   >
                     Print
                     <i className='material-icons left'>get_app</i>

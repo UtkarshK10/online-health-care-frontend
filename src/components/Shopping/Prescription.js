@@ -11,7 +11,7 @@ const Prescription = ({
   deletePrescription,
   editInstruction,
   recordID,
-  resetPage
+  resetPage,
 }) => {
   const { auth } = useContext(AuthContext);
   const [loading_inc_dec, setLoadingIncDec] = useState(false);
@@ -32,15 +32,19 @@ const Prescription = ({
     });
 
     axios
-      .post(`/api/prescriptions/create/${recordID}`, { data }, {
-        headers: {
-          'dapi-token': auth?.token,
-        },
-      })
-      .then(res => {
+      .post(
+        `/api/prescriptions/create/${recordID}`,
+        { data },
+        {
+          headers: {
+            'dapi-token': auth?.token,
+          },
+        }
+      )
+      .then((res) => {
         if (res.status === 200) {
           resetPage();
-          M.toast({ html: res.data.msg })
+          M.toast({ html: res.data.msg });
         }
       })
       .catch((err) => {
@@ -60,8 +64,8 @@ const Prescription = ({
 
   return (
     <>
-      <ul className='collection with-header'>
-        <li className='collection-header'>
+      <ul className='collection with-header ' style={{ marginTop: '0px' }}>
+        <li className='collection-header bgcolor'>
           <div className='row hide-on-small-only'>
             <div className='col s12 m6 l6 offset-m3 offset-l3'>
               <h4 className='left-align'>Test's Prescription</h4>
@@ -87,7 +91,10 @@ const Prescription = ({
                   }}
                 >
                   {prescriptionDetail.name} <br />
-                  <span className='grey-text' style={{ fontSize: '0.8em' }}>
+                  <span
+                    className='text-secondary'
+                    style={{ fontSize: '0.8em' }}
+                  >
                     {prescriptionDetail.description}
                   </span>
                 </p>
@@ -98,91 +105,91 @@ const Prescription = ({
                     <ReactSpinner size='30px' />
                   </div>
                 ) : (
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(prescriptionDetail.id, -1);
                       }}
+                      className='material-icons text-primary'
+                      style={{ cursor: 'pointer' }}
                     >
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(prescriptionDetail.id, -1);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        remove
+                      remove
                     </i>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                        className='btn btn-small scolour waves-effect'
-                      >
-                        <span style={{ fontSize: '18px' }}>
-                          {prescriptionDetail.quantity}
-                        </span>{' '}
-                      </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                      className='btn btn-small scolour waves-effect'
+                    >
+                      <span style={{ fontSize: '18px' }}>
+                        {prescriptionDetail.quantity}
+                      </span>{' '}
+                    </button>
 
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(prescriptionDetail.id, 1);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        add
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(prescriptionDetail.id, 1);
+                      }}
+                      className='material-icons text-primary'
+                      style={{ cursor: 'pointer' }}
+                    >
+                      add
                     </i>
-                    </div>
-                  )}
+                  </div>
+                )}
               </div>
               <div className='row hide-on-med-and-up'>
                 {loading_inc_dec ? (
                   <ReactSpinner size='25px' />
                 ) : (
-                    <div
-                      className=' col s12'
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginLeft: '30%',
+                  <div
+                    className=' col s12'
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginLeft: '30%',
+                    }}
+                  >
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(prescriptionDetail.medicine_id, -1);
                       }}
+                      className='material-icons text-primary'
+                      style={{ cursor: 'pointer' }}
                     >
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(prescriptionDetail.medicine_id, -1);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        remove
+                      remove
                     </i>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                        className='btn btn-small scolour waves-effect'
-                      >
-                        <span style={{ fontSize: '18px' }}>
-                          {prescriptionDetail.quantity}
-                        </span>{' '}
-                      </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                      className='btn btn-small scolour waves-effect'
+                    >
+                      <span style={{ fontSize: '18px' }}>
+                        {prescriptionDetail.quantity}
+                      </span>{' '}
+                    </button>
 
-                      <i
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEdit(prescriptionDetail.id, 1);
-                        }}
-                        className='material-icons ptcolour'
-                        style={{ cursor: 'pointer' }}
-                      >
-                        add
+                    <i
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(prescriptionDetail.id, 1);
+                      }}
+                      className='material-icons text-primary'
+                      style={{ cursor: 'pointer' }}
+                    >
+                      add
                     </i>
-                    </div>
-                  )}
+                  </div>
+                )}
               </div>
               <div className='col s12 m3 l3'>
                 <div className='row'>
@@ -242,7 +249,7 @@ const Prescription = ({
                 handleSubmit();
               }}
               disabled={prescription?.length === 0}
-              className='btn btn-large pcolour btn-register waves-effect waves-light hover'
+              className='btn btn-large pcolour btn-register waves-effect waves-light glow'
             >
               Submit
               <i className='material-icons right'>add_task</i>

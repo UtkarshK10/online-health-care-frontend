@@ -139,7 +139,7 @@ const DoctorMail = (props) => {
                 {!loading && (
                   <div className='input-field'>
                     <button
-                      className='btn btn-large pcolour btn-register waves-effect waves-light hover'
+                      className='btn btn-large pcolour btn-register waves-effect waves-light glow'
                       style={{ zIndex: 0 }}
                     >
                       Submit
