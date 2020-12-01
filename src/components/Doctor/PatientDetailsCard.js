@@ -62,9 +62,12 @@ const PatientDetailsCard = ({ currPatient, updateState }) => {
                 <CardField keyName={keyNames[1]} value={currPatient.gender} />
                 <CardField
                   keyName={keyNames[2]}
-                  value={currPatient.oxygen_level}
+                  value={currPatient.oxygen_level.toFixed(2)}
                 />
-                <CardField keyName={keyNames[3]} value={currPatient.heart_rate} />
+                <CardField
+                  keyName={keyNames[3]}
+                  value={currPatient.heart_rate.toFixed(2)}
+                />
                 <CardField
                   keyName={keyNames[4]}
                   value={currPatient.temperature}

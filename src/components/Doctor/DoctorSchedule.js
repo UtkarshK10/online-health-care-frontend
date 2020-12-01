@@ -123,8 +123,8 @@ const DoctorSchedule = () => {
           <h4>Patient Details List</h4>
         </li>
         {patientDetails.map((patientDetail, idx) => (
-          <>
-            <li className='row' key={idx}>
+          <React.Fragment key={idx}>
+            <li className='row'>
               <div className='col s12 m3 l3'>
                 <p style={{ fontSize: '1.5em', marginLeft: '0px' }}>
                   {patientDetail.patient_name} <br />
@@ -206,7 +206,7 @@ const DoctorSchedule = () => {
               </div>
             </li>{' '}
             <div className='divider'></div>
-          </>
+          </React.Fragment>
         ))}
       </ul>
       <ConfirmationModal propData={propData} />

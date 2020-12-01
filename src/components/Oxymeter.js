@@ -13,7 +13,7 @@ import useTheme from './useTheme';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
-  const [oxylevel, setLevel] = useState(0);
+  const [oxylevel, setLevel] = useState({});
 
   const theme = useTheme();
 
@@ -47,8 +47,9 @@ const Oxymeter = (props) => {
           },
         })
         .then((res) => {
+          setLevel(res.data);
+          console.log(res.data);
           setLoading(false);
-          setLevel(+res.data);
         })
         .catch((err) => {
           setLoading(false);
@@ -114,8 +115,6 @@ const Oxymeter = (props) => {
       filtered = [...toFilter, value];
     }
     setCheckboxData({ ...checkboxData, [name]: [...filtered] });
-
-    // console.log(checkboxData);
   };
 
   if (!showForm) {
@@ -138,7 +137,7 @@ const Oxymeter = (props) => {
               />
             )}
             {loading && <ReactSpinner size={150} />}
-            {oxylevel > 0 && (
+            {oxylevel?.spo2 > 0 && (
               <>
                 <h4>
                   Your blood oxygen level is{' '}
@@ -146,11 +145,13 @@ const Oxymeter = (props) => {
                 </h4>
                 <h4>
                   Your heart rate is{' '}
-                  <span className='highlight'>{+oxylevel.heart_rate.toFixed(2)}</span>
+                  <span className='highlight'>
+                    {+oxylevel.heart_rate.toFixed(2)}
+                  </span>
                 </h4>
               </>
             )}
-            {oxylevel > 0 && appointment && (
+            {oxylevel?.spo2 > 0 && appointment && (
               <a
                 href='#!'
                 onClick={(e) => {
@@ -184,10 +185,10 @@ const Oxymeter = (props) => {
     const jsonData = {
       ...data,
       ...otherCheckboxData,
-      oxy_level: oxylevel,
+      oxy_level: oxylevel?.spo2,
+      heart_rate: oxylevel?.heart_rate,
       user_id: auth.user_id,
       doctor_id,
-      transaction_id: 1,
     };
     axios
       .post('/api/records/', jsonData, {

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth-context';
+import healthcare from '../../assets/healthcare.svg';
 
 import M from 'materialize-css/dist/js/materialize.min.js';
 const DoctorNavbar = () => {
@@ -19,7 +20,15 @@ const DoctorNavbar = () => {
               to='/doctors'
               className='cleft brand-logo hide-on-med-and-down'
             >
-              Logo
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={healthcare}
+                  width='35'
+                  alt='logo'
+                  style={{ marginRight: '5px' }}
+                />
+                Medico
+              </span>
             </NavLink>
             <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
               <i className='material-icons'>menu</i>

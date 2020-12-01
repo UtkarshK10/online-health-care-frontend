@@ -3,7 +3,7 @@ import React from 'react';
 export default function RadioButton({ name, val1, val2, handleChange, curr }) {
   return (
     <div className='input-field' onChange={handleChange}>
-      <div className='first'>
+      <div className='col s12 m3 l3 offset-l3 offset-m3'>
         <label>
           <input
             className='with-gap'
@@ -15,7 +15,7 @@ export default function RadioButton({ name, val1, val2, handleChange, curr }) {
           <span className='font-app'>{val1}</span>
         </label>
       </div>
-      <div className='second'>
+      <div className='col s12 m3 l3'>
         <label>
           <input
             className='with-gap'

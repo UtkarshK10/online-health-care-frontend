@@ -313,7 +313,7 @@ const ConfirmationPage = () => {
           <div className='row'>
             <div className='col s12 m12 l12'>
               <div id=''>
-                <form className='padding-form shadow'>
+                <form className='padding-form shadow' autoComplete='off'>
                   {' '}
                   <div className='row'>
                     <div className='col s12 m6 l6'>

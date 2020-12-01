@@ -74,7 +74,7 @@ const DoctorPrescription = (props) => {
         let updatedQty = +p.quantity;
         updatedQty += qty;
         // console.log(updatedQty);
-        if (updatedQty > 0 && updatedQty < 11) {
+        if (updatedQty > 0 && updatedQty < 11 && id === p.id) {
           p.quantity = updatedQty;
           return p;
         }

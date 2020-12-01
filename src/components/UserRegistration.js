@@ -210,7 +210,7 @@ function UserRegistration() {
                 </div>
                 <div className='row'>
                   <div className='input-field' onChange={handleGender}>
-                    <div className='first'>
+                    <div className='col s12 m4 l4 offset-m2 offset-l2'>
                       <label>
                         <input
                           className='with-gap'
@@ -221,7 +221,7 @@ function UserRegistration() {
                         <span>Male</span>
                       </label>
                     </div>
-                    <div className='second'>
+                    <div className='col s12 m4 l4 offset-m2'>
                       <label>
                         <input
                           className='with-gap'

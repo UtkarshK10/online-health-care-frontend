@@ -54,14 +54,22 @@ const HomePage = () => {
         <nav>
           <div className='nav-wrapper pcolour'>
             <NavLink to='/' className='cleft brand-logo hide-on-med-and-down'>
-              <img src={healthcare} width='35' alt='logo' />
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={healthcare}
+                  width='35'
+                  alt='logo'
+                  style={{ marginRight: '5px' }}
+                />
+                Medico
+              </span>
             </NavLink>
 
             <NavLink
               to='/'
               className='brand-logo show-on-medium-and-down hide-on-large-only'
             >
-              Logo
+              <img src={healthcare} width='35' alt='logo' />
             </NavLink>
             <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
               <i className='material-icons'>menu</i>
