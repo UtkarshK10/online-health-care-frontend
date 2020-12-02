@@ -20,10 +20,13 @@ const DoctorOTPModal = (props) => {
   };
 
   const handleSubmit = async (e) => {
+    const regexForNumbers = /\d+/;
     e.preventDefault();
     if (!props?.info) {
       if (otp.length <= 0) {
         M.toast({ html: 'Please enter an OTP' });
+      } else if (!regexForNumbers.test(otp)) {
+        M.toast({ html: 'OTP can\'t have alphabets' });
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
@@ -82,7 +85,7 @@ const DoctorOTPModal = (props) => {
   };
 
   return (
-    <div id='OtpModal' className='modal dmodal'>
+    <div id='OtpModal' className='modal dmodal bgsecondary'>
       <div className='modal-content'>
         <h4>
           {props?.info
@@ -105,25 +108,25 @@ const DoctorOTPModal = (props) => {
               </label>
             </div>
           ) : (
-            <div className='input-field'>
-              <input
-                autoFocus
-                type='email'
-                name='Email'
-                value={email}
-                onChange={setEmail}
-              />
-              <label htmlFor='Email' className='active'>
-                Email
+              <div className='input-field'>
+                <input
+                  autoFocus
+                  type='email'
+                  name='Email'
+                  value={email}
+                  onChange={setEmail}
+                />
+                <label htmlFor='Email' className='active'>
+                  Email
               </label>
-            </div>
-          )}
+              </div>
+            )}
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}
         </div>
       </div>
-      <div className='modal-footer'>
+      <div className='modal-footer bgsecondary'>
         <a
           href='#!'
           onClick={handleSubmit}

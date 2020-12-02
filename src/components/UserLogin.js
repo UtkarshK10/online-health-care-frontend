@@ -55,7 +55,7 @@ function UserLogin(props) {
         .then((res) => {
           if (res.status === 200 && res.data.msg === 'unverified') {
             const resData = {
-              user_id: res.data.user_id,
+              username: res.data.username,
             };
             setAuth(resData);
             setModal(true);

@@ -20,10 +20,13 @@ const OTPModal = (props) => {
   };
 
   const handleSubmit = async (e) => {
+    const regexForNumbers = /\d+/;
     e.preventDefault();
     if (!props?.info) {
       if (otp.length <= 0) {
         M.toast({ html: 'Please enter an OTP' });
+      } else if (!regexForNumbers.test(otp)) {
+        M.toast({ html: 'OTP can\'t have alphabets' });
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
@@ -81,7 +84,7 @@ const OTPModal = (props) => {
   };
 
   return (
-    <div id='OtpModal' className='modal umodal'>
+    <div id='OtpModal' className='modal umodal bgsecondary'>
       <div className='modal-content'>
         <h4>{props?.info ? props?.info?.title : 'Enter the OTP to verify your email'}</h4>
         <div className='row'>
@@ -107,7 +110,7 @@ const OTPModal = (props) => {
           )}
         </div>
       </div>
-      <div className='modal-footer'>
+      <div className='modal-footer bgsecondary'>
         <a
           href='#!'
           onClick={handleSubmit}

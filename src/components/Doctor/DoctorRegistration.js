@@ -143,7 +143,7 @@ function DoctorRegistration(props) {
           //   saveLocalStorage(resData);
           //   history.push('/doctors');
           const resData = {
-            user_id: res.data.username,
+            username: res.data.username,
           };
           setAuth(resData);
           saveLocalStorage(resData);
