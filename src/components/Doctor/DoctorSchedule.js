@@ -7,6 +7,7 @@ import PatientDetailsCard from './PatientDetailsCard';
 import Prescription from '../../assets/prescription.png';
 import ConfirmationModal from '../../Modal/ConfirmationModal';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import videoCall from '../../assets/video-call.png';
 
 const DoctorSchedule = () => {
   const { auth } = useContext(AuthContext);
@@ -190,19 +191,39 @@ const DoctorSchedule = () => {
                       }}
                     />
                   </div>
-                </div>{' '}
-                <button
-                  className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
-                  style={{ marginTop: '0px' }}
-                  disabled={patientDetail.attended}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleAttendedConfirmation(patientDetail.patient_record_id);
-                  }}
-                >
-                  Mark as complete
-                  <i className='material-icons right'>check_circle</i>
-                </button>
+                </div>
+                <div className='row'>
+                  <div className='col'>
+                    <button
+                      className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
+                      style={{ marginTop: '0px' }}
+                      disabled={patientDetail.attended}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleAttendedConfirmation(
+                          patientDetail.patient_record_id
+                        );
+                      }}
+                    >
+                      Mark
+                      <i className='material-icons right'>check_circle</i>
+                    </button>
+                  </div>
+                  <div className='col'>
+                    <a
+                      style={{ margin: 0, padding: 0 }}
+                      target='_blank'
+                      rel='noreferrer'
+                      href={`http://localhost:8000/login?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
+                    >
+                      <img
+                        src={videoCall}
+                        alt='videocall'
+                        style={{ width: '40px' }}
+                      />
+                    </a>
+                  </div>
+                </div>
               </div>
             </li>{' '}
             <div className='divider'></div>
