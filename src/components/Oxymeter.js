@@ -132,7 +132,7 @@ const Oxymeter = (props) => {
                   'video/m4v',
                   'video/wav',
                 ]}
-                maxFileSize={20971520}
+                maxFileSize={16777216}
                 filesLimit={1}
               />
             )}

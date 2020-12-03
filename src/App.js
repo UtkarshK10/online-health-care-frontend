@@ -150,7 +150,7 @@ function App() {
                     path='/oxymeter'
                     render={() => (
                       <div className='page'>
-                        <Oxymeter title='Please drop your 20 secs video to monitor oxygen amount' />
+                        <Oxymeter title='Please drop your 25 secs video to monitor oxygen amount and heart rate' />
                       </div>
                     )}
                   />

@@ -96,8 +96,8 @@ const ConfirmationPage = () => {
       M.toast({ html: 'Name cannot be empty' });
     } else if (!regularExpressionPhone.test(phone_number)) {
       M.toast({ html: 'Please enter a valid phone number' });
-    } else if (house_number.length < 3) {
-      M.toast({ html: 'House number should be atleast 3 characters long' });
+    } else if (house_number.length < 1) {
+      M.toast({ html: 'House number should be atleast 1 characters long' });
     } else if (street.length < 5) {
       M.toast({ html: 'Street should be at least 5 characters long' });
     } else if (!regularExpressionZip.test(zip_code)) {
