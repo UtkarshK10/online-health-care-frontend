@@ -38,6 +38,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import useTheme from './components/useTheme';
 import bmarble from './assets/bmarble.jpg';
 import marble from './assets/marble.jpg';
+import AboutUs from './components/AboutUs';
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -131,6 +132,15 @@ function App() {
                     render={() => (
                       <div className='page'>
                         <HomePage />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/aboutus'
+                    render={() => (
+                      <div className='page'>
+                        <AboutUs />
                       </div>
                     )}
                   />

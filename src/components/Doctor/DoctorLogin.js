@@ -120,7 +120,7 @@ function DoctorLogin(props) {
                   </div>
                 </div>
                 <p className='right-align'>
-                  <Link to='#' onClick={handleClick} className='stcolour'>
+                  <Link to='#' onClick={handleClick} className='text-secondary'>
                     Forgot password?
                   </Link>
                 </p>
@@ -150,7 +150,7 @@ function DoctorLogin(props) {
                 </div>
               </form>
               <span>New to App?</span>{' '}
-              <Link to='/doctors/signup' className='stcolour'>
+              <Link to='/doctors/signup' className='text-secondary'>
                 Register
               </Link>
             </div>
