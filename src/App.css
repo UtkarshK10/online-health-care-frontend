@@ -300,7 +300,7 @@ button {
   }
 }
 .icon-size {
-  width: 48px;
+  width: 52px;
   vertical-align: center;
   cursor: pointer;
 }
@@ -534,4 +534,18 @@ table td {
 }
 .btn:hover {
   background-color: var(--secondary);
+}
+.developer {
+  -moz-box-shadow: 2px 2px 4px 5px #ccc;
+  -webkit-box-shadow: 2px 2px 4px 5px #ccc;
+  box-shadow: 2px 2px 4px 5px #ccc;
+  transform: scale(1.02);
+}
+.developer:hover {
+  -moz-box-shadow: 1px 1px 2px 3px #ccc;
+  -webkit-box-shadow: 1px 1px 2px 3px #ccc;
+  box-shadow: 1px 1px 2px 3px #ccc;
+  transition: all 1s;
+  transition-delay: 0.3s;
+  transform: scale(1) !important;
 }

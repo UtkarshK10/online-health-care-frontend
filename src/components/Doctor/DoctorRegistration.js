@@ -340,7 +340,7 @@ function DoctorRegistration(props) {
               </form>
               <span>
                 Already registered?{' '}
-                <Link to='/doctors/login' className='stcolour'>
+                <Link to='/doctors/login' className='text-secondary'>
                   Login
                 </Link>
               </span>

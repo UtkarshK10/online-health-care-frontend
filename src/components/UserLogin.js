@@ -47,6 +47,7 @@ function UserLogin(props) {
         html: 'Password should be of minimum 6 characters',
       });
     } else {
+      setLoading(true);
       const headers = { 'Content-Type': 'application/json' };
       axios
         .post('/api/users/login', data, {
@@ -58,6 +59,7 @@ function UserLogin(props) {
               username: res.data.username,
             };
             setAuth(resData);
+            setLoading(false);
             setModal(true);
           } else if (res.status === 200) {
             const resData = {
@@ -68,6 +70,7 @@ function UserLogin(props) {
             };
             setAuth(resData);
             saveLocalStorage(resData);
+            setLoading(false);
             history.push('/');
           }
         })
@@ -145,7 +148,7 @@ function UserLogin(props) {
                       </button>
                     </div>
                   )}
-                  {loading && <ReactSpinner size={25} />}
+                  {loading && <ReactSpinner size={35} />}
                 </div>
               </form>
               <span>New to App?</span>{' '}

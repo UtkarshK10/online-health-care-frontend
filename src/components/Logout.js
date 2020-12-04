@@ -11,6 +11,8 @@ const Logout = () => {
         clearLocalStorage();
         return () => {
             history.replace('/login')
+            window.location.reload()
+
         }
     }, [setAuth, history])
 

@@ -8,6 +8,7 @@ import Prescription from '../../assets/prescription.png';
 import ConfirmationModal from '../../Modal/ConfirmationModal';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import videoCall from '../../assets/video-call.png';
+import sad from '../../assets/sad.png';
 
 const DoctorSchedule = () => {
   const { auth } = useContext(AuthContext);
@@ -123,113 +124,128 @@ const DoctorSchedule = () => {
         <li className='collection-header bgcolor'>
           <h4>Patient Details List</h4>
         </li>
-        {patientDetails.map((patientDetail, idx) => (
-          <React.Fragment key={idx}>
-            <li className='row'>
-              <div className='col s12 m3 l3'>
-                <p style={{ fontSize: '1.5em', marginLeft: '0px' }}>
-                  {patientDetail.patient_name} <br />
-                  {patientDetail.age}<br />
-                  {patientDetail.gender[0].toUpperCase()}
-                </p>
-              </div>
-              <div className='col s6 m1 l1'>
-                <p
-                  className='ptcolour'
-                  style={{
-                    fontSize: '4.2em',
-                    margin: '2px',
-                    fontWeight: '400',
-                  }}
-                >
-                  {patientDetail?.meeting_time}
-                </p>
-              </div>
-              <div className='col s6 l1 m1 offset-m1 offset-l1'>
-                <p
-                  className='ptcolour'
-                  style={{ fontSize: '4.3em', margin: '2px' }}
-                >
-                  <img
-                    src={DetailsIcon}
-                    alt='details Icon'
-                    className='icon-size'
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrPatient({ ...patientDetails[idx] });
-                      setIsDetails(true);
+        {patientDetails.length > 0 &&
+          patientDetails.map((patientDetail, idx) => (
+            <React.Fragment key={idx}>
+              <li className='row'>
+                <div className='col s12 m3 l3'>
+                  <p
+                    style={{
+                      fontSize: '1.7em',
+                      marginLeft: '0px',
+                      marginTop: '10px',
                     }}
-                  />
-                </p>
-              </div>
-              <div className='col s12 m3 l3 offset-m3 offset-l3'>
-                <div className='row'>
-                  <div className='col s9 m9 l9'>
-                    <button
-                      disabled={patientDetail.attended}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleClick(patientDetail?.patient_email, patientDetail.patient_record_id);
-                      }}
-                      className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
-                    >
-                      Send Mail
-                      <i className='material-icons right'>call_made</i>
-                    </button>
-                  </div>
-                  <div className='col' style={{ paddingLeft: 0 }}>
+                  >
+                    {patientDetail.patient_name} <br />
+                    {patientDetail.age}
+                    <br />
+                  </p>
+                </div>
+                <div className='col s6 m1 l1'>
+                  <p
+                    className='text-primary'
+                    style={{
+                      fontSize: '4.2em',
+                      margin: '2px',
+                      fontWeight: '400',
+                    }}
+                  >
+                    {patientDetail?.meeting_time}
+                  </p>
+                </div>
+                <div className='col s6 l1 m1 offset-m1 offset-l1'>
+                  <p
+                    className='text-primary'
+                    style={{ fontSize: '4.3em', margin: '2px' }}
+                  >
                     <img
-                      src={Prescription}
-                      alt='Prescription'
+                      src={DetailsIcon}
+                      alt='details Icon'
+                      className='icon-size'
                       onClick={(e) => {
                         e.preventDefault();
-                        handlePrescription(patientDetail.patient_record_id);
-                      }}
-                      style={{
-                        width: '40px',
-                        marginTop: '11px',
-                        cursor: 'pointer',
+                        setCurrPatient({ ...patientDetails[idx] });
+                        setIsDetails(true);
                       }}
                     />
-                  </div>
+                  </p>
                 </div>
-                <div className='row'>
-                  <div className='col'>
-                    <button
-                      className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
-                      style={{ marginTop: '0px' }}
-                      disabled={patientDetail.attended}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleAttendedConfirmation(
-                          patientDetail.patient_record_id
-                        );
-                      }}
-                    >
-                      Mark
-                      <i className='material-icons right'>check_circle</i>
-                    </button>
-                  </div>
-                  <div className='col'>
-                    <a
-                      style={{ margin: 0, padding: 0 }}
-                      target='_blank'
-                      rel='noreferrer'
-                      href={`http://localhost:8000/login?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
-                    >
+                <div className='col s12 m3 l3 offset-m3 offset-l3'>
+                  <div className='row'>
+                    <div className='col s9 m9 l9'>
+                      <button
+                        disabled={patientDetail.attended}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleClick(patientDetail?.patient_email);
+                        }}
+                        className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
+                      >
+                        Send Mail
+                        <i className='material-icons right'>call_made</i>
+                      </button>
+                    </div>
+                    <div className='col' style={{ paddingLeft: 0 }}>
                       <img
-                        src={videoCall}
-                        alt='videocall'
-                        style={{ width: '40px' }}
+                        src={Prescription}
+                        alt='Prescription'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handlePrescription(patientDetail.patient_record_id);
+                        }}
+                        style={{
+                          width: '40px',
+                          marginTop: '11px',
+                          cursor: 'pointer',
+                        }}
                       />
-                    </a>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col'>
+                      <button
+                        className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
+                        style={{ marginTop: '0px' }}
+                        disabled={patientDetail.attended}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAttendedConfirmation(
+                            patientDetail.patient_record_id
+                          );
+                        }}
+                      >
+                        Mark
+                        <i className='material-icons right'>check_circle</i>
+                      </button>
+                    </div>
+                    <div className='col'>
+                      <a
+                        style={{ margin: 0, padding: 0 }}
+                        target='_blank'
+                        rel='noreferrer'
+                        href={`http://localhost:8000/login?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
+                      >
+                        <img
+                          src={videoCall}
+                          alt='videocall'
+                          style={{ width: '40px' }}
+                        />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>{' '}
-            <div className='divider'></div>
-          </React.Fragment>
-        ))}
+              </li>{' '}
+              <div className='divider'></div>
+            </React.Fragment>
+          ))}
+        {patientDetails.length === 0 && (
+          <p style={{ fontSize: '34px' }}>
+            No records found
+            <br />
+            <br />
+            <img src={sad} alt='noRecord' style={{ height: '200px' }} />
+          </p>
+        )}
       </ul>
       <ConfirmationModal propData={propData} />
     </div>
