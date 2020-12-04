@@ -26,16 +26,16 @@ const OTPModal = (props) => {
       if (otp.length <= 0) {
         M.toast({ html: 'Please enter an OTP' });
       } else if (!regexForNumbers.test(otp)) {
-        M.toast({ html: 'OTP can\'t have alphabets' });
+        M.toast({ html: "OTP can't have alphabets" });
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
-        axios.post(`/api/users/validate/${auth.username}`, data, {
-          headers: headers,
-        })
-          .then(res => {
+        axios
+          .post(`/api/users/validate/${auth.username}`, data, {
+            headers: headers,
+          })
+          .then((res) => {
             if (res.status === 200) {
-
               const resData = {
                 credits: res.data.total_credit,
                 isLoggedIn: true,
@@ -44,10 +44,10 @@ const OTPModal = (props) => {
               };
               setAuth({ ...resData });
               updateLocalStorage(resData);
-              history.push('/#!');
+              history.push('/');
             }
           })
-          .catch(err => {
+          .catch((err) => {
             if (err?.response) {
               M.toast({ html: err?.response?.data?.msg });
             } else if (err?.request) {
@@ -55,23 +55,28 @@ const OTPModal = (props) => {
             } else {
               M.toast({ html: 'Something went wrong, please try again' });
             }
-          })
+          });
       }
     }
     if (props?.info) {
-      const data = { email }
-      axios.post('/api/users/reset', data, {
-        headers: {
-          'Content-type': 'application/json'
-        }
-      })
-        .then(res => {
+      const data = {
+        email,
+        protocol: window.location.protocol,
+        host: window.location.host,
+      };
+      axios
+        .post('/api/users/reset', data, {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        })
+        .then((res) => {
           setMsg(res.data.msg);
           setTimeout(() => {
-            closeInstance()
+            closeInstance();
           }, 10000);
         })
-        .catch(err => {
+        .catch((err) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -79,32 +84,47 @@ const OTPModal = (props) => {
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
-        })
+        });
     }
   };
 
   return (
     <div id='OtpModal' className='modal umodal bgsecondary'>
       <div className='modal-content'>
-        <h4>{props?.info ? props?.info?.title : 'Enter the OTP to verify your email'}</h4>
+        <h4>
+          {props?.info
+            ? props?.info?.title
+            : 'Enter the OTP to verify your email'}
+        </h4>
         <div className='row'>
           <br />
-          {!props?.info
-            ?
+          {!props?.info ? (
             <div className='input-field'>
-              <input autoFocus type='password' name='OTP' value={otp} onChange={setOTP} />
+              <input
+                autoFocus
+                type='password'
+                name='OTP'
+                value={otp}
+                onChange={setOTP}
+              />
               <label htmlFor='OTP' className='active'>
                 OTP
-            </label>
+              </label>
             </div>
-            :
+          ) : (
             <div className='input-field'>
-              <input autoFocus type='email' name='Email' value={email} onChange={setEmail} />
+              <input
+                autoFocus
+                type='email'
+                name='Email'
+                value={email}
+                onChange={setEmail}
+              />
               <label htmlFor='Email' className='active'>
                 Email
-            </label>
+              </label>
             </div>
-          }
+          )}
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}

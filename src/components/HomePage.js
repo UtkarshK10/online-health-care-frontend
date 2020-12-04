@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import ReactSpinner from './ReactSpinner';
@@ -20,7 +20,8 @@ const HomePage = () => {
   const { auth } = useContext(AuthContext);
   const history = useHistory();
 
-  const fetchDoctors = useCallback(() =>
+  const fetchDoctors = () => {
+    setLoading(true);
     axios
       .get('/api/doctors/', {
         headers: {
@@ -32,6 +33,7 @@ const HomePage = () => {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -39,9 +41,8 @@ const HomePage = () => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
-  );
-
+      });
+  };
   useEffect(() => {
     // if (auth?.token)
     fetchDoctors();
@@ -49,7 +50,7 @@ const HomePage = () => {
   }, [auth?.token]);
 
   const initModal = () => {
-    var elems = document.querySelectorAll('.modal');
+    var elems = document.querySelectorAll('.bmodal');
     var instances = M.Modal.init(elems, { opacity: 0.1 });
   };
 
@@ -70,7 +71,6 @@ const HomePage = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    setLoading(false);
     return <ReactSpinner size='50' />;
   }
   return (
@@ -104,14 +104,14 @@ const HomePage = () => {
         totalItems={doctors.length}
         paginate={paginate}
       />
-      <div id='chat-modal' className='modal'>
+      <BotButton />
+      <div id='chat-modal' className='modal bmodal'>
         <Chatbot
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
         />
       </div>
-      <BotButton />
     </>
   );
 };

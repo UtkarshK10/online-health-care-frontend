@@ -505,8 +505,7 @@ table td {
   position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% 50%;
-  z-index: 0;
+  z-index: 0 !important;
 }
 
 @media screen and (min-width: 1200px) {

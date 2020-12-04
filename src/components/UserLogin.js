@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
@@ -16,7 +16,7 @@ function UserLogin(props) {
   const [openModal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const history = useHistory();
   const [propData, setPropData] = useState(null);
 
@@ -30,6 +30,12 @@ function UserLogin(props) {
     if (openModal) getOTP();
     // eslint-disable-next-line
   }, [openModal]);
+
+  useEffect(() => {
+    if (auth?.token) {
+      history.push('/');
+    }
+  }, []);
 
   const login = async (e) => {
     e.preventDefault();
@@ -122,7 +128,11 @@ function UserLogin(props) {
                   </div>
                 </div>
                 <p className='right-align'>
-                  <Link to='#' onClick={handleClick} className='text-secondary'>
+                  <Link
+                    to='#'
+                    onClick={handleClick}
+                    className='text-secondary waves-effect'
+                  >
                     Forgot password?
                   </Link>
                 </p>
@@ -152,7 +162,7 @@ function UserLogin(props) {
                 </div>
               </form>
               <span>New to App?</span>{' '}
-              <Link to='/signup' className='text-secondary'>
+              <Link to='/signup' className='text-secondary waves-effect'>
                 Register
               </Link>
             </div>
