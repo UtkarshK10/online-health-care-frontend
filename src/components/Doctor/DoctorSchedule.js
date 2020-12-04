@@ -129,7 +129,8 @@ const DoctorSchedule = () => {
               <div className='col s12 m3 l3'>
                 <p style={{ fontSize: '1.5em', marginLeft: '0px' }}>
                   {patientDetail.patient_name} <br />
-                  {patientDetail.age}
+                  {patientDetail.age}<br />
+                  {patientDetail.gender[0].toUpperCase()}
                 </p>
               </div>
               <div className='col s6 m1 l1'>
@@ -141,7 +142,7 @@ const DoctorSchedule = () => {
                     fontWeight: '400',
                   }}
                 >
-                  {patientDetail.gender[0].toUpperCase()}
+                  {patientDetail?.meeting_time}
                 </p>
               </div>
               <div className='col s6 l1 m1 offset-m1 offset-l1'>

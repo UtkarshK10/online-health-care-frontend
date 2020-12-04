@@ -61,9 +61,7 @@ const DoctorMail = (props) => {
         }
       });
   };
-  // if (!receiver) {
-  //     history.replace('/doctors')
-  // }
+
   return (
     <div className='container'>
       <div className='row'>
