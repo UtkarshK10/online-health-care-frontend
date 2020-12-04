@@ -18,6 +18,7 @@ const DoctorMail = (props) => {
 
   const searchString = queryString.parse(props?.location?.search);
   const receiver = searchString?.email;
+  const record_id = searchString?.id;
 
   const handleChange = (val) => {
     onChange(val);
@@ -37,6 +38,7 @@ const DoctorMail = (props) => {
       subject: emailData.subject,
       body: emailData.body,
       meetingTime: time.toLocaleString(),
+      record_id
     };
     axios
       .post('/api/records/schedule', data, {

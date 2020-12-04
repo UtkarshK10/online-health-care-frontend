@@ -29,8 +29,8 @@ const DoctorSchedule = () => {
     // eslint-disable-next-line
   }, [openModal]);
 
-  const handleClick = (email) => {
-    history.push(`/doctors/mail?email=${email}`);
+  const handleClick = (email, id) => {
+    history.push(`/doctors/mail?email=${email}&id=${id}`);
   };
 
   const handleAttendedConfirmation = (id) => {
@@ -169,7 +169,7 @@ const DoctorSchedule = () => {
                       disabled={patientDetail.attended}
                       onClick={(e) => {
                         e.preventDefault();
-                        handleClick(patientDetail?.patient_email);
+                        handleClick(patientDetail?.patient_email, patientDetail.patient_record_id);
                       }}
                       className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                     >
