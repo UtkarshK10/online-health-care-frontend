@@ -41,57 +41,6 @@ import marble from './assets/marble.jpg';
 import AboutUs from './components/AboutUs';
 import AboutProject from './components/AboutProject';
 import Helpdesk from './components/Helpdesk';
-// import SimpleReactFooter from 'simple-react-footer';
-
-// const description =
-//   'You are at the right place, get your medical problems solved at ease of your home.';
-// const title = 'Medico';
-// const columns = [
-//   {
-//     title: 'Resources',
-//     resources: [
-//       {
-//         name: 'Help Desk',
-//         link: '/help',
-//       },
-//       {
-//         name: 'About',
-//         link: '/aboutproject',
-//       },
-
-//       {
-//         name: 'About Us',
-//         link: '/aboutus',
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Legal',
-//     resources: [
-//       {
-//         name: 'Privacy',
-//         link: '/privacy',
-//       },
-//       {
-//         name: 'Terms',
-//         link: '/terms',
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Visit',
-//     resources: [
-//       {
-//         name: 'Locations',
-//         link: '/locations',
-//       },
-//       {
-//         name: 'Culture',
-//         link: '/culture',
-//       },
-//     ],
-//   },
-// ];
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -161,11 +110,11 @@ function App() {
       <div className='App'>
         {!pathname.includes('login') &&
           !pathname.includes('signup') &&
-          !pathname.includes('doctors') &&
+          !pathname.includes('doctor') &&
           !pathname.includes('notFound') && <Navbar />}
         {!pathname.includes('login') &&
           !pathname.includes('signup') &&
-          pathname.includes('doctors') &&
+          pathname.includes('doctor') &&
           !pathname.includes('notFound') && <DoctorNavbar />}
         <Route
           render={({ location }) => (
@@ -206,6 +155,24 @@ function App() {
                       </div>
                     )}
                   />
+                  <Route
+                    exact
+                    path='/doctors/aboutus'
+                    render={() => (
+                      <div className='page'>
+                        <AboutUs />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/doctors/aboutproject'
+                    render={() => (
+                      <div className='page'>
+                        <AboutProject />
+                      </div>
+                    )}
+                  />
                   <PrivateRoute
                     exact
                     path='/help'
@@ -217,7 +184,7 @@ function App() {
                   />
                   <PrivateRoute
                     exact
-                    path='/helpdoctor'
+                    path='/doctors/help'
                     render={() => (
                       <div className='page'>
                         <Helpdesk isDoctor />

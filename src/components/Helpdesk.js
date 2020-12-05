@@ -9,7 +9,7 @@ const Helpdesk = ({ isDoctor }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     subject: '',
-    body: '',
+    message: '',
   });
 
   const URL = isDoctor ? '/api/doctors/help' : '/api/users/help';
@@ -24,6 +24,13 @@ const Helpdesk = ({ isDoctor }) => {
     setLoading(true);
     e.preventDefault();
 
+    if (data.subject === '') {
+      return M.toast({ html: 'Please enter a subject' });
+    }
+    if (data.message === '') {
+      return M.toast({ html: 'Please enter a body' });
+    }
+
     axios
       .post(`${URL}`, data, {
         headers,
@@ -32,7 +39,7 @@ const Helpdesk = ({ isDoctor }) => {
         setLoading(false);
         if (res.status === 200) {
           M.toast({
-            html: 'You have got your complaint, we will contact you soon!',
+            html: 'We have got your complaint, we will contact you soon!',
           });
         }
       })
@@ -48,7 +55,7 @@ const Helpdesk = ({ isDoctor }) => {
       });
   };
   return (
-    <div classname='container'>
+    <div className='container'>
       <div className='row'>
         <h3>Submit your complaint</h3>
       </div>
@@ -78,14 +85,14 @@ const Helpdesk = ({ isDoctor }) => {
               <div className='row'>
                 <div className='input-field'>
                   <input
-                    value={data.body}
+                    value={data.message}
                     onChange={handleChange}
-                    id='body'
+                    id='message'
                     type='text'
-                    name='body'
+                    name='message'
                     className='validate'
                   />
-                  <label htmlFor='body' className='font-app'>
+                  <label htmlFor='message' className='font-app'>
                     Body
                   </label>
                 </div>
