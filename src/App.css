@@ -521,13 +521,13 @@ table td {
 
   @-webkit-keyframes slide {
     100% {
-      right: 220px;
+      right: 10%;
     }
   }
 
   @keyframes slide {
     100% {
-      right: 220px;
+      right: 10%;
     }
   }
 }
