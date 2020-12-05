@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import ReactSpinner from './ReactSpinner';
@@ -14,24 +14,22 @@ import BotButton from './BotButton';
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [doctorsPerPage] = useState(3);
   const { auth } = useContext(AuthContext);
   const history = useHistory();
 
-  const fetchDoctors = useCallback(() =>
+  const fetchDoctors = () => {
+    setLoading(true);
     axios
-      .get('/api/doctors/', {
-        headers: {
-          // 'api-token': auth.token
-        },
-      })
+      .get('/api/doctors/',)
       .then((res) => {
         setDoctors([...res.data]);
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -39,19 +37,18 @@ const HomePage = () => {
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
-      })
-  );
-
-  useEffect(() => {
-    // if (auth?.token)
-    fetchDoctors();
-    initModal();
-  }, [auth?.token]);
-
-  const initModal = () => {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, { opacity: 0.1 });
+      });
   };
+  // useEffect(() => {
+
+  //   fetchDoctors();
+  //   initModal();
+  // }, []);
+
+  // const initModal = () => {
+  //   var elems = document.querySelectorAll('.bmodal');
+  //   var instances = M.Modal.init(elems, { opacity: 0.1 });
+  // };
 
   const makeAppointment = (id) => {
     if (auth.credits < 10) {
@@ -70,11 +67,11 @@ const HomePage = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    setLoading(false);
     return <ReactSpinner size='50' />;
   }
   return (
     <>
+
       <div className='container'>
         <div className='row'>
           <h4 className='h4-style'>Our Health Experts</h4>
@@ -104,14 +101,14 @@ const HomePage = () => {
         totalItems={doctors.length}
         paginate={paginate}
       />
-      <div id='chat-modal' className='modal'>
+      <BotButton />
+      <div id='chat-modal' className='modal bmodal'>
         <Chatbot
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
         />
       </div>
-      <BotButton />
     </>
   );
 };

@@ -26,7 +26,7 @@ const DoctorOTPModal = (props) => {
       if (otp.length <= 0) {
         M.toast({ html: 'Please enter an OTP' });
       } else if (!regexForNumbers.test(otp)) {
-        M.toast({ html: 'OTP can\'t have alphabets' });
+        M.toast({ html: "OTP can't have alphabets" });
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
@@ -59,7 +59,11 @@ const DoctorOTPModal = (props) => {
       }
     }
     if (props?.info) {
-      const data = { email };
+      const data = {
+        email,
+        protocol: window.location.protocol,
+        host: window.location.host,
+      };
       axios
         .post('/api/doctors/reset', data, {
           headers: {
@@ -108,19 +112,19 @@ const DoctorOTPModal = (props) => {
               </label>
             </div>
           ) : (
-              <div className='input-field'>
-                <input
-                  autoFocus
-                  type='email'
-                  name='Email'
-                  value={email}
-                  onChange={setEmail}
-                />
-                <label htmlFor='Email' className='active'>
-                  Email
+            <div className='input-field'>
+              <input
+                autoFocus
+                type='email'
+                name='Email'
+                value={email}
+                onChange={setEmail}
+              />
+              <label htmlFor='Email' className='active'>
+                Email
               </label>
-              </div>
-            )}
+            </div>
+          )}
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}
