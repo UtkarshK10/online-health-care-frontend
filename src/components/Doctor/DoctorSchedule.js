@@ -118,6 +118,8 @@ const DoctorSchedule = () => {
   const handlePrescription = (id) => {
     history.push(`/doctors/prescription?id=${id}`);
   };
+
+  const URL = 'https://deploy-practice2.herokuapp.com/login';
   return (
     <div className='container' style={{ paddingTop: '30px' }}>
       <ul className='collection with-header' style={{ marginTop: '0px' }}>
@@ -223,7 +225,7 @@ const DoctorSchedule = () => {
                         style={{ margin: 0, padding: 0 }}
                         target='_blank'
                         rel='noreferrer'
-                        href={`http://localhost:8000/login?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
+                        href={`${URL}?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
                       >
                         <img
                           src={videoCall}

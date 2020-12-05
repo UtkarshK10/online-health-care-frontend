@@ -40,6 +40,7 @@ import bmarble from './assets/bmarble.jpg';
 import marble from './assets/marble.jpg';
 import AboutUs from './components/AboutUs';
 import AboutProject from './components/AboutProject';
+import Helpdesk from './components/Helpdesk';
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -109,11 +110,11 @@ function App() {
       <div className='App'>
         {!pathname.includes('login') &&
           !pathname.includes('signup') &&
-          !pathname.includes('doctors') &&
+          !pathname.includes('doctor') &&
           !pathname.includes('notFound') && <Navbar />}
         {!pathname.includes('login') &&
           !pathname.includes('signup') &&
-          pathname.includes('doctors') &&
+          pathname.includes('doctor') &&
           !pathname.includes('notFound') && <DoctorNavbar />}
         <Route
           render={({ location }) => (
@@ -151,6 +152,42 @@ function App() {
                     render={() => (
                       <div className='page'>
                         <AboutProject />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/doctors/aboutus'
+                    render={() => (
+                      <div className='page'>
+                        <AboutUs />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path='/doctors/aboutproject'
+                    render={() => (
+                      <div className='page'>
+                        <AboutProject />
+                      </div>
+                    )}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/help'
+                    render={() => (
+                      <div className='page'>
+                        <Helpdesk />
+                      </div>
+                    )}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/doctors/help'
+                    render={() => (
+                      <div className='page'>
+                        <Helpdesk isDoctor />
                       </div>
                     )}
                   />
@@ -280,6 +317,16 @@ function App() {
                       <div className='page'>
                         <Particle />
                         <DoctorLogin />
+                      </div>
+                    )}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/doctors/logout'
+                    render={() => (
+                      <div className='page'>
+                        <Particle />
+                        <Logout isDoctor />
                       </div>
                     )}
                   />
@@ -415,6 +462,17 @@ function App() {
             </TransitionGroup>
           )}
         />
+        {/* <SimpleReactFooter
+          title={title}
+          description={description}
+          columns={columns}
+          youtube='UCFt6TSF464J8K82xeA?'
+          copyright='Medico'
+          iconColor='black'
+          backgroundColor='black'
+          fontColor='white'
+          copyrightColor='white'
+        /> */}
       </div>
     </ThemeProvider>
   );

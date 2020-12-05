@@ -30,12 +30,39 @@ const DoctorNavbar = () => {
                 Medico
               </span>
             </NavLink>
+
+            <NavLink
+              to='/doctors'
+              className='brand-logo show-on-medium-and-down hide-on-large-only'
+            >
+              <img src={healthcare} width='35' alt='logo' />
+            </NavLink>
             <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
               <i className='material-icons'>menu</i>
             </a>
             <ul className='right hide-on-med-and-down'>
               {auth?.isLoggedIn && (
                 <>
+                  <ul id='dropdown3' className='dropdown-content bgsecondary'>
+                    <li>
+                      <NavLink to='/doctors/help' className='text-secondary'>
+                        Help
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to='/doctors/aboutus' className='text-secondary'>
+                        About us
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to='/doctors/aboutproject'
+                        className='text-secondary'
+                      >
+                        About Project
+                      </NavLink>
+                    </li>
+                  </ul>
                   <li>
                     <NavLink to='/doctors/schedules' activeClassName='scolour'>
                       <i className='material-icons'>event_note</i>
@@ -55,9 +82,18 @@ const DoctorNavbar = () => {
                       </span>
                     </NavLink>
                   </li>
-
                   <li>
-                    <NavLink to={`/logout`} activeClassName='scolour'>
+                    <a
+                      className='dropdown-trigger'
+                      href='#!'
+                      data-target='dropdown3'
+                    >
+                      Need help?
+                      <i className='material-icons right'>arrow_drop_down</i>
+                    </a>
+                  </li>
+                  <li>
+                    <NavLink to={`/doctors/logout`} activeClassName='scolour'>
                       <span
                         style={{
                           display: 'flex',
@@ -79,6 +115,9 @@ const DoctorNavbar = () => {
                   </li>
                   <li>
                     <NavLink to='/doctors/signup'>Signup</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/doctors/aboutproject'>About Project</NavLink>
                   </li>
                 </>
               )}
@@ -123,9 +162,39 @@ const DoctorNavbar = () => {
                 </span>
               </NavLink>
             </li>
-
             <li>
-              <NavLink to={`/logout`} activeClassName='scolour'>
+              <NavLink to={`/doctors/help`} activeClassName='scolour'>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  Help &nbsp;<i className='material-icons'>help_outline</i>
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/doctors/aboutus`} activeClassName='scolour'>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  About us &nbsp;<i className='material-icons'>info</i>
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/doctors/aboutproject' className='text-secondary'>
+                About Project
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/doctors/logout`} activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',
@@ -149,6 +218,11 @@ const DoctorNavbar = () => {
             <li>
               <NavLink to='/doctors/signup' className='sidenav-close'>
                 Signup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/doctors/aboutproject' className='sidenav-close'>
+                About Project
               </NavLink>
             </li>
           </>

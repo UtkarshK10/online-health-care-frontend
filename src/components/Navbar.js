@@ -16,39 +16,58 @@ const HomePage = () => {
   return (
     <>
       {auth?.isLoggedIn && (
-        <ul id='dropdown1' className='dropdown-content bgsecondary'>
-          <li>
-            <NavLink to={`/user`} className='text-secondary'>
-              My Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={`/records`} className='text-secondary'>
-              Records
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/shopping/orders' className='text-secondary'>
-              Orders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/payment' className='highlight'>
-              Credits : <span className='ptcolour'>{auth.credits}</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/transactions' className='text-secondary'>
-              Transactions
-            </NavLink>
-          </li>
-          <li className='divider'></li>
-          <li>
-            <NavLink to='/logout' className='text-secondary'>
-              Logout
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <ul id='dropdown1' className='dropdown-content bgsecondary'>
+            <li>
+              <NavLink to={`/user`} className='text-secondary'>
+                My Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/records`} className='text-secondary'>
+                Records
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/shopping/orders' className='text-secondary'>
+                Orders
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/payment' className='highlight'>
+                Credits : <span className='ptcolour'>{auth.credits}</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/transactions' className='text-secondary'>
+                Transactions
+              </NavLink>
+            </li>
+            <li className='divider'></li>
+            <li>
+              <NavLink to='/logout' className='text-secondary'>
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+          <ul id='dropdown2' className='dropdown-content bgsecondary'>
+            <li>
+              <NavLink to='/help' className='text-secondary'>
+                Help
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutus' className='text-secondary'>
+                About us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject' className='text-secondary'>
+                About Project
+              </NavLink>
+            </li>
+          </ul>
+        </>
       )}
       <div className='navbar-fixed'>
         <nav>
@@ -110,6 +129,16 @@ const HomePage = () => {
                       <i className='material-icons right'>arrow_drop_down</i>
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className='dropdown-trigger'
+                      href='#!'
+                      data-target='dropdown2'
+                    >
+                      Need help?
+                      <i className='material-icons right'>arrow_drop_down</i>
+                    </a>
+                  </li>
                 </>
               )}
               {!auth?.isLoggedIn && (
@@ -122,6 +151,9 @@ const HomePage = () => {
                   </li>
                   <li>
                     <NavLink to='/signup'>Signup</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/aboutproject'>About project</NavLink>
                   </li>
                 </>
               )}
@@ -188,14 +220,22 @@ const HomePage = () => {
               <NavLink to={`/records`}>Records</NavLink>
             </li>
             <li>
-              <NavLink to='/payment' className='highlight'>
-                Credits : <span className='ptcolour'>{auth.credits}</span>
+              <NavLink to='/payment'>
+                Credits : <span className='highlight'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>
               <NavLink to='/transactions'>Transactions</NavLink>
             </li>
-            <li></li>
+            <li>
+              <NavLink to='/help'>Helpdesk</NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutus'>About us</NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject'>About project</NavLink>
+            </li>
             <li className='divider'></li>
             <li>
               <NavLink to='/logout'>Logout</NavLink>
@@ -217,6 +257,11 @@ const HomePage = () => {
             <li>
               <NavLink to='/signup' className='sidenav-close'>
                 Signup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject' className='sidenav-close'>
+                About Project
               </NavLink>
             </li>
           </>
