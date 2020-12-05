@@ -553,3 +553,7 @@ table td {
     width: 75vw;
   }
 }
+.justify-align {
+  text-align: justify;
+  text-justify: inter-word;
+}

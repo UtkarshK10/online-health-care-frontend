@@ -44,6 +44,7 @@
     "react-to-pdf": "^0.0.13",
     "react-to-print": "^2.11.0",
     "react-transition-group": "^4.4.1",
+    "react-typist": "^2.0.5",
     "secure-web-storage": "^1.0.2",
     "shallowequal": "^1.1.0",
     "string-similarity": "^4.0.3",
