@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import '../styles/UserRegistrationStyles.css';
 import axios from '../axios/axios';
@@ -22,7 +22,18 @@ function UserRegistration() {
   const [openModal, setModal] = useState(false);
   const [state] = useState(true);
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (auth?.token) {
+      history.push('/');
+    }
+  }, [auth?.token, history]);
+
+  useEffect(() => {
+    return () => window.location.reload();
+  }, []);
 
   //user signup and validation
 
@@ -97,6 +108,10 @@ function UserRegistration() {
     if (openModal) getOTP();
     // eslint-disable-next-line
   }, [openModal]);
+
+  useEffect(() => {
+    return () => window.location.reload();
+  }, []);
 
   //animation part
 

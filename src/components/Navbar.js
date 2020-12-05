@@ -115,6 +115,9 @@ const HomePage = () => {
               {!auth?.isLoggedIn && (
                 <>
                   <li>
+                    <NavLink to='/doctors/signup'>Are you a doctor?</NavLink>
+                  </li>
+                  <li>
                     <NavLink to='/login'>Login</NavLink>
                   </li>
                   <li>
@@ -202,10 +205,19 @@ const HomePage = () => {
         {!auth?.isLoggedIn && (
           <>
             <li>
-              <NavLink to='/login'>Login</NavLink>
+              <NavLink to='/doctors/signup' className='sidenav-close'>
+                Are you a doctor?
+              </NavLink>
             </li>
             <li>
-              <NavLink to='/signup'>Signup</NavLink>
+              <NavLink to='/login' className='sidenav-close'>
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/signup' className='sidenav-close'>
+                Signup
+              </NavLink>
             </li>
           </>
         )}

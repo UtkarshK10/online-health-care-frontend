@@ -274,7 +274,7 @@ const Invoice = (props) => {
                   Thanks for shopping with us!
                 </p>{' '}
                 <span>
-                  <b>Care More</b> Team
+                  <b>Medico</b> Team
                 </span>
               </div>
             </div>
@@ -287,10 +287,10 @@ const Invoice = (props) => {
                 <div className='input-field'>
                   <button
                     className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                  // onClick={e => {
-                  //     e.preventDefault();
-                  //     downloadInvoice();
-                  // }}
+                    // onClick={e => {
+                    //     e.preventDefault();
+                    //     downloadInvoice();
+                    // }}
                   >
                     Print
                     <i className='material-icons left'>get_app</i>

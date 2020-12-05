@@ -67,7 +67,7 @@ const HomePage = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return <ReactSpinner size='50' />;
+    return <ReactSpinner size='50px' />;
   }
   return (
     <>

@@ -8,6 +8,7 @@ const DoctorCard = (props) => {
     appointment,
     experience,
     speciality,
+    fee,
     showLink,
     id,
   } = props;
@@ -42,10 +43,12 @@ const DoctorCard = (props) => {
         <p>
           <span style={{ fontWeight: '600' }}>Experience : </span>
           {experience}
-        </p>
-        <p>
+          <br />
           <span style={{ fontWeight: '600' }}>Speciality : </span>
           {speciality}
+          <br />
+          <span style={{ fontWeight: '600' }}>Fee : </span>
+          {1300}
         </p>
       </div>
     </div>

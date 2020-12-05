@@ -31,7 +31,13 @@ function UserLogin(props) {
     // eslint-disable-next-line
   }, [openModal]);
   useEffect(() => {
-    return () => window.location.reload()
+    if (auth?.token) {
+      history.push('/');
+    }
+  }, [auth?.token, history]);
+
+  useEffect(() => {
+    return () => window.location.reload();
   }, []);
 
 

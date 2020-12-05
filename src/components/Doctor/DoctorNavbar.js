@@ -142,10 +142,14 @@ const DoctorNavbar = () => {
         {!auth?.isLoggedIn && (
           <>
             <li>
-              <NavLink to='/doctors/login'>Login</NavLink>
+              <NavLink to='/doctors/login' className='sidenav-close'>
+                Login
+              </NavLink>
             </li>
             <li>
-              <NavLink to='/doctors/signup'>Signup</NavLink>
+              <NavLink to='/doctors/signup' className='sidenav-close'>
+                Signup
+              </NavLink>
             </li>
           </>
         )}

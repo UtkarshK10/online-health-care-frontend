@@ -10894,6 +10894,13 @@ react-transition-group@^4.4.0, react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-typist@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/react-typist/-/react-typist-2.0.5.tgz#9830395a73a03e6368e1392ecb98edaa3a648e44"
+  integrity sha512-iZCkeqeegO0TlkTMiH2JD1tvMtY9RrXkRylnAI6m8aCVAUUwNzoWTVF7CKLij6THeOMcUDCznLDDvNp55s+YZA==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-util-kit@0.0.14:
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/react-util-kit/-/react-util-kit-0.0.14.tgz#602315314e3a47c57ca4f5382abba104b41ccc55"

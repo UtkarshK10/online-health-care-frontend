@@ -39,6 +39,7 @@ import useTheme from './components/useTheme';
 import bmarble from './assets/bmarble.jpg';
 import marble from './assets/marble.jpg';
 import AboutUs from './components/AboutUs';
+import AboutProject from './components/AboutProject';
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -146,6 +147,15 @@ function App() {
                   />
                   <Route
                     exact
+                    path='/aboutproject'
+                    render={() => (
+                      <div className='page'>
+                        <AboutProject />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
                     path='/signup'
                     render={() => (
                       <div className='page'>
@@ -224,15 +234,6 @@ function App() {
                       </div>
                     )}
                   />
-                  {/* <PrivateRoute
-                  exact
-                  path='/records'
-                  render={() => (
-                    <div className='page'>
-                      <Records />
-                    </div>
-                  )}
-                /> */}
                   <PrivateRoute
                     exact
                     path='/transactions'
