@@ -206,12 +206,21 @@ function App() {
                       </div>
                     )}
                   />
-                  <Route
+                  <PrivateRoute
                     exact
                     path='/help'
                     render={() => (
                       <div className='page'>
                         <Helpdesk />
+                      </div>
+                    )}
+                  />
+                  <PrivateRoute
+                    exact
+                    path='/helpdoctor'
+                    render={() => (
+                      <div className='page'>
+                        <Helpdesk isDoctor />
                       </div>
                     )}
                   />

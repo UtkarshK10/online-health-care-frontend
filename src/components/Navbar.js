@@ -53,7 +53,7 @@ const HomePage = () => {
           <ul id='dropdown2' className='dropdown-content bgsecondary'>
             <li>
               <NavLink to='/help' className='text-secondary'>
-                Helpdesk
+                Help
               </NavLink>
             </li>
             <li>
@@ -152,6 +152,9 @@ const HomePage = () => {
                   <li>
                     <NavLink to='/signup'>Signup</NavLink>
                   </li>
+                  <li>
+                    <NavLink to='/aboutproject'>About project</NavLink>
+                  </li>
                 </>
               )}
             </ul>
@@ -217,14 +220,22 @@ const HomePage = () => {
               <NavLink to={`/records`}>Records</NavLink>
             </li>
             <li>
-              <NavLink to='/payment' className='highlight'>
-                Credits : <span className='ptcolour'>{auth.credits}</span>
+              <NavLink to='/payment'>
+                Credits : <span className='highlight'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>
               <NavLink to='/transactions'>Transactions</NavLink>
             </li>
-            <li></li>
+            <li>
+              <NavLink to='/help'>Helpdesk</NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutus'>About us</NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject'>About project</NavLink>
+            </li>
             <li className='divider'></li>
             <li>
               <NavLink to='/logout'>Logout</NavLink>
@@ -246,6 +257,11 @@ const HomePage = () => {
             <li>
               <NavLink to='/signup' className='sidenav-close'>
                 Signup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject' className='sidenav-close'>
+                About Project
               </NavLink>
             </li>
           </>

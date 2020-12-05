@@ -115,7 +115,7 @@ const DoctorMail = (props) => {
                     required
                   />
                   <label htmlFor='subject' className='active font-app'>
-                    Email Subject
+                    Subject
                   </label>
                 </div>
               </div>
@@ -129,7 +129,7 @@ const DoctorMail = (props) => {
                     className='materialize-textarea'
                   ></textarea>
                   <label htmlFor='body' className='active font-app'>
-                    Email body
+                    Body
                   </label>
                 </div>
               </div>

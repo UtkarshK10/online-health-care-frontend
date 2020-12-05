@@ -46,14 +46,12 @@ const HomePage = () => {
   useEffect(() => {
     // if (auth?.token)
     fetchDoctors();
-    initModal();
   }, [auth?.token]);
 
-  const initModal = () => {
-    var elems = document.querySelectorAll('.bmodal');
+  const botopen = () => {
+    var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems, { opacity: 0.1 });
   };
-
   const makeAppointment = (id, consulation_fee) => {
     if (auth.credits < Math.ceil(consulation_fee)) {
       M.toast({
@@ -114,14 +112,14 @@ const HomePage = () => {
         totalItems={doctors.length}
         paginate={paginate}
       />
-      <BotButton />
-      <div id='chat-modal' className='modal bmodal'>
+      <div id='chat-modal' className='modal'>
         <Chatbot
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
         />
       </div>
+      <BotButton botopen={botopen} />
     </>
   );
 };
