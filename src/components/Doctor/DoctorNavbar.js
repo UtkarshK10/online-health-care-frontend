@@ -116,6 +116,9 @@ const DoctorNavbar = () => {
                   <li>
                     <NavLink to='/doctors/signup'>Signup</NavLink>
                   </li>
+                  <li>
+                    <NavLink to='/doctors/aboutproject'>About Project</NavLink>
+                  </li>
                 </>
               )}
             </ul>
@@ -215,6 +218,11 @@ const DoctorNavbar = () => {
             <li>
               <NavLink to='/doctors/signup' className='sidenav-close'>
                 Signup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/doctors/aboutproject' className='sidenav-close'>
+                About Project
               </NavLink>
             </li>
           </>
