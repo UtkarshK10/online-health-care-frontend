@@ -224,15 +224,6 @@ function App() {
                       </div>
                     )}
                   />
-                  {/* <PrivateRoute
-                  exact
-                  path='/records'
-                  render={() => (
-                    <div className='page'>
-                      <Records />
-                    </div>
-                  )}
-                /> */}
                   <PrivateRoute
                     exact
                     path='/transactions'

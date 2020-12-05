@@ -35,6 +35,10 @@ function UserLogin(props) {
     if (auth?.token) {
       history.push('/');
     }
+  }, [auth?.token, history]);
+
+  useEffect(() => {
+    return () => window.location.reload();
   }, []);
 
   const login = async (e) => {

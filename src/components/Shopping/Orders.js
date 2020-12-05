@@ -48,14 +48,14 @@ const Orders = () => {
     return <ReactSpinner size='50px' />;
   }
 
-  if (!loading && orders.length === 0) {
+  if (orders && orders.length === 0 && !loading) {
     return (
       <div className='container'>
         <div className='row'>
           <div className='col s12'>
             {' '}
-            <h2>You don't have any orders to show!</h2>
-            <img src={noOrders} alt='No Orders' />
+            <h2>You have zero orders</h2>
+            <img src={noOrders} alt='Empty Cart' className='orderimg' />
           </div>
         </div>
       </div>

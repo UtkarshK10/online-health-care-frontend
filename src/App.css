@@ -548,3 +548,8 @@ table td {
   transition-delay: 0.3s;
   transform: scale(1) !important;
 }
+@media screen and (max-width: 600px) {
+  .orderimg {
+    width: 75vw;
+  }
+}
