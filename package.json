@@ -47,6 +47,7 @@
     "react-typist": "^2.0.5",
     "secure-web-storage": "^1.0.2",
     "shallowequal": "^1.1.0",
+    "simple-react-footer": "^1.0.2",
     "string-similarity": "^4.0.3",
     "styled-components": "^4.0.0",
     "styled-theming": "^2.2.0",

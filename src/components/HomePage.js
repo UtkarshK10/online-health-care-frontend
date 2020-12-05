@@ -54,10 +54,12 @@ const HomePage = () => {
     var instances = M.Modal.init(elems, { opacity: 0.1 });
   };
 
-  const makeAppointment = (id) => {
-    if (auth.credits < 10) {
+  const makeAppointment = (id, consulation_fee) => {
+    if (auth.credits < Math.ceil(consulation_fee)) {
       M.toast({
-        html: "You don't have enough credits, please add and then continue",
+        html: `You don't have enough credits, please add ${
+          Math.ceil(consulation_fee) - auth.credits
+        } credits and then try again`,
       });
       return;
     }
@@ -81,7 +83,14 @@ const HomePage = () => {
         </div>
         <div className='row'>
           {currPageDoctors.map((doctor) => {
-            const { id, name, profile_url, experience, speciality } = doctor;
+            const {
+              id,
+              name,
+              profile_url,
+              experience,
+              speciality,
+              consulation_fee,
+            } = doctor;
             return (
               <div key={doctor.id} className='col s12 m6 l4'>
                 <DoctorCard
@@ -93,6 +102,7 @@ const HomePage = () => {
                   speciality={speciality}
                   appointment={makeAppointment}
                   showLink={auth?.isLoggedIn}
+                  consulation_fee={consulation_fee}
                 />
               </div>
             );

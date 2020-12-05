@@ -8,14 +8,14 @@ const DoctorCard = (props) => {
     appointment,
     experience,
     speciality,
-    fee,
+    consulation_fee,
     showLink,
     id,
   } = props;
 
   const handleChange = (e) => {
     e.preventDefault();
-    appointment(id);
+    appointment(id, consulation_fee);
   };
 
   // let classD = '';
@@ -48,7 +48,7 @@ const DoctorCard = (props) => {
           {speciality}
           <br />
           <span style={{ fontWeight: '600' }}>Fee : </span>
-          {1300}
+          {Math.ceil(consulation_fee)}
         </p>
       </div>
     </div>

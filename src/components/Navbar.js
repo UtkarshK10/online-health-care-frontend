@@ -16,39 +16,58 @@ const HomePage = () => {
   return (
     <>
       {auth?.isLoggedIn && (
-        <ul id='dropdown1' className='dropdown-content bgsecondary'>
-          <li>
-            <NavLink to={`/user`} className='text-secondary'>
-              My Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={`/records`} className='text-secondary'>
-              Records
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/shopping/orders' className='text-secondary'>
-              Orders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/payment' className='highlight'>
-              Credits : <span className='ptcolour'>{auth.credits}</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/transactions' className='text-secondary'>
-              Transactions
-            </NavLink>
-          </li>
-          <li className='divider'></li>
-          <li>
-            <NavLink to='/logout' className='text-secondary'>
-              Logout
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <ul id='dropdown1' className='dropdown-content bgsecondary'>
+            <li>
+              <NavLink to={`/user`} className='text-secondary'>
+                My Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/records`} className='text-secondary'>
+                Records
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/shopping/orders' className='text-secondary'>
+                Orders
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/payment' className='highlight'>
+                Credits : <span className='ptcolour'>{auth.credits}</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/transactions' className='text-secondary'>
+                Transactions
+              </NavLink>
+            </li>
+            <li className='divider'></li>
+            <li>
+              <NavLink to='/logout' className='text-secondary'>
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+          <ul id='dropdown2' className='dropdown-content bgsecondary'>
+            <li>
+              <NavLink to='/help' className='text-secondary'>
+                Helpdesk
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutus' className='text-secondary'>
+                About us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/aboutproject' className='text-secondary'>
+                About Project
+              </NavLink>
+            </li>
+          </ul>
+        </>
       )}
       <div className='navbar-fixed'>
         <nav>
@@ -107,6 +126,16 @@ const HomePage = () => {
                       data-target='dropdown1'
                     >
                       My Account
+                      <i className='material-icons right'>arrow_drop_down</i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className='dropdown-trigger'
+                      href='#!'
+                      data-target='dropdown2'
+                    >
+                      Need help?
                       <i className='material-icons right'>arrow_drop_down</i>
                     </a>
                   </li>
