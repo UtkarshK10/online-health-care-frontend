@@ -320,6 +320,16 @@ function App() {
                       </div>
                     )}
                   />
+                  <PrivateRoute
+                    exact
+                    path='/doctors/logout'
+                    render={() => (
+                      <div className='page'>
+                        <Particle />
+                        <Logout isDoctor />
+                      </div>
+                    )}
+                  />
                   <Route
                     exact
                     path='/doctors'

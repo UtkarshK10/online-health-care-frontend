@@ -93,7 +93,7 @@ const DoctorNavbar = () => {
                     </a>
                   </li>
                   <li>
-                    <NavLink to={`/logout`} activeClassName='scolour'>
+                    <NavLink to={`/doctors/logout`} activeClassName='scolour'>
                       <span
                         style={{
                           display: 'flex',
@@ -191,7 +191,7 @@ const DoctorNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/logout`} activeClassName='scolour'>
+              <NavLink to={`/doctors/logout`} activeClassName='scolour'>
                 <span
                   style={{
                     display: 'flex',
