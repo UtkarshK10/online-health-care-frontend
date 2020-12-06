@@ -14,7 +14,7 @@ import BotButton from './BotButton';
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [doctorsPerPage] = useState(3);
   const { auth } = useContext(AuthContext);
@@ -23,11 +23,7 @@ const HomePage = () => {
   const fetchDoctors = () => {
     setLoading(true);
     axios
-      .get('/api/doctors/', {
-        headers: {
-          // 'api-token': auth.token
-        },
-      })
+      .get('/api/doctors/',)
       .then((res) => {
         setDoctors([...res.data]);
         setLoading(false);
@@ -37,7 +33,8 @@ const HomePage = () => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          console.log(err?.request);
+          M.toast({ html: 'Request error!' });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -55,9 +52,8 @@ const HomePage = () => {
   const makeAppointment = (id, consulation_fee) => {
     if (auth.credits < Math.ceil(consulation_fee)) {
       M.toast({
-        html: `You don't have enough credits, please add ${
-          Math.ceil(consulation_fee) - auth.credits
-        } credits and then try again`,
+        html: `You don't have enough credits, please add ${Math.ceil(consulation_fee) - auth.credits
+          } credits and then try again`,
       });
       return;
     }
@@ -75,6 +71,7 @@ const HomePage = () => {
   }
   return (
     <>
+
       <div className='container'>
         <div className='row'>
           <h4 className='h4-style'>Our Health Experts</h4>

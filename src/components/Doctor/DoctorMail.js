@@ -38,7 +38,11 @@ const DoctorMail = (props) => {
       subject: emailData.subject,
       body: emailData.body,
       meetingTime: time.toLocaleString(),
+<<<<<<< HEAD
+      record_id
+=======
       record_id,
+>>>>>>> 736f57c467171356649034616136b1eee46927cf
     };
     axios
       .post('/api/records/schedule', data, {

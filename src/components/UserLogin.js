@@ -30,7 +30,6 @@ function UserLogin(props) {
     if (openModal) getOTP();
     // eslint-disable-next-line
   }, [openModal]);
-
   useEffect(() => {
     if (auth?.token) {
       history.push('/');
@@ -40,6 +39,7 @@ function UserLogin(props) {
   useEffect(() => {
     return () => window.location.reload();
   }, []);
+
 
   const login = async (e) => {
     e.preventDefault();

@@ -30,8 +30,8 @@ const DoctorSchedule = () => {
     // eslint-disable-next-line
   }, [openModal]);
 
-  const handleClick = (email) => {
-    history.push(`/doctors/mail?email=${email}`);
+  const handleClick = (email, id) => {
+    history.push(`/doctors/mail?email=${email}&id=${id}`);
   };
 
   const handleAttendedConfirmation = (id) => {

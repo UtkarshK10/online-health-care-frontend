@@ -17,8 +17,6 @@ const Oxymeter = (props) => {
 
   const theme = useTheme();
 
-  console.log('theme', theme);
-
   const [data, setData] = useState({
     temperature: '',
     contact: '',
