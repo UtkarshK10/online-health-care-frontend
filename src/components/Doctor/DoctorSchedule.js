@@ -119,7 +119,7 @@ const DoctorSchedule = () => {
     history.push(`/doctors/prescription?id=${id}`);
   };
 
-  const URL = 'https://deploy-practice2.herokuapp.com/login';
+  const URL = 'https://medico-videocall.herokuapp.com/login';
   return (
     <div className='container' style={{ paddingTop: '30px' }}>
       <ul className='collection with-header' style={{ marginTop: '0px' }}>
