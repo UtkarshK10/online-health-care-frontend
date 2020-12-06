@@ -33,8 +33,7 @@ const HomePage = () => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          console.log(err?.request);
-          M.toast({ html: 'Request error!' });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }

@@ -44,10 +44,11 @@ const DoctorPrescription = (props) => {
         setProducts(res.data.msg);
       })
       .catch((err) => {
+
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -153,22 +154,22 @@ const DoctorPrescription = (props) => {
                 </div>
               </div>
             ) : (
-              <div className='row'>
-                {filteredProducts.map((Product, idx) => {
-                  return (
-                    <div key={idx}>
-                      <div className='col s10 m10 l10 offset-l1 offset-m1 offset-s1'>
-                        <ProductCard
-                          Product={Product}
-                          Prescription
-                          addToPrescription={handleAddToPrescription}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+                  <div className='row'>
+                    {filteredProducts.map((Product, idx) => {
+                      return (
+                        <div key={idx}>
+                          <div className='col s10 m10 l10 offset-l1 offset-m1 offset-s1'>
+                            <ProductCard
+                              Product={Product}
+                              Prescription
+                              addToPrescription={handleAddToPrescription}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
           </div>
           <div
             className='col s12 m12 l8 pre-container bgsecondary'

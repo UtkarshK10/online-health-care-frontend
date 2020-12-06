@@ -46,11 +46,11 @@ const ConfirmationPage = () => {
         const { address_count } = res.data;
         address_count === ALLOWED_ADDRESSES
           ? M.toast({
-              html: 'Address limit reached, please delete some to add new!',
-            })
+            html: 'Address limit reached, please delete some to add new!',
+          })
           : setNewAddress(true);
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
   const handleClick = (new_address, id = null) => {
@@ -69,10 +69,11 @@ const ConfirmationPage = () => {
           history.push(`/shopping/confirm/${address}`);
         })
         .catch((err) => {
+
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -136,7 +137,7 @@ const ConfirmationPage = () => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -181,10 +182,11 @@ const ConfirmationPage = () => {
         }
       })
       .catch((err) => {
+
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -211,7 +213,7 @@ const ConfirmationPage = () => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -486,23 +488,23 @@ const ConfirmationPage = () => {
           </div>
         </div>
       ) : (
-        <div className='container'>
-          <div className='row'>
-            <div className='col s12'>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNewAddress();
-                }}
-                className='btn btn-large pcolour btn-register waves-effect waves-light glow'
-              >
-                Add new address
+          <div className='container'>
+            <div className='row'>
+              <div className='col s12'>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNewAddress();
+                  }}
+                  className='btn btn-large pcolour btn-register waves-effect waves-light glow'
+                >
+                  Add new address
                 <i className='material-icons right'>create</i>
-              </button>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

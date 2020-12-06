@@ -67,10 +67,11 @@ export default function DoctorHomePage() {
           setCount({ ...res?.data });
         })
         .catch((err) => {
+
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -93,9 +94,8 @@ export default function DoctorHomePage() {
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m3 l3  ${
-                idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
-              }`}
+              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+                }`}
               key={idx}
             >
               <PatientCountCard
