@@ -80,7 +80,7 @@ h4 {
 }
 
 .hover:hover {
-  background-color: var(--text-secondary) !important;
+  background-color: var(--secondary) !important;
 }
 .pad li {
   margin-left: 5px;
@@ -90,7 +90,7 @@ h4 {
   height: 180px;
 }
 .amount {
-  color: var(--text-primary) !important;
+  color: var(--highlight) !important;
   font-size: 30px !important  ;
   font-weight: 600 !important;
 }

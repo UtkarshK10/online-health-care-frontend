@@ -87,15 +87,15 @@ const Oxymeter = (props) => {
       name: 'apply',
       label:
         'I have recently interacted or lived with someone who has tested positive for COVID - 19',
-      value: '1',
+      value: '0',
     },
     {
       name: 'apply',
       label:
         'I am a healthcare worker and I examined a COVID-19 confirmed case without protective gear',
-      value: '2',
+      value: '1',
     },
-    { name: 'apply', label: 'None of the above', value: 'none' },
+    { name: 'apply', label: 'No Interaction', value: '2' },
   ];
 
   const handleCheckboxChange = (e) => {
