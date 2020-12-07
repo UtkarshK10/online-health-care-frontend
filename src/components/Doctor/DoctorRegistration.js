@@ -148,7 +148,6 @@ function DoctorRegistration(props) {
           };
           setAuth(resData);
           saveLocalStorage(resData);
-          setLoading(false);
           setModal(true);
         })
         .catch((err) => {

@@ -48,7 +48,7 @@ const DoctorCard = (props) => {
           {speciality}
           <br />
           <span style={{ fontWeight: '600' }}>Fee : </span>
-          {Math.ceil(consulation_fee)}
+          {Math.ceil(consulation_fee)} cr.
         </p>
       </div>
     </div>
