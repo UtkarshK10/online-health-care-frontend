@@ -15,7 +15,7 @@ const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState({});
 
-  const theme = useTheme();
+
 
   const [data, setData] = useState({
     temperature: '',
@@ -46,7 +46,7 @@ const Oxymeter = (props) => {
         })
         .then((res) => {
           setLevel(res.data);
-          console.log(res.data);
+
           setLoading(false);
         })
         .catch((err) => {
@@ -54,7 +54,8 @@ const Oxymeter = (props) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.toString() });
+            console.log("exc", err?.request)
+            M.toast({ html: "Your internet speed might be causing the problem to get the response, try with a good internet speed" });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }

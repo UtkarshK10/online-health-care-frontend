@@ -14,7 +14,7 @@ const Logout = ({ isDoctor }) => {
       history.replace(URL);
       window.location.reload();
     };
-  }, [setAuth, history]);
+  }, [setAuth, history, URL]);
 
   return null;
 };

@@ -46,7 +46,7 @@ const HomePage = () => {
 
   const botopen = () => {
     var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, { opacity: 0.1 });
+    M.Modal.init(elems, { opacity: 0.1 });
   };
   const makeAppointment = (id, consulation_fee) => {
     if (auth.credits < Math.ceil(consulation_fee)) {

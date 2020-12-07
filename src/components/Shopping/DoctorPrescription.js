@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import ProductCard from './ProductCard';
 import axios from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
-import SearchMed from '../../assets/search_med.png';
 import Sad from '../../assets/sad.png';
 import Prescription from './Prescription';
 import M from 'materialize-css/dist/js/materialize.min.js';
