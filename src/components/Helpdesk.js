@@ -36,16 +36,14 @@ const Helpdesk = ({ isDoctor }) => {
         headers,
       })
       .then((res) => {
+        setData({ ...data, subject: '', body: '' })
         setLoading(false);
         if (res.status === 200) {
           M.toast({
             html: 'We have got your complaint, we will contact you soon!',
           });
         }
-        setData({
-          subject: '',
-          message: '',
-        })
+
       })
       .catch((err) => {
         setLoading(false);
