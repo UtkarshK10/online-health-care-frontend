@@ -42,6 +42,10 @@ const Helpdesk = ({ isDoctor }) => {
             html: 'We have got your complaint, we will contact you soon!',
           });
         }
+        setData({
+          subject: '',
+          message: '',
+        })
       })
       .catch((err) => {
         setLoading(false);
