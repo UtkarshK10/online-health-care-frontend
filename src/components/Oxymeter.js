@@ -9,7 +9,7 @@ import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import GetWell from '../assets/get-well.jpg';
-import useTheme from './useTheme';
+
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
