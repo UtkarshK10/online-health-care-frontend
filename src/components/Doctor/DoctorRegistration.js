@@ -278,7 +278,7 @@ function DoctorRegistration(props) {
                       type='text'
                       className='validate'
                     />
-                    <label htmlFor='experience'>Experience(in years)</label>
+                    <label htmlFor='experience'>Experience (in years)</label>
                   </div>
                 </div>
                 <div className='row'>

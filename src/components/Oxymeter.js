@@ -9,13 +9,14 @@ import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import GetWell from '../assets/get-well.jpg';
-
+import { Link } from 'react-router-dom';
+import YouTube from 'react-youtube';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState({});
-
-
+  const [text, setText] = useState("Watch the demo!");
+  const [switchView, setSwitchView] = useState(false);
 
   const [data, setData] = useState({
     temperature: '',
@@ -46,7 +47,6 @@ const Oxymeter = (props) => {
         })
         .then((res) => {
           setLevel(res.data);
-
           setLoading(false);
         })
         .catch((err) => {
@@ -55,7 +55,7 @@ const Oxymeter = (props) => {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
             console.log("exc", err?.request)
-            M.toast({ html: "Your internet speed might be causing the problem to get the response, try with a good internet speed" });
+            M.toast({ html: "Your internet speed might be causing the problem to get the response, try with a good internet speed or may be some server side issue" });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -116,13 +116,37 @@ const Oxymeter = (props) => {
     setCheckboxData({ ...checkboxData, [name]: [...filtered] });
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    setSwitchView(!switchView);
+    setText(text === "Go back" ? "Watch the demo" : "Go back");
+  }
+  const opts = {
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const _onReady = (e) => {
+    e.target.pauseVideo();
+  }
+
   if (!showForm) {
     return (
       <div className='container'>
         <div className='row'>
           <div className='col s12 m12 l12'>
             <h3>{title}</h3>
-            {!loading && (
+            <p className='right-align'>
+              {!loading && <Link
+                to='#'
+                onClick={handleClick}
+                className='text-secondary highlight'
+              >
+                {text}
+              </Link>}
+            </p>
+            {(!loading && !switchView) && (
               <DropzoneArea
                 onChange={handleFileChange}
                 acceptedFiles={[
@@ -134,6 +158,9 @@ const Oxymeter = (props) => {
                 maxFileSize={16777216}
                 filesLimit={1}
               />
+            )}
+            {(!loading && switchView) && (
+              <YouTube videoId="svb4Uku2KZ8" opts={opts} onReady={_onReady} />
             )}
             {loading && <ReactSpinner size={150} />}
             {oxylevel?.spo2 > 0 && (
