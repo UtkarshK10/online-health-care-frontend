@@ -30,7 +30,7 @@ const Forget = ({ match, midRoute }) => {
         setMsg(res.data.msg);
       })
       .catch((err) => {
-        setLoading(false);
+
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
