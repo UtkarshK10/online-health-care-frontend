@@ -61,10 +61,11 @@ const DoctorSchedule = () => {
         }
       })
       .catch((err) => {
+
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -95,10 +96,11 @@ const DoctorSchedule = () => {
           setPatientDetails([...res.data.details]);
         })
         .catch((err) => {
+
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -119,7 +121,7 @@ const DoctorSchedule = () => {
     history.push(`/doctors/prescription?id=${id}`);
   };
 
-  const URL = 'https://deploy-practice2.herokuapp.com/login';
+  const URL = 'https://medico-videocall.herokuapp.com/login';
   return (
     <div className='container' style={{ paddingTop: '30px' }}>
       <ul className='collection with-header' style={{ marginTop: '0px' }}>
@@ -179,7 +181,7 @@ const DoctorSchedule = () => {
                         disabled={patientDetail.attended}
                         onClick={(e) => {
                           e.preventDefault();
-                          handleClick(patientDetail?.patient_email);
+                          handleClick(patientDetail?.patient_email, patientDetail.patient_record_id);
                         }}
                         className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                       >

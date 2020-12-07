@@ -45,6 +45,7 @@
     "react-to-print": "^2.11.0",
     "react-transition-group": "^4.4.1",
     "react-typist": "^2.0.5",
+    "react-youtube": "^7.13.0",
     "secure-web-storage": "^1.0.2",
     "shallowequal": "^1.1.0",
     "simple-react-footer": "^1.0.2",
@@ -60,7 +61,7 @@
     "eject": "react-scripts eject"
   },
   "engines": {
-    "node": "12.18.3"
+    "node": "14.15.0"
   },
   "eslintConfig": {
     "extends": [

@@ -36,19 +36,21 @@ const Helpdesk = ({ isDoctor }) => {
         headers,
       })
       .then((res) => {
+        setData({ ...data, subject: '', message: '' })
         setLoading(false);
         if (res.status === 200) {
           M.toast({
             html: 'We have got your complaint, we will contact you soon!',
           });
         }
+
       })
       .catch((err) => {
         setLoading(false);
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }

@@ -76,34 +76,34 @@ function DoctorRegistration(props) {
     const phoneno = /^\d{10}$/;
     const regularExpressionEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (name === '') {
-      M.toast({ html: 'Name cannot be empty' });
+      return M.toast({ html: 'Name cannot be empty' });
     } else if (username === '') {
-      M.toast({ html: 'Username cannot be empty' });
+      return M.toast({ html: 'Username cannot be empty' });
     } else if (password.length < 6) {
-      M.toast({
+      return M.toast({
         html: 'Password should be of minimum 6 characters.',
       });
     } else if (!regularExpressionPassword.test(password)) {
-      M.toast({
+      return M.toast({
         html:
           'Password should contain atleast one number and one special character',
       });
     } else if (!regularExpressionEmail.test(email)) {
-      M.toast({ html: 'Please enter a valid email id.' });
+      return M.toast({ html: 'Please enter a valid email id.' });
     } else if (!phoneno.test(phone)) {
-      M.toast({ html: 'Please enter a valid phone number.' });
+      return M.toast({ html: 'Please enter a valid phone number.' });
     } else if (experience === '') {
-      M.toast({ html: 'Please enter your experience.' });
+      return M.toast({ html: 'Please enter your experience.' });
     } else if (speciality === '' || speciality.length < 5) {
-      M.toast({
+      return M.toast({
         html: 'Please enter about your speciality, minimum 5 characters',
       });
     } else if (fee === '' || (fee < 0 && fee > 2000)) {
-      M.toast({ html: 'Please enter a valid fee in the range of Rs 0-2000' });
+      return M.toast({ html: 'Please enter a valid fee in the range of Rs 0-2000' });
     } else if (!file) {
-      M.toast({ html: 'Please pick an image' });
+      return M.toast({ html: 'Please pick an image' });
     } else if (!isValid) {
-      M.toast({
+      return M.toast({
         html: 'Please pick one of the file format image: ".jpg,.png,.jpeg"',
       });
     } else {
@@ -126,6 +126,7 @@ function DoctorRegistration(props) {
           headers: headers,
         })
         .then((res) => {
+
           //   const resData = {
           //     name: res.data.name,
           //     username: res.data.username,
@@ -154,7 +155,7 @@ function DoctorRegistration(props) {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -277,7 +278,7 @@ function DoctorRegistration(props) {
                       type='text'
                       className='validate'
                     />
-                    <label htmlFor='experience'>Experience</label>
+                    <label htmlFor='experience'>Experience (in years)</label>
                   </div>
                 </div>
                 <div className='row'>

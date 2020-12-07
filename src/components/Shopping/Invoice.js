@@ -35,7 +35,7 @@ const Invoice = (props) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -287,10 +287,10 @@ const Invoice = (props) => {
                 <div className='input-field'>
                   <button
                     className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                    // onClick={e => {
-                    //     e.preventDefault();
-                    //     downloadInvoice();
-                    // }}
+                  // onClick={e => {
+                  //     e.preventDefault();
+                  //     downloadInvoice();
+                  // }}
                   >
                     Print
                     <i className='material-icons left'>get_app</i>

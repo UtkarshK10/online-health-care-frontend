@@ -39,7 +39,7 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -101,16 +101,16 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
                 style={{ width: '30px', cursor: 'pointer' }}
               />
             ) : (
-              <img
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleAddToPrescription();
-                }}
-                src={PrescriptionIcon}
-                alt=''
-                style={{ width: '30px', cursor: 'pointer' }}
-              />
-            ))}
+                  <img
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToPrescription();
+                    }}
+                    src={PrescriptionIcon}
+                    alt=''
+                    style={{ width: '30px', cursor: 'pointer' }}
+                  />
+                ))}
         </div>
         <br />
       </div>

@@ -9,10 +9,14 @@ import queryString from 'query-string';
 import { updateLocalStorage } from '../utils/helper';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import GetWell from '../assets/get-well.jpg';
+import { Link } from 'react-router-dom';
+import YouTube from 'react-youtube';
 
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState({});
+  const [text, setText] = useState('Watch the demo!');
+  const [switchView, setSwitchView] = useState(false);
 
   const [data, setData] = useState({
     temperature: '',
@@ -43,7 +47,6 @@ const Oxymeter = (props) => {
         })
         .then((res) => {
           setLevel(res.data);
-          console.log(res.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -51,7 +54,11 @@ const Oxymeter = (props) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            console.log('exc', err?.request);
+            M.toast({
+              html:
+                'Your internet speed might be causing the problem to get the response, try with a good internet speed or may be some server side issue',
+            });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -84,15 +91,15 @@ const Oxymeter = (props) => {
       name: 'apply',
       label:
         'I have recently interacted or lived with someone who has tested positive for COVID - 19',
-      value: '1',
+      value: '0',
     },
     {
       name: 'apply',
       label:
         'I am a healthcare worker and I examined a COVID-19 confirmed case without protective gear',
-      value: '2',
+      value: '1',
     },
-    { name: 'apply', label: 'None of the above', value: 'none' },
+    { name: 'apply', label: 'No Interaction', value: '2' },
   ];
 
   const handleCheckboxChange = (e) => {
@@ -112,13 +119,39 @@ const Oxymeter = (props) => {
     setCheckboxData({ ...checkboxData, [name]: [...filtered] });
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    setSwitchView(!switchView);
+    setText(text === 'Go back' ? 'Watch the demo' : 'Go back');
+  };
+  const opts = {
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const _onReady = (e) => {
+    e.target.pauseVideo();
+  };
+
   if (!showForm) {
     return (
       <div className='container'>
         <div className='row'>
           <div className='col s12 m12 l12'>
             <h3>{title}</h3>
-            {!loading && (
+            <p className='right-align'>
+              {!loading && (
+                <Link
+                  to='#'
+                  onClick={handleClick}
+                  className='text-secondary highlight'
+                >
+                  {text}
+                </Link>
+              )}
+            </p>
+            {!loading && !switchView && (
               <DropzoneArea
                 onChange={handleFileChange}
                 acceptedFiles={[
@@ -130,6 +163,11 @@ const Oxymeter = (props) => {
                 maxFileSize={16777216}
                 filesLimit={1}
               />
+            )}
+            {!loading && switchView && (
+              <div className='youtube'>
+                <YouTube videoId='svb4Uku2KZ8' opts={opts} onReady={_onReady} />
+              </div>
             )}
             {loading && <ReactSpinner size={150} />}
             {oxylevel?.spo2 > 0 && (
@@ -207,7 +245,7 @@ const Oxymeter = (props) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }

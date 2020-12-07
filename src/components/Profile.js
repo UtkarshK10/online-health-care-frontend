@@ -31,7 +31,7 @@ const Profile = ({ isDoctor }) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            M.toast({ html: err?.request?.data?.toString() });
+            M.toast({ html: err?.request?.toString() });
           } else {
             M.toast({ html: 'Something went wrong, please try again' });
           }
@@ -56,7 +56,7 @@ const Profile = ({ isDoctor }) => {
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -86,7 +86,15 @@ const Profile = ({ isDoctor }) => {
         .then((res) => {
           setUser({ ...res.data.user });
         })
-        .catch((err) => {});
+        .catch((err) => {
+          if (err?.response) {
+            M.toast({ html: err?.response?.data?.msg });
+          } else if (err?.request) {
+            M.toast({ html: err?.request?.toString() });
+          } else {
+            M.toast({ html: 'Something went wrong, please try again' });
+          }
+        });
     };
     if (auth?.token) fetchUser();
   }, [auth?.token, route, headers]);
@@ -217,42 +225,42 @@ const Profile = ({ isDoctor }) => {
                   </div>
                 </>
               ) : (
-                <>
-                  <div className='row'>
-                    <div className='input-field'>
-                      <input
-                        value={age}
-                        onChange={update}
-                        name='age'
-                        id='age'
-                        type='number'
-                        readOnly={!edit}
-                        min='1'
-                        max='100'
-                      />
-                      <label htmlFor='age' className={`${age && 'active'}`}>
-                        Age
+                  <>
+                    <div className='row'>
+                      <div className='input-field'>
+                        <input
+                          value={age}
+                          onChange={update}
+                          name='age'
+                          id='age'
+                          type='number'
+                          readOnly={!edit}
+                          min='1'
+                          max='100'
+                        />
+                        <label htmlFor='age' className={`${age && 'active'}`}>
+                          Age
                       </label>
+                      </div>
                     </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col l3 m3 s6 offset-l3 offset-m3'>
-                      <CustomG
-                        sex='male'
-                        gender={gender}
-                        updateGender={updateGender}
-                      />
+                    <div className='row'>
+                      <div className='col l3 m3 s6 offset-l3 offset-m3'>
+                        <CustomG
+                          sex='male'
+                          gender={gender}
+                          updateGender={updateGender}
+                        />
+                      </div>
+                      <div className='col l3 m3 s6'>
+                        <CustomG
+                          sex='female'
+                          gender={gender}
+                          updateGender={updateGender}
+                        />
+                      </div>
                     </div>
-                    <div className='col l3 m3 s6'>
-                      <CustomG
-                        sex='female'
-                        gender={gender}
-                        updateGender={updateGender}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
             </form>
           </div>
         </div>

@@ -217,24 +217,24 @@ const HomePage = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/records`}>Records</NavLink>
+              <NavLink to={`/records`} activeClassName='scolour'>Records</NavLink>
             </li>
             <li>
-              <NavLink to='/payment'>
+              <NavLink to='/payment' activeClassName='scolour'>
                 Credits : <span className='highlight'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to='/transactions'>Transactions</NavLink>
+              <NavLink to='/transactions' activeClassName='scolour'>Transactions</NavLink>
             </li>
             <li>
-              <NavLink to='/help'>Helpdesk</NavLink>
+              <NavLink to='/help' activeClassName='scolour'>Helpdesk</NavLink>
             </li>
             <li>
-              <NavLink to='/aboutus'>About us</NavLink>
+              <NavLink to='/aboutus' activeClassName='scolour'>About us</NavLink>
             </li>
             <li>
-              <NavLink to='/aboutproject'>About project</NavLink>
+              <NavLink to='/aboutproject' activeClassName='scolour'>About project</NavLink>
             </li>
             <li className='divider'></li>
             <li>
@@ -245,22 +245,22 @@ const HomePage = () => {
         {!auth?.isLoggedIn && (
           <>
             <li>
-              <NavLink to='/doctors/signup' className='sidenav-close'>
+              <NavLink to='/doctors/signup' className='sidenav-close' activeClassName='scolour'>
                 Are you a doctor?
               </NavLink>
             </li>
             <li>
-              <NavLink to='/login' className='sidenav-close'>
+              <NavLink to='/login' className='sidenav-close' activeClassName='scolour'>
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink to='/signup' className='sidenav-close'>
+              <NavLink to='/signup' className='sidenav-close' activeClassName='scolour'>
                 Signup
               </NavLink>
             </li>
             <li>
-              <NavLink to='/aboutproject' className='sidenav-close'>
+              <NavLink to='/aboutproject' className='sidenav-close' activeClassName='scolour'>
                 About Project
               </NavLink>
             </li>

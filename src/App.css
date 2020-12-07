@@ -90,7 +90,7 @@ h4 {
   height: 180px;
 }
 .amount {
-  color: var(--text-primary) !important;
+  color: var(--highlight) !important;
   font-size: 30px !important  ;
   font-weight: 600 !important;
 }
@@ -556,4 +556,10 @@ table td {
 .justify-align {
   text-align: justify;
   text-justify: inter-word;
+}
+
+@media screen and (max-width: 600px) {
+  iframe {
+    width: 90vw !important;
+  }
 }

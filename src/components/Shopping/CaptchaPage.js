@@ -89,10 +89,11 @@ const CaptchaPage = ({ match }) => {
         updateLocalStorage({ ...auth, credits: res.data.new_credits });
       })
       .catch((err) => {
+
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
-          M.toast({ html: err?.request?.data?.toString() });
+          M.toast({ html: err?.request?.toString() });
         } else {
           M.toast({ html: 'Something went wrong, please try again' });
         }
@@ -152,20 +153,20 @@ const CaptchaPage = ({ match }) => {
           </div>
         </>
       ) : (
-        <div
-          className='row'
-          style={{ marginTop: '25px', marginBottom: '25px' }}
-        >
-          <div className='col s12'>{msg && <h4>{msg}</h4>}</div>
-          <div className='col s12 '>
-            <img
-              src={successOrder}
-              alt='successOrder'
-              style={{ height: '300px', marginTop: '40px' }}
-            />
+          <div
+            className='row'
+            style={{ marginTop: '25px', marginBottom: '25px' }}
+          >
+            <div className='col s12'>{msg && <h4>{msg}</h4>}</div>
+            <div className='col s12 '>
+              <img
+                src={successOrder}
+                alt='successOrder'
+                style={{ height: '300px', marginTop: '40px' }}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };
