@@ -36,7 +36,7 @@ const Helpdesk = ({ isDoctor }) => {
         headers,
       })
       .then((res) => {
-        setData({ ...data, subject: '', body: '' })
+        setData({ ...data, subject: '', message: '' })
         setLoading(false);
         if (res.status === 200) {
           M.toast({
