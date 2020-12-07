@@ -126,6 +126,7 @@ function DoctorRegistration(props) {
           headers: headers,
         })
         .then((res) => {
+
           //   const resData = {
           //     name: res.data.name,
           //     username: res.data.username,
@@ -147,10 +148,11 @@ function DoctorRegistration(props) {
           };
           setAuth(resData);
           saveLocalStorage(resData);
+          setLoading(false);
           setModal(true);
         })
         .catch((err) => {
-
+          setLoading(false);
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
