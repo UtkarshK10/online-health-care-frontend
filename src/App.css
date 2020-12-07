@@ -80,7 +80,7 @@ h4 {
 }
 
 .hover:hover {
-  background-color: var(--text-secondary) !important;
+  background-color: var(--secondary) !important;
 }
 .pad li {
   margin-left: 5px;
