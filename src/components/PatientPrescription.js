@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import noRecords from '../assets/no-record.svg';
 import ReactSpinner from './ReactSpinner';
+import FeedbackRating from './FeedbackRating';
 
 const PatientPrescription = () => {
   const history = useHistory();
@@ -39,6 +40,20 @@ const PatientPrescription = () => {
   const handleClick = (id) => {
     history.push(`/records/prescription?id=${id}`);
   };
+  const handleRating = (newRating, recordId) => {
+    const data = {
+      doc_rating: newRating,
+    };
+    axios
+      .put(`/api/records/feedback/${recordId}`, data, {
+        headers: {
+          'api-token': auth?.token,
+        },
+      })
+      .then((res) => {})
+      .catch((e) => console.log(e));
+  };
+
   if (loading) {
     return (
       <div className='container'>
@@ -55,7 +70,7 @@ const PatientPrescription = () => {
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col s12'>
+          <div className='col s12 l6 offset-l3 m8 offset-m2'>
             <h2>No records found!</h2>
             <img src={noRecords} alt='no records' />
           </div>
@@ -74,6 +89,7 @@ const PatientPrescription = () => {
             <th>Prescription Id</th>
             <th>Issued On</th>
             <th>Issued By</th>
+            <th>Rate</th>
             <th>View Prescription</th>
           </tr>
         </thead>
@@ -85,6 +101,13 @@ const PatientPrescription = () => {
                 {prescription.issue_date.toString().replace('GMT', 'IST')}
               </td>
               <td>{prescription.doctor_name}</td>
+              <td>
+                <FeedbackRating
+                  handleRating={handleRating}
+                  rating={prescription.doc_rating}
+                  recordId={prescription.record_id}
+                />
+              </td>
               <td>
                 <button
                   onClick={(e) => {

@@ -219,48 +219,48 @@ const Profile = ({ isDoctor }) => {
                         htmlFor='consultation_fee'
                         className={`${consultation_fee && 'active'}`}
                       >
-                        Fee
+                        Fee (in &#8377;)
                       </label>
                     </div>
                   </div>
                 </>
               ) : (
-                  <>
-                    <div className='row'>
-                      <div className='input-field'>
-                        <input
-                          value={age}
-                          onChange={update}
-                          name='age'
-                          id='age'
-                          type='number'
-                          readOnly={!edit}
-                          min='1'
-                          max='100'
-                        />
-                        <label htmlFor='age' className={`${age && 'active'}`}>
-                          Age
+                <>
+                  <div className='row'>
+                    <div className='input-field'>
+                      <input
+                        value={age}
+                        onChange={update}
+                        name='age'
+                        id='age'
+                        type='number'
+                        readOnly={!edit}
+                        min='1'
+                        max='100'
+                      />
+                      <label htmlFor='age' className={`${age && 'active'}`}>
+                        Age
                       </label>
-                      </div>
                     </div>
-                    <div className='row'>
-                      <div className='col l3 m3 s6 offset-l3 offset-m3'>
-                        <CustomG
-                          sex='male'
-                          gender={gender}
-                          updateGender={updateGender}
-                        />
-                      </div>
-                      <div className='col l3 m3 s6'>
-                        <CustomG
-                          sex='female'
-                          gender={gender}
-                          updateGender={updateGender}
-                        />
-                      </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col l3 m3 s6 offset-l3 offset-m3'>
+                      <CustomG
+                        sex='male'
+                        gender={gender}
+                        updateGender={updateGender}
+                      />
                     </div>
-                  </>
-                )}
+                    <div className='col l3 m3 s6'>
+                      <CustomG
+                        sex='female'
+                        gender={gender}
+                        updateGender={updateGender}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
             </form>
           </div>
         </div>

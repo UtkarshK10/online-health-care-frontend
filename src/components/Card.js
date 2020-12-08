@@ -1,4 +1,5 @@
 import React from 'react';
+import money from '../assets/money.png';
 
 const Card = (props) => {
   const BASE_PRICE = 500;
@@ -22,9 +23,21 @@ const Card = (props) => {
         <p className='card-title amount'>&#8377; {amount}</p>
       </div>
       <div className='card-content'>
-        <p>
-          You will get <b className='stcolour'>{getCredits(amount)}</b> credits
-          !!
+        <p
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span>
+            You will get <b>{getCredits(amount)}</b>
+          </span>
+          <img
+            src={money}
+            alt='money'
+            style={{ width: '20px', marginLeft: '3px' }}
+          />
         </p>
       </div>
     </div>

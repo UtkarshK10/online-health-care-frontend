@@ -3,6 +3,7 @@ import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import noTransaction from '../assets/no-transaction.svg';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import money from '../assets/money.png';
 
 const Transcations = () => {
   const [transactions, setTransactions] = useState([]);
@@ -53,7 +54,7 @@ const Transcations = () => {
       <div className='row'>
         <h3 className='h4-style'>Your Transcations</h3>
       </div>
-      <table className='responsive-table'>
+      <table className='responsive-table centered'>
         <thead>
           <tr>
             <th>Transcation Id</th>
@@ -73,7 +74,23 @@ const Transcations = () => {
             >
               <td>{transaction.transaction_id}</td>
               <td>{transaction.done_to}</td>
-              <td>{transaction.amount} cr.</td>
+              <td>
+                <span
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {transaction.amount}
+
+                  <img
+                    src={money}
+                    alt='money'
+                    style={{ width: '20px', marginLeft: '7px' }}
+                  />
+                </span>
+              </td>
               <td>
                 {transaction.transaction_date.toString().replace('GMT', 'IST')}
               </td>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RatingStar from './Shopping/RatingStar';
+import money from '../assets/money.png';
 
 const DoctorCard = (props) => {
   const {
@@ -11,6 +13,7 @@ const DoctorCard = (props) => {
     consulation_fee,
     showLink,
     id,
+    doc_rating,
   } = props;
 
   const handleChange = (e) => {
@@ -40,7 +43,7 @@ const DoctorCard = (props) => {
         <span className='card-title ptcolour' style={{ fontWeight: '600' }}>
           {name}
         </span>
-        <p>
+        <p style={{ fontSize: '1.1rem' }}>
           <span style={{ fontWeight: '600' }}>Experience : </span>
           {experience}{' '}
           {experience.toString().toLowerCase().includes('year') ? '' : 'years'}
@@ -48,8 +51,26 @@ const DoctorCard = (props) => {
           <span style={{ fontWeight: '600' }}>Speciality : </span>
           {speciality}
           <br />
-          <span style={{ fontWeight: '600' }}>Fee : </span>
-          {Math.ceil(consulation_fee)} cr.
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span style={{ fontWeight: '600', marginRight: '5px' }}>
+              Fee :{' '}
+            </span>
+            {Math.ceil(consulation_fee)}
+            <img
+              src={money}
+              alt='money'
+              style={{ width: '18px', marginLeft: '5px' }}
+            />
+          </div>
+          <span className='right' style={{ margin: '15px 0' }}>
+            <RatingStar val={doc_rating} />
+          </span>
         </p>
       </div>
     </div>

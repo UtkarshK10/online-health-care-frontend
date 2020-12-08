@@ -6,6 +6,7 @@ import axios from '../axios/axios';
 import { AuthContext } from '../contexts/auth-context';
 import noPrescription from '../assets/no-prescription.png';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import money from '../assets/money.png';
 
 const PatientPrescriptionDetails = (props) => {
   const searchString = queryString.parse(props.location.search);
@@ -145,7 +146,7 @@ const PatientPrescriptionDetails = (props) => {
                 }}
               >
                 <p
-                  className='ptcolour'
+                  className='text-secondary'
                   style={{
                     fontSize: '2.5em',
                     margin: '5px',
@@ -154,9 +155,26 @@ const PatientPrescriptionDetails = (props) => {
                     marginLeft: '22px',
                   }}
                 >
-                  {prescriptionDetail.price} cr.
-                </p>
+                  {prescriptionDetail.price}
 
+                  <span
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <img
+                      src={money}
+                      alt='money'
+                      style={{
+                        width: '32px',
+                        marginLeft: '7px',
+                        marginTop: '3px',
+                      }}
+                    />
+                  </span>
+                </p>
                 <button
                   onClick={(e) => {
                     e.preventDefault();

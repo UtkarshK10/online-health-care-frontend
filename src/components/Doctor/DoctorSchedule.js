@@ -61,7 +61,6 @@ const DoctorSchedule = () => {
         }
       })
       .catch((err) => {
-
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -96,7 +95,6 @@ const DoctorSchedule = () => {
           setPatientDetails([...res.data.details]);
         })
         .catch((err) => {
-
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -143,6 +141,7 @@ const DoctorSchedule = () => {
                     {patientDetail.patient_name} <br />
                     {patientDetail.age}
                     <br />
+                    {patientDetail.gender.toString()[0].toUppercase()}
                   </p>
                 </div>
                 <div className='col s6 m1 l1'>
@@ -181,7 +180,10 @@ const DoctorSchedule = () => {
                         disabled={patientDetail.attended}
                         onClick={(e) => {
                           e.preventDefault();
-                          handleClick(patientDetail?.patient_email, patientDetail.patient_record_id);
+                          handleClick(
+                            patientDetail?.patient_email,
+                            patientDetail.patient_record_id
+                          );
                         }}
                         className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                       >

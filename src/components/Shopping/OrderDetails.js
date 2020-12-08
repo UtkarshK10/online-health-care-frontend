@@ -5,6 +5,7 @@ import ReactSpinner from '../ReactSpinner';
 import axios from '../../axios/axios';
 import { AuthContext } from '../../contexts/auth-context';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import money from '../../assets/money.png';
 // const Orders = [
 //   {
 //     id: '1',
@@ -138,7 +139,23 @@ const OrderDetails = (props) => {
                     marginLeft: '22px',
                   }}
                 >
-                  {orderDetail.price} cr.
+                  <span
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {orderDetail.price}{' '}
+                    <img
+                      src={money}
+                      alt='money'
+                      style={{
+                        width: '30px',
+                        marginLeft: '7px',
+                        marginTop: '3px',
+                      }}
+                    />
+                  </span>
                 </p>
 
                 <button

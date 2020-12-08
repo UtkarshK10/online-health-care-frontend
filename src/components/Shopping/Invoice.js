@@ -76,7 +76,7 @@ const Invoice = (props) => {
                   Invoice Number:{' '}
                 </p>
                 <span style={{ display: 'inline-block' }}>
-                  #{invoiceData.Invoice_No}
+                  {invoiceData.Invoice_No}
                 </span>
               </div>
               <div className='invoice'>
@@ -174,7 +174,7 @@ const Invoice = (props) => {
                             <div className='right price'>
                               {' '}
                               <span className='font-weight-bold'>
-                                {product.price} cr.
+                                {product.price} Coins
                               </span>{' '}
                             </div>
                           </td>
@@ -200,7 +200,7 @@ const Invoice = (props) => {
                           <td>
                             <div className='right price'>
                               {' '}
-                              <span>{invoiceData.Sub_Total} cr.</span>{' '}
+                              <span>{invoiceData.Sub_Total} Coins</span>{' '}
                             </div>
                           </td>
                         </tr>
@@ -214,7 +214,7 @@ const Invoice = (props) => {
                           <td>
                             <div className='right price'>
                               {' '}
-                              <span>{invoiceData.SGST} cr.</span>{' '}
+                              <span>{invoiceData.SGST} Coins</span>{' '}
                             </div>
                           </td>
                         </tr>
@@ -228,7 +228,7 @@ const Invoice = (props) => {
                           <td>
                             <div className='right price'>
                               {' '}
-                              <span>{invoiceData.CGST} cr.</span>{' '}
+                              <span>{invoiceData.CGST} Coins</span>{' '}
                             </div>
                           </td>
                         </tr>
@@ -243,7 +243,7 @@ const Invoice = (props) => {
                             <div className='right price'>
                               {' '}
                               <span className='highlight'>
-                                {invoiceData.GST} cr.
+                                {invoiceData.GST} Coins
                               </span>{' '}
                             </div>
                           </td>
@@ -261,7 +261,7 @@ const Invoice = (props) => {
                             <div className='right'>
                               {' '}
                               <span style={{ fontWeight: 600 }}>
-                                {invoiceData.Total} cr.
+                                {invoiceData.Total} Coins
                               </span>{' '}
                             </div>
                           </td>
@@ -287,10 +287,10 @@ const Invoice = (props) => {
                 <div className='input-field'>
                   <button
                     className='btn btn-large pcolour btn-register waves-effect waves-light hover'
-                  // onClick={e => {
-                  //     e.preventDefault();
-                  //     downloadInvoice();
-                  // }}
+                    // onClick={e => {
+                    //     e.preventDefault();
+                    //     downloadInvoice();
+                    // }}
                   >
                     Print
                     <i className='material-icons left'>get_app</i>

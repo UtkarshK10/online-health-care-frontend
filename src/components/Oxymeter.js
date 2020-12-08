@@ -15,7 +15,7 @@ import YouTube from 'react-youtube';
 const Oxymeter = (props) => {
   const { title, appointment } = props;
   const [oxylevel, setLevel] = useState({});
-  const [text, setText] = useState('Watch the demo!');
+  const [text, setText] = useState('Watch Demo!');
   const [switchView, setSwitchView] = useState(false);
 
   const [data, setData] = useState({
@@ -122,7 +122,7 @@ const Oxymeter = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
     setSwitchView(!switchView);
-    setText(text === 'Go back' ? 'Watch the demo' : 'Go back');
+    setText(text === 'Go back' ? 'Watch Demo' : 'Go back');
   };
   const opts = {
     playerVars: {

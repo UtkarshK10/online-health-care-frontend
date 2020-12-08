@@ -23,7 +23,7 @@ const HomePage = () => {
   const fetchDoctors = () => {
     setLoading(true);
     axios
-      .get('/api/doctors/',)
+      .get('/api/doctors/')
       .then((res) => {
         setDoctors([...res.data]);
         setLoading(false);
@@ -51,8 +51,9 @@ const HomePage = () => {
   const makeAppointment = (id, consulation_fee) => {
     if (auth.credits < Math.ceil(consulation_fee)) {
       M.toast({
-        html: `You don't have enough credits, please add ${Math.ceil(consulation_fee) - auth.credits
-          } credits and then try again`,
+        html: `You don't have enough credits, please add ${
+          Math.ceil(consulation_fee) - auth.credits
+        } credits and then try again`,
       });
       return;
     }
@@ -70,7 +71,6 @@ const HomePage = () => {
   }
   return (
     <>
-
       <div className='container'>
         <div className='row'>
           <h4 className='h4-style'>Our Health Experts</h4>
@@ -84,6 +84,7 @@ const HomePage = () => {
               experience,
               speciality,
               consulation_fee,
+              rating,
             } = doctor;
             return (
               <div key={doctor.id} className='col s12 m6 l4'>
@@ -97,6 +98,7 @@ const HomePage = () => {
                   appointment={makeAppointment}
                   showLink={auth?.isLoggedIn}
                   consulation_fee={consulation_fee}
+                  doc_rating={rating}
                 />
               </div>
             );

@@ -6,6 +6,7 @@ import axios from '../../axios/axios';
 import ReactSpinner from '../ReactSpinner';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import PrescriptionIcon from '../../assets/add-to-pre.png';
+import money from '../../assets/money.png';
 
 const ProductCard = ({ Product, Prescription, addToPrescription }) => {
   const [loading, setLoading] = useState(false);
@@ -87,7 +88,19 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
             fontSize: '22px',
           }}
         >
-          {price} cr.
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            {price}{' '}
+            <img
+              src={money}
+              alt='money'
+              style={{ width: '25px', marginLeft: '7px' }}
+            />
+          </div>
         </div>
         <div className='col offset-l5 offset-m5 s4 m2 l2 offset-s3'>
           {auth?.token &&
@@ -101,16 +114,16 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
                 style={{ width: '30px', cursor: 'pointer' }}
               />
             ) : (
-                  <img
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddToPrescription();
-                    }}
-                    src={PrescriptionIcon}
-                    alt=''
-                    style={{ width: '30px', cursor: 'pointer' }}
-                  />
-                ))}
+              <img
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddToPrescription();
+                }}
+                src={PrescriptionIcon}
+                alt=''
+                style={{ width: '30px', cursor: 'pointer' }}
+              />
+            ))}
         </div>
         <br />
       </div>

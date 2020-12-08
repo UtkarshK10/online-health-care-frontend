@@ -286,7 +286,7 @@ function DoctorRegistration(props) {
                       type='number'
                       className='validate'
                     />
-                    <label htmlFor='fee'>Fee</label>
+                    <label htmlFor='fee'>Fee (in &#8377;)</label>
                   </div>
                 </div>
                 <div className='row'>
