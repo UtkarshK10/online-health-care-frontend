@@ -122,6 +122,7 @@ function UserLogin(props) {
                 e.preventDefault();
                 window.location.href = '/';
               }}
+              style={{ cursor: 'pointer' }}
             />
           </div>
           <div

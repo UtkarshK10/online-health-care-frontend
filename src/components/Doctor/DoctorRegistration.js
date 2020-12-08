@@ -196,6 +196,7 @@ function DoctorRegistration(props) {
                     e.preventDefault();
                     window.location.href = '/doctors';
                   }}
+                  style={{ cursor: 'pointer' }}
                 />
               </animated.div>
             </div>

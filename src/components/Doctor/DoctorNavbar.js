@@ -119,6 +119,9 @@ const DoctorNavbar = () => {
                   <li>
                     <NavLink to='/doctors/aboutproject'>About Project</NavLink>
                   </li>
+                  <li>
+                    <NavLink to='/doctors/aboutus'>Contact</NavLink>
+                  </li>
                 </>
               )}
             </ul>
@@ -189,7 +192,11 @@ const DoctorNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to='/doctors/aboutproject' className='text-secondary' activeClassName='scolour'>
+              <NavLink
+                to='/doctors/aboutproject'
+                className='text-secondary'
+                activeClassName='scolour'
+              >
                 About Project
               </NavLink>
             </li>
@@ -211,18 +218,39 @@ const DoctorNavbar = () => {
         {!auth?.isLoggedIn && (
           <>
             <li>
-              <NavLink to='/doctors/login' className='sidenav-close' activeClassName='scolour'>
+              <NavLink
+                to='/doctors/login'
+                className='sidenav-close'
+                activeClassName='scolour'
+              >
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink to='/doctors/signup' className='sidenav-close' activeClassName='scolour'>
+              <NavLink
+                to='/doctors/signup'
+                className='sidenav-close'
+                activeClassName='scolour'
+              >
                 Signup
               </NavLink>
             </li>
             <li>
-              <NavLink to='/doctors/aboutproject' className='sidenav-close' activeClassName='scolour'>
+              <NavLink
+                to='/doctors/aboutproject'
+                className='sidenav-close'
+                activeClassName='scolour'
+              >
                 About Project
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/doctors/aboutus'
+                className='sidenav-close'
+                activeClassName='scolour'
+              >
+                Contact
               </NavLink>
             </li>
           </>

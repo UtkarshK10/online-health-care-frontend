@@ -147,6 +147,7 @@ function UserRegistration() {
                     e.preventDefault();
                     window.location.href = '/';
                   }}
+                  style={{ cursor: 'pointer' }}
                 />
               </animated.div>
             </div>

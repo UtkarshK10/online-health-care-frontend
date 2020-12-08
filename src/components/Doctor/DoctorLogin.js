@@ -107,6 +107,7 @@ function DoctorLogin(props) {
               className='responsive-img center'
               src={doctor}
               alt='doctor'
+              style={{ cursor: 'pointer' }}
               onClick={(e) => {
                 e.preventDefault();
                 window.location.href = '/doctors';
