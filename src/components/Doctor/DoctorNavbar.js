@@ -120,7 +120,7 @@ const DoctorNavbar = () => {
                     <NavLink to='/doctors/aboutproject'>About Project</NavLink>
                   </li>
                   <li>
-                    <NavLink to='/doctors/aboutus'>Contact</NavLink>
+                    <NavLink to='/doctors/aboutus'>Contact Us</NavLink>
                   </li>
                 </>
               )}
@@ -250,7 +250,7 @@ const DoctorNavbar = () => {
                 className='sidenav-close'
                 activeClassName='scolour'
               >
-                Contact
+                Contact Us
               </NavLink>
             </li>
           </>
