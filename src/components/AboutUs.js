@@ -10,43 +10,42 @@ import uk from '../assets/developers/uk.jpg';
 const Developers = [
   {
     image: cp,
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+    description: '"If you can\'t scale, you can\'t scrum, Deploy or die. v200"',
     name: 'CHAITANYA PANDIT',
     link: 'https://www.linkedin.com/in/chaitanyapandit1998/',
   },
   {
     image: ms,
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+      ' “We May Encounter Many Defeats But We Must Not Be Defeated.”',
     name: 'Mandeep Singh',
     link: 'https://www.linkedin.com/in/mandysgh/',
   },
   {
     image: nb,
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+      '“The Man Who Has Confidence In Himself Gains The Confidence Of Others.”',
     name: 'nishit bisht',
     link: 'https://www.linkedin.com/in/nishit-bisht-a0aba0152/',
   },
   {
     image: pk,
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+      '“The Best Way To Get Started Is To Quit Talking And Begin Doing.”',
     name: 'Prakhar Kamal',
     link: 'https://www.linkedin.com/in/kprakhar04/',
   },
   {
     image: ss,
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+      '“Security Is Mostly A Superstition. Life Is Either A Daring Adventure Or Nothing.”',
     name: 'Snehansh Siddharth',
     link: 'https://www.linkedin.com/in/ssiddharth007/',
   },
   {
     image: uk,
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rutrum malesuada eros sit amet lobortis',
+      '"Make it right, make it fast and make it work like a champ 🔥🔥"',
     name: 'Utkarsh Khanna',
     link: 'https://www.linkedin.com/in/utkarsh-khanna-43824117b/',
   },

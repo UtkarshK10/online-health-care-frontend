@@ -23,7 +23,9 @@ const AboutUsCard = ({ image, name, description, link }) => {
       </div>
       <div className='card-content'>
         <div className='card-title highlight'>{name.toUpperCase()}</div>
-        <p className='card-description'>{description}</p>
+        <p className='card-description' style={{ fontStyle: 'italic' }}>
+          {description}
+        </p>
       </div>
     </div>
   );
