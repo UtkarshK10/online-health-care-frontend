@@ -9,6 +9,7 @@ import doctor from '../../assets/doctor_thanks.jpg';
 import ReactSpinner from '../ReactSpinner';
 import { saveLocalStorage } from '../../utils/helper.js';
 import DoctorOTPModal from '../../Modal/DoctorOTPModal';
+import healthcare from '../../assets/healthcare.svg';
 
 function DoctorLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
@@ -73,7 +74,7 @@ function DoctorLogin(props) {
           }
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -102,7 +103,29 @@ function DoctorLogin(props) {
       <div className='container'>
         <div className='row'>
           <div className='col hide-on-small-and-down m7 l7'>
-            <img className='responsive-img center' src={doctor} alt='doctor' />
+            <img
+              className='responsive-img center'
+              src={doctor}
+              alt='doctor'
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/doctors';
+              }}
+            />
+          </div>
+          <div
+            className='col show-on-small s12 hide-on-med-and-up'
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/doctors';
+            }}
+          >
+            <img
+              src={healthcare}
+              alt='healthcare'
+              className='waves-effect'
+              style={{ width: '200px' }}
+            />
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>

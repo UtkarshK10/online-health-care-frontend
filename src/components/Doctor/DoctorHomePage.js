@@ -17,6 +17,9 @@ export default function DoctorHomePage() {
   const NEWS_API_KEY = process.env.REACT_APP_NEWS_API;
   const iconNames = [GreenHeart, RedHeart, BlueHeart];
   useEffect(() => {
+    return () => window.location.reload();
+  }, []);
+  useEffect(() => {
     let cancel;
     const fetchNews = () => {
       // axios
@@ -67,7 +70,6 @@ export default function DoctorHomePage() {
           setCount({ ...res?.data });
         })
         .catch((err) => {
-
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -94,8 +96,9 @@ export default function DoctorHomePage() {
         {Object.keys(patientCount).map((keyname, idx) => {
           return (
             <div
-              className={`col s12 m3 l3  ${idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
-                }`}
+              className={`col s12 m3 l3  ${
+                idx === 0 ? 'left-marg' : 'offset-l1 offset-m1'
+              }`}
               key={idx}
             >
               <PatientCountCard

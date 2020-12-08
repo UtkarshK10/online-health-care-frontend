@@ -10,6 +10,7 @@ import { useSpring, animated } from 'react-spring';
 import ReactSpinner from '../ReactSpinner';
 import DoctorOTPModal from '../../Modal/DoctorOTPModal';
 import { saveLocalStorage } from '../../utils/helper.js';
+import healthcare from '../../assets/healthcare.svg';
 
 function DoctorRegistration(props) {
   const [name, handleNameChange] = useInputState('');
@@ -99,7 +100,9 @@ function DoctorRegistration(props) {
         html: 'Please enter about your speciality, minimum 5 characters',
       });
     } else if (fee === '' || (fee < 0 && fee > 2000)) {
-      return M.toast({ html: 'Please enter a valid fee in the range of Rs 0-2000' });
+      return M.toast({
+        html: 'Please enter a valid fee in the range of Rs 0-2000',
+      });
     } else if (!file) {
       return M.toast({ html: 'Please pick an image' });
     } else if (!isValid) {
@@ -126,7 +129,6 @@ function DoctorRegistration(props) {
           headers: headers,
         })
         .then((res) => {
-
           //   const resData = {
           //     name: res.data.name,
           //     username: res.data.username,
@@ -190,9 +192,27 @@ function DoctorRegistration(props) {
                   className='responsive-img center'
                   src={doctor}
                   alt='doctor'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = '/doctors';
+                  }}
                 />
               </animated.div>
             </div>
+          </div>
+          <div
+            className='col show-on-small s12 hide-on-med-and-up'
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/doctors';
+            }}
+          >
+            <img
+              src={healthcare}
+              alt='healthcare'
+              className='waves-effect'
+              style={{ width: '200px' }}
+            />
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>

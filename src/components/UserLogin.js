@@ -9,6 +9,7 @@ import doctor from '../assets/doctor.png';
 import { saveLocalStorage } from '../utils/helper';
 import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
+import healthcare from '../assets/healthcare.svg';
 
 function UserLogin(props) {
   const [password, handlePasswordChange] = useInputState('');
@@ -39,7 +40,6 @@ function UserLogin(props) {
   useEffect(() => {
     return () => window.location.reload();
   }, []);
-
 
   const login = async (e) => {
     e.preventDefault();
@@ -114,7 +114,29 @@ function UserLogin(props) {
       <div className='container'>
         <div className='row'>
           <div className='col hide-on-small-and-down m7 l7'>
-            <img className='responsive-img center' src={doctor} alt='doctor' />
+            <img
+              className='responsive-img center'
+              src={doctor}
+              alt='doctor'
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/';
+              }}
+            />
+          </div>
+          <div
+            className='col show-on-small s12 hide-on-med-and-up'
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/';
+            }}
+          >
+            <img
+              src={healthcare}
+              alt='healthcare'
+              className='waves-effect'
+              style={{ width: '200px' }}
+            />
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>

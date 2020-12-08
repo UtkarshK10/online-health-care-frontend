@@ -42,7 +42,8 @@ const DoctorCard = (props) => {
         </span>
         <p>
           <span style={{ fontWeight: '600' }}>Experience : </span>
-          {experience} {experience.toString().includes("year") ? "" : "years"}
+          {experience}{' '}
+          {experience.toString().toLowerCase().includes('year') ? '' : 'years'}
           <br />
           <span style={{ fontWeight: '600' }}>Speciality : </span>
           {speciality}

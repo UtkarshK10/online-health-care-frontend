@@ -10,6 +10,7 @@ import { useSpring, animated } from 'react-spring';
 import AddTechModal from '../Modal/OTPModal';
 import ReactSpinner from './ReactSpinner';
 import { saveLocalStorage } from '../utils/helper.js';
+import healthcare from '../assets/healthcare.svg';
 
 function UserRegistration() {
   const [name, handleNameChange] = useInputState('');
@@ -142,9 +143,27 @@ function UserRegistration() {
                   className='responsive-img center'
                   src={doctor}
                   alt='doctor'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = '/';
+                  }}
                 />
               </animated.div>
             </div>
+          </div>
+          <div
+            className='col show-on-small s12 hide-on-med-and-up'
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/';
+            }}
+          >
+            <img
+              src={healthcare}
+              alt='healthcare'
+              className='waves-effect'
+              style={{ width: '200px' }}
+            />
           </div>
           <div className='col s12 m5 l5'>
             <div id='slide'>
