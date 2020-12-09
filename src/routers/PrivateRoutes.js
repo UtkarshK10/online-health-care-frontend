@@ -29,7 +29,6 @@ export const PrivateRoute = ({
         })
         .catch((err) => {
           setValid('');
-          console.log('error occured');
         });
     }
   }, [auth?.token, rest.location.pathname]);

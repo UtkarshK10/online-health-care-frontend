@@ -54,7 +54,6 @@ function DoctorLogin(props) {
           headers: headers,
         })
         .then((res) => {
-          console.log(res.data);
           if (res.status === 200 && res.data.msg === 'unverified') {
             const resData = {
               username: res.data.username,

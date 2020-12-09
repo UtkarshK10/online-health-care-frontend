@@ -50,9 +50,7 @@ export default function DoctorHomePage() {
         .then((res) => {
           setNewsPosts(res.data.response.docs);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fetchNews();
     return () => cancel();
