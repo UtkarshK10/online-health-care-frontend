@@ -11,31 +11,56 @@ const Profile = ({ isDoctor }) => {
   const [edit, setEdit] = useState(false);
   const { auth } = useContext(AuthContext);
   const route = isDoctor ? '/api/doctors/me' : '/api/users/me';
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    profile_url: '',
+    email: '',
+    age: '',
+    phone: '',
+    gender: '',
+    experience: '',
+    consultation_fee: '',
+  });
   const headers = useMemo(
     () =>
       isDoctor ? { 'dapi-token': auth?.token } : { 'api-token': auth?.token },
     [auth?.token, isDoctor]
   );
   let classD = 'remove';
+
   const updatetrigger = () => {
     setEdit(!edit);
     if (edit) {
-      axios
-        .put(`${route}`, user, {
-          headers: { ...headers, 'Content-type': 'application/json' },
-        })
-        .then((res) => {
-          setUser({ ...res.data.user });
-        })
-        .catch((err) => {
-          if (err?.response) {
-            M.toast({ html: err?.response?.data?.msg });
-          } else if (err?.request) {
-            M.toast({ html: err?.request?.toString() });
-          } else {
-            M.toast({ html: 'Something went wrong, please try again' });
-          }
-        });
+      const phoneno = /^\d{10}$/;
+      if (name === '') {
+        return M.toast({ html: 'Name cannot be empty' });
+      } else if (!phoneno.test(user.phone)) {
+        return M.toast({ html: 'Please enter a valid phone number' });
+      } else if (!isDoctor && user.age === '') {
+        return M.toast({ html: 'Please enter a valid age' });
+      } else if (isDoctor && user.fee === '') {
+        return M.toast({ html: 'Please enter a valid fee amount' });
+      } else if (isDoctor && user.experience === '') {
+        return M.toast({ html: 'Please enter your experience' });
+      } else {
+        axios
+          .put(`${route}`, user, {
+            headers: { ...headers, 'Content-type': 'application/json' },
+          })
+          .then((res) => {
+            setUser({ ...res.data.user });
+          })
+          .catch((err) => {
+            if (err?.response) {
+              M.toast({ html: err?.response?.data?.msg });
+            } else if (err?.request) {
+              M.toast({ html: err?.request?.toString() });
+            } else {
+              M.toast({ html: 'Something went wrong, please try again' });
+            }
+          });
+      }
     }
   };
   const updateGender = (val) => {
@@ -66,17 +91,7 @@ const Profile = ({ isDoctor }) => {
   if (edit === true) {
     classD = 'shadow ';
   }
-  const [user, setUser] = useState({
-    name: '',
-    username: '',
-    profile_url: '',
-    email: '',
-    age: '',
-    phone: '',
-    gender: '',
-    experience: '',
-    consultation_fee: '',
-  });
+
   useEffect(() => {
     const fetchUser = async () => {
       axios
@@ -121,8 +136,8 @@ const Profile = ({ isDoctor }) => {
               name={name}
               setImage={setImage}
             />
-            <h4>{username}</h4>
-            <h5>{email}</h5>
+            <h5>{username}</h5>
+            <h6>{email}</h6>
             {!edit && (
               <button
                 className='btn btn-large pcolour btn-register waves-effect waves-light glow'

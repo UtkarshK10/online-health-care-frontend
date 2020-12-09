@@ -97,6 +97,7 @@ const DoctorSchedule = () => {
         .then((res) => {
           setPatientDetails([...res.data.details]);
           setLoading(false);
+          console.log(res);
         })
         .catch((err) => {
           setLoading(false);
@@ -126,7 +127,7 @@ const DoctorSchedule = () => {
 
   if (loading) {
     return (
-      <div class='container'>
+      <div className='container'>
         <div className='row'>
           <div className='col s12'>
             <ReactSpinner size='50px' />
@@ -161,16 +162,16 @@ const DoctorSchedule = () => {
                     {patientDetail.gender.toString().toUpperCase()[0]}
                   </p>
                 </div>
-                <div className='col s6 m1 l1'>
+                <div className='col s6 m2 l2'>
                   <p
                     className='text-primary'
                     style={{
-                      fontSize: '4.2em',
-                      margin: '2px',
+                      fontSize: '1.5em',
+                      marginTop: '12px',
                       fontWeight: '400',
                     }}
                   >
-                    {patientDetail?.meeting_time}
+                    {patientDetail?.meeting_time.toString().replace('GMT', '')}
                   </p>
                 </div>
                 <div className='col s6 l1 m1 offset-m1 offset-l1'>
@@ -190,7 +191,7 @@ const DoctorSchedule = () => {
                     />
                   </p>
                 </div>
-                <div className='col s12 m3 l3 offset-m3 offset-l3'>
+                <div className='col s12 m3 l3 offset-m2 offset-l2'>
                   <div className='row'>
                     <div className='col s9 m9 l9'>
                       <button

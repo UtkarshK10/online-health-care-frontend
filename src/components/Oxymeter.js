@@ -139,17 +139,33 @@ const Oxymeter = (props) => {
         <div className='row'>
           <div className='col s12 m12 l12'>
             <h3>{title}</h3>
-            <p className='right-align'>
-              {!loading && (
-                <Link
-                  to='#'
-                  onClick={handleClick}
-                  className='text-secondary highlight'
-                >
-                  {text}
-                </Link>
-              )}
-            </p>
+            <div className='col s6 m6 l6'>
+              <p className='left-align'>
+                {!loading && (
+                  <a
+                    href='https://drive.google.com/file/d/1FRkz_asM8LuoxiliS7k7aRS-owHDVWbC/view?usp=sharing'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-secondary highlight'
+                  >
+                    Know more
+                  </a>
+                )}
+              </p>
+            </div>
+            <div className='col s6 m6 l6'>
+              <p className='right-align'>
+                {!loading && (
+                  <Link
+                    to='#'
+                    onClick={handleClick}
+                    className='text-secondary highlight'
+                  >
+                    {text}
+                  </Link>
+                )}
+              </p>
+            </div>
             {!loading && !switchView && (
               <DropzoneArea
                 onChange={handleFileChange}

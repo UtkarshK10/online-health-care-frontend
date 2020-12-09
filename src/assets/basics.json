@@ -65,7 +65,11 @@
     },
     {
         "label": "Hello",
-        "answer": "Hello,I am corona bot.How could i help you?"
+        "answer": "Hello, I am corona bot. How could I help you?"
+    },
+    {
+        "label": "Hi",
+        "answer": "Hi, I am corona bot. How could I help you?"
     },
     {
         "label": "What do you do?",
@@ -81,7 +85,7 @@
     },
     {
         "label": "Tip regarding coronavirus",
-        "answer": "2 gaj ki duuri mask hain zaroori.Bharak sarkar dwara jan hit mh jari."
+        "answer": "2 gaj ki duuri mask hain zaroori. Bharat sarkar dwara jan hit mh jari."
     },
     {
         "label": "Development of covid vaccine in India.",
@@ -89,7 +93,7 @@
     },
     {
         "label": "What to do if tested covid positive?",
-        "answer": "Drink hot water,isolate yourself,intake vitamin c and if possible buy coronil kit."
+        "answer": "Drink hot water, isolate yourself, intake Vitamin C and if possible buy coronil kit."
     }
     
 ]

@@ -98,7 +98,13 @@ const HomePage = () => {
                 <>
                   {pathname.includes('appointment') && (
                     <li>
-                      <NavLink to='/appointment' activeClassName='scolour'>
+                      <NavLink
+                        to='/appointment'
+                        activeClassName='scolour'
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
                         Appointment
                       </NavLink>
                     </li>
@@ -113,11 +119,20 @@ const HomePage = () => {
                       <i className='material-icons'>shopping_cart</i>
                     </NavLink>
                   </li>
-
                   <li>
                     <NavLink to='/oxymeter' activeClassName='scolour'>
                       Monitor Oxygen
                     </NavLink>
+                  </li>{' '}
+                  <li>
+                    <a
+                      className='dropdown-trigger'
+                      href='#!'
+                      data-target='dropdown2'
+                    >
+                      Need help?
+                      <i className='material-icons right'>arrow_drop_down</i>
+                    </a>
                   </li>
                   <li>
                     <a
@@ -126,16 +141,6 @@ const HomePage = () => {
                       data-target='dropdown1'
                     >
                       My Account
-                      <i className='material-icons right'>arrow_drop_down</i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className='dropdown-trigger'
-                      href='#!'
-                      data-target='dropdown2'
-                    >
-                      Need help?
                       <i className='material-icons right'>arrow_drop_down</i>
                     </a>
                   </li>
@@ -170,6 +175,9 @@ const HomePage = () => {
                   className='text-secondary'
                   to='/appointment'
                   activeClassName='scolour'
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
                 >
                   Appointment
                 </NavLink>
