@@ -230,7 +230,7 @@ const Cart = () => {
               </div>
               <div className='col s12 m3 l3  hide-on-small-only'>
                 <p
-                  className='ptcolour'
+                  className='text-primary'
                   style={{
                     fontSize: '2.2em',
                     margin: '5px',
@@ -257,7 +257,7 @@ const Cart = () => {
                         e.preventDefault();
                         handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
                       }}
-                      className='material-icons ptcolour'
+                      className='material-icons text-primary'
                       style={{ cursor: 'pointer' }}
                     >
                       remove
@@ -278,7 +278,7 @@ const Cart = () => {
                         e.preventDefault();
                         handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
                       }}
-                      className='material-icons ptcolour'
+                      className='material-icons text-primary'
                       style={{ cursor: 'pointer' }}
                     >
                       add
@@ -299,7 +299,7 @@ const Cart = () => {
                         e.preventDefault();
                         handleEdit(cartDetail.medicine_id, -1, cartDetail.id);
                       }}
-                      className='material-icons ptcolour'
+                      className='material-icons text-primary'
                       style={{ cursor: 'pointer' }}
                     >
                       remove
@@ -320,7 +320,7 @@ const Cart = () => {
                         e.preventDefault();
                         handleEdit(cartDetail.medicine_id, 1, cartDetail.id);
                       }}
-                      className='material-icons ptcolour'
+                      className='material-icons text-primary'
                       style={{ cursor: 'pointer' }}
                     >
                       add
@@ -329,7 +329,7 @@ const Cart = () => {
                 )}{' '}
                 <div className='col s6'>
                   <p
-                    className='ptcolour  right-align'
+                    className='text-primary  right-align'
                     style={{
                       fontSize: '2.2em',
                       margin: '5px',
@@ -350,7 +350,7 @@ const Cart = () => {
                   }}
                   className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                 >
-                  Remove from cart
+                  Remove
                   <i className='material-icons right'>delete</i>
                 </button>
               </div>

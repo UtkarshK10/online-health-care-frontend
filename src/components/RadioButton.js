@@ -23,7 +23,7 @@ export default function RadioButton({ name, val1, val2, handleChange, curr }) {
             type='radio'
             defaultChecked={curr === val2 || curr === 'on'}
           />
-          <span className='stcolour'>{val2}</span>
+          <span className='text-secondary'>{val2}</span>
         </label>
       </div>
     </div>

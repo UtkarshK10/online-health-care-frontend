@@ -32,9 +32,9 @@ function UserRegistration() {
     }
   }, [auth?.token, history]);
 
-  useEffect(() => {
-    return () => window.location.reload();
-  }, []);
+  // useEffect(() => {
+  //   return () => window.location.reload();
+  // }, []);
 
   //user signup and validation
 
@@ -110,11 +110,11 @@ function UserRegistration() {
     // eslint-disable-next-line
   }, [openModal]);
 
-  useEffect(() => {
-    return () => window.location.reload();
-  }, []);
+  // useEffect(() => {
+  //   return () => window.location.reload();
+  // }, []);
 
-  //animation part
+  // animation part
 
   const { x } = useSpring({
     from: { x: 0 },
@@ -145,7 +145,7 @@ function UserRegistration() {
                   alt='doctor'
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = '/';
+                    history.push('/');
                   }}
                   style={{ cursor: 'pointer' }}
                 />
@@ -156,7 +156,7 @@ function UserRegistration() {
             className='col show-on-small s12 hide-on-med-and-up'
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = '/';
+              history.push('/');
             }}
           >
             <img
@@ -196,18 +196,6 @@ function UserRegistration() {
                 <div className='row'>
                   <div className='input-field'>
                     <input
-                      value={password}
-                      onChange={handlePasswordChange}
-                      id='password'
-                      type='password'
-                      className='validate'
-                    />
-                    <label htmlFor='password'>Password</label>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='input-field'>
-                    <input
                       value={email}
                       onChange={handleEmailChange}
                       id='email'
@@ -217,6 +205,19 @@ function UserRegistration() {
                     <label htmlFor='email'>Email</label>
                   </div>
                 </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={password}
+                      onChange={handlePasswordChange}
+                      id='password'
+                      type='password'
+                      className='validate'
+                    />
+                    <label htmlFor='password'>Password</label>
+                  </div>
+                </div>
+
                 <div className='row'>
                   <div className='input-field'>
                     <input

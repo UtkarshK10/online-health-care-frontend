@@ -53,7 +53,7 @@ const DoctorMail = (props) => {
         setMsg(`Appointment confirmed at: ${d}`);
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -70,6 +70,7 @@ const DoctorMail = (props) => {
         <div className='col s12 m8 l8 offset-l2 offset-m2'>
           <div id=''>
             <form
+              autoComplete='off'
               onSubmit={handelSubmit}
               className='padding-form shadow'
               noValidate
@@ -123,13 +124,14 @@ const DoctorMail = (props) => {
               </div>
               <div className='row'>
                 <div className='input-field'>
-                  <textarea
+                  <input
                     name='body'
                     value={emailData.body}
                     onChange={handleInputChange}
                     id='body'
+                    type='text'
                     className='materialize-textarea'
-                  ></textarea>
+                  />
                   <label htmlFor='body' className='active font-app'>
                     Body
                   </label>

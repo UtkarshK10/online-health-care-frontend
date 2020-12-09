@@ -563,3 +563,6 @@ table td {
     width: 90vw !important;
   }
 }
+.pbox {
+  box-shadow: 0 8px 6px -6px var(--secondary) !important;
+}

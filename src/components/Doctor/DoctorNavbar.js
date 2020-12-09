@@ -128,7 +128,7 @@ const DoctorNavbar = () => {
           </div>
         </nav>
       </div>
-      <ul className='sidenav' id='mobile-demo'>
+      <ul className='sidenav bgcolor sideinside' id='mobile-demo'>
         {auth?.isLoggedIn && (
           <>
             <li>

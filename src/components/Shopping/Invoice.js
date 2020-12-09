@@ -68,11 +68,11 @@ const Invoice = (props) => {
               </div>
               <div
                 className='right'
-                style={{ marginRight: '20px', fontSize: '1.8em' }}
+                style={{ marginRight: '1.2em', fontSize: '1.8em' }}
               >
                 <p
                   className='text-secondary'
-                  style={{ display: 'inline-block', padding: '10px' }}
+                  style={{ display: 'inline-block', padding: '0.7em' }}
                 >
                   Invoice Number:{' '}
                 </p>

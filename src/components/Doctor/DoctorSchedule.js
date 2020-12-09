@@ -9,6 +9,7 @@ import ConfirmationModal from '../../Modal/ConfirmationModal';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import videoCall from '../../assets/video-call.png';
 import sad from '../../assets/sad.png';
+import ReactSpinner from '../ReactSpinner';
 
 const DoctorSchedule = () => {
   const { auth } = useContext(AuthContext);
@@ -18,6 +19,7 @@ const DoctorSchedule = () => {
   const history = useHistory();
   const [propData, setPropData] = useState(null);
   const [openModal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getOTP = () => {
     var elem = document.querySelector('.cmodal');
@@ -85,6 +87,7 @@ const DoctorSchedule = () => {
 
   useEffect(() => {
     const fetchPatientDetails = () => {
+      setLoading(true);
       axios
         .get('/api/doctors/pat_details', {
           headers: {
@@ -93,8 +96,10 @@ const DoctorSchedule = () => {
         })
         .then((res) => {
           setPatientDetails([...res.data.details]);
+          setLoading(false);
         })
         .catch((err) => {
+          setLoading(false);
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -119,6 +124,18 @@ const DoctorSchedule = () => {
     history.push(`/doctors/prescription?id=${id}`);
   };
 
+  if (loading) {
+    return (
+      <div class='container'>
+        <div className='row'>
+          <div className='col s12'>
+            <ReactSpinner size='50px' />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const URL = 'https://medico-videocall.herokuapp.com/login';
   return (
     <div className='container' style={{ paddingTop: '30px' }}>
@@ -141,7 +158,7 @@ const DoctorSchedule = () => {
                     {patientDetail.patient_name} <br />
                     {patientDetail.age}
                     <br />
-                    {patientDetail.gender.toString()[0].toUppercase()}
+                    {patientDetail.gender.toString().toUpperCase()[0]}
                   </p>
                 </div>
                 <div className='col s6 m1 l1'>
@@ -244,7 +261,7 @@ const DoctorSchedule = () => {
               <div className='divider'></div>
             </React.Fragment>
           ))}
-        {patientDetails.length === 0 && (
+        {patientDetails.length === 0 && !loading && (
           <p style={{ fontSize: '34px' }}>
             No records found
             <br />

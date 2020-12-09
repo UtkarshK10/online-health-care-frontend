@@ -16,9 +16,9 @@ export default function DoctorHomePage() {
   const [patientCount, setCount] = useState({});
   const NEWS_API_KEY = process.env.REACT_APP_NEWS_API;
   const iconNames = [GreenHeart, RedHeart, BlueHeart];
-  useEffect(() => {
-    return () => window.location.reload();
-  }, []);
+  // useEffect(() => {
+  //   return () => window.location.reload();
+  // }, []);
   useEffect(() => {
     let cancel;
     const fetchNews = () => {
@@ -63,7 +63,7 @@ export default function DoctorHomePage() {
       axiosC
         .get('/api/doctors/patient_count', {
           headers: {
-            'dapi-token': auth.token,
+            'dapi-token': auth?.token,
           },
         })
         .then((res) => {
@@ -71,7 +71,7 @@ export default function DoctorHomePage() {
         })
         .catch((err) => {
           if (err?.response) {
-            M.toast({ html: err?.response?.data?.msg });
+            M.toast({ html: 'Failed to fetch patient data' });
           } else if (err?.request) {
             M.toast({ html: err?.request?.toString() });
           } else {
@@ -79,8 +79,8 @@ export default function DoctorHomePage() {
           }
         });
     };
-    if (auth?.token) fetchPatientCount();
-  }, [auth?.token]);
+    if (auth?.token && !auth?.credits) fetchPatientCount();
+  }, [auth?.token, auth?.credits]);
 
   const shortDescription = (description) => {
     const maxChar = 200;
@@ -110,13 +110,13 @@ export default function DoctorHomePage() {
           );
         })}
       </div>
-      <div className='row'>
-        {/* <input
+      {/* <div className='row'>
+        <input
           type='text'
           value={searchItem}
           onChange={(e) => setSearchItem(e.target.value)}
-        /> */}
-      </div>
+        />
+      </div> */}
 
       <ul className='collection with-header'>
         <li className='collection-header bgsecondary '>

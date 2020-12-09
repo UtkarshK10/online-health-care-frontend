@@ -88,7 +88,7 @@ const ImageAvatar = ({ imageURL, name, setImage }) => {
       />
       <img src={imageURL} alt='Avatar' className='middle shadow avatar'></img>
       <i
-        className='material-icons pos ptcolour'
+        className='material-icons pos text-primary'
         onClick={onButtonClick}
         alt='edit'
       >

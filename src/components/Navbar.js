@@ -35,7 +35,7 @@ const HomePage = () => {
             </li>
             <li>
               <NavLink to='/payment' className='highlight'>
-                Credits : <span className='ptcolour'>{auth.credits}</span>
+                Credits : <span className='text-primary'>{auth.credits}</span>
               </NavLink>
             </li>
             <li>

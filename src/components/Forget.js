@@ -13,24 +13,23 @@ const Forget = ({ match, midRoute }) => {
   const [msg, setMsg] = useState(null);
   const onChange = (e) =>
     setFields({ ...fields, [e.target.name]: e.target.value });
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (password1 !== password2) {
-      M.toast({ html: 'Passwords does not match' })
+      M.toast({ html: 'Passwords does not match' });
       return;
     }
-    const data = { password: password1 }
-    axios.put(`/api/${midRoute}/reset/${token}`, data, {
-      headers: {
-        'Content-type': 'application/json'
-      }
-    })
-      .then(res => {
-
+    const data = { password: password1 };
+    axios
+      .put(`/api/${midRoute}/reset/${token}`, data, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then((res) => {
         setMsg(res.data.msg);
       })
       .catch((err) => {
-
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {
@@ -49,7 +48,10 @@ const Forget = ({ match, midRoute }) => {
             <div className='card-image'>
               <img src={RESET} alt='money' className='reset-photo' />
             </div>
-            <div className='card-title ptcolour' style={{ fontWeight: '600' }}>
+            <div
+              className='card-title text-primary'
+              style={{ fontWeight: '600' }}
+            >
               Reset Password
             </div>
             <div className='forget-form'>

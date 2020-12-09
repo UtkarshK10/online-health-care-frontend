@@ -33,7 +33,7 @@ const ShoppingHome = () => {
       );
     }
     if (searchString.length === 0) {
-      setFilteredProducts(products);
+      setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
     }
   }, [searchString, products, productsPerPage, currentPage]);
 
@@ -62,7 +62,6 @@ const ShoppingHome = () => {
         setProducts(res.data.msg);
       })
       .catch((err) => {
-
         if (err?.response) {
           M.toast({ html: err?.response?.data?.msg });
         } else if (err?.request) {

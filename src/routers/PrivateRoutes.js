@@ -20,7 +20,6 @@ export const PrivateRoute = ({
       axios
         .get(`/api/doctors/find/${auth?.token}`)
         .then((res) => {
-          console.log(res.data.msg + ' ' + rest.location.pathname);
           if (res.data.msg === 'doctor') {
             setValid('doctor');
           }

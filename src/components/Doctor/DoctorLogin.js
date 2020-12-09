@@ -110,7 +110,7 @@ function DoctorLogin(props) {
               style={{ cursor: 'pointer' }}
               onClick={(e) => {
                 e.preventDefault();
-                window.location.href = '/doctors';
+                history.push('/doctors');
               }}
             />
           </div>
@@ -118,7 +118,7 @@ function DoctorLogin(props) {
             className='col show-on-small s12 hide-on-med-and-up'
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = '/doctors';
+              history.push('/doctors');
             }}
           >
             <img
@@ -138,7 +138,7 @@ function DoctorLogin(props) {
                       onChange={handleEmailChange}
                       id='email'
                       type='email'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='email'>Email</label>
                   </div>
@@ -159,7 +159,7 @@ function DoctorLogin(props) {
                       onChange={handlePasswordChange}
                       id='password'
                       type='password'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='password'>Password</label>
                   </div>

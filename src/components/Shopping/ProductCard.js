@@ -13,7 +13,7 @@ const ProductCard = ({ Product, Prescription, addToPrescription }) => {
   const { auth } = useContext(AuthContext);
   const { id, name, price, description, image_url, rating } = Product;
   const shortText = (description) => {
-    const maxChar = 200;
+    const maxChar = 30;
     if (description.length > maxChar) {
       description = description.substring(0, maxChar) + ' . . .';
       return description;

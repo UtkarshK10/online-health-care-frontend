@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useInputState from '../../hooks/useInputState';
 import '../../styles/UserRegistrationStyles.css';
 import axios from '../../axios/axios';
@@ -13,6 +13,7 @@ import { saveLocalStorage } from '../../utils/helper.js';
 import healthcare from '../../assets/healthcare.svg';
 
 function DoctorRegistration(props) {
+  const history = useHistory();
   const [name, handleNameChange] = useInputState('');
   const [username, handleUserNameChange] = useInputState('');
   const [password, handlePasswordChange] = useInputState('');
@@ -194,7 +195,7 @@ function DoctorRegistration(props) {
                   alt='doctor'
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = '/doctors';
+                    history.push('/');
                   }}
                   style={{ cursor: 'pointer' }}
                 />
@@ -245,18 +246,6 @@ function DoctorRegistration(props) {
                 <div className='row'>
                   <div className='input-field'>
                     <input
-                      value={password}
-                      onChange={handlePasswordChange}
-                      id='password'
-                      type='password'
-                      className='validate'
-                    />
-                    <label htmlFor='password'>Password</label>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='input-field'>
-                    <input
                       value={email}
                       onChange={handleEmailChange}
                       id='email'
@@ -266,6 +255,19 @@ function DoctorRegistration(props) {
                     <label htmlFor='email'>Email</label>
                   </div>
                 </div>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      value={password}
+                      onChange={handlePasswordChange}
+                      id='password'
+                      type='password'
+                      className='validate'
+                    />
+                    <label htmlFor='password'>Password</label>
+                  </div>
+                </div>
+
                 <div className='row'>
                   <div className='input-field'>
                     <input
@@ -286,6 +288,8 @@ function DoctorRegistration(props) {
                       id='fee'
                       type='number'
                       className='validate'
+                      min={1}
+                      max={2000}
                     />
                     <label htmlFor='fee'>Fee (in &#8377;)</label>
                   </div>
@@ -304,13 +308,14 @@ function DoctorRegistration(props) {
                 </div>
                 <div className='row'>
                   <div className='input-field'>
-                    <textarea
+                    <input
+                      type='text'
                       value={speciality}
                       onChange={handleSpeciality}
                       id='speciality'
                       className='materialize-textarea'
                       data-length='120'
-                    ></textarea>
+                    />
                     <label htmlFor='speciality'>Speciality</label>
                   </div>
                 </div>

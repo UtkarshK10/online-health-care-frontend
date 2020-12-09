@@ -130,7 +130,7 @@ const OrderDetails = (props) => {
                 }}
               >
                 <p
-                  className='ptcolour'
+                  className='text-primary'
                   style={{
                     fontSize: '2.5em',
                     margin: '5px',

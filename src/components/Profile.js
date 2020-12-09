@@ -199,7 +199,7 @@ const Profile = ({ isDoctor }) => {
                         htmlFor='experience'
                         className={`${experience && 'active'}`}
                       >
-                        Experience
+                        Experience (in years)
                       </label>
                     </div>
                   </div>
@@ -212,8 +212,8 @@ const Profile = ({ isDoctor }) => {
                         id='consultation_fee'
                         type='number'
                         readOnly={!edit}
-                        min='0'
-                        max='2000'
+                        min={0}
+                        max={2000}
                       />
                       <label
                         htmlFor='consultation_fee'

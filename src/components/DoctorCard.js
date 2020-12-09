@@ -40,7 +40,7 @@ const DoctorCard = (props) => {
         )}
       </div>
       <div className='card-content'>
-        <span className='card-title ptcolour' style={{ fontWeight: '600' }}>
+        <span className='card-title text-primary' style={{ fontWeight: '600' }}>
           {name}
         </span>
         <p style={{ fontSize: '1.1rem' }}>

@@ -37,9 +37,9 @@ function UserLogin(props) {
     }
   }, [auth?.token, history]);
 
-  useEffect(() => {
-    return () => window.location.reload();
-  }, []);
+  // useEffect(() => {
+  //   return () => window.location.reload();
+  // }, []);
 
   const login = async (e) => {
     e.preventDefault();
@@ -120,7 +120,7 @@ function UserLogin(props) {
               alt='doctor'
               onClick={(e) => {
                 e.preventDefault();
-                window.location.href = '/';
+                history.push('/');
               }}
               style={{ cursor: 'pointer' }}
             />
@@ -129,7 +129,7 @@ function UserLogin(props) {
             className='col show-on-small s12 hide-on-med-and-up'
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = '/';
+              history.push('/');
             }}
           >
             <img
@@ -149,7 +149,7 @@ function UserLogin(props) {
                       onChange={handleEmailChange}
                       id='email'
                       type='email'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='email'>Email</label>
                   </div>
@@ -170,7 +170,7 @@ function UserLogin(props) {
                       onChange={handlePasswordChange}
                       id='password'
                       type='password'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='password'>Password</label>
                   </div>
