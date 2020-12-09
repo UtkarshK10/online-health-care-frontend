@@ -30,7 +30,7 @@ const DoctorOTPModal = (props) => {
       } else {
         const data = { otp };
         const headers = { 'Content-Type': 'application/json' };
-        console.log(auth?.username);
+
         axios
           .post(`/api/doctors/validate/${auth?.username}`, data, {
             headers: headers,
@@ -48,7 +48,6 @@ const DoctorOTPModal = (props) => {
             }
           })
           .catch((err) => {
-
             if (err?.response) {
               M.toast({ html: err?.response?.data?.msg });
             } else if (err?.request) {
@@ -78,7 +77,6 @@ const DoctorOTPModal = (props) => {
           }, 10000);
         })
         .catch((err) => {
-
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
@@ -114,19 +112,19 @@ const DoctorOTPModal = (props) => {
               </label>
             </div>
           ) : (
-              <div className='input-field'>
-                <input
-                  autoFocus
-                  type='email'
-                  name='Email'
-                  value={email}
-                  onChange={setEmail}
-                />
-                <label htmlFor='Email' className='active'>
-                  Email
+            <div className='input-field'>
+              <input
+                autoFocus
+                type='email'
+                name='Email'
+                value={email}
+                onChange={setEmail}
+              />
+              <label htmlFor='Email' className='active'>
+                Email
               </label>
-              </div>
-            )}
+            </div>
+          )}
           {msg && (
             <span style={{ color: '#dd2c00', fontSize: '1.5rem' }}>{msg}</span>
           )}

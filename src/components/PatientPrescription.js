@@ -51,7 +51,7 @@ const PatientPrescription = () => {
         },
       })
       .then((res) => {})
-      .catch((e) => console.log(e));
+      .catch();
   };
 
   if (loading) {

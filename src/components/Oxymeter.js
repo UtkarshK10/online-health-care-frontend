@@ -54,7 +54,6 @@ const Oxymeter = (props) => {
           if (err?.response) {
             M.toast({ html: err?.response?.data?.msg });
           } else if (err?.request) {
-            console.log('exc', err?.request);
             M.toast({
               html:
                 'Your internet speed might be causing the problem to get the response, try with a good internet speed or may be some server side issue',
@@ -107,7 +106,7 @@ const Oxymeter = (props) => {
     const isChecked = e.target.checked;
     const value = e.target.value;
     const toFilter = checkboxData[name];
-    // console.log(toFilter);
+
     let filtered;
     if (!isChecked) {
       filtered = toFilter.filter((ele) => {
