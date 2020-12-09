@@ -72,7 +72,9 @@ const PatientPrescription = () => {
         <div className='row'>
           <div className='col s12 l6 offset-l3 m8 offset-m2'>
             <h2>No records found!</h2>
-            <img src={noRecords} alt='no records' />
+            <span className='col s12 l8 m8 offset-l2 offset-m2'>
+              <img src={noRecords} alt='no records' />
+            </span>
           </div>
         </div>
       </div>
