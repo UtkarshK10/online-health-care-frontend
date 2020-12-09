@@ -50,28 +50,25 @@ const DoctorCard = (props) => {
           <br />
           <span style={{ fontWeight: '600' }}>Speciality : </span>
           {speciality}
-          <br />
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <span style={{ fontWeight: '600', marginRight: '5px' }}>
-              Fee :{' '}
-            </span>
-            {Math.ceil(consulation_fee)}
-            <img
-              src={money}
-              alt='money'
-              style={{ width: '18px', marginLeft: '5px' }}
-            />
-          </div>
-          <span className='right' style={{ margin: '15px 0' }}>
-            <RatingStar val={doc_rating} />
-          </span>
         </p>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span style={{ fontWeight: '600', marginRight: '5px' }}>Fee : </span>
+          {Math.ceil(consulation_fee)}
+          <img
+            src={money}
+            alt='money'
+            style={{ width: '18px', marginLeft: '5px' }}
+          />
+        </div>
+        <span className='right' style={{ margin: '15px 0' }}>
+          <RatingStar val={doc_rating} />
+        </span>
       </div>
     </div>
   );

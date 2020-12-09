@@ -121,7 +121,7 @@ const OrderDetails = (props) => {
                 </p>
               </div>
               <div
-                className='col s6 m4 l3  offset-l2'
+                className='col s12 m4 l3  offset-l2'
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -145,17 +145,18 @@ const OrderDetails = (props) => {
                       alignItems: 'center',
                     }}
                   >
-                    {orderDetail.price}{' '}
-                    <img
-                      src={money}
-                      alt='money'
-                      style={{
-                        width: '30px',
-                        marginLeft: '7px',
-                        marginTop: '3px',
-                      }}
-                    />
+                    {orderDetail.price}
                   </span>
+                  <img
+                    src={money}
+                    alt='money'
+                    style={{
+                      width: '30px',
+                      height: '30px',
+                      marginLeft: '7px',
+                      marginTop: '14px',
+                    }}
+                  />
                 </p>
 
                 <button

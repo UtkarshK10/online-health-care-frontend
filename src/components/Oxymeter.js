@@ -386,12 +386,17 @@ const Oxymeter = (props) => {
   return (
     <div className='container'>
       <div className='row'>
-        <div className='col s12'>{msg && <h4>{msg}</h4>}</div>{' '}
-        <div className='col s8 l8 m8 offset-l2 offset-m2 offset-s2'>
+        <div className='col s12'>{msg && <h4>{msg}</h4>}</div>
+      </div>
+      <div className='row'>
+        <div className='col s12 hide-on-med-and-up'>
+          <img src={GetWell} alt='Get Well Soon' style={{ width: '80vw' }} />
+        </div>
+        <div className='col s12 show-on-med-and-up hide-on-small-only'>
           <img
             src={GetWell}
             alt='Get Well Soon'
-            style={{ height: '500px', margin: '20px' }}
+            style={{ height: '500px', width: '500px' }}
           />
         </div>
       </div>

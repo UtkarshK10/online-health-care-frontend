@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Pagination from '../Pagination';
+// import Pagination from '../Pagination';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import ProductCard from './ProductCard';
 import axios from '../../axios/axios';
+import ReactPaginate from 'react-paginate';
 import { AuthContext } from '../../contexts/auth-context';
 
 const ShoppingHome = () => {
@@ -37,19 +38,15 @@ const ShoppingHome = () => {
     }
   }, [searchString, products, productsPerPage, currentPage]);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    const idxOfLastProduct = pageNumber * productsPerPage;
-    const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
-    // if (searchString) {
-    //   setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct).filter(product => {
-    //     return product.name.toLowerCase().includes(searchString.toLowerCase())
-    //   }));
-    // }
-    if (!searchString) {
-      setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
-    }
-  };
+  // const paginate = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  //   const idxOfLastProduct = pageNumber * productsPerPage;
+  //   const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
+
+  //   if (!searchString) {
+  //     setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
+  //   }
+  // };
   useEffect(() => {
     axios
       .get('/api/medicines/', {
@@ -75,6 +72,24 @@ const ShoppingHome = () => {
   //  if(loading) {
   //   return <ReactSpinner size="50px"/>
   // }
+  const handlePageClick = (data) => {
+    console.log(data);
+    const pageNumber = data.selected + 1;
+    setCurrentPage(pageNumber);
+    const idxOfLastProduct = pageNumber * productsPerPage;
+    const idxOfFirstProduct = idxOfLastProduct - productsPerPage;
+    if (!searchString) {
+      setFilteredProducts(products.slice(idxOfFirstProduct, idxOfLastProduct));
+    }
+  };
+
+  const calcCount = () => {
+    if (!searchString) {
+      return Math.ceil(products.length / productsPerPage);
+    } else {
+      return Math.ceil(len / productsPerPage);
+    }
+  };
 
   return (
     <div className='container'>
@@ -107,11 +122,24 @@ const ShoppingHome = () => {
         })}
       </div>
 
-      <Pagination
+      {/* <Pagination
         itemsPerPage={productsPerPage}
         totalItems={!searchString ? products.length : len}
         currentPage={currentPage}
         paginate={paginate}
+      /> */}
+      <ReactPaginate
+        previousLabel={'<<'}
+        nextLabel={'>>'}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={calcCount()}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageClick}
+        containerClassName={'pagination'}
+        subContainerClassName={'pages pagination'}
+        activeClassName={'shadow-pagination'}
       />
     </div>
   );

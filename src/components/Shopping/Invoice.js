@@ -45,7 +45,8 @@ const Invoice = (props) => {
 
   const formatDate = (date) => {
     // return date.split('T')[0].toString().split('-').reverse().join('/');
-    return new Date(date * 1000).toISOString().split('T')[0];
+
+    return new Date(date * 1000).toLocaleString().split(',')[0];
   };
 
   if (loading) {

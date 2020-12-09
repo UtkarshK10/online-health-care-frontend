@@ -116,7 +116,10 @@ const DoctorPrescription = (props) => {
     <div className='container'>
       <div className='card'>
         <div className='row'>
-          <div className='col s12 m12 l4 pre-container searchp'>
+          <div
+            className='col s12 m12 l4 pre-container searchp'
+            style={{ overflow: 'scroll' }}
+          >
             <div className='row'>
               <div className='col s12 m12 l12'>
                 <div className='input-field'>

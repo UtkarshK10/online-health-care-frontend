@@ -5,10 +5,17 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 // import { updateLocalStorage } from '../utils/helper';
 
 const ConfirmationModal = ({ propData }) => {
+  const makescroll = () => {
+    document.body.style.overflow = 'visible';
+  };
   const closeInstance = () => {
     var elem = document.querySelector('.cmodal');
-    var instance = M.Modal.init(elem, { dismissible: true, opacity: 0.7 });
+    var instance = M.Modal.init(elem, {
+      dismissible: true,
+      opacity: 0.7,
+    });
     instance.close();
+    makescroll();
     propData?.closeModal();
   };
 

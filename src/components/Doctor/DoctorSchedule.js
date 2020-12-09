@@ -97,7 +97,6 @@ const DoctorSchedule = () => {
         .then((res) => {
           setPatientDetails([...res.data.details]);
           setLoading(false);
-          console.log(res);
         })
         .catch((err) => {
           setLoading(false);
@@ -156,10 +155,10 @@ const DoctorSchedule = () => {
                       marginTop: '10px',
                     }}
                   >
-                    {patientDetail.patient_name} <br />
-                    {patientDetail.age}
+                    {patientDetail?.patient_name} <br />
+                    {patientDetail?.age}
                     <br />
-                    {patientDetail.gender.toString().toUpperCase()[0]}
+                    {patientDetail?.gender.toString().toUpperCase()[0]}
                   </p>
                 </div>
                 <div className='col s6 m2 l2'>
@@ -171,7 +170,8 @@ const DoctorSchedule = () => {
                       fontWeight: '400',
                     }}
                   >
-                    {patientDetail?.meeting_time.toString().replace('GMT', '')}
+                    {patientDetail?.meeting_time?.length > 0 &&
+                      patientDetail?.meeting_time.toString().replace('GMT', '')}
                   </p>
                 </div>
                 <div className='col s6 l1 m1 offset-m1 offset-l1'>
@@ -195,12 +195,12 @@ const DoctorSchedule = () => {
                   <div className='row'>
                     <div className='col s9 m9 l9'>
                       <button
-                        disabled={patientDetail.attended}
+                        disabled={patientDetail?.attended}
                         onClick={(e) => {
                           e.preventDefault();
                           handleClick(
                             patientDetail?.patient_email,
-                            patientDetail.patient_record_id
+                            patientDetail?.patient_record_id
                           );
                         }}
                         className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
@@ -215,7 +215,7 @@ const DoctorSchedule = () => {
                         alt='Prescription'
                         onClick={(e) => {
                           e.preventDefault();
-                          handlePrescription(patientDetail.patient_record_id);
+                          handlePrescription(patientDetail?.patient_record_id);
                         }}
                         style={{
                           width: '40px',
@@ -230,11 +230,11 @@ const DoctorSchedule = () => {
                       <button
                         className='btn btn-medium pcolour btn-register waves-effect waves-light hover'
                         style={{ marginTop: '0px' }}
-                        disabled={patientDetail.attended}
+                        disabled={patientDetail?.attended}
                         onClick={(e) => {
                           e.preventDefault();
                           handleAttendedConfirmation(
-                            patientDetail.patient_record_id
+                            patientDetail?.patient_record_id
                           );
                         }}
                       >
@@ -247,7 +247,7 @@ const DoctorSchedule = () => {
                         style={{ margin: 0, padding: 0 }}
                         target='_blank'
                         rel='noreferrer'
-                        href={`${URL}?id=${patientDetail.patient_record_id}&roomId=${patientDetail.room_id}`}
+                        href={`${URL}?id=${patientDetail?.patient_record_id}&roomId=${patientDetail?.room_id}`}
                       >
                         <img
                           src={videoCall}

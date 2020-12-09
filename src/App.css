@@ -137,6 +137,13 @@ button {
   transform: scale(1.02);
   transition: all 1s;
 }
+.shadow-pagination {
+  -moz-box-shadow: 1px 1px 2px 3px #ccc;
+  -webkit-box-shadow: 1px 1px 2px 3px #ccc;
+  box-shadow: 1px 1px 2px 3px #ccc;
+  transform: scale(1.02);
+  transition: all 1s;
+}
 .remove {
   transform: scaleX(1);
   transition: all 1s;
@@ -354,7 +361,8 @@ table td {
 .pagination li a {
   background-color: white !important;
   color: var(--primary) !important;
-  font-size: 2px !important;
+  /* font-size: 2px !important; */
+  cursor: pointer;
   border: 0px !important;
   outline: 0px !important;
   box-shadow: 0px !important;
