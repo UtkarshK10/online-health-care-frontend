@@ -5,16 +5,34 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Offline, Online } from 'react-detect-offline';
 
 ReactDOM.render(
   // <React.StrictMode>
-  <BrowserRouter>
-
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-
-  </BrowserRouter>,
+  <>
+    <Online>
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    </Online>
+    <Offline>
+      <div
+        className='container offline'
+        style={{ width: '100vw', height: '90vh' }}
+      >
+        <div className='row '>
+          <div className='center'>
+            <h3>You're currently offline.</h3>
+            <i className='material-icons' style={{ fontSize: '4em' }}>
+              sentiment_very_dissatisfied
+            </i>
+          </div>
+        </div>
+      </div>
+    </Offline>
+  </>,
   // </React.StrictMode>,
   document.getElementById('root')
 );

@@ -160,7 +160,7 @@ const Prescription = ({
                     <i
                       onClick={(e) => {
                         e.preventDefault();
-                        handleEdit(prescriptionDetail.medicine_id, -1);
+                        handleEdit(prescriptionDetail.id, -1);
                       }}
                       className='material-icons text-primary'
                       style={{ cursor: 'pointer' }}
