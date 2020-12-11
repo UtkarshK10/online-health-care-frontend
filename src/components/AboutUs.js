@@ -16,8 +16,7 @@ const Developers = [
   },
   {
     image: ms,
-    description:
-      ' “We May Encounter Many Defeats But We Must Not Be Defeated.”',
+    description: ' “First, solve the problem. Then, write the code.”',
     name: 'Mandeep Singh',
     link: 'https://www.linkedin.com/in/mandysgh/',
   },

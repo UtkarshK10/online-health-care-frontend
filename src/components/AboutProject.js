@@ -13,7 +13,7 @@ const AboutProject = () => {
         <div className='col s12 justify-align' style={{ fontSize: '1.4em' }}>
           <p>
             The lockdown that took place due to the Covid-19 all around the
-            country haad some severe impact on people. Most of them were afraid
+            country had some severe impact on people. Most of them were afraid
             to go outside of their homes. People were reluctant to go even for a
             checkup. <br />
             The aim of this project is to provide a frequent online health

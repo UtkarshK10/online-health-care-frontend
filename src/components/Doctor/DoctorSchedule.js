@@ -244,6 +244,9 @@ const DoctorSchedule = () => {
                     </div>
                     <div className='col'>
                       <a
+                        className={
+                          patientDetail?.room_id === null && 'disableda'
+                        }
                         style={{ margin: 0, padding: 0 }}
                         target='_blank'
                         rel='noreferrer'

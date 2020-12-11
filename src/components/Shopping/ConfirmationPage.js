@@ -22,6 +22,7 @@ const ConfirmationPage = () => {
     city: '',
     state: '',
   });
+
   const [newAddress, setNewAddress] = useState(false);
   const [oldAddresses, setOldAddresses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -222,34 +223,39 @@ const ConfirmationPage = () => {
       {!newAddress && oldAddresses?.length > 0 && (
         <div className='row'>
           <div className='col s12'>
-            {/*  */}
             <div className='card  bgsecondary'>
               <div className='card-content'>
                 <h4>You can choose one from your existing addesses!</h4>
               </div>
-              <div className='card-tabs'>
+              {/* <div className='card-tabs'>
                 <ul className='tabs tabs-fixed-width'>
                   {oldAddresses.map((address, idx) => {
                     return (
                       <li className='tab' key={address.id}>
-                        <a className='pcolour' href={`#${address.id}`}>
+                        <a
+                          className={`pcolour ${idx === 0 && 'active'}`}
+                          href={`#${idx}`}
+                          ref={idx === 0 ? aref : ''}
+                        >
                           <h6 style={{ color: 'white' }}>Address #{idx + 1}</h6>
                         </a>
                       </li>
                     );
                   })}
                 </ul>
-              </div>
+              </div> */}
               <div
                 className='card-content grey lighten-3'
                 style={{ color: 'black' }}
               >
-                {oldAddresses.map((address) => {
+                {oldAddresses.map((address, idx) => {
                   return (
                     <div
                       className='row'
-                      id={`${address.id}`}
+                      // id={`${address.id}`}
+                      id={idx}
                       style={{ fontSize: '1.2em' }}
+                      key={idx}
                     >
                       <div
                         className='col s12 m6 l6'

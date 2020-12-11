@@ -44,7 +44,7 @@ const Forget = ({ match, midRoute }) => {
     <div className='container'>
       <div className='row'>
         <div className='col s12 m8 l6 offset-l3 offset-m2'>
-          <div className='card' style={{ margin: '20px 0px' }}>
+          <div className='card bgsecondary' style={{ margin: '20px 0px' }}>
             <div className='card-image'>
               <img src={RESET} alt='money' className='reset-photo' />
             </div>
@@ -64,7 +64,7 @@ const Forget = ({ match, midRoute }) => {
                       type='password'
                       id='password1'
                       name='password1'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='password1'>Password</label>
                   </div>
@@ -77,7 +77,7 @@ const Forget = ({ match, midRoute }) => {
                       type='password'
                       id='password2'
                       name='password2'
-                      className='validate'
+                      className='validate text-primary'
                     />
                     <label htmlFor='password2'>Confirm Password</label>
                   </div>

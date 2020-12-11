@@ -217,7 +217,7 @@ function App() {
                     render={(props) => (
                       <div className='page'>
                         <Oxymeter
-                          title='First check your spO2(Blood Oxygen) level and heart rate'
+                          title='First check your SpO2(Blood Oxygen) level and heart rate'
                           appointment
                           {...props}
                         />

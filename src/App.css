@@ -574,3 +574,8 @@ table td {
 .pbox {
   box-shadow: 0 8px 6px -6px var(--secondary) !important;
 }
+
+.disableda {
+  pointer-events: none;
+  cursor: default;
+}
