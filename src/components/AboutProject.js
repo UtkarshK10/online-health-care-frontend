@@ -24,7 +24,7 @@ const AboutProject = () => {
           <Typist>
             <p>The parameters that we focus on are-</p>
             <ol>
-              <li>Body temperature </li> <li>spO2 level in blood</li>{' '}
+              <li>Body temperature </li> <li>SpO2 level in blood</li>{' '}
               <li>Measured heart rate</li> <li>Difficulty in breathing</li>{' '}
               <li>Travel history</li> <li> Disease history</li>{' '}
               <li>Symptom Checking</li>
