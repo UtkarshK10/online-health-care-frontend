@@ -6,7 +6,7 @@ import UserRegistration from './components/UserRegistration';
 import Particle from './Particles';
 import { AuthContext } from './contexts/auth-context';
 import HomePage from './components/HomePage';
-import { loadLocalStorage } from './utils/helper';
+import { loadLocalStorage, clearLocalStorage } from './utils/helper';
 import UserLogin from './components/UserLogin';
 import Oxymeter from './components/Oxymeter';
 import Navbar from './components/Navbar';
@@ -41,6 +41,10 @@ import marble from './assets/marble.jpg';
 import AboutUs from './components/AboutUs';
 import AboutProject from './components/AboutProject';
 import Helpdesk from './components/Helpdesk';
+import M from 'materialize-css/dist/js/materialize.min.js';
+
+
+let timer;
 
 const getPrimary = style('mode', {
   light: '#f4511e',
@@ -99,6 +103,24 @@ function App() {
     const userData = loadLocalStorage();
     setAuth(userData);
   }, [setAuth]);
+
+  useEffect(() => {
+    if (window.localStorage.getItem('userData')) {
+     
+      const d = new Date().getTime();
+      const expiresIn = JSON.parse(window.localStorage.getItem('userData'))?.tokenExpirationDate;
+      if (expiresIn) {
+        timer = setTimeout(() => {
+          clearLocalStorage();
+          M.toast({ html: 'Please login again to continue' })
+          setTimeout(() => {
+            window.location.href='/';
+          }, 2000);
+        }, expiresIn - d);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, []);
 
   const { pathname } = useLocation();
 

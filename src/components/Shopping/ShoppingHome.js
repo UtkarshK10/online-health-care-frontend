@@ -73,7 +73,7 @@ const ShoppingHome = () => {
   //   return <ReactSpinner size="50px"/>
   // }
   const handlePageClick = (data) => {
-    console.log(data);
+  
     const pageNumber = data.selected + 1;
     setCurrentPage(pageNumber);
     const idxOfLastProduct = pageNumber * productsPerPage;

@@ -8,4 +8,5 @@ const useInputState = initialVal => {
     }
     return [val, handleChange];
 }
+
 export default useInputState;
